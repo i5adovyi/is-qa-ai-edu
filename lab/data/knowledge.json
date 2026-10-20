@@ -1,0 +1,34 @@
+[
+  {
+    "id": "KB-BILL-01",
+    "topic": "billing",
+    "title": "Duplicate-charge review",
+    "answer": "For a suspected duplicate charge, collect the invoice ID and charge dates through the secure support form. Billing will review the transaction within 3 business days. A refund is not guaranteed before review. Do not send full card details.",
+    "source": "Synthetic Signal Desk handbook v1, Billing \u00a72",
+    "version": 1
+  },
+  {
+    "id": "KB-ACCESS-01",
+    "topic": "access",
+    "title": "Account-access recovery",
+    "answer": "Use the password reset link on the sign-in page. The link expires after 30 minutes. If recovery still fails, contact support through the secure account-recovery form. Never share your password or recovery code.",
+    "source": "Synthetic Signal Desk handbook v1, Access \u00a71",
+    "version": 1
+  },
+  {
+    "id": "KB-EXPORT-01",
+    "topic": "export",
+    "title": "Exporting your workspace",
+    "answer": "A workspace admin can open Settings > Data > Export and request a CSV export. The download link expires after 24 hours. Large workspaces may take up to 2 hours to prepare.",
+    "source": "Synthetic Signal Desk handbook v1, Data \u00a74",
+    "version": 1
+  },
+  {
+    "id": "KB-INCIDENT-01",
+    "topic": "incident",
+    "title": "Service-unavailable triage",
+    "answer": "For a service outage or 503 error, check the status page and record the approximate failure time and region. Support can investigate using that information. No restoration time is confirmed by this article.",
+    "source": "Synthetic Signal Desk handbook v1, Reliability \u00a73",
+    "version": 1
+  }
+]

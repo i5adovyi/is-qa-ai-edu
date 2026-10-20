@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.DS_Store
+work/
+lab/runs/
+.tmp/
+tmp/
+.env
+.env.*
+!.env.example
+*.zip
+.lab-runs/
