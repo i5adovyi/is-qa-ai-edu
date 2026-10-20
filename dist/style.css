@@ -45,3 +45,14 @@ details[open]>summary{margin-bottom:15px}
 @media(max-width:1150px){.exercise-layout{grid-template-columns:minmax(0,1fr) 230px}.route-grid{grid-template-columns:1fr}}
 @media(max-width:850px){.exercise-layout{grid-template-columns:1fr}.exercise-layout aside{display:grid;grid-template-columns:1fr 1fr;gap:16px}.sidebar nav{margin-bottom:0}.lesson-row .meta{max-width:140px}}
 @media(max-width:560px){.exercise-layout aside{grid-template-columns:1fr}.exercise-main{padding:20px 16px}.lesson-row .meta{max-width:100px;font-size:10px}.route-card{padding:16px}.history-entry pre{font-size:11px}.reading details{padding:10px}.step-bar select{font-size:13px}.next-action .btn{margin-left:0}}
+
+/* Incident guidance is created only after an explicit request, not hidden in DOM. */
+.incident-footnote{margin-top:24px;max-width:820px}
+.incident-guidance{overflow-wrap:anywhere}
+.incident-guidance .incident-debrief{border-top:1px solid var(--line);margin-top:22px;padding-top:18px}
+.incident-debrief h3{margin-top:18px}
+.incident-debrief pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px}
+.incident-debrief ul{padding-left:18px}
+.incident-card p{margin-bottom:14px}
+#exercise-nextCheck{min-height:110px}
+.assignment-context pre{overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}

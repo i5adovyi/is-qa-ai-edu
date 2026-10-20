@@ -81,7 +81,7 @@ class Book(BaseDocTemplate):
 def build():
     OUT.parent.mkdir(parents=True,exist_ok=True)
     lab_count=len(list((ROOT/'content/labs').glob('[0-9]*.md')))
-    story=[Spacer(1,85),Paragraph('FIELD PROGRAM / OCTOBER 2026',styles['Subsection']),Spacer(1,25),Paragraph('AI Engineering<br/>Fieldbook',styles['BookTitle']),Paragraph('From deliberate prompting to reliable agent systems',styles['Section']),Spacer(1,28),Paragraph(f'24 lessons. 72 lesson exercises. {lab_count} labs. Eight stages of deliberate practice.',styles['Prose']),Paragraph('Preparation - context - tools and skills - agentic development - harnesses - evaluation - delegation - production',styles['Prose']),Spacer(1,50),Paragraph('An original companion to the Signal Desk practice project. Read with a terminal, an experiment log, and a willingness to test your assumptions.',styles['Prose']),Paragraph('External courses, books, and videos are linked for independent study. Their content is not reproduced here. Completion is a personal learning record, not an accredited qualification.',styles['SmallText']),PageBreak(),Paragraph('Contents',styles['Chapter'])]
+    story=[Spacer(1,85),Paragraph('FIELD PROGRAM / OCTOBER 2026',styles['Subsection']),Spacer(1,25),Paragraph('AI Engineering<br/>Fieldbook',styles['BookTitle']),Paragraph('From deliberate prompting to reliable agent systems',styles['Section']),Spacer(1,28),Paragraph(f'24 lessons. 72 lesson exercises. {lab_count} labs. Six incidents and a capstone investigation. Eight stages of deliberate practice.',styles['Prose']),Paragraph('Preparation - context - tools and skills - agentic development - harnesses - evaluation - delegation - production',styles['Prose']),Spacer(1,50),Paragraph('An original companion to the Signal Desk practice project. Read with a terminal, an experiment log, and a willingness to test your assumptions.',styles['Prose']),Paragraph('External courses, books, and videos are linked for independent study. Their content is not reproduced here. Completion is a personal learning record, not an accredited qualification.',styles['SmallText']),PageBreak(),Paragraph('Contents',styles['Chapter'])]
     toc=TableOfContents();toc.levelStyles=[ParagraphStyle(name='TOC',fontName='Helvetica',fontSize=9,leading=13,spaceBefore=5,leftIndent=0,firstLineIndent=0)];story.extend([toc,PageBreak()])
     curriculum=json.loads((ROOT/'content/curriculum.json').read_text())
     paths=[ROOT/'docs/SETUP.md',ROOT/'docs/START-HERE.md',ROOT/'docs/ASSESSMENT.md',ROOT/'docs/GLOSSARY.md',ROOT/'docs/STUDY-PLAN.md',ROOT/'docs/OPERATING-PLAYBOOK.md',ROOT/'docs/PRACTICE-MAP.md',ROOT/'docs/INTEGRATION-LABS.md',ROOT/'lab/model-bridge.md',ROOT/'content/dev-sandbox/README.md',ROOT/'content/research/README.md',ROOT/'content/research/worked-example.md']+[ROOT/l['file'] for l in curriculum['lessons']]+sorted((ROOT/'content/labs').glob('[0-9]*.md'))+[ROOT/'lab/mcp_lab/README.md',ROOT/'lab/mcp_lab/solutions.md',ROOT/'content/skill-practice/HOST-EVIDENCE.md']+sorted((ROOT/'content/articles').glob('*.md'))+sorted((ROOT/'capstones').glob('*.md'))+sorted((ROOT/'templates').glob('*.md'))+[ROOT/'content/library/README.md',ROOT/'content/library/catalog.md',ROOT/'docs/REUSE.md']
@@ -89,6 +89,9 @@ def build():
     for folder in ['content/onboarding','content/assessment','content/walkthroughs']:
         additions.extend(sorted((ROOT/folder).glob('*.md')))
     additions.extend([ROOT/'docs/FUTURE-PROJECT-READINESS.md',ROOT/'docs/ACCOUNT-MIGRATION.md',ROOT/'docs/CONTINUE-LEARNING.md',ROOT/'lab/planner_lab/README.md'])
+    incident_position=paths.index(ROOT/'lab/mcp_lab/README.md')
+    incident_paths=[ROOT/'content/incidents/README.md']+sorted((ROOT/'content/incidents').glob('[0-9]*.md'))+[ROOT/'content/incidents/ASSESSMENT.md',ROOT/'lab/incidents/README.md']
+    paths[incident_position:incident_position]=incident_paths
     paths=additions+paths
     answer_sections=[]
     for p in paths:
@@ -108,6 +111,10 @@ def build():
     story.extend(markdown('# Applied checks\n\nPredict, explain, or inspect a new case. Preserve your attempt before consulting a tutor. These checks supplement the lesson quizzes.\n'))
     for check in learning['checks']:
         story.extend(markdown('## '+check['id']+'\n\n'+check['prompt']+'\n\nReview criteria: '+'; '.join(check['criteria'])))
+    story.append(PageBreak())
+    # Incident guidance stays out of this static student book altogether. Unlike
+    # the portal/CLI, a PDF cannot condition disclosure on a saved attempt.
+    story.extend(markdown('# Incident guidance access\n\nThe six incident briefs and capstone incident are included above. Incident hints, debriefs, and reference implementations are deliberately omitted from this student fieldbook. Save your hypothesis, evidence, and next check in the portal or terminal exercise, then explicitly request a hint or debrief there. These two attempt records are separate. The editable repository includes guidance for maintenance; this is a learning workflow, not a secure examination.\n'))
     story.append(PageBreak())
     story.extend(markdown('# Guidance appendix — open after your attempt\n\nThese are hints and solution outlines. Return to the exercises if you want to try independently first.\n'))
     story.append(PageBreak())

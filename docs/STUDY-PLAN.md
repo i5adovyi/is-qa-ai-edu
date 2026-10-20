@@ -10,16 +10,34 @@ Check the [prerequisites and lesson-to-lab map](PRACTICE-MAP.md) first. Add prep
 | 2 | Context, lessons 04-06 | Conflicting evidence and compressed handoff | Before/after context packets |
 | 3 | Tools, lessons 07-08 | Lab 01 and Lab 03 | Rejected malformed inputs and scope tests |
 | 4 | Skills, lesson 09 | Lab 02 and a reusable skill; lab 10 if using the installation extension | Activation table and three evidence-review artifacts, with structural checks and independent semantic review; host behavior remains pending until actually run |
-| 5 | Development, lessons 10-12 | Bounded bug fix and review | Failing test, patch, passing check, handoff |
+| 5 | Development, lessons 10-12 | Bounded bug fix and review; Lab 13 Part A can start here | Failing test, patch, passing check, handoff |
 | 6 | Harnesses, lessons 13-15 | Lab 04 and Lab 05 | Timeout, exhausted-budget, and recovery traces |
 | 7 | Evaluation, lessons 16-18 | Lab 06 | Frozen dataset, baseline comparison, failure taxonomy |
-| 8 | Delegation, lessons 19-21 | Lab 07 | Worker briefs and single-vs-multiple-worker comparison |
+| 8 | Delegation, lessons 19-21 | Lab 07; Lab 13 Part B after these lessons | Worker briefs and single-vs-multiple-worker comparison |
 | 9 | Production, lessons 22-23; lesson 24 proposal clinic | Lab 08 and selection of one capstone | Release criteria, incident scenario and proposal; the capstone is not yet complete |
 | 10 | Capstone build | Implement smallest useful user journey | Working baseline and evaluation cases |
 | 11 | Capstone hardening | Failure injection and fresh-case review | Incident report and measured revision |
 | 12 | Capstone defense | Reproduce from a clean copy; explain to a reviewer | Final dossier and personal next-step plan |
 
 Add the [integration route](INTEGRATION-LABS.md) alongside this core schedule: lab 09 after week 3, lab 10 after week 4, and lab 11 after lab 08 in week 9. Reserve another 5–9 focused hours, either as additional sessions or one to two extra weeks. The original 72-hour plan does not include these new sessions.
+
+Lab 08 supplies the decision helper used by the composed harness in Lab 11 and the later model/tool loop. Complete that bounded helper for the engineering integration route even if your final capstone is QA or research. It does not require building a second full support capstone.
+
+For the real-life incident route, add the investigations below after their prerequisites. They are distributed through the course, so you practice diagnosing unfamiliar evidence before the final project. The original 72-hour scaffold does not include their full additional time.
+
+| Placement | Investigation | Additional planning range |
+| --- | --- | --- |
+| Week 5, after Lab 13 Part A | [INC-01: The morning change request](../content/incidents/01-morning-change.md) | 90–120 minutes |
+| Week 6, after Lab 05 | [INC-03: The interrupted update](../content/incidents/03-interrupted-update.md) | 75–105 minutes |
+| Weeks 6–7, after lessons 07–09 and 13–15; revisit Lab 10 | [INC-04: The Monday workspace](../content/incidents/04-monday-workspace.md) | 75–105 minutes |
+| Week 7, after the evaluation lessons | [INC-02: The weekly evidence brief](../content/incidents/02-evidence-brief.md) | 75–105 minutes |
+| Week 8, after Lab 13 Part B | [INC-05: The busy afternoon](../content/incidents/05-busy-afternoon.md) | 90–120 minutes |
+| Week 9, after lessons 22–23 | [INC-06: The resumed delivery](../content/incidents/06-resumed-delivery.md) | 75–105 minutes |
+| Weeks 11–12, after your chosen product's working baseline | [INC-CAPSTONE: The release rehearsal](../content/incidents/07-release-rehearsal.md) | 150–210 minutes |
+
+The six investigations total **8–11 hours**, with **2.5–3.5 hours** for the capstone incident. At six hours per week, reserve about two to three additional weeks for this route. If an incident replaces optional repetitive case authoring, record that substitution; keep the original stage gate. If the capstone incident fits inside your already reserved hardening time, count those hours once. Do not add all three capstones.
+
+The order is INC-01, INC-03, INC-04, INC-02, INC-05, INC-06, then INC-CAPSTONE. Stable IDs are labels, not a prerequisite sequence. Each investigation begins with a neutral brief, a constrained evidence-gathering budget, and a first attempt. Hints and debriefs require that saved attempt and an explicit request. Use the [incident route](../content/incidents/README.md) for the CLI, evidence packet and assessment.
 
 ## Preparation and extension budget
 
@@ -36,7 +54,7 @@ Before week 1, reserve 15–25 minutes for [diagram and outcome entry checks](..
 | After week 9 | [Lab 15](../content/labs/15-review-and-operations.md) | 90–150 minutes | Human review, release checks, pending work and rollback |
 | Weeks 7–11 as relevant | [Three future-project missions](FUTURE-PROJECT-READINESS.md#three-short-missions-for-future-projects) | 30–60 minutes each, plus actual provider costs/time if selected | Environment/API diagnosis, controlled model migration, and new-data feedback |
 
-Labs 12–15 add approximately 6.5–11.5 hours before optional actual model work; labs 09–11 add the separate 5–9 hours above. Applied checks and transfer add further time unless replacing optional reading. For six hours per week, extend the calendar by roughly two to four weeks for the integration labs and revisit the plan after observing your pace. The complete extended route should not be advertised as a guaranteed twelve-week finish.
+Labs 12–15 add approximately 6.5–11.5 hours before optional actual model work; labs 09–11 add the separate 5–9 hours above. Applied checks and transfer add further time unless replacing optional reading. At six hours per week, reserve roughly two to four extra weeks for those integration labs and roughly two to three more for the incident route. That makes about **16–19 weeks** for the base plan plus both routes, before any additional preparation, applied-check, recall, future-project mission, or live-model sessions that do not fit into existing time. This is a planning envelope, not a measured completion promise. Revisit the calendar after observing your pace.
 
 All durations are planning ranges, not results of measured learner trials. Use [the pacing log](../templates/pacing-log.md) and choose one extension at a time. Learners without a current model account can finish the concept and local engineering evidence while keeping live gates visibly pending.
 

@@ -76,6 +76,28 @@ def validate(root):
         for exercise in exercises:
             for link in exercise.get(key, []):
                 need((root / link['path'].split('#')[0]).is_file(), 'Missing learning asset ' + link['path'])
+    incidents = json.loads((root / 'content/incidents.json').read_text())
+    need(incidents.get('version') == 1, 'Unknown incident metadata version')
+    cases = incidents.get('incidents', [])
+    need({x.get('id') for x in cases} == {
+        'INC-01', 'INC-02', 'INC-03', 'INC-04', 'INC-05', 'INC-06', 'INC-CAPSTONE'
+    } and len(cases) == 7, 'Expected six unique incidents and one capstone incident')
+    for incident in cases:
+        name = incident['id']
+        for key in ('title', 'placement', 'minutes', 'prerequisites', 'briefPath',
+                    'steps', 'deliverables', 'criteria', 'debrief', 'transfer'):
+            need(bool(incident.get(key)), 'Missing incident ' + key + ': ' + name)
+        need(len(incident.get('hints', [])) == 3 and
+             all(isinstance(h, str) and h.strip() for h in incident.get('hints', [])),
+             'Expected three progressive incident hints: ' + name)
+        brief = root / incident.get('briefPath', '')
+        need(brief.is_file(), 'Missing incident brief: ' + name)
+        if brief.is_file():
+            # Guidance belongs in explicit reveal fields, never in the student brief.
+            need(incident.get('debrief', '') not in brief.read_text(),
+                 'Incident debrief leaked into brief: ' + name)
+        step_ids = [s.get('id') for s in incident.get('steps', [])]
+        need(len(step_ids) == len(set(step_ids)), 'Duplicate incident step: ' + name)
     paths = [root / 'README.md']
     for folder in ['docs', 'templates', 'capstones', 'content', 'lab']:
         paths.extend((root / folder).rglob('*.md'))
@@ -94,7 +116,7 @@ def check():
     errors = validate(ROOT)
     if errors:
         raise SystemExit('\n'.join(errors))
-    print('Content checks passed: 24 lessons, 72 exercise workspaces, applied checks, 15 lab guides, resource metadata, and local file/section links.')
+    print('Content checks passed: 24 lessons, 72 exercise workspaces, applied checks, 15 lab guides, six incidents and a capstone incident, resource metadata, and local file/section links.')
 
 if __name__ == '__main__':
     check()

@@ -33,7 +33,7 @@ All paths below start at the project root. Save learner artifacts under `work/`;
 | 07 tools | [Lab 01](../content/labs/01-data-boundaries.md) data helper and [Lab 03](../content/labs/03-tool-authority.md) permission helper | Invalid and cross-scope arguments rejected; limits of the helper explained |
 | 08 MCP | Message fixtures, then [Lab 09](../content/labs/09-real-mcp.md) SDK client/server | Real initialization, capability listing, request/result matching, invalid calls and disconnects |
 | 09 skills | Author a skill, then [Lab 10](../content/labs/10-installed-skill.md) installation and fresh-host practice | Separate installation, discovery and execution evidence; trigger/non-trigger and missing-reference behavior |
-| 10 task design, 11 verification, 12 review | [Development sandbox](../content/dev-sandbox/README.md), copied to `work/router-practice/` | One original failure, narrow patch, five passing checks, mutant failures and reviewed diff |
+| 10 task design, 11 verification, 12 review | [Development sandbox](../content/dev-sandbox/README.md), copied to `work/router-practice/`; Lab 13 Part A can follow here | One original failure, narrow patch, five passing checks, mutant failures and reviewed diff |
 | 13 loop, 14 recovery | Reference traces, [Lab 04](../content/labs/04-retries-and-budgets.md) schedule helper and [Lab 05](../content/labs/05-idempotency-and-recovery.md) key helper | Success, exhausted budget, interrupted write and one-effect replay |
 | 15 observability | Ten scripted traces, cost ledger, [Lab 07](../content/labs/07-traces-and-diagnosis.md) summary helper | Step/time stops, explicit cost reservations, complete event accounting |
 | 16 datasets, 17 graders, 18 release | [Lab 06](../content/labs/06-grounding-and-evaluation.md); authored rubric and cases | Frozen split, false acceptance/rejection counts, hard-gate decision |
@@ -71,6 +71,22 @@ Use [starter fixtures](../content/practice/README.md) before authoring new cases
 | [Lab 15: review and operations](../content/labs/15-review-and-operations.md) | Lessons 14 and 22–23 | Exact-version human review, stale-approval rejection, persisted pending work, release checks, and rollback |
 
 These extensions add sessions; the [study plan](STUDY-PLAN.md) budgets them explicitly. A process-based worker run establishes process coordination; a scripted planner run establishes the loop boundary. Neither establishes unexecuted live-model behavior.
+
+## Investigate unfamiliar incidents
+
+After the component exercises, use the [incident route](../content/incidents/README.md). Each case supplies a neutral brief, a disposable workspace, deterministic evidence and a deliberately incomplete decision function. Preserve the initial state and save a hypothesis, observation and next check before requesting hints or a debrief. The portal and CLI keep separate attempt records.
+
+| Incident | Prerequisites | Evidence added to your dossier |
+| --- | --- | --- |
+| [INC-01](../content/incidents/01-morning-change.md) | Lessons 10–12 and Lab 13 Part A; Git | Working-tree baseline, scoped change, current test evidence, preserved human work |
+| [INC-03](../content/incidents/03-interrupted-update.md) | Lessons 13–15 and Lab 05 | Cross-system timeline, recovery proposal, replay observations, explicit unknowns |
+| [INC-04](../content/incidents/04-monday-workspace.md) | Lessons 07–09 and 13–15; revisit Lab 10 | Current scope, environment comparison, boundary checks, narrow authorization or compatibility decision |
+| [INC-02](../content/incidents/02-evidence-brief.md) | Lessons 04–05 and 16–18 | Claim-to-evidence ledger, completeness and interpretation checks, comparable evaluation conditions |
+| [INC-05](../content/incidents/05-busy-afternoon.md) | Lessons 14–15 and 19–21 and Lab 13 Part B | Whole-run accounting, bounded scheduling, state-conflict handling and pending work |
+| [INC-06](../content/incidents/06-resumed-delivery.md) | Lessons 06, 12, 20 and 22–23 | Current acceptance brief, precise clarification, artifact-version comparison and usefulness review |
+| [INC-CAPSTONE](../content/incidents/07-release-rehearsal.md) | Working baseline for one chosen capstone | Unfamiliar incident defense, persisted-state recovery evidence and a fresh project-specific regression |
+
+The route adds 10.5–14.5 planning hours, including the capstone incident. The [study plan](STUDY-PLAN.md) explains where it fits and how to avoid double-counting capstone hardening time. Each case has a transfer variant; record a prediction before running it. The [incident rubric](../content/incidents/ASSESSMENT.md) assesses reasoning, evidence and recovery separately from the executable contract. Use the existing 40-point rubric for the single capstone.
 
 ## Evidence before completion
 

@@ -1,8 +1,27 @@
-# Verification record for the October 2026 learning release
+# Verification record for the October 2026 incident release
 
-Checked 20 October 2026. This record describes the expanded learning experience and its synthetic fixtures. Earlier findings remain in the [student audit](STUDENT-AUDIT.md) and [learning experience review](LEARNING-EXPERIENCE-REVIEW.md); the [implementation record](LEARNING-EXPERIENCE-IMPLEMENTATION.md) maps all eight review workstreams to delivered practice.
+Checked 20 October 2026. The incident revision below is the latest verification. Earlier learning-release observations are retained afterward for provenance. Earlier findings remain in the [student audit](STUDENT-AUDIT.md) and [learning experience review](LEARNING-EXPERIENCE-REVIEW.md); the [implementation record](LEARNING-EXPERIENCE-IMPLEMENTATION.md) maps the preceding eight review workstreams.
 
-## Fresh-copy execution
+## Incident revision: executed checks
+
+The [incident route](../content/incidents/README.md) adds six investigations and one capstone incident, each with a primary and transfer workspace, boundary workloads, an editable starter, and separate guidance. These are local deterministic simulations; they do not exercise real customer services or deliberately cause provider failures.
+
+- Full Python 3.9.6 core suite: **201 discovered, 190 passed, 11 optional MCP skips**.
+- Full Python 3.12.14 suite with pinned `mcp==1.30.0`: **201 passed**, no skips.
+- New incident regression coverage: **36 tests**, included in both complete suites. Starters fail their acceptance checks as intended; reference repairs pass primary, transfer and boundary cases. Tests also cover preserved evidence, path containment, malformed outputs, negative acceptance cases, guidance gates, and immutable run/check history.
+- Portal unit suite: **26 passed**. A fresh-browser import defect was reproduced and repaired: an untouched local draft now adopts imported work; real conflicting drafts remain preserved.
+- All three interaction suites passed: original portal, learning workflow, and incidents. The incident suite covers all seven routes, empty/draft/feedback rejection, explicit progressive hints and debrief, reload/navigation/import closure, tutor packet exclusions, attempt history, escaping and mobile layout.
+- Exhaustive browser audit: **137 documents and Markdown downloads, 397 internal link occurrences, 167 distinct internal links, all 96 quiz choices, eight stages, 70 downloadable assets, all 137 documents at mobile width, zero page errors**.
+- Fresh source-package execution: **234 distributed files, 14 isolated primary/transfer workspaces, 113 commands**. Initial execution, intended starter-check failures, pre-attempt guidance blocking, explicit post-attempt guidance, and rebuilding both downloadable packages all passed. Distributed source hashes remained unchanged; generated learner work stayed out of the rebuilt source archive.
+- Fieldbook: **278 pages**, with no empty pages or text outside the inspected safety bounds. Representative study-plan and incident pages were rendered and visually reviewed. Incident debriefs are absent from the student book; the portal and CLI provide deliberate access after an attempt.
+
+The revised study plan budgets the incident route separately, splits Lab 13's coding and worker prerequisites, and retains the required decision helper for the composed harness regardless of the final capstone choice. A full extended route is not promised within twelve weeks.
+
+Run the complete suites and content validator using the commands below. Browser checks additionally include `node scripts/test_learning_portal.cjs` and `node scripts/test_incident_portal.cjs`. The GitHub workflow discovers the new Python tests and runs the portal unit tests; hosted CI status is verified separately after pushing.
+
+The attempt gates are learning safeguards, not examination security. Editable source contains guidance, while the ordinary incident interface and tutor packets conceal it. CLI and portal attempts are separate records. No actual provider/model reliability claim or learner-pilot result is inferred from these checks.
+
+## Earlier learning release: fresh-copy execution
 
 The [fresh-source execution record](RELEASE-V5-EXECUTION.md) lists fourteen commands run from an isolated distribution copy with inherited Python import paths removed. Imports resolved to that copy, and its source manifest remained unchanged.
 

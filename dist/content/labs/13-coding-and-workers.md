@@ -1,6 +1,6 @@
 # Lab 13 — Deliver a coding change and coordinate real workers
 
-Allow 2–4 hours. Prerequisites: lessons 10–12 and 19–21, Python 3.9+, Git. The scripted worker path has no dependency or account requirement. The optional AI-worker path requires an installed, authenticated Codex CLI and model access. Outputs are fictional and local.
+Allow 2–4 hours across both parts. **Part A** requires lessons 10–12, Python 3.9+ and Git, so it can begin in week 5. **Part B** additionally requires lessons 19–21 and belongs after week 8's delegation work. You do not need the delegation lessons to start Part A. The scripted worker path has no additional dependency or account requirement. The optional AI-worker path requires an installed, authenticated Codex CLI and model access. Outputs are fictional and local.
 
 ## Part A: a reproducible coding-agent mission
 

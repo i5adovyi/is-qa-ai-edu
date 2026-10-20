@@ -13,12 +13,15 @@ Python 3.9+ is supported (tested here with Python 3.9.6). The portal builder and
 
 - Eight stages and 24 lessons, each with teaching material, a worked example, three exercises, hints, solution guidance, and a knowledge check.
 - Fifteen lab guides: eight component exercises, real MCP, host-installed skills, a composed student harness, a model-directed tool loop, coding and worker practice, retrieval comparison, and review/rollback operations.
+- Six incident exercises and one capstone incident, with disposable local workspaces, conflicting evidence, transfer variants, and hints/debriefs unlocked after a recorded attempt.
 - Original articles, learner manuals, reusable engineering templates, and three substantial capstone briefs.
 - A curated library of courses, books, documentation, papers, and videos, with practical follow-up tasks.
 - A local learning portal with beginner preparation, 72 exercise workspaces, 72 applied checks, progressive hints, attempt/feedback history, tutor packets, recall practice, notes, bookmarks, and JSON progress export/import.
 - An original PDF fieldbook and a downloadable source archive.
 
 See the [practice map](docs/PRACTICE-MAP.md) for prerequisites and lesson-to-lab links. To try your current chat model without an API integration, follow the [model response bridge](lab/model-bridge.md).
+
+Follow the [incident route](content/incidents/README.md) at its scheduled points. Preserve evidence, write competing hypotheses, and test a discriminating prediction before changing code. The fixtures simulate service behavior locally; no paid model or real customer system is needed. Portal and terminal attempts are separate learning records. Their answer gates support deliberate practice, not secure examinations.
 
 Begin with the [preparation module](content/onboarding/README.md). It teaches diagram notation on a different scenario, checks the coding prerequisites, and helps you choose the concept, local engineering, or live-model route. The portal saves drafts and attempts locally; use its export feature to preserve your feedback and review history.
 
@@ -33,11 +36,11 @@ The [learning experience implementation record](docs/LEARNING-EXPERIENCE-IMPLEME
 | Route | Suggested cadence | Outcome |
 | --- | --- | --- |
 | Foundations | 4 weeks, 4-6 hours/week | Complete stages 1-3 and the first two labs |
-| Builder | 12 weeks, 6-8 hours/week | Complete all lessons, labs, and one capstone |
-| Intensive | 6 weeks, 12-16 hours/week | Same work, with two review sessions per week |
+| Builder | Twelve-week core scaffold, then extend for the chosen practice | Complete lessons and core labs, then integrations, incidents, and one capstone at your measured pace |
+| Intensive | Six-week core scaffold, 12-16 hours/week, plus extensions | Same core work, with two review sessions per week; budget integration and incident work separately |
 | Practitioner | Self-paced | Take the diagnostic, attempt stage gates, fill demonstrated gaps |
 
-These are planning estimates, not measured completion times. Readings and extensions can add substantial time.
+These are planning estimates, not measured completion times. Use the [study plan](docs/STUDY-PLAN.md) for separate integration, incident, and capstone budgets; the full route is not a guaranteed twelve-week finish.
 
 ## Commands
 

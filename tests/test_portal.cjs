@@ -20,6 +20,7 @@ function academy() {
     }
   }
   return {
+    incidents: fs.existsSync(path.join(ROOT,'content/incidents.json')) ? JSON.parse(fs.readFileSync(path.join(ROOT,'content/incidents.json'),'utf8')) : {incidents:[]},
     curriculum: JSON.parse(fs.readFileSync(path.join(ROOT, 'content/curriculum.json'), 'utf8')),
     learning: JSON.parse(fs.readFileSync(path.join(ROOT, 'content/learning.json'), 'utf8')),
     resources: JSON.parse(fs.readFileSync(path.join(ROOT, 'content/resources.json'), 'utf8')),
@@ -262,4 +263,80 @@ test('quiz display shuffles positions but original answer identities and evidenc
     assert.match(p.run('quizHTML(lessons.find(l=>l.id===lessonId))'),/not verified practical mastery/);
     assert.equal((p.run('quizHTML(lessons.find(l=>l.id===lessonId))').match(/try a new case/g)||[]).length,3);
   }
+});
+
+
+function incidentFixture(p) {
+  p.run("var inc={id:'INC-TEST',isIncident:true,title:'The next shift',briefPath:'content/incidents/test.md',placement:'After a baseline',minutes:'45',budget:'6 checks',prerequisites:['Keep an evidence log'],prompt:'Inspect the observed symptoms and choose your next check.',steps:[{id:'INC-TEST-1',prompt:'Record a hypothesis and compare it with another explanation.'}],criteria:['Preserve evidence'],deliverables:['An evidence log'],hints:['INCIDENT_HINT_ONE','INCIDENT_HINT_TWO','INCIDENT_HINT_THREE'],debrief:'INCIDENT_DEBRIEF_SECRET',transfer:'INCIDENT_TRANSFER_SECRET'};activities.push(inc);state.exercises[inc.id]=blankRecord(inc)");
+}
+function attemptedIncident(p) {
+  p.run("Object.assign(state.exercises[inc.id].draft,{attempt:'The command may be reading a stale report rather than this checkout.',artifacts:'Captured run.txt: timestamp differs from current commit.',nextCheck:'Run the collection command and compare its source revision.'});appendRecord(inc.id,'attempt')");
+}
+
+test('incident guidance requires a saved substantive attempt, not drafts or hint/feedback history',()=>{
+  const p=portal();incidentFixture(p);
+  assert.throws(()=>p.run("requestIncidentGuidance(inc.id,'hint')"),/Save an incident attempt/);
+  assert.throws(()=>p.run("appendRecord(inc.id,'attempt')"),/substantive incident/);
+  p.run("Object.assign(state.exercises[inc.id].draft,{attempt:' '.repeat(100),artifacts:'An evidence source',nextCheck:'A sufficiently long next check'});");
+  assert.throws(()=>p.run("appendRecord(inc.id,'attempt')"),/substantive incident/);
+  p.run("state.exercises[inc.id].history.push({id:'hint',at:'now',kind:'hint-request',hintLevel:3},{id:'review',at:'now',kind:'feedback',attempt:'A long explanation that would qualify otherwise',artifacts:'Observed some evidence',nextCheck:'Compare the report and current revision'})");
+  assert.equal(p.run('incidentAttempted(state.exercises[inc.id])'),false);
+  p.run("Object.assign(state.exercises[inc.id].draft,{attempt:'A substantive current draft with two alternative explanations.',artifacts:'run.txt observed a failure',nextCheck:'Compare the report revision to the checkout.'})");
+  assert.equal(p.run('incidentAttempted(state.exercises[inc.id])'),false);
+  assert.throws(()=>p.run("requestIncidentGuidance(inc.id,'debrief')"),/Save an incident attempt/);
+  assert.doesNotMatch(p.run('workspace(inc.id)'),/INCIDENT_HINT_|INCIDENT_DEBRIEF_SECRET|INCIDENT_TRANSFER_SECRET/);
+});
+
+test('incident attempts unlock only deliberate guidance; save, reload-style render and import keep it closed',()=>{
+  const p=portal();incidentFixture(p);attemptedIncident(p);
+  assert.equal(p.run('incidentAttempted(state.exercises[inc.id])'),true);
+  assert.doesNotMatch(p.run('workspace(inc.id)'),/INCIDENT_HINT_|INCIDENT_DEBRIEF_SECRET/);
+  p.run("requestIncidentGuidance(inc.id,'hint')");
+  let html=p.run('workspace(inc.id)');
+  assert.match(html,/INCIDENT_HINT_ONE/);assert.doesNotMatch(html,/INCIDENT_HINT_TWO|INCIDENT_DEBRIEF_SECRET/);
+  p.run("requestIncidentGuidance(inc.id,'hint')");
+  html=p.run('workspace(inc.id)');assert.match(html,/INCIDENT_HINT_TWO/);assert.doesNotMatch(html,/INCIDENT_DEBRIEF_SECRET/);
+  p.run("requestIncidentGuidance(inc.id,'debrief')");assert.match(p.run('workspace(inc.id)'),/INCIDENT_DEBRIEF_SECRET/);
+  p.context.location.hash='#incident=INC-TEST';p.run('render()');
+  assert.doesNotMatch(p.nodes['#main'].innerHTML,/INCIDENT_HINT_|INCIDENT_DEBRIEF_SECRET/);
+  p.run('var incidentBackup=validateState(JSON.parse(JSON.stringify(state)));state=mergeProgress(fresh(),incidentBackup).state;render()');
+  assert.equal(p.run('incidentAttempted(state.exercises[inc.id])'),true);
+  assert.equal(p.run('state.exercises[inc.id].history.filter(e=>e.kind==="attempt").length'),1);
+  assert.doesNotMatch(p.nodes['#main'].innerHTML,/INCIDENT_HINT_|INCIDENT_DEBRIEF_SECRET/);
+  p.run("requestIncidentGuidance(inc.id,'debrief');appendRecord(inc.id,'attempt');render()");
+  assert.doesNotMatch(p.nodes['#main'].innerHTML,/INCIDENT_DEBRIEF_SECRET/);
+});
+
+test('incident alias routes remain gated and freeform work cannot inject executable markup',()=>{
+  const p=portal();incidentFixture(p);
+  p.run("state.exercises[inc.id].draft.attempt='<img src=x onerror=alert(1)> and a hypothesis';state.exercises[inc.id].draft.nextCheck='<script>alert(1)</script> is learner text'");
+  for(const route of ['#incident=INC-TEST','#exercise=INC-TEST']) {
+    p.context.location.hash=route;p.run('render()');
+    const html=p.nodes['#main'].innerHTML;
+    assert.doesNotMatch(html,/<img|<script|INCIDENT_HINT_|INCIDENT_DEBRIEF_SECRET/);
+    assert.match(html,/&lt;img/);assert.match(html,/id="incident-debrief" disabled/);
+  }
+  assert.throws(()=>p.run("validateState({...state,exercises:{[inc.id]:{...state.exercises[inc.id],draft:{...state.exercises[inc.id].draft,nextCheck:{bad:'shape'}}}}})"),/nothing imported/);
+});
+
+test('incident tutor packets include next check but omit guidance, transfer answers, and feedback',()=>{
+  const p=portal();incidentFixture(p);attemptedIncident(p);
+  p.run("state.exercises[inc.id].draft.feedback='PRIVATE_REVIEW';requestIncidentGuidance(inc.id,'debrief')");
+  const packet=p.run('tutorPacket(inc,state.exercises[inc.id])');
+  assert.match(packet,/Next discriminating check/);assert.match(packet,/Run the collection command/);
+  assert.doesNotMatch(packet,/INCIDENT_HINT_|INCIDENT_DEBRIEF_SECRET|INCIDENT_TRANSFER_SECRET|PRIVATE_REVIEW/);
+});
+
+test('import into a just-opened incident adopts its saved draft and step while preserving both histories',()=>{
+  const p=portal();incidentFixture(p);attemptedIncident(p);
+  p.run("var incidentImport=validateState(JSON.parse(JSON.stringify(state)));incidentImport.exercises[inc.id].step='INC-TEST-review';state=fresh();workspace(inc.id);state.exercises[inc.id].history.push({id:'earlier-local',at:'now',kind:'attempt',step:'INC-TEST-old',attempt:'Earlier local evidence'});var importedIncident=mergeProgress(state,incidentImport);state=importedIncident.state");
+  assert.equal(p.run('importedIncident.conflicts'),0);
+  assert.equal(p.run("state.exercises[inc.id].step"),'INC-TEST-review');
+  assert.equal(p.run("state.exercises[inc.id].draft.nextCheck"),'Run the collection command and compare its source revision.');
+  assert.equal(p.run("state.exercises[inc.id].history.filter(e=>e.kind==='attempt').length"),2);
+  assert.equal(p.run("incidentAttempted(state.exercises[inc.id])"),true);
+  assert.doesNotMatch(p.run('workspace(inc.id)'),/INCIDENT_HINT_|INCIDENT_DEBRIEF_SECRET/);
+  p.run("state.exercises[inc.id].draft.nextCheck='My new local check should remain visible';var conflictingImport=mergeProgress(state,incidentImport)");
+  assert.equal(p.run("conflictingImport.state.exercises[inc.id].draft.nextCheck"),'My new local check should remain visible');
+  assert.equal(p.run("conflictingImport.state.exercises[inc.id].history.filter(e=>e.kind==='imported-draft').length"),1);
 });

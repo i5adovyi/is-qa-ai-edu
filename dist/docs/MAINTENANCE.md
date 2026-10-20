@@ -16,6 +16,7 @@ The editable source is this repository. The portal is generated into `dist/`; do
 - `lab/composed.py`: integrated student-component runner; preserve the ordinary reference CLI.
 - `lab/planner_lab/`: bounded planner, live-model adapters, real MCP use, host integration, and separately labeled execution evidence.
 - `lab/practicum/`: isolated coding mission, process/model workers, retrieval comparison, and local review queue.
+- `content/incidents/`, `content/incidents.json`, `lab/incidents/`: six incident briefs and one capstone incident, separately stored guidance, disposable simulations, and behavioral checks. Never put an incident debrief into a student brief.
 - `content/research/`: synthetic source corpus and scored research examples.
 - `content/dev-sandbox/`: intentionally broken development exercise; its one baseline test failure is expected and isolated from reference checks.
 - `docs/`, `templates/`, `capstones/`: learner manuals and reusable project artifacts.
@@ -40,6 +41,8 @@ Open overview, a lesson, a lab, the library, and a manual. Check keyboard naviga
 With the local server running and Playwright available, run `node scripts/test_portal.cjs` for interactions and `node scripts/audit_portal.cjs` for every document, internal link, quiz answer, downloadable asset, and mobile document layout. `ACADEMY_BROWSER_PATH` selects an installed browser executable. When testing another checkout, set `ACADEMY_TEST_URL` to its server and `ACADEMY_DIST_DIR` to its matching `dist/`; the audit compares download hashes with that exact build.
 
 Also run `node scripts/test_learning_portal.cjs` for the exercise workspace, spoiler protection, v1 progress migration, feedback history, import conflicts, recall, and narrow-screen behavior. The v2 progress schema must preserve original attempts; do not silently overwrite a learner's history on import.
+
+Run `node scripts/test_incident_portal.cjs` for incident attempt gates, progressive hints, deliberate debrief reveal, reload and import behavior. Incident guidance must stay out of the DOM and tutor packet before explicit disclosure. The source archive contains editable guidance; the static portal is not an examination security system. The PDF includes incident briefs but omits their guidance because it cannot enforce an attempt gate.
 
 The GitHub Actions workflow runs core and optional MCP checks with no model credentials. Live Codex/provider calls are deliberately explicit local checks. Record CI execution separately from a locally passing workflow command.
 

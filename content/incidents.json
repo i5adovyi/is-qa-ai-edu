@@ -1,0 +1,305 @@
+{
+  "version": 1,
+  "incidents": [
+    {
+      "id": "INC-01",
+      "title": "The morning change request",
+      "stage": 4,
+      "placement": "Week 5, after lessons 10–12 and Lab 13 Part A",
+      "minutes": "90–120",
+      "prerequisites": [
+        "Lessons 10–12",
+        "Lab 13 Part A",
+        "Python 3.9+ and Git"
+      ],
+      "prompt": "A small change is due before lunch. You inherit a repository, an assistant diagnosis, several test reports, and another person’s unfinished work. Establish what can be trusted before changing anything.",
+      "deliverables": [
+        "Initial working-tree inventory and preserved baseline",
+        "Competing explanations and a discriminating check",
+        "Scoped patch and current execution evidence",
+        "Handoff and changed-condition result"
+      ],
+      "hints": [
+        "Choose one completion claim and trace it back to the exact execution that supposedly supports it. Which identity and version must match?",
+        "Compare the number of discovered tests with the exit code. Then compare report revisions and repeated results for the same test. Inspect the checkout before acting on the assistant’s diagnosis.",
+        "Run the supplied application tests directly, inspect the wrapper from another working directory, and test an empty test directory. Separate the wrapper repair from unrelated intermittent evidence; preserve the human’s dirty file."
+      ],
+      "debrief": "The primary fixture combines several misleading signals. A report from an older revision cannot establish current behavior; a zero-test run cannot establish a pass; and repeated pass/fail outcomes need investigation rather than an invented application diagnosis. The existing application’s own tests pass. The requested small reporting feature still needs its narrow implementation, while the check wrapper separately needs to discover tests from any working directory and fail when none ran. This does not justify changing the working application logic. Preserve the human’s uncommitted work. The report-selection exercise can remain blocked because its supplied current evidence is insufficient or unstable even after the wrapper is repaired. Name that distinction instead of presenting every green command as permission to release. In real work, investigate flaky results and their environment before deciding whether they are infrastructure or product defects.",
+      "transfer": "Create a fresh transfer workspace. Predict which observations should change and whether the same completion decision will remain justified. Check the request, current revision and preserved human work again; do not copy the previous conclusion.",
+      "briefPath": "content/incidents/01-morning-change.md",
+      "budget": "Initial investigation: 20 minutes and 8 logged evidence checks; record a handoff at the limit.",
+      "command": "python3 -m lab.incidents init INC-01 --workspace work/incidents/INC-01",
+      "steps": [
+        {
+          "id": "investigate",
+          "prompt": "State two competing explanations, cite an observed artifact or trace, and choose one next check with a different predicted result under each explanation. Save this attempt before requesting guidance."
+        }
+      ],
+      "criteria": [
+        "Preserve the initial state and cite actual evidence, including versions and uncertainty.",
+        "Compare at least two explanations and run a check that can distinguish them.",
+        "Stay within the stated scope and investigation budget, or record why you stopped.",
+        "Separate a proposed action from an executed check and a local simulation from a live integration.",
+        "Predict a changed condition, then explain the transfer result and remaining limits.",
+        "Explain the relation between the test inventory, current revision, actual execution, and the final status without erasing unrelated failures."
+      ]
+    },
+    {
+      "id": "INC-02",
+      "title": "The weekly evidence brief",
+      "stage": 6,
+      "placement": "Week 7, after lessons 04–05 and 16–18",
+      "minutes": "75–105",
+      "prerequisites": [
+        "Lessons 04–05 and 16–18",
+        "Python 3.9+"
+      ],
+      "prompt": "Turn supplied tool responses into a weekly report and assess a claimed assistant improvement. Establish the meaning, coverage, and comparability of the records before describing the result.",
+      "deliverables": [
+        "Preserved tool responses and first result",
+        "Claim-to-evidence ledger",
+        "Comparison conditions and case counts",
+        "Implemented decision, missing-information request, and transfer result"
+      ],
+      "hints": [
+        "Write the assumptions required for each claim in the report. Which assumption can you check independently of whether the response parses?",
+        "Follow the response sequence to its documented end, compare absent fields with explicit nulls and zero, and identify dates that permit more than one interpretation. Compare evaluation case identities and run state.",
+        "Treat a broken page chain or truncation as incomplete. Leave an ambiguous slash date unresolved without a locale. Calculate a paired comparison only from cases that were neither training examples nor cached in either run; report the eligible denominator."
+      ],
+      "debrief": "The fixture separates syntax from evidence quality. Page reachability, termination, and truncation determine whether the response is complete. Missing, null, and zero describe different observations and must not collapse into one value. Some numeric dates require a locale; a plausible guess is not a verified date. The advertised evaluation improvement also mixes previously seen or cached examples with fresh observations. Excluding those ineligible pairs changes the interpretation of the claimed gain. The remaining comparison is a small diagnostic estimate, not statistical proof of general improvement. A defensible outcome names missing evidence and sample limits instead of manufacturing a complete report.",
+      "transfer": "Create a fresh transfer workspace. Predict which report claims should change under the new conditions, then rebuild the claim-to-evidence ledger and comparison from those inputs.",
+      "briefPath": "content/incidents/02-evidence-brief.md",
+      "budget": "Initial investigation: 20 minutes and 8 logged evidence checks; record a handoff at the limit.",
+      "command": "python3 -m lab.incidents init INC-02 --workspace work/incidents/INC-02",
+      "steps": [
+        {
+          "id": "investigate",
+          "prompt": "State two competing explanations, cite an observed artifact or trace, and choose one next check with a different predicted result under each explanation. Save this attempt before requesting guidance."
+        }
+      ],
+      "criteria": [
+        "Preserve the initial state and cite actual evidence, including versions and uncertainty.",
+        "Compare at least two explanations and run a check that can distinguish them.",
+        "Stay within the stated scope and investigation budget, or record why you stopped.",
+        "Separate a proposed action from an executed check and a local simulation from a live integration.",
+        "Predict a changed condition, then explain the transfer result and remaining limits.",
+        "Support completeness, field interpretation, and evaluation claims separately; a syntactically valid record is not enough for all three."
+      ]
+    },
+    {
+      "id": "INC-03",
+      "title": "The interrupted update",
+      "stage": 5,
+      "placement": "Week 6, after lessons 13–15 and Lab 05",
+      "minutes": "75–105",
+      "prerequisites": [
+        "Lessons 13–15",
+        "Lab 05",
+        "Python 3.9+"
+      ],
+      "prompt": "A task stopped while updating a synthetic external system. Local state, service records, and notification evidence must support a safe continuation decision.",
+      "deliverables": [
+        "Initial local and simulated service records",
+        "Observed-versus-inferred timeline",
+        "Recovery proposal and actual replay evidence",
+        "Unknown-outcome handoff and transfer result"
+      ],
+      "hints": [
+        "Separate what the local process knows from what the other system may already have done. Which observation is authoritative for each individual effect?",
+        "Compare each operation’s stable identity with the remote lookup and the notification ledger. Is an unavailable lookup the same as a confirmed absence?",
+        "Do not recreate an operation observed present. A recorded notification key prevents another notification; an unavailable remote result remains unknown. Advance a checkpoint only through a confirmed contiguous prefix, not past an unresolved operation."
+      ],
+      "debrief": "A lost response can coexist with a committed remote operation and a stale local checkpoint. Replaying everything after the checkpoint can duplicate both an update and its notification. Reconcile each operation by stable identity, use the notification ledger separately, and preserve the difference between present, absent, and unavailable. Only confirmed absence supports proposing creation. An unavailable observation needs a later check or escalation, and it prevents claiming an uninterrupted completed prefix. The exercise proposes effects against synthetic records; it does not implement a real transaction or prove a provider’s idempotency guarantees.",
+      "transfer": "Create a fresh transfer workspace. Predict how the recovery decision should change when one observation changes, then compare the proposed effects and final status with the new evidence.",
+      "briefPath": "content/incidents/03-interrupted-update.md",
+      "budget": "Initial investigation: 20 minutes and 8 logged evidence checks; record a handoff at the limit.",
+      "command": "python3 -m lab.incidents init INC-03 --workspace work/incidents/INC-03",
+      "steps": [
+        {
+          "id": "investigate",
+          "prompt": "State two competing explanations, cite an observed artifact or trace, and choose one next check with a different predicted result under each explanation. Save this attempt before requesting guidance."
+        }
+      ],
+      "criteria": [
+        "Preserve the initial state and cite actual evidence, including versions and uncertainty.",
+        "Compare at least two explanations and run a check that can distinguish them.",
+        "Stay within the stated scope and investigation budget, or record why you stopped.",
+        "Separate a proposed action from an executed check and a local simulation from a live integration.",
+        "Predict a changed condition, then explain the transfer result and remaining limits.",
+        "Justify each proposed effect separately and avoid claiming an outcome that no observation establishes."
+      ]
+    },
+    {
+      "id": "INC-04",
+      "title": "The Monday workspace",
+      "stage": 5,
+      "placement": "Weeks 6–7, after lessons 07–09 and 13–15; revisit Lab 10",
+      "minutes": "75–105",
+      "prerequisites": [
+        "Lessons 07–09 and 13–15",
+        "Lab 10 package/host distinction",
+        "Python 3.9+"
+      ],
+      "prompt": "Resume a familiar workflow after an account change and a package update. Saved material is available, but current scope and behavior still need to be established.",
+      "deliverables": [
+        "Initial identity, scope, and environment observations",
+        "Competing explanations and a discriminating check",
+        "Allowed and stopped boundary cases",
+        "Current-contract comparison and transfer handoff"
+      ],
+      "hints": [
+        "List the dimensions that make a result reusable in the current session. Which of them changed since the saved observation?",
+        "Track the principal and workspace through every event. Compare grants and revocation with requests. Then inspect the cached result’s origin and the active package’s declared units and version.",
+        "Bind cache reuse to principal, workspace, query, and skill version. A switch grants nothing, and revocation requires a new authorization decision. Interpret dollars versus cents from the supported package contract; do not guess compatibility for an unsupported version."
+      ],
+      "debrief": "Familiar task text does not make retained data valid for a different principal or workspace. The fixture also revokes a previously valid scope during the run, so a check only at startup is insufficient. Cache reuse must respect both authorization scope and the relevant versioned contract. The package upgrade changes numeric units; a familiar output shape can still mean something different. Supported contracts can be interpreted explicitly, while unsupported ones require a compatibility decision. Stop or request a narrow authorization decision when the current scope no longer permits work; never solve it by granting everything. These are local simulations, not proof of real account isolation.",
+      "transfer": "Create a fresh transfer workspace. Predict which changed conditions should affect the result, then explain which observations justify treating retained material and current requests the same way or differently.",
+      "briefPath": "content/incidents/04-monday-workspace.md",
+      "budget": "Initial investigation: 20 minutes and 8 logged evidence checks; record a handoff at the limit.",
+      "command": "python3 -m lab.incidents init INC-04 --workspace work/incidents/INC-04",
+      "steps": [
+        {
+          "id": "investigate",
+          "prompt": "State two competing explanations, cite an observed artifact or trace, and choose one next check with a different predicted result under each explanation. Save this attempt before requesting guidance."
+        }
+      ],
+      "criteria": [
+        "Preserve the initial state and cite actual evidence, including versions and uncertainty.",
+        "Compare at least two explanations and run a check that can distinguish them.",
+        "Stay within the stated scope and investigation budget, or record why you stopped.",
+        "Separate a proposed action from an executed check and a local simulation from a live integration.",
+        "Predict a changed condition, then explain the transfer result and remaining limits.",
+        "Show which current authority and package contract each result depends on; keep simulated identity checks separate from actual authentication."
+      ]
+    },
+    {
+      "id": "INC-05",
+      "title": "The busy afternoon",
+      "stage": 7,
+      "placement": "Week 8, after lessons 14–15 and 19–21 and Lab 13 Part B",
+      "minutes": "90–120",
+      "prerequisites": [
+        "Lessons 14–15 and 19–21",
+        "Lab 13 Part B",
+        "Python 3.9+"
+      ],
+      "prompt": "A workflow that works in a small demonstration slows down when several workers run together. Explain the combined outcome and choose a bounded recovery.",
+      "deliverables": [
+        "Combined trace and relevant worker observations",
+        "Competing explanations and a small separating experiment",
+        "Global logical-work ledger and actual checks",
+        "Pending-work decision and transfer result"
+      ],
+      "hints": [
+        "Inspect the shared resources rather than only individual worker success. Which limits apply to the group, and which observations refer to the same state?",
+        "Put arrival, retry availability, duration, and deadline on one timeline. Sum the shared cost once. Compare the revisions each update expected with the revision actually present when it arrived.",
+        "Choose a feasible schedule under concurrency, deadline, and total budget limits; separate synchronized retry starts. Defer work that does not fit. Apply a state delta only when its expected revision matches; a conflict needs reconciliation, not an overwrite."
+      ],
+      "debrief": "Local worker behavior can look reasonable while the group overspends, retries together, or overwrites shared state. The fixture requires global scheduling and accounting under a shared budget, with bounded concurrency and deadlines. Retry delays alone do not prevent a synchronized burst. Multiple schedules may satisfy the contract; the checker does not prove yours optimizes throughput. Competing updates use expected revisions, so a later write cannot silently apply to a state it never read. Preserve conflicts and pending work for reconciliation. The timeline and costs are deterministic logical quantities, not measured provider latency or billing.",
+      "transfer": "Create a fresh transfer workspace. Predict the effect of the changed workload conditions on the whole run. Compare actual accounting, pending work and final state with that prediction.",
+      "briefPath": "content/incidents/05-busy-afternoon.md",
+      "budget": "Initial investigation: 20 minutes and 8 logged evidence checks; record a handoff at the limit.",
+      "command": "python3 -m lab.incidents init INC-05 --workspace work/incidents/INC-05",
+      "steps": [
+        {
+          "id": "investigate",
+          "prompt": "State two competing explanations, cite an observed artifact or trace, and choose one next check with a different predicted result under each explanation. Save this attempt before requesting guidance."
+        }
+      ],
+      "criteria": [
+        "Preserve the initial state and cite actual evidence, including versions and uncertainty.",
+        "Compare at least two explanations and run a check that can distinguish them.",
+        "Stay within the stated scope and investigation budget, or record why you stopped.",
+        "Separate a proposed action from an executed check and a local simulation from a live integration.",
+        "Predict a changed condition, then explain the transfer result and remaining limits.",
+        "Account for the complete run, including deferred work, deadlines, and state conflicts; different valid schedules can be acceptable."
+      ]
+    },
+    {
+      "id": "INC-06",
+      "title": "The resumed delivery",
+      "stage": 8,
+      "placement": "Week 9, after lessons 06, 12, 20 and 22–23",
+      "minutes": "75–105",
+      "prerequisites": [
+        "Lessons 06, 12, 20 and 22–23",
+        "Python 3.9+"
+      ],
+      "prompt": "Resume a task from a handoff while another worker returns an artifact and stakeholders disagree about the result. Decide what is current, useful, and authorized.",
+      "deliverables": [
+        "Initial handoff and requirement sources",
+        "Requirement-to-artifact comparison",
+        "A narrow clarification question and provisional action",
+        "Actual check, usefulness review, and transfer handoff"
+      ],
+      "hints": [
+        "Ask what evidence establishes the current task, rather than treating the handoff as the task itself. Which output would actually fit the user’s present workflow?",
+        "Compare the handoff version, later requirement events, and the version each worker targeted. Look for a constraint whose current stakeholders request different values.",
+        "Use the current requirement version and reject stale artifacts. A conflict at that version requires a precise clarification question; passing tests do not authorize selecting one stakeholder silently. Accept an artifact only after its values satisfy the resolved current constraints."
+      ],
+      "debrief": "The interruption left a stale handoff while legitimate requirements changed. A late worker can be correct for the old task and unusable for the current one. The current fixture also contains conflicting stakeholder requirements, so neither a passing demonstration nor the most recent worker response settles the delivery decision. The primary outcome requires clarification. Keep a bounded provisional action, ask about the specific conflicting constraint, and do not invent the reply. The transfer case resolves the conflict and allows useful work to continue. Actual product usefulness still requires feedback from real users; the executable contract checks only the supplied synthetic constraints.",
+      "transfer": "Create a fresh transfer workspace. Predict the delivery decision from its current evidence before running it. Explain which prior assumptions remain valid and which must be revised.",
+      "briefPath": "content/incidents/06-resumed-delivery.md",
+      "budget": "Initial investigation: 20 minutes and 8 logged evidence checks; record a handoff at the limit.",
+      "command": "python3 -m lab.incidents init INC-06 --workspace work/incidents/INC-06",
+      "steps": [
+        {
+          "id": "investigate",
+          "prompt": "State two competing explanations, cite an observed artifact or trace, and choose one next check with a different predicted result under each explanation. Save this attempt before requesting guidance."
+        }
+      ],
+      "criteria": [
+        "Preserve the initial state and cite actual evidence, including versions and uncertainty.",
+        "Compare at least two explanations and run a check that can distinguish them.",
+        "Stay within the stated scope and investigation budget, or record why you stopped.",
+        "Separate a proposed action from an executed check and a local simulation from a live integration.",
+        "Predict a changed condition, then explain the transfer result and remaining limits.",
+        "Keep current confirmed requirements, conflicting requests, assumptions, and pending worker output distinct. Never invent a stakeholder response."
+      ]
+    },
+    {
+      "id": "INC-CAPSTONE",
+      "title": "The release rehearsal",
+      "stage": 8,
+      "placement": "Weeks 11–12, after a working baseline for one chosen capstone",
+      "minutes": "150–210",
+      "prerequisites": [
+        "A working baseline for one existing capstone",
+        "Lessons 22–23",
+        "Six incident investigations or equivalent demonstrated evidence",
+        "Python 3.9+"
+      ],
+      "prompt": "Investigate an unfamiliar release rehearsal with interrupted work, changed persisted records, and disagreeing artifacts. Recover or hold, then adapt one pressure to your chosen product.",
+      "deliverables": [
+        "First attempt and initial evidence timeline",
+        "Recovery or hold decision with actual checks",
+        "Preserved records and uncertainty handoff",
+        "Changed-condition result and one-project adaptation"
+      ],
+      "hints": [
+        "Before selecting a recovery procedure, list everything it would need to preserve and every claim that must be true for release. Which of those claims is currently only assumed?",
+        "Compare the records already written with the recovery target’s supported schema. Inspect snapshot coverage, tested migration evidence, unresolved operations, and evaluation revision separately.",
+        "A code rollback is insufficient when new records cannot be represented in the old schema. Choose only a recovery path whose compatibility and verification evidence exists; otherwise stop and preserve state. Unknown operations or stale evaluation evidence still block release even if a migration path is available."
+      ],
+      "debrief": "This case combines recovery compatibility with incomplete outcome evidence. New-schema records may make an apparently simple rollback destructive. A snapshot is useful only when its coverage and recovery procedure are established; a version label is not a tested migration. The primary case lacks enough evidence for a safe recovery and release, so stopping while preserving records is a valid technical decision. A changed case can support a verified forward fix, but release also depends on resolved operation outcomes and current evaluation evidence. The runtime proposes a decision; your capstone adaptation must supply an actual disposable migration or recovery check for one real local product journey. Do not claim that a simulation proves a production database rollback.",
+      "transfer": "Predict the release decision in a fresh transfer workspace before running it. Then adapt a new input and one structural condition to your chosen capstone and test that case in a disposable copy.",
+      "briefPath": "content/incidents/07-release-rehearsal.md",
+      "budget": "Initial investigation: 30 minutes and 12 logged evidence checks; record a handoff at the limit.",
+      "command": "python3 -m lab.incidents init INC-CAPSTONE --project support --workspace work/incidents/INC-CAPSTONE",
+      "steps": [
+        {
+          "id": "investigate",
+          "prompt": "State two competing explanations, cite an observed artifact or trace, and choose one next check with a different predicted result under each explanation. Save this attempt before requesting guidance."
+        }
+      ],
+      "criteria": [
+        "Preserve the initial state and cite actual evidence, including versions and uncertainty.",
+        "Compare at least two explanations and run a check that can distinguish them.",
+        "Stay within the stated scope and investigation budget, or record why you stopped.",
+        "Separate a proposed action from an executed check and a local simulation from a live integration.",
+        "Predict a changed condition, then explain the transfer result and remaining limits.",
+        "Demonstrate compatibility with existing persisted state and justify release separately from code startup. Use the existing 40-point capstone rubric."
+      ]
+    }
+  ]
+}
