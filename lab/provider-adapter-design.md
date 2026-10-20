@@ -2,6 +2,8 @@
 
 This document is an implementation brief, not a working provider integration. Provider APIs, SDK methods, pricing, structured-output options, and model identifiers change. Consult the provider's current official documentation before implementing an adapter. The baseline remains offline.
 
+First try the working [manual model bridge](model-bridge.md). It exports a prompt and replays your saved model response through the harness without credentials or SDKs. The steps below replace that manual exchange with a transport.
+
 ## Keep one narrow seam
 
 The injectable `Runner(..., policy=callable)` accepts a callable of:

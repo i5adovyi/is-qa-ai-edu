@@ -34,25 +34,25 @@ The repair checks membership in the available source set. Add a valid-source cas
 
 ## Exercise 1 · Guided failure
 
-Write three tests or manual cases for unknown, valid and empty source lists. Run them against a deliberately faulty validator that only checks list length. Confirm which case fails and why. Label every expected result before inspecting the implementation.
+Continue with lesson 10's copy of the [development sandbox](../dev-sandbox/README.md). Write expected results for below-limit, exactly-at-limit and already-over-limit calls to `take_step`, then run its five starter checks. Confirm that the exactly-at-limit case exposes the seeded defect. Do not remove checks from the working reference harness to manufacture a failure. As an alternative exercise, create the deliberately faulty source validator from the worked example and test unknown, valid and empty source lists.
 
-**Deliverable:** cases and failing result. **Pass:** the unknown-source case detects the defect; the expected outcome does not depend on the buggy implementation.
+**Deliverable:** cases and failing result. **Pass:** the boundary case detects the chosen defect; the expected outcome does not depend on the buggy implementation.
 
 ## Exercise 2 · Build a repair loop
 
-Implement the smallest repair, then run the three cases and the relevant existing suite. Save a short log with hypothesis, change, result and next decision. Optional agent use: ask the agent to inspect the failure and propose a repair; review the patch before accepting its completion claim. Keep the original failure as a regression case.
+Implement the smallest repair, then run the boundary cases and the relevant existing suite. For the sandbox, rerun `python3 -m unittest discover -s work/router-practice -p 'test_router.py' -v`; all five starter checks should pass. Save a short log with hypothesis, change, result and next decision. Optional agent use: ask the agent to inspect the failure and propose a repair; review the patch before accepting its completion claim. Keep the original failure as a regression case.
 
-**Deliverable:** patch, checks and repair log. **Pass:** the original failure is fixed; valid input still passes; empty input retains the intended behavior; no unrelated test was weakened.
+**Deliverable:** patch, checks and repair log. **Pass:** the original failure is fixed; valid input still passes; rejected boundary inputs remain rejected; no unrelated test was weakened.
 
 ## Exercise 3 · Adversarial test quality
 
-Create a mutant implementation that always returns success. Create another that always returns failure. Run your tests against both. Then create a more subtle mutant that accepts any ID starting with `KB-`. Determine whether your suite detects it. Add one case only if it represents a real missing requirement boundary.
+Create a mutant implementation that always admits a step, another that always rejects, and a subtle one that restores the erroneous inclusive `<=` boundary. Run your checks against each, restoring the repaired version afterward. For the alternative citation exercise, use always-success, always-failure and “accept any ID starting with `KB-`” mutants. Add a case only if it represents a real missing requirement boundary.
 
 **Deliverable:** mutation table. **Pass:** the suite rejects all three mutants while accepting the correct implementation. Explain any intentionally uncovered behavior.
 
 ## Hints and solution outline
 
-A tiny fixture set is sufficient: one available ID, one nonexistent ID and an empty list. The prefix mutant exposes the difference between syntactic validity and source existence. Use descriptive assertion messages so a failure points to behavior. The repair log should not include every internal thought; it should contain reproducible observations and decisions. For the bundled lab, run `python3 -m unittest discover -s tests -p 'test_lab*.py'` after adapting the case to its actual schema.
+For the sandbox, the final permitted step starts below the limit; a new step must not start when `used == max_steps`. The three mutants check that your suite detects both excessive rejection and excessive admission. For the citation alternative, a tiny fixture set is sufficient: one available ID, one nonexistent ID and an empty list. The prefix mutant exposes the difference between syntactic validity and source existence. Use descriptive assertions and record reproducible observations and decisions. Running the reference harness suite can check that the academy remains intact, but it does not test your isolated sandbox patch.
 
 Do not claim model reliability from these deterministic tests. They establish validator behavior. A separate evaluation checks how often proposed drafts need rejection and whether the final system handles that rejection usefully.
 

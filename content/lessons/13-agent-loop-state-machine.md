@@ -51,6 +51,8 @@ Implement the state machine in a small script or use the bundled lab as an inspe
 
 **Deliverable:** implementation or annotated trace for three runs. **Pass:** each run terminates with an explicit reason; the executor receives only validated proposals; step limits are enforced by code or a mechanically applied simulation rule.
 
+The bundled lab follows a fixed retrieval/decision/write workflow. Its injected policy supplies a bounded final decision, not arbitrary next-tool proposals. Inspect it as an example of controls, or build the scripted loop above to practice planner-driven action selection. The [model bridge](../../lab/model-bridge.md) exercises the decision seam; adding a model-controlled tool loop requires the separate proposal contract described in the [adapter brief](../../lab/provider-adapter-design.md).
+
 ## Exercise 3 · Adversarial completion
 
 Supply a planner response that says “done” before a draft exists. Supply another that requests an unknown tool and a third that loops forever. Verify that the harness detects all three independently of the planner's confidence. Optional model use can generate proposals, but keep the scripted cases as deterministic regression checks.

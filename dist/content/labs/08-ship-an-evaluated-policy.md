@@ -6,7 +6,7 @@
 
 You now have data handling, context selection, permissions, budgets, recovery, citations, and traces. The final exercise connects a student policy to the harness while preserving those boundaries.
 
-This is still a deterministic offline policy. Adding a real model is a separate extension described in the [adapter design brief](../../lab/provider-adapter-design.md). You can learn the engineering interface before paying for model calls.
+This is still a deterministic offline policy. After completing it, use the working [manual model bridge](../../lab/model-bridge.md) to export a request, ask any chat model for a JSON decision, and replay its answer through the same harness. No API key is needed; a labeled mock response also works offline. A live provider integration is a further extension described in the [adapter design brief](../../lab/provider-adapter-design.md).
 
 ## Build
 
@@ -28,7 +28,7 @@ Keep the operational reason concise. Do not ask an agent for hidden chain-of-tho
 ```sh
 python3 -m lab.cli practice --lab 08
 python3 -m lab.cli evaluate --policy student --split train --out .lab-runs/lab08-train-v1
-python3 -m unittest discover -s tests -p 'test_lab*.py' -v
+python3 -m unittest discover -s tests -p 'test_*.py' -v
 ```
 
 The public practice checks must pass. The student training gate should pass 18 ticket cases and 11 scenarios. Use a new output directory for every evaluation to preserve previous reports.

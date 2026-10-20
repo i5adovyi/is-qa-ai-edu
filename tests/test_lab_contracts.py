@@ -147,6 +147,26 @@ class DispatcherTest(unittest.TestCase):
         self.assertNotIn(self.store.data["ticket"]["body"], trace)
         self.assertIn("request_hash", trace)
 
+    def test_rejected_proposal_metadata_cannot_leak_arbitrary_text(self):
+        secret = "sk-demo-SYNTHETIC_SECRET"
+        self.assert_code("invalid_arguments", self.dispatcher.call, "read_ticket",
+                         {"ticket_id": "T-001", secret: "value"}, key=secret)
+        self.assert_code("tool_denied", self.dispatcher.call, secret, {})
+        trace = self.trace.path.read_text()
+        self.assertNotIn(secret, trace)
+        attempts = [e for e in read_trace(self.trace.path) if e["event"] == "tool_attempt"]
+        self.assertEqual(attempts[0]["argument_keys"], ["ticket_id"])
+        self.assertEqual(attempts[1]["tool"], "<unknown>")
+        self.assertEqual(len(attempts[0]["idempotency_key_hash"]), 64)
+
+    def test_successful_mutation_trace_hashes_operation_key(self):
+        key = "sk-demo-SYNTHETIC_OPERATION"
+        self.dispatcher.call("search_kb", {"topic": "billing"})
+        self.dispatcher.call("save_draft", self.draft_args(), key=key)
+        self.assertNotIn(key, self.trace.path.read_text())
+        committed = [e for e in read_trace(self.trace.path) if e["event"] == "mutation_committed"]
+        self.assertEqual(len(committed[0]["idempotency_key_hash"]), 64)
+
     def test_dispatcher_rejects_a_store_from_another_ticket(self):
         self.assert_code("scope_denied", Dispatcher, self.store, self.trace,
                          Budget(), Usage(), "T-002")

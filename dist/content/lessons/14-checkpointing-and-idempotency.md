@@ -37,7 +37,7 @@ Crash after B but before C. On resume, look up the operation ID. If its stored a
 
 List crashes before A, between each pair of steps and after D. For every point, describe what durable evidence exists and what resumption should do. Identify which outcomes are known, unknown or conflicting.
 
-**Deliverable:** six-row crash matrix. **Pass:** the after-B case reuses the existing draft; no row equates a missing response with a failed write.
+**Deliverable:** five-row crash matrix: before A, A–B, B–C, C–D, and after D. **Pass:** the after-B case reuses the existing draft; no row equates a missing response with a failed write. An interruption *inside* B is an additional case: explain which transaction or atomic-replacement guarantee covers it rather than assuming two separate writes are atomic.
 
 ## Exercise 2 · Build recovery
 

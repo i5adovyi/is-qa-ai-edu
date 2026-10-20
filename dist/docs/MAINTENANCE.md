@@ -1,6 +1,6 @@
 # Maintain and extend the academy
 
-The editable source is this repository. The portal is generated into `dist/`; do not edit generated content there. Lessons and reference material are ordinary Markdown so the course remains usable without its interface.
+The editable source is this repository. The portal is generated into `dist/`; do not edit generated content there. The build also refreshes the downloadable source archive, so a newly extracted project can rebuild all portal downloads. Lessons and reference material are ordinary Markdown so the course remains usable without its interface.
 
 ## Structure
 
@@ -8,7 +8,9 @@ The editable source is this repository. The portal is generated into `dist/`; do
 - `content/lessons/`: original lesson text.
 - `content/resources.json`: curated external library.
 - `content/articles/`, `content/library/`: supporting reading.
-- `content/labs/`, `lab/`, `tests/`: practical assignments and executable reference implementation.
+- `content/labs/`, `lab/`, `tests/`: practical assignments, the reference harness, and manual model-response bridge.
+- `content/research/`: synthetic source corpus and scored research examples.
+- `content/dev-sandbox/`: intentionally broken development exercise; its one baseline test failure is expected and isolated from reference checks.
 - `docs/`, `templates/`, `capstones/`: learner manuals and reusable project artifacts.
 - `portal/`: interface source.
 - `scripts/`: build, serving, packaging, and content validation.
@@ -18,6 +20,7 @@ The editable source is this repository. The portal is generated into `dist/`; do
 
 ```sh
 python3 -m unittest discover -s tests
+node --test tests/test_portal.cjs
 python3 scripts/check_content.py
 python3 scripts/build_portal.py
 python3 scripts/serve.py

@@ -44,7 +44,15 @@ Locate the lab's CLI, fixtures, core decision logic and tests. Write a one-page 
 
 ## Exercise 2 · Build an implementation brief
 
-Choose one small improvement: unknown-source rejection, missing-evidence handling or clearer failure output. Write the problem, scope, three acceptance cases, allowed files and verification command. Ask an agent to implement it optionally, or implement it yourself. Keep a copy of the original brief and compare it with the resulting diff.
+First reproduce a defect before choosing a change. The bundled reference already rejects unknown citations and empty evidence; do not report those existing checks as your improvement. Use the [isolated development sandbox](../dev-sandbox/README.md) for a guaranteed starting defect. Copy its files to `work/router-practice/`, then run:
+
+```sh
+python3 -m unittest discover -s work/router-practice -p 'test_router.py' -v
+```
+
+The seeded `take_step` bug admits a fourth step when three have already consumed a three-step limit. The starter deliberately has one failing check among five. Preserve that failing result before editing your copy. Do not weaken the test or modify the academy reference harness to manufacture a defect. Carry this same patch into lessons 11 and 12.
+
+Write the problem, scope, three acceptance cases, allowed files and verification command for this defect, or for another defect you can actually reproduce. For the sandbox, cover below-limit, exactly-at-limit and already-over-limit calls. Ask an agent to implement it optionally, or implement it yourself. Keep a copy of the original brief and compare it with the resulting diff. If using Git, inspect the diff; otherwise preserve a before/after file pair.
 
 **Deliverable:** brief, patch and verification evidence. **Pass:** each acceptance case is observable; changes are limited to the feature and necessary supporting tests.
 

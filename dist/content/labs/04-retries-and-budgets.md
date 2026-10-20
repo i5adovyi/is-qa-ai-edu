@@ -41,7 +41,7 @@ This exercise computes a schedule only. It does not sleep or alter the reference
 python3 -m lab.cli practice --lab 04
 ```
 
-All five public checks must pass. Add checks for a zero cap and a floating-point attempt. Explain Python's `bool`/`int` relationship and why a schema may intentionally reject booleans.
+All seven public checks must pass, including a zero cap and invalid values in each input position. Add checks for a base above the cap and the exact attempt where the cap is first reached. Explain Python's `bool`/`int` relationship and why a schema may intentionally reject booleans.
 
 ## Retry decision table
 

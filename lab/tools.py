@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 
-from .contracts import DEFAULT_ALLOWLIST, HarnessError, validate_arguments
+from .contracts import DEFAULT_ALLOWLIST, TOOL_SCHEMAS, HarnessError, validate_arguments
 from .storage import digest
 
 
@@ -31,14 +31,23 @@ class Dispatcher:
         self.retrieved_ids = set()
 
     def call(self, name, arguments, key=None):
-        # Trace bounded metadata, never untrusted bodies, reply text, or tool secrets.
-        self.trace.emit("tool_attempt", tool=name,
-                        argument_keys=sorted(arguments) if isinstance(arguments, dict) else [],
-                        request_hash=digest({"tool": name, "arguments": arguments}),
-                        idempotency_key=key)
+        # Even a field name or operation key can contain untrusted text. Log only
+        # registry-defined labels and hashes; validate the original proposal below.
+        known_tool = type(name) is str and name in TOOL_SCHEMAS
+        trace_name = name if known_tool else "<unknown>"
+        known_keys = set(TOOL_SCHEMAS[name]["required"]) if known_tool else set()
+        argument_keys = sorted(known_keys & arguments.keys()) if type(arguments) is dict else []
+        try:
+            request_hash = digest({"tool": name, "arguments": arguments})
+        except (TypeError, ValueError):
+            request_hash = None
+        key_hash = digest(key) if type(key) is str else None
+        self.trace.emit("tool_attempt", tool=trace_name,
+                        argument_keys=argument_keys, request_hash=request_hash,
+                        idempotency_key_hash=key_hash)
         try:
             self.usage.consume(self.budget, "tool_calls")
-            if name not in self.allowlist:
+            if type(name) is not str or name not in self.allowlist:
                 raise HarnessError("tool_denied", "Tool is outside this run's allowlist.")
             validate_arguments(name, arguments)
             if "ticket_id" in arguments and arguments["ticket_id"] != self.ticket_id:
@@ -60,19 +69,19 @@ class Dispatcher:
                 if not citations or not citations <= (valid_ids & self.retrieved_ids):
                     raise HarnessError("unsupported_citation", "Citations must be retrieved in this run.")
                 result = self.store.mutate(name, arguments, key)
-                self.trace.emit("mutation_committed", tool=name, replayed=result["replayed"],
-                                idempotency_key=key)
+                self.trace.emit("mutation_committed", tool=trace_name, replayed=result["replayed"],
+                                idempotency_key_hash=key_hash)
             else:
                 result = self.store.mutate(name, arguments, key)
-                self.trace.emit("mutation_committed", tool=name, replayed=result["replayed"],
-                                idempotency_key=key)
+                self.trace.emit("mutation_committed", tool=trace_name, replayed=result["replayed"],
+                                idempotency_key_hash=key_hash)
             # Budget tool output BEFORE exposing it to the policy.
             self.usage.consume(self.budget, "context_chars", len(json.dumps(result)))
             if name == "search_kb":
                 self.retrieved_ids.update(item["id"] for item in result)
-            self.trace.emit("tool_result", tool=name, result_hash=digest(result),
+            self.trace.emit("tool_result", tool=trace_name, result_hash=digest(result),
                             replayed=result.get("replayed", False) if isinstance(result, dict) else False)
             return result
         except HarnessError as exc:
-            self.trace.emit("tool_rejected", tool=name, code=exc.code)
+            self.trace.emit("tool_rejected", tool=trace_name, code=exc.code)
             raise

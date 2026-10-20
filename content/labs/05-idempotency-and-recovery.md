@@ -46,7 +46,7 @@ python3 -m lab.cli practice --lab 05
 python3 -m unittest discover -s tests -p 'test_lab_engine.py' -v
 ```
 
-All five student checks must pass. The baseline recovery test verifies one effect after crash/resume and preserved usage accounting. Add a test for a ticket-ID change and one for unusually long input strings.
+All six student checks must pass, including a ticket-ID change. The baseline recovery test verifies one effect after crash/resume and preserved usage accounting. Add a test for non-ASCII input and one for unusually long input strings.
 
 ## Read the commit boundary
 

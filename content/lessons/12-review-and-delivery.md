@@ -36,7 +36,7 @@ The example uses synthetic tenants only. It demonstrates why existence and autho
 
 ## Exercise 1 · Guided review checklist
 
-Take the patch from lesson 11 and write five review questions tied to its behavior. Include valid input, invalid input, scope, error reporting and compatibility. For each question, identify the evidence needed to answer it: code, test, command output or documented requirement.
+Take the patch from lesson 11 and write five review questions tied to its behavior. For the [development sandbox](../dev-sandbox/README.md), inspect your `work/router-practice/` copy and its boundary-test results, not only the unchanged reference harness. Include valid input, invalid input, scope, error reporting and compatibility. For each question, identify the evidence needed to answer it: code, test, command output or documented requirement.
 
 **Deliverable:** evidence-based checklist. **Pass:** each question can produce a concrete finding or a supported pass; no item is merely “is it good?”
 

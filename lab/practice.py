@@ -43,6 +43,13 @@ def check_lesson(number, module=student):
         check("zero_budget", lambda: f(articles, 0) == [])
         check("duplicate_ids", lambda: f(articles + [articles[0]], 20) == ["A", "B", "C"])
         check("negative_budget", lambda: rejects(f, articles, -1))
+        tied = [{"id": "C", "text": "123", "relevance": 1},
+                {"id": "B", "text": "123", "relevance": 1}]
+        check("tie_order_independent", lambda: f(tied, 3) == f(list(reversed(tied)), 3) == ["B"])
+        check("first_duplicate_is_canonical", lambda: f([
+            {"id": "A", "text": "too large", "relevance": 1},
+            {"id": "A", "text": "x", "relevance": 0},
+        ], 1) == [])
     elif number == "03":
         f = module.tool_allowed
         check("valid_read", lambda: f("read_ticket", {"ticket_id": "T-001"},
@@ -64,11 +71,17 @@ def check_lesson(number, module=student):
         check("bounded_huge_attempt", lambda: f(100000, 10, 1000) == 1000)
         check("negative_rejected", lambda: rejects(f, -1, 10, 100))
         check("boolean_rejected", lambda: rejects(f, True, 10, 100))
+        check("zero_cap", lambda: f(3, 100, 0) == 0)
+        check("all_inputs_validated", lambda: all(
+            rejects(f, *values) for values in (
+                (1.5, 10, 100), (1, -10, 100), (1, 10, -100),
+                (1, True, 100), (1, 10, False), (1, 1.5, 100), (1, 10, 100.5))))
     elif number == "05":
         f = module.operation_key
         check("stable", lambda: f("run1", "T-001", "draft") == f("run1", "T-001", "draft"))
         check("action_specific", lambda: f("r", "T-001", "draft") != f("r", "T-001", "tag"))
         check("run_specific", lambda: f("r1", "T-001", "draft") != f("r2", "T-001", "draft"))
+        check("ticket_specific", lambda: f("r", "T-001", "draft") != f("r", "T-002", "draft"))
         check("delimiter_collision", lambda: f("a:b", "c", "d") != f("a", "b:c", "d"))
         check("bounded", lambda: isinstance(f("x" * 300, "T-001", "draft"), str)
               and 0 < len(f("x" * 300, "T-001", "draft")) <= 160)
@@ -80,6 +93,8 @@ def check_lesson(number, module=student):
         check("duplicates", lambda: f(["KB-A", "KB-A"], ["KB-A"]) is False)
         check("wrong_type", lambda: f("KB-A", ["KB-A"]) is False)
         check("nested_values", lambda: f([["KB-A"]], ["KB-A"]) is False)
+        check("multiple_valid", lambda: f(["KB-A", "KB-B"], ["KB-A", "KB-B"]) is True)
+        check("empty_id", lambda: f([""], [""]) is False)
     elif number == "07":
         f = module.summarize_trace
         events = [{"event": "run_started"}, {"event": "tool_attempt"},
@@ -93,6 +108,8 @@ def check_lesson(number, module=student):
             "tool_attempts": 0, "rejections": 0, "retries": 0, "replay_hits": 0})
         check("strict_replay_boolean", lambda: f([{"event": "tool_result", "replayed": "false"}])
               ["replay_hits"] == 0)
+        check("replay_requires_result_event", lambda: f([
+            {"event": "mutation_committed", "replayed": True}])["replay_hits"] == 0)
     elif number == "08":
         f = module.build_decision
         article = load_knowledge()[0]
@@ -104,12 +121,28 @@ def check_lesson(number, module=student):
             return value["action"] == "draft" and value["reply"] == article["answer"]
 
         check("grounded_draft", valid_grounded)
-        check("missing_evidence", lambda: f(ticket, [])["action"] == "escalate")
-        check("wrong_evidence", lambda: f(ticket, [load_knowledge()[1]])["action"] == "escalate")
-        check("instruction_attack", lambda: f(get_case("train-13")["ticket"], [article])
-              ["action"] == "escalate")
-        check("ambiguous_request", lambda: f(get_case("train-11")["ticket"], [article])
-              ["action"] == "escalate")
+        def valid_escalation(subject, evidence):
+            value = f(subject, evidence)
+            validate_decision(value, evidence)
+            return value["action"] == "escalate"
+
+        check("missing_evidence", lambda: valid_escalation(ticket, []))
+        check("wrong_evidence", lambda: valid_escalation(ticket, [load_knowledge()[1]]))
+        check("instruction_attack", lambda: valid_escalation(
+            get_case("train-13")["ticket"], [article]))
+        check("ambiguous_request", lambda: valid_escalation(
+            get_case("train-11")["ticket"], [article]))
+        conflict = {**article, "id": article["id"] + "-CONFLICT",
+                    "answer": "This deliberately conflicts with the approved answer."}
+        check("conflicting_evidence", lambda: valid_escalation(ticket, [article, conflict]))
+
+        def filter_irrelevant():
+            evidence = [load_knowledge()[1], article]
+            value = f(ticket, evidence)
+            validate_decision(value, evidence)
+            return value["action"] == "draft" and value["reply"] == article["answer"]
+
+        check("filter_irrelevant_evidence", filter_irrelevant)
     else:
         raise ValueError("Lesson must be 01 through 08.")
     return {"lab": number, "passed": all(item["passed"] for item in checks), "checks": checks}

@@ -40,7 +40,7 @@ For article lengths `A=8`, `B=5`, `C=2`, with A ranked first and B before C, a b
 python3 -m lab.cli practice --lab 02
 ```
 
-All five public checks must pass. Add tests for exact-fit boundaries and two equal-relevance candidates arriving in opposite input orders. State whether input order should affect the result.
+All seven public checks must pass, including reversed tie order and the canonical duplicate-ID rule. Add your own exact-fit example and a case where changing the budget by one changes the selection. State whether input order should affect distinct IDs.
 
 ## Review the tradeoff
 

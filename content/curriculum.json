@@ -66,12 +66,12 @@
       "quiz": {
         "question": "What belongs to the harness?",
         "options": [
-          "Only the model weights",
           "Context preparation, execution controls, state and validation",
+          "Only the model weights",
           "The customer ticket alone",
           "Only the final prose"
         ],
-        "answer": 1,
+        "answer": 0,
         "explanation": "The harness is the surrounding runtime that turns model proposals into observable, controlled work."
       },
       "exerciseCount": 3
@@ -93,11 +93,11 @@
         "question": "What is the strongest response to missing diagnostic evidence?",
         "options": [
           "Invent the likely cause",
-          "Add a more impressive role description",
           "Specify missing facts and an appropriate next question",
+          "Add a more impressive role description",
           "Force a category and omit uncertainty"
         ],
-        "answer": 2,
+        "answer": 1,
         "explanation": "An explicit uncertainty path preserves usefulness without treating guesses as facts."
       },
       "exerciseCount": 3
@@ -119,11 +119,11 @@
         "question": "After repeatedly tuning against your held-out set, what should you do?",
         "options": [
           "Keep calling it unseen data",
-          "Treat it as development data and obtain a new final set",
           "Delete its failures",
+          "Treat it as development data and obtain a new final set",
           "Report only its best run"
         ],
-        "answer": 1,
+        "answer": 2,
         "explanation": "Repeated tuning consumes the independence of the held-out set."
       },
       "exerciseCount": 3
@@ -146,10 +146,10 @@
         "options": [
           "Timestamp alone",
           "Document length",
-          "Applicability, authority and provenance as well as freshness",
-          "Whichever statement is easier to answer"
+          "Whichever statement is easier to answer",
+          "Applicability, authority and provenance as well as freshness"
         ],
-        "answer": 2,
+        "answer": 3,
         "explanation": "Freshness does not establish that a document applies to the same product version or has authority."
       },
       "exerciseCount": 3
@@ -170,12 +170,12 @@
       "quiz": {
         "question": "A draft cites a real document. What is still required?",
         "options": [
-          "Nothing; citations guarantee correctness",
           "Check that the cited passage supports the specific claim",
+          "Nothing; citations guarantee correctness",
           "Make the response longer",
           "Retrieve the entire corpus"
         ],
-        "answer": 1,
+        "answer": 0,
         "explanation": "Source existence and claim support are different checks."
       },
       "exerciseCount": 3
@@ -250,10 +250,10 @@
         "options": [
           "Yes, discovery is authorization",
           "Only for write tools",
-          "No; host and server policy still govern execution",
-          "Yes, if its description sounds safe"
+          "Yes, if its description sounds safe",
+          "No; host and server policy still govern execution"
         ],
-        "answer": 2,
+        "answer": 3,
         "explanation": "Discovery describes available capabilities; authorization and validation remain separate controls."
       },
       "exerciseCount": 3
@@ -274,12 +274,12 @@
       "quiz": {
         "question": "What is the best evidence that a skill is reusable?",
         "options": [
-          "Its instructions are very long",
           "It works from its files on new cases without hidden chat context",
+          "Its instructions are very long",
           "It contains many role adjectives",
           "It always activates"
         ],
-        "answer": 1,
+        "answer": 0,
         "explanation": "A reusable procedure must transfer to new cases with explicit dependencies and completion criteria."
       },
       "exerciseCount": 3
@@ -327,11 +327,11 @@
         "question": "Why test an always-successful mutant?",
         "options": [
           "To improve code style",
-          "To verify that tests can detect a validator that rejects nothing",
           "To measure model intelligence",
+          "To verify that tests can detect a validator that rejects nothing",
           "To replace the real suite"
         ],
-        "answer": 1,
+        "answer": 2,
         "explanation": "A suite that passes an always-successful validator cannot establish rejection behavior."
       },
       "exerciseCount": 3
@@ -353,11 +353,11 @@
         "question": "What makes a review finding actionable?",
         "options": [
           "A broad warning without an example",
-          "A trigger, consequence and evidence pointing to the defect",
           "A preference for another framework",
-          "A statement that AI code is risky"
+          "A statement that AI code is risky",
+          "A trigger, consequence and evidence pointing to the defect"
         ],
-        "answer": 1,
+        "answer": 3,
         "explanation": "Actionable findings show how the defect occurs and why it matters."
       },
       "exerciseCount": 3
@@ -378,12 +378,12 @@
       "quiz": {
         "question": "Who should enforce the maximum number of steps?",
         "options": [
+          "The harness runtime",
           "The model alone",
           "The customer ticket",
-          "The harness runtime",
           "A final summary"
         ],
-        "answer": 2,
+        "answer": 0,
         "explanation": "Runtime enforcement remains effective even when the planner ignores or misunderstands its instructions."
       },
       "exerciseCount": 3
@@ -405,11 +405,11 @@
         "question": "A write times out after it may have succeeded. What is the correct interpretation?",
         "options": [
           "It definitely failed",
-          "It definitely succeeded",
           "Its outcome is uncertain until reconciled or safely deduplicated",
+          "It definitely succeeded",
           "Retry immediately with a new operation ID"
         ],
-        "answer": 2,
+        "answer": 1,
         "explanation": "A missing response does not establish whether the side effect occurred."
       },
       "exerciseCount": 3
@@ -431,11 +431,11 @@
         "question": "Why distinguish budget exhaustion from task failure?",
         "options": [
           "They are identical",
-          "Budget exhaustion describes a runtime limit, not proof the task is impossible",
           "It makes success rates look better",
+          "Budget exhaustion describes a runtime limit, not proof the task is impossible",
           "Only the model can tell them apart"
         ],
-        "answer": 1,
+        "answer": 2,
         "explanation": "A bounded run can stop before resolving an otherwise solvable task; reporting the reason supports recovery."
       },
       "exerciseCount": 3
@@ -457,11 +457,11 @@
         "question": "What should a label specify for a generative support draft?",
         "options": [
           "One exact sentence only",
-          "Acceptable behavior, required evidence and forbidden claims",
           "The longest possible answer",
-          "Only the category"
+          "Only the category",
+          "Acceptable behavior, required evidence and forbidden claims"
         ],
-        "answer": 1,
+        "answer": 3,
         "explanation": "Behavioral labels allow valid wording variation while preserving the requirements that matter."
       },
       "exerciseCount": 3
@@ -482,12 +482,12 @@
       "quiz": {
         "question": "A candidate improves average score but introduces an unauthorized-action failure. What should you do?",
         "options": [
-          "Release because the mean improved",
           "Inspect the severe regression and apply the release policy",
+          "Release because the mean improved",
           "Hide the failed case",
           "Change the grader to pass it"
         ],
-        "answer": 1,
+        "answer": 0,
         "explanation": "Averages cannot override explicit critical failure constraints."
       },
       "exerciseCount": 3
@@ -509,11 +509,11 @@
         "question": "What is a strong release response to a critical tool-boundary failure?",
         "options": [
           "Add a reassuring disclaimer",
-          "Raise the average score",
           "Fix it or remove the affected capability and verify the narrower scope",
+          "Raise the average score",
           "Ask the model to be more careful"
         ],
-        "answer": 2,
+        "answer": 1,
         "explanation": "A concrete capability change or verified repair addresses the failure; presentation changes do not."
       },
       "exerciseCount": 3
@@ -535,11 +535,11 @@
         "question": "Which work is best suited to parallel delegation?",
         "options": [
           "Tasks that all edit the same file without coordination",
-          "Independent subtasks with explicit inputs and verifiable outputs",
           "A strict dependency chain with no independent work",
+          "Independent subtasks with explicit inputs and verifiable outputs",
           "Anything, if enough agents are available"
         ],
-        "answer": 1,
+        "answer": 2,
         "explanation": "Independence and clear contracts reduce coordination cost and integration risk."
       },
       "exerciseCount": 3
@@ -561,11 +561,11 @@
         "question": "A worker returns an older policy version after a newer result was accepted. What should happen?",
         "options": [
           "Overwrite the final result because it arrived last",
-          "Detect the version mismatch and reconcile or reject automatic integration",
           "Ignore version information",
-          "Restart all workers unconditionally"
+          "Restart all workers unconditionally",
+          "Detect the version mismatch and reconcile or reject automatic integration"
         ],
-        "answer": 1,
+        "answer": 3,
         "explanation": "Arrival order is not evidence of freshness; input versions determine applicability."
       },
       "exerciseCount": 3
@@ -586,12 +586,12 @@
       "quiz": {
         "question": "Three workers agree using the same mistaken source. What does their agreement establish?",
         "options": [
-          "Independent confirmation",
           "Only shared agreement; the evidence can still be wrong",
+          "Independent confirmation",
           "A guaranteed correct answer",
           "That the minority should always be ignored"
         ],
-        "answer": 1,
+        "answer": 0,
         "explanation": "Correlated evidence and assumptions can produce unanimous error."
       },
       "exerciseCount": 3
@@ -639,11 +639,11 @@
         "question": "A reviewer confidently blames the model for an incident. What should guide diagnosis?",
         "options": [
           "The confidence of the reviewer",
-          "The first observable failing boundary and supporting artifacts",
           "The newest component automatically",
+          "The first observable failing boundary and supporting artifacts",
           "The longest trace event only"
         ],
-        "answer": 1,
+        "answer": 2,
         "explanation": "Incident diagnosis should follow evidence and distinguish symptoms from contributing causes."
       },
       "exerciseCount": 3
@@ -651,26 +651,26 @@
     {
       "id": "24",
       "stage": 8,
-      "title": "Build and defend your Signal Desk capstone",
-      "summary": "Integrate the course into a portfolio-grade system and defend its design with a live failure drill and reproducible evidence.",
-      "minutes": 240,
+      "title": "Choose, build and defend your capstone",
+      "summary": "Choose the support, QA or research project, then use a shared rubric to defend a reproducible result. The 90-minute clinic precedes 10–20 project hours.",
+      "minutes": 90,
       "level": "Advanced",
       "file": "content/lessons/24-capstone.md",
       "objectives": [
-        "Deliver an end-to-end bounded agent system with evidence.",
-        "Demonstrate recovery, evaluation and adversarial behavior.",
+        "Deliver one of three bounded AI workflow projects with evidence.",
+        "Demonstrate evaluation, adversarial behavior and appropriate recovery.",
         "Defend tradeoffs and define the next justified improvement."
       ],
       "quiz": {
         "question": "What makes the capstone credible?",
         "options": [
           "Many agents and a dramatic demo",
-          "Reproducible behavior, failure evidence, clear scope and honest limits",
           "A claim of production readiness without deployment",
-          "A large prompt collection alone"
+          "A large prompt collection alone",
+          "Reproducible behavior, failure evidence, clear scope and honest limits"
         ],
-        "answer": 1,
-        "explanation": "Credibility comes from reviewable outcomes and evidence, including the system\u2019s limits."
+        "answer": 3,
+        "explanation": "Credibility comes from reviewable outcomes and evidence, including the system’s limits."
       },
       "exerciseCount": 3
     }

@@ -19,7 +19,11 @@ Python 3.9+ is supported (tested here with Python 3.9.6). The portal builder and
 - Original articles, learner manuals, reusable engineering templates, and three substantial capstone briefs.
 - A curated library of courses, books, documentation, papers, and videos, with practical follow-up tasks.
 - A local learning portal with search, quizzes, progress, personal notes, bookmarks, and JSON progress export/import.
-- A 136-page original PDF fieldbook and a downloadable source archive.
+- An original PDF fieldbook and a downloadable source archive.
+
+See the [practice map](docs/PRACTICE-MAP.md) for prerequisites and lesson-to-lab links. To try your current chat model without an API integration, follow the [model response bridge](lab/model-bridge.md).
+
+The [second review report](docs/REVIEW-2026-10-20.md) records repaired gaps, verification, and the remaining extension roadmap.
 
 ## Choose a pace
 

@@ -2,6 +2,8 @@
 
 You will build a small system that reads a synthetic support ticket, retrieves relevant policy, proposes an action, and records enough evidence for someone else to review it. By the end, you should be able to explain why an agent succeeded, why it failed, and which change would improve it. That ability is more durable than memorizing a particular model's interface.
 
+Start with the [prerequisites and practice map](PRACTICE-MAP.md). The Python route assumes basic functions, lists, dictionaries, JSON and terminal commands; it does not teach programming from zero. The concept route works on paper. When you have access to an assistant, use the [model bridge](../lab/model-bridge.md) to turn actual model outputs into reproducible experiments. Keep offline, simulated and live-model results labeled separately.
+
 ## Your first 90 minutes
 
 **Minutes 0-15: get something running.** From this project directory, run `python3 -m lab.cli demo`. Read the output, locate its trace, and identify a decision, a tool call, and a result. If Python is missing, you can still read the entire curriculum in the portal or Markdown files; install Python before the executable labs.
@@ -10,7 +12,7 @@ You will build a small system that reads a synthetic support ticket, retrieves r
 
 **Minutes 30-55: take lesson 01.** Do its guided exercise before reading the solution. Write your predicted answer, your actual result, and one difference. A beautiful answer that you cannot verify is not a passing result.
 
-**Minutes 55-75: create your learning log.** Copy `templates/experiment-log.md` into `work/experiments/first-run.md`. Record the input, instructions, tool choices, and result. If using a model, also record the provider, model identifier as shown by the product, date, and relevant settings. Never record a key or token.
+**Minutes 55-75: create your learning log.** Create `work/experiments/`, then copy `templates/experiment-log.md` into `work/experiments/first-run.md`. Record the input, instructions, tool choices, and result. If using a model, also record the provider, model identifier as shown by the product, date, and relevant settings. Never record a key or token.
 
 **Minutes 75-90: explain the result.** Give yourself a two-minute oral explanation. Could a teammate reproduce your experiment from the log? If not, fix the log before moving on.
 

@@ -44,7 +44,7 @@ Unknown events do not affect these totals. An empty trace produces zeroes.
 python3 -m lab.cli practice --lab 07
 ```
 
-All three public checks must pass. Add a mixed trace with two rejections and a successful completion. Add a non-tool event containing `replayed=True` and confirm it does not count.
+All four public checks must pass, including a non-result event containing `replayed=True`. Add a mixed trace with two rejections and a successful completion. Explain why a replayed `mutation_committed` followed by a replayed `tool_result` counts as one replay acknowledgment.
 
 ## Write an incident note
 

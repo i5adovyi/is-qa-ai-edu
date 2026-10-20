@@ -1,22 +1,30 @@
-# 24 · Build and defend your Signal Desk capstone
+# 24 · Choose, build and defend your capstone
 
-Stage 8 · 240 minutes · Advanced
+Stage 8 · 90-minute proposal clinic, then 10–20 project hours · Advanced
 
 Integrate the course into a portfolio-grade system and defend its design with a live failure drill and reproducible evidence.
 
 ## What you will be able to do
 
-- Deliver an end-to-end bounded agent system with evidence.
-- Demonstrate recovery, evaluation and adversarial behavior.
+- Deliver one of three bounded AI workflow projects with evidence.
+- Demonstrate evaluation, adversarial behavior and appropriate recovery.
 - Defend tradeoffs and define the next justified improvement.
 
 ## The assignment
 
-Your capstone is a Signal Desk assistant that turns synthetic tickets into useful, evidence-backed local drafts or explicit review outcomes. It must retrieve relevant knowledge, preserve provenance, validate proposed actions, record traces, respect budgets and recover from interruption. A real model is optional. A deterministic planner proves the harness mechanics; a live model extension tests language behavior and must be evaluated separately.
+Choose one project:
+
+- [Support agent](../../capstones/01-support-agent.md): turn synthetic tickets into evidence-backed drafts; demonstrate tool boundaries, budgets and interrupted-write recovery.
+- [QA review copilot](../../capstones/02-qa-copilot.md): review specifications and patches; expose seeded defects and distinguish proposed tests from executed tests.
+- [Research workflow](../../capstones/03-research-workflow.md): produce a decision memo with claim-level evidence, source-conflict handling and verifiable handoffs.
+
+All three use the shared assessment below. Follow your chosen brief's required checks rather than building all three products. A real model is optional by access: the [model bridge](../../lab/model-bridge.md) provides a separate route for capturing and evaluating model output. A deterministic implementation or design simulation can establish only the behavior it actually exercises. Label those results separately from live-model evidence.
 
 The system should be understandable to another engineer. Provide a quickstart, architecture diagram, task contract, tool contracts, evaluation dataset, results and operating runbook. Include a short decision record explaining one feature you deliberately did not build. A portfolio becomes credible when its boundaries and evidence are clear, not when it claims universal autonomy.
 
-Use the bundled lab as a starting point, then add one meaningful capability. Examples include policy-version conflict handling, better retrieval for SSO cases, a stricter evidence-scope validator or a selective multi-agent review path. Choose a change with an observable baseline failure. The capstone is not complete merely because the unmodified demo runs; your improvement must have a before/after result and a reviewable implementation or rigorous design simulation.
+Use the bundled support lab when it fits your chosen project. For QA and research, use an isolated project directory and the brief's fixtures or input contract. Add one meaningful capability with an observable baseline failure: policy-version conflict handling, detection of an actual retry defect, or rejection of a real but irrelevant citation. The capstone is not complete merely because the unmodified demo runs; your improvement must have a before/after result and a reviewable implementation or rigorous design simulation.
+
+Spend this lesson's 90-minute clinic choosing the project and completing exercise 1. Exercises 2 and 3 are the project build and defense, scheduled across weeks 10–12. Budget approximately 10–20 focused hours according to the selected brief. The clinic estimate does not include that build time.
 
 ## Worked defense structure
 
@@ -24,9 +32,9 @@ A ten-minute demonstration can follow this sequence:
 
 ```text
 Minute 0–2: user problem, task contract and baseline failure.
-Minute 2–4: successful ticket with visible evidence and local draft.
-Minute 4–6: malicious input blocked at the execution boundary.
-Minute 6–8: interruption and resume without duplicate work.
+Minute 2–4: successful user journey with visible evidence.
+Minute 4–6: adversarial or misleading input handled at its enforcing boundary.
+Minute 6–8: interruption or stale handoff reconciled against saved artifacts.
 Minute 8–10: evaluation results, limitations and next decision.
 ```
 
@@ -34,29 +42,29 @@ Show actual artifacts instead of narrating hypothetical behavior. If a feature i
 
 ## Exercise 1 · Guided capstone proposal
 
-Write a one-page proposal with target user, supported cases, baseline defect, chosen improvement, architecture and acceptance criteria. Select twelve evaluation cases spanning ordinary, ambiguous, adversarial and recovery scenarios. Define critical gates before implementation. Record your available time and choose a scope you can finish and verify.
+Write a one-page proposal naming your selected capstone, target user, supported cases, baseline defect, chosen improvement, architecture and acceptance criteria. Select an initial twelve-case evaluation plan spanning ordinary, ambiguous, adversarial and recovery scenarios, then satisfy any larger dataset requirement in your chosen brief. For research, a recovery case can be an interrupted evidence ledger or stale handoff; for QA, it can be interrupted execution with no passing result recorded. Define critical gates before implementation. Record your available time and choose a scope you can finish and verify.
 
 **Deliverable:** proposal and frozen evaluation plan. **Pass:** the improvement addresses an observed need; the plan contains negative cases and a recovery drill; success is observable without trusting a narrative.
 
 ## Exercise 2 · Build the complete evidence package
 
-Implement the improvement and assemble a reproducible package. Include exact setup and run commands, a sample successful trace, a failed trace, a checkpoint, evaluation results and a review note. Run `python3 -m lab.cli demo`, `python3 -m lab.cli evaluate --split holdout` and the relevant tests when using the bundled implementation. Adapt additional commands to your actual extension.
+Implement the improvement and assemble a reproducible package. Include exact setup and run commands, successful and failed execution evidence, saved resumption state, evaluation results and a review note. If extending the support lab through `lab/student.py`, run `python3 -m lab.cli evaluate --policy student --split train`, freeze the candidate, then run `python3 -m lab.cli evaluate --policy student --split holdout` and relevant tests. The command without `--policy student` evaluates the reference policy and cannot prove that a student change works. For other implementations, provide commands that actually exercise your candidate and selected cases.
 
 **Deliverable:** working project plus evidence folder. **Pass:** a fresh reviewer can reproduce the main path; every reported metric identifies dataset and rubric versions; the project contains no required paid API dependency for the core demonstration.
 
 ## Exercise 3 · Adversarial defense
 
-Ask a peer to choose one unseen ticket, one malformed tool response and one crash point. If working alone, prepare these before the final run and keep them out of development. Demonstrate the resulting behavior, then explain any failure without editing the evidence. Propose a bounded repair and show which acceptance case would verify it.
+Ask a peer to choose one unseen input, one misleading or malformed external result, and one interruption point appropriate to your project. If working alone, prepare these before the final run and keep them out of development. Demonstrate the resulting behavior, then explain any failure without editing the evidence. Propose a bounded repair and show which acceptance case would verify it.
 
 **Deliverable:** defense recording or transcript and a repair plan. **Pass:** no hidden manual correction; uncertainty and incomplete work are reported honestly; the system remains bounded when the planner behaves badly.
 
 ## Assessment rubric
 
-Score five dimensions from zero to four: task usefulness, evidence quality, harness reliability, evaluation rigor and reproducibility. Zero means absent; one means described only; two means demonstrated on the happy path; three means tested on relevant failure cases; four means reproducible evidence plus a clear account of limitations. A course pass requires at least fifteen of twenty, no zero, and no critical authority-boundary failure in the declared suite. This is a learning rubric, not an accredited certification or a production guarantee.
+Use the single [40-point capstone rubric](../../docs/ASSESSMENT.md#capstone-scoring): ten dimensions, each scored 0–4. Suggested pass is **30/40, every dimension at least 2, and no unauthorized side effects** in the declared suite. Preserve the evidence supporting each score. The 20-point common rubric applies to stage submissions; it is not a second capstone standard. This is a learning rubric, not an accredited certification or a production guarantee.
 
 ## Hints and solution outline
 
-A strong solution uses a narrow tool set, an explicit state machine, source-aware drafts and a durable operation ledger. It keeps the model adapter separate from orchestration, so scripted fault injection remains available. Its evaluation report includes regressions and unresolved cases. Its demo makes the failure boundary visible. Its README tells a reviewer where to start and how to reproduce the evidence. Do fewer things well if necessary; an honest bounded system is a stronger artifact than a sprawling unverified claim.
+A strong solution preserves its project's boundaries. Support work needs source-aware drafts and a durable operation ledger; QA work needs requirement-to-test evidence and truthful execution status; research needs claim-to-source support and unresolved-conflict handling. Keep any model adapter separate from orchestration so scripted fault injection remains available. Include regressions and unresolved cases in the evaluation report. The demo should expose one failure boundary, and the README should tell a reviewer how to reproduce it.
 
 ## Reflection and next step
 

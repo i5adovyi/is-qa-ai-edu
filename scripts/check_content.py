@@ -1,29 +1,80 @@
-"""Check academy metadata, lesson structure, resource URLs and local doc links."""
+"""Validate learning metadata, actual exercise sections, assets and Markdown anchors."""
 import json
 import re
 from pathlib import Path
-ROOT=Path(__file__).resolve().parents[1]
+from urllib.parse import unquote
+
+ROOT = Path(__file__).resolve().parents[1]
+
+def headings(text):
+    """GitHub-style IDs for ordinary Markdown headings, ignoring fenced code."""
+    used = {}
+    result = set()
+    in_code = False
+    for line in text.splitlines():
+        if line.startswith('```'):
+            in_code = not in_code
+            continue
+        match = re.match(r'^#{1,6}\s+(.+)', line)
+        if in_code or not match:
+            continue
+        value = re.sub(r'[^\w\- ]', '', match[1].strip().lower()).replace(' ', '-')
+        count = used.get(value, 0)
+        used[value] = count + 1
+        result.add(value + ('-' + str(count) if count else ''))
+    return result
+
+def validate(root):
+    c = json.loads((root / 'content/curriculum.json').read_text())
+    resources = json.loads((root / 'content/resources.json').read_text())
+    errors = []
+    def need(ok, message):
+        if not ok:
+            errors.append(message)
+    need(len(c['lessons']) == 24, 'Expected 24 lessons')
+    need({s['id'] for s in c['stages']} == set(range(1, 9)), 'Expected stages 1 through 8')
+    ids = set()
+    for lesson in c['lessons']:
+        name = lesson['id']
+        need(name not in ids, 'Duplicate lesson ID ' + name)
+        ids.add(name)
+        path = root / lesson['file']
+        need(path.is_file(), 'Missing lesson ' + lesson['file'])
+        need(lesson['stage'] in range(1, 9), 'Invalid stage ' + name)
+        quiz = lesson['quiz']
+        need(len(quiz['options']) == 4 and type(quiz['answer']) is int and quiz['answer'] in range(4), 'Invalid quiz ' + name)
+        need(bool(quiz.get('explanation', '').strip()), 'Missing quiz explanation ' + name)
+        need(type(lesson['minutes']) is int and lesson['minutes'] > 0, 'Invalid duration ' + name)
+        if path.is_file():
+            text = path.read_text()
+            exercises = re.findall(r'^## Exercise ([123])\b', text, re.M)
+            need(exercises == ['1', '2', '3'] and lesson.get('exerciseCount') == len(exercises), 'Exercise sections do not match metadata ' + name)
+            need(len(text.split()) >= 600, 'Lesson too thin ' + name)
+            need('## Hints and solution outline' in text, 'Missing solution guidance ' + name)
+    need(ids == {str(i).zfill(2) for i in range(1, 25)}, 'Lesson IDs must be 01 through 24')
+    for stage in range(1, 9):
+        need(sum(l['stage'] == stage for l in c['lessons']) == 3, 'Expected three lessons in stage ' + str(stage))
+    need(len({r['id'] for r in resources}) == len(resources), 'Duplicate resource ID')
+    for resource in resources:
+        need(resource['url'].startswith('https://'), 'Invalid resource URL ' + resource['id'])
+        need(resource['stage'] in range(1, 9), 'Invalid resource stage ' + resource['id'])
+    for folder in ['docs', 'templates', 'capstones', 'content', 'lab']:
+        for path in (root / folder).rglob('*.md'):
+            for target in re.findall(r'\[[^\]]+\]\(([^)]+)\)', path.read_text()):
+                if re.match(r'https?://|mailto:', target):
+                    continue
+                file_part, _, fragment = target.partition('#')
+                dest = (path.parent / unquote(file_part)).resolve() if file_part else path.resolve()
+                need(dest.is_file(), f'Broken link {path.relative_to(root)} -> {target}')
+                if dest.is_file() and fragment and dest.suffix == '.md':
+                    need(unquote(fragment) in headings(dest.read_text()), f'Broken section {path.relative_to(root)} -> {target}')
+    return errors
+
 def check():
-    c=json.loads((ROOT/'content/curriculum.json').read_text());rs=json.loads((ROOT/'content/resources.json').read_text());errors=[]
-    def need(ok,message):
-        if not ok:errors.append(message)
-    need(len(c['lessons'])==24,'Expected 24 lessons');need(len(c['stages'])==8,'Expected 8 stages')
-    ids=set()
-    for l in c['lessons']:
-        need(l['id'] not in ids,'Duplicate lesson ID');ids.add(l['id']);p=ROOT/l['file'];need(p.exists(),f'Missing {p}')
-        need(l['stage'] in range(1,9),f'Invalid stage {l["id"]}');q=l['quiz'];need(len(q['options'])==4 and q['answer'] in range(4),f'Invalid quiz {l["id"]}')
-        need(l.get('exerciseCount')==3,f'Expected three exercises {l["id"]}')
-        if p.exists():need(len(p.read_text().split())>=600,f'Lesson too thin {l["id"]}')
-    for n in range(1,9):need(sum(l['stage']==n for l in c['lessons'])==3,f'Stage {n} must have three lessons')
-    need(len({r['id'] for r in rs})==len(rs),'Duplicate resource ID')
-    for r in rs:
-        need(r['url'].startswith('https://'),f'Invalid source URL {r["id"]}');need(r['stage'] in range(1,9),f'Invalid resource stage {r["id"]}')
-    for folder in ['docs','templates','capstones','content','lab']:
-        for p in (ROOT/folder).rglob('*.md'):
-            for target in re.findall(r'\[[^\]]+\]\(([^)]+)\)',p.read_text()):
-                if re.match(r'https?://|#|mailto:',target):continue
-                dest=target.split('#')[0]
-                need((p.parent/dest).exists(),f'Broken link {p.relative_to(ROOT)} -> {target}')
-    if errors:raise SystemExit('\n'.join(errors))
-    print(f'Content checks passed: {len(c["lessons"])} lessons, {len(rs)} resources, all local Markdown links resolve.')
-if __name__=='__main__':check()
+    errors = validate(ROOT)
+    if errors:
+        raise SystemExit('\n'.join(errors))
+    print('Content checks passed: 24 lessons, actual exercise sections, quizzes, resource metadata, and local file/section links.')
+
+if __name__ == '__main__':
+    check()

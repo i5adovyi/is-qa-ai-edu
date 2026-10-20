@@ -4,6 +4,7 @@ import io
 import json
 from pathlib import Path
 import tempfile
+from types import SimpleNamespace
 import unittest
 
 from lab.cli import main
@@ -262,6 +263,40 @@ class EvaluationTest(unittest.TestCase):
             with self.subTest(lab=number):
                 report = check_lesson(f"{number:02}", module)
                 self.assertTrue(report["passed"], report)
+
+    def test_public_practice_rejects_missing_ticket_scope_and_wrong_replay_event(self):
+        import hashlib
+        ignores_ticket = lambda run, ticket, action: hashlib.sha256(
+            json.dumps([run, action]).encode()).hexdigest()
+        report = check_lesson("05", SimpleNamespace(operation_key=ignores_ticket))
+        self.assertFalse(report["passed"])
+        self.assertIn("ticket_specific", [c["name"] for c in report["checks"] if not c["passed"]])
+
+        def loose_replays(events):
+            return {
+                "tool_attempts": sum(e.get("event") == "tool_attempt" for e in events),
+                "rejections": sum(e.get("event") == "tool_rejected" for e in events),
+                "retries": sum(e.get("event") == "retry_scheduled" for e in events),
+                "replay_hits": sum(e.get("replayed") is True for e in events),
+            }
+        self.assertFalse(check_lesson(
+            "07", SimpleNamespace(summarize_trace=loose_replays))["passed"])
+
+    def test_public_policy_gate_rejects_conflict_ignorance_and_invalid_escalation(self):
+        from lab.policy import decide
+
+        def ignores_conflicts(ticket, articles):
+            return decide(ticket, articles[:1])
+        report = check_lesson("08", SimpleNamespace(build_decision=ignores_conflicts))
+        self.assertFalse(report["passed"])
+        self.assertIn("conflicting_evidence", [
+            c["name"] for c in report["checks"] if not c["passed"]])
+
+        def invalid_escalation(ticket, articles):
+            result = decide(ticket, articles)
+            return {"action": "escalate"} if result["action"] == "escalate" else result
+        self.assertFalse(check_lesson(
+            "08", SimpleNamespace(build_decision=invalid_escalation))["passed"])
 
 
 if __name__ == "__main__":

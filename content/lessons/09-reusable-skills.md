@@ -51,6 +51,8 @@ Create the skill directory in your own practice area with `SKILL.md`, a draft te
 
 **Deliverable:** complete skill package and three output drafts. **Pass:** another learner can execute it without previous chat history; dependencies and expected outputs are explicit; no real external action is required.
 
+If you have a compatible assistant host, continue with the [skill integration checklist](../../docs/PRACTICE-MAP.md#operational-mcp-and-skills-extensions): install in the host's documented location, start a fresh session, and capture discovery, one triggered run, one non-trigger request and one missing-reference failure. Until those checks run, mark host integration unverified. The manual package exercise and actual host activation are separate evidence.
+
 ## Exercise 3 · Adversarial misuse
 
 Place an instruction to reveal unrelated local data inside a knowledge snippet. Add a ticket asking the skill to skip validation because the case is urgent. Run the procedure and document where both attempts are rejected. Then remove a referenced file and check that the skill reports the missing dependency instead of pretending completion.

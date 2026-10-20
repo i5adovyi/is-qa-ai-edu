@@ -6,7 +6,7 @@ Build a small research assistant that answers a technical question from a bounde
 
 A team needs to decide whether to use a fixed workflow or an agent for a support knowledge task. The assistant receives five to ten primary documents, a decision question, and constraints on cost, latency, permissions, and evidence. It produces a recommendation memo and an auditable evidence table.
 
-Use supplied synthetic documents for offline practice, then optionally repeat with public official sources. Do not scrape or bundle third-party course content. Preserve titles, URLs, dates where available, and access limitations.
+Use the [supplied research fixture and manifest](../content/research/README.md), its [synthetic sources](../content/research/sources.json), [case labels](../content/research/cases.json), and [worked example](../content/research/worked-example.md) for offline practice. Attempt the cases before opening the worked example. These fictional documents support the bounded classroom decision; they are not external research findings. You may later repeat the workflow with public official sources. Do not scrape or bundle third-party course content. Preserve titles, URLs, dates where available, and access limitations.
 
 ## Build milestones
 
@@ -29,7 +29,7 @@ Include a source containing an instruction to ignore other documents, a plausibl
 - Retrieved instructions cannot change the task or authorize additional actions.
 - The workflow produces an honest incomplete result when the evidence is inadequate.
 - Delegation handoffs preserve provenance and do not convert guesses into facts.
-- The multi-worker variant is compared against the single-worker baseline on the same criteria.
+- If a multi-worker variant is built, compare it against the single-worker baseline on the same criteria. Otherwise submit a reasoned decision to retain one worker and compare that baseline with one measured context or validation improvement.
 
 ## Evaluation design
 
@@ -37,7 +37,7 @@ Have a reviewer inspect at least 20 claim-source pairs across several questions.
 
 ## Evidence package
 
-Submit the corpus manifest, task contract, evidence ledger, worker briefs, final memos, cost and latency accounting, comparison report, and a handoff failure analysis. Record which calls used a real model and which were simulated. Do not imply that a deterministic simulation demonstrates research accuracy.
+Submit the corpus manifest, task contract, evidence ledger, final memos, cost and latency accounting, comparison report, and a handoff failure analysis. Include worker briefs if you used multiple workers, or the single-worker decision record otherwise. Record which calls used a real model and which were simulated. Do not imply that a deterministic simulation demonstrates research accuracy.
 
 ## Stretch work
 

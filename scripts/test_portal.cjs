@@ -36,9 +36,19 @@ const path = require('node:path');
  assert.match(await page.locator('#trace').textContent(),/budget exhausted/);
  await page.goto(base+'/#progress');await page.locator('[data-gate="1"]').check();
  const exported=page.waitForEvent('download');await page.locator('#export').click();const dl=await exported;const file=await dl.path();const state=JSON.parse(fs.readFileSync(file,'utf8'));assert.deepEqual(state.done,['01']);assert.ok(state.gates.includes(1));
- await page.locator('#import').setInputFiles({name:'progress.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify({...state,done:['01','02']}))});
+ const choosing=page.waitForEvent('filechooser');await page.locator('#import-progress').focus();await page.keyboard.press('Enter');
+ const chooser=await choosing;await chooser.setFiles({name:'progress.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify({...state,done:['01','02'],notes:{...state.notes,'content/lessons/01-systems-before-agents.md':'A note from another device.'}}))});
  await page.waitForFunction(()=>document.querySelector('.stat strong').textContent.startsWith('2/'));
  for(const route of ['path','labs','manuals','capstones']) {await page.goto(base+'/#'+route);await page.locator('h1').waitFor();assert.ok(!await page.getByText('That page is not in this edition.').count());}
+ await page.goto(base+'/#lesson=01');await page.locator('#notes').waitFor();
+ assert.match(await page.locator('#notes').inputValue(),/QA note:[\s\S]*Imported backup[\s\S]*another device/);
+ await page.goto(base+'/#doc=content%2Flabs%2F08-ship-an-evaluated-policy.md');
+ await page.getByRole('link',{name:'Solution discussion',exact:true}).click();
+ await page.waitForFunction(()=>document.activeElement?.id==='lab-08');
+ assert.match(page.url(),/&section=lab-08$/);
+ assert.equal(await page.locator('.reading a[href="content/labs/solutions/reference.py"]').count(),1);
+ const solution=await context.request.get(base+'/content/labs/solutions/reference.py');assert.equal(solution.status(),200);assert.match(await solution.text(),/def /);
+ await page.goto(base+'/#doc=%');await page.getByRole('heading',{name:'That page is not in this edition.'}).waitFor();
  await page.goto(base+'/#doc=content%2Flibrary%2FREADME.md');
  assert.equal(await page.locator('.reading a[href="content/resources.json"]').count(),1);
  await page.setViewportSize({width:390,height:844});await page.goto(base+'/#overview');
@@ -47,5 +57,5 @@ const path = require('node:path');
  await page.screenshot({path:path.join(__dirname,'../tmp/qa/mobile.png'),fullPage:true});
  for(const asset of ['fieldbook.pdf','academy-source.zip','content/resources.json']) {const r=await context.request.get(base+'/'+asset);assert.equal(r.status(),200,asset);}
  assert.deepEqual(errors,[]);
- await browser.close();console.log('Browser checks passed: navigation, skip link, quiz, notes persistence, completion, search, bookmarks, simulator, progress export/import, mobile layout, downloads.');
+ await browser.close();console.log('Browser checks passed: navigation, skip link, quiz, notes persistence, completion, search, bookmarks, simulator, keyboard progress import/export, conflicting notes, solution links and section focus, malformed routes, mobile layout, downloads.');
 })().catch(e=>{console.error(e);process.exit(1);});

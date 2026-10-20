@@ -37,6 +37,25 @@ A trace is evidence of an execution, not a guarantee that all executions behave 
 
 Use the five common dimensions above, plus five project dimensions worth 0-4 each: user usefulness, incident readiness, cost and latency measurement, data handling, and clarity of the final defense. Suggested pass: 30/40 with no dimension below 2 and no unauthorized side effects. Record the actual work reviewed, not just the score.
 
+This is the single capstone standard for lesson 24 and all three project briefs. The 20-point rubric above is for stage submissions. Apply each dimension to the chosen product: research can demonstrate recovery from an interrupted evidence ledger; QA can demonstrate recovery from an interrupted check without claiming it passed; support can demonstrate replay without duplicate writes.
+
+No paid model is required for an offline capstone pass. For cost and latency, report measured local work and elapsed time, label synthetic accounting assumptions, and mark model billing “not applicable.” If model integration was not exercised, it remains unverified; an offline pass must not be reported as a live-model qualification.
+
+## Calibrate your self-assessment
+
+Use these anchors before scoring your own submission:
+
+| Evidence pattern | Appropriate score for the relevant dimension |
+| --- | --- |
+| A tool contract is described, but there is no run or mechanically reproducible simulation | 1 for control and tools |
+| A draft succeeds once with valid input, with no negative case | 2 for control and tools |
+| Valid input succeeds; wrong scope, malformed arguments and duplicate operations have reproducible outcomes | 3 for control and tools |
+| The previous evidence includes a tested limitation, explicit assumptions and an explained tradeoff | 4 for control and tools |
+| A percentage is reported without cases, a denominator or a rubric | At most 1 for evaluation |
+| A baseline and candidate are compared on frozen cases, with labels, discordant cases and sample limits | 3 or 4 for evaluation, depending on reproducibility and limitations |
+
+One strong dimension cannot rescue another from its minimum. For example, stage scores `4, 4, 4, 2, 1` total 15/20 but fail because reproducibility is below 2. Capstone scores `4, 4, 4, 4, 4, 4, 3, 3, 3, 1` total 34/40 but fail for the same minimum-dimension rule. Cite the actual artifact for every score; these examples do not substitute for reviewing the work.
+
 ## Oral defense prompts
 
 - What is the strongest evidence that your change helped?

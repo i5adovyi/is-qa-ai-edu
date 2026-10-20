@@ -39,7 +39,7 @@ This is a provenance check, not a semantic entailment check. Name that limitatio
 python3 -m lab.cli practice --lab 06
 ```
 
-All six public checks must pass. Add examples for two valid citations and for a valid ID from the wrong topic. Your function will accept the latter if that ID was retrieved; explain which additional layer must enforce relevance.
+All eight public checks must pass, including multiple valid citations and rejection of an empty ID. Add an example for a valid ID from the wrong topic. Your function will accept it if that ID was retrieved; explain which additional layer must enforce relevance.
 
 ## Improve an evaluation, not just a score
 

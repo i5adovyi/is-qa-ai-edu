@@ -12,12 +12,14 @@ Requirements: Python 3.9 or later; terminal opened at the repository root. The s
 python3 --version
 python3 -m lab.cli demo
 python3 -m lab.cli evaluate --split train
-python3 -m unittest discover -s tests -p 'test_lab*.py' -v
+python3 -m unittest discover -s tests -p 'test_*.py' -v
 ```
 
 The demo prints a local draft and its run-artifact directory. The training gate should report **18/18 cases and 11/11 scenarios**. Unit tests should pass. One test deliberately injects a failing policy to verify the regression gate.
 
 Open [the eight practice labs](../content/labs/README.md) next. Their starter checks intentionally fail until you implement the corresponding function in `lab/student.py`. They do not break the reference harness.
+
+For a real-model experiment without an API key, use the [manual model bridge](model-bridge.md): export a prompt, obtain a JSON answer from any chat model, and replay it through this harness. A labeled mock response makes the same workflow runnable offline.
 
 ## Exact commands
 
@@ -97,6 +99,8 @@ cli.py
   └── practice.py → student.py: isolated learner extensions
 ```
 
+`model_bridge.py` exports synthetic requests and replays saved responses through `Runner`; it makes no provider calls. Labs 01–07 are isolated micro-exercises. Lab 08 and the model bridge exercise the actual decision seam.
+
 Read `contracts.py`, `tools.py`, `engine.py`, then `evaluation.py`. Follow one `save_draft` operation from the decision contract through the dispatcher to the durable store.
 
 Every run produces:
@@ -135,4 +139,4 @@ This is deliberately a small, closed-world acceptance suite. It does not measure
 - A failing tag operation can follow a successful draft write. Always inspect effects and status separately.
 - A mutation can commit before its response exceeds the context budget. A `mutation_committed` event records this boundary even if the later response is rejected.
 
-For an extension plan, read [provider-adapter-design.md](provider-adapter-design.md). For dataset stewardship, read [data/README.md](data/README.md).
+For a hands-on model experiment, follow [model-bridge.md](model-bridge.md). For a live transport extension plan, read [provider-adapter-design.md](provider-adapter-design.md). For dataset stewardship, read [data/README.md](data/README.md).

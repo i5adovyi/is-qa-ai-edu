@@ -18,6 +18,8 @@ Use a run ID to connect events and a step ID for each action. Record event type,
 
 Budgets constrain different resources. A step limit bounds orchestration even when tools are fast. A time limit protects user experience when tools stall. A monetary budget matters when using paid providers. Token counts may help estimate cost, but prices and billing details are provider-specific and change. Use actual current pricing only for a real integration; offline simulations should label costs as assumptions.
 
+For a cost simulation, define integer accounting units and reserve the maximum permitted cost of a call before starting it. If a call reserves 7 units, then reports 4 units of usage, release the unused 3. A lost response does not prove zero usage: keep the reservation until reconciliation, or stop if another call would exceed the remaining allowance. This is a local accounting policy, not a guarantee about a provider's billing. A real integration needs documented pricing and usage behavior, bounded output, and accounting for retries and all workers.
+
 Measure distribution, not just averages. One slow run can dominate a user's experience even when the average is low. Track median and a high percentile when sample size permits, alongside counts and maximum. Do not report a precise high percentile from three observations as though it represents a stable production distribution. Small samples are still useful for detecting obvious bottlenecks.
 
 ## Worked example
@@ -46,7 +48,9 @@ Choose ten event fields and justify each by a diagnostic question. Define three 
 
 Run ten scripted scenarios with different step counts and simulated tool durations. Calculate total calls, successful outcomes, failures, median duration and maximum duration. Add a step budget and a time budget; compare outcomes before and after enforcement. Use `python3 -m lab.cli trace <trace.jsonl>` to inspect an actual lab-generated trace when available.
 
-**Deliverable:** trace files and comparison table. **Pass:** budget stops are distinguishable from task failures, and simulated time or cost is labeled explicitly.
+Add a separate cost ledger with a 10-unit budget and a maximum reservation of 7 units per call. Run three independent cases: a call reports 4 units then another requests 7; a call reports 3 then another requests 7; and a call loses its response while holding its 7-unit reservation. Predict which next calls are admitted, then check the ledger. Record consumed, reserved, and available units separately. These are invented teaching units, not currency or current token prices.
+
+**Deliverable:** trace files, comparison table, and cost ledger. **Pass:** budget stops are distinguishable from task failures; the three cost cases respectively reject, admit, and reject a subsequent 7-unit call; unknown usage is not recorded as zero. Label virtual time and invented cost assumptions. The bundled harness implements step and virtual-time limits; this cost ledger is a separate exercise, not a feature already implemented by `lab.contracts.Budget`.
 
 ## Exercise 3 · Adversarial logging
 

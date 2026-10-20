@@ -45,6 +45,8 @@ Create twelve tickets, reserving four before prompt revision. Compare a minimal 
 
 **Deliverable:** experiment table, prompts and one-paragraph decision. **Pass:** case counts reconcile; simulated data is labeled; the decision discusses at least one regression or limitation.
 
+When assistant access is available, follow the [model bridge](../../lab/model-bridge.md) to capture raw model decisions and run them through the same validation boundary. This is the practical bridge from a paper experiment to actual AI use. A recorded response is replay evidence for that response; it does not establish how often future generations will behave similarly.
+
 ## Exercise 3 · Adversarial measurement
 
 Have a second reviewer change names, product wording and ticket order while preserving facts. Re-score the outputs without revealing the prompt version. Check whether the apparent improvement depended on recognizable examples or on one evaluator's stylistic preference. If working alone, randomize filenames and review after a break.
