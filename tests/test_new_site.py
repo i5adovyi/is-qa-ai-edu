@@ -25,6 +25,7 @@ class NewSiteTests(unittest.TestCase):
         self.write("academy.py", "# source launcher\n")
         self.write("academy_local.py", "# local database support\n")
         self.write("AGENTS.md", "# Tutor instructions\n")
+        self.write("CLAUDE.md", "# Claude entry point\n")
         self.write("scripts/build_portal.py", (
             "from pathlib import Path\n"
             "Path('dist').mkdir(exist_ok=True)\n"
@@ -63,6 +64,7 @@ class NewSiteTests(unittest.TestCase):
         self.assertEqual((destination / "dist/index.html").read_text(), "fresh build")
         self.assertEqual((destination / "academy_local.py").read_text(), "# local database support\n")
         self.assertEqual((destination / "AGENTS.md").read_text(), "# Tutor instructions\n")
+        self.assertEqual((destination / "CLAUDE.md").read_text(), "# Claude entry point\n")
         self.assertEqual(json.loads((destination / ".openai/hosting.json").read_text()),
                          {"static": {"directory": "dist"}})
         configuration = json.loads((destination / "academy.json").read_text())

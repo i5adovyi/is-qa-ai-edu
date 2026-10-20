@@ -41,7 +41,9 @@ def build():
             docs[path] = {'title': title, 'text': text, 'words': len(text.split())}
     docs['README.md'] = {'title':'Project README','text':(ROOT/'README.md').read_text()}
     if (ROOT/'AGENTS.md').is_file():
-        docs['AGENTS.md'] = {'title':'Codex project instructions','text':(ROOT/'AGENTS.md').read_text()}
+        docs['AGENTS.md'] = {'title':'Shared assistant instructions','text':(ROOT/'AGENTS.md').read_text()}
+    if (ROOT/'CLAUDE.md').is_file():
+        docs['CLAUDE.md'] = {'title':'Claude project instructions','text':(ROOT/'CLAUDE.md').read_text()}
     assets = downloadable_assets()
     learning = json.loads((ROOT/'content/learning.json').read_text())
     incidents = json.loads((ROOT/'content/incidents.json').read_text())

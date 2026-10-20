@@ -23,7 +23,7 @@ The editable source is this repository. The portal is generated into `dist/`; do
 - `portal/`: interface source.
 - `academy.py`, `academy.json`: shared local/hosted launcher and canonical hosted/GitHub URLs. Both source and portable packages include them; legacy server commands delegate to this launcher.
 - `academy_local.py`, `.academy-data/`: local SQLite persistence and the ignored default learner data directory. Never distribute its database, sidecars, or backups.
-- `AGENTS.md`: tutor and maintainer instructions for opening the project in a new Codex session/account.
+- `README.md`, `AGENTS.md`, `CLAUDE.md`: project overview, shared tutor/maintainer instructions, and Claude entry point. Keep them in editable downloads and new-account copies.
 - `scripts/prepare_new_site.py`: creates a separate publication copy with a fresh hosting manifest and no hosted URL; actual registration happens through Sites in the target account.
 - `scripts/`: build, serving, packaging, and content validation.
 - `work/`: your private experiment outputs, intentionally excluded from distribution.

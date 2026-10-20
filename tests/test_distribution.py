@@ -15,6 +15,7 @@ class DistributionTests(unittest.TestCase):
             public = {
                 "README.md": "Course",
                 "AGENTS.md": "Tutor instructions",
+                "CLAUDE.md": "Claude entry point",
                 "academy.py": "# launcher",
                 "academy_local.py": "# local storage",
                 "academy.json": '{"hostedUrl":null}',

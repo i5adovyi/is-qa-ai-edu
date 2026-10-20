@@ -98,7 +98,8 @@ def validate(root):
                  'Incident debrief leaked into brief: ' + name)
         step_ids = [s.get('id') for s in incident.get('steps', [])]
         need(len(step_ids) == len(set(step_ids)), 'Duplicate incident step: ' + name)
-    paths = [root / 'README.md']
+    paths = [root / name for name in ('README.md', 'AGENTS.md', 'CLAUDE.md')
+             if (root / name).is_file()]
     for folder in ['docs', 'templates', 'capstones', 'content', 'lab']:
         paths.extend((root / folder).rglob('*.md'))
     for path in paths:

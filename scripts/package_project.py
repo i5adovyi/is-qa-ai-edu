@@ -5,7 +5,7 @@ from zipfile import ZipFile, ZIP_DEFLATED
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'dist/academy-source.zip'
 INCLUDE = [
-    'README.md', 'AGENTS.md', 'academy.py', 'academy_local.py', 'academy.json',
+    'README.md', 'AGENTS.md', 'CLAUDE.md', 'academy.py', 'academy_local.py', 'academy.json',
     '.openai/hosting.json', '.gitignore', '.gitattributes', '.github',
     'docs', 'content', 'templates', 'capstones', 'lab', 'tests', 'scripts',
     'portal', 'output/pdf',
