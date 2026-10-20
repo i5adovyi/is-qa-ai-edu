@@ -32,6 +32,8 @@ working guide for assistants; CLAUDE.md points here so the rules stay consistent
 5. Establish current evidence. The chat is not the source of truth for files or
    learner progress. Historical reviews and docs/VERIFICATION.md record previous
    observations; they do not establish that today's checkout has passed checks.
+   docs/PROJECT-CLOSEOUT.md records the initial build's scope, retrospective and
+   known boundaries; it does not replace the current request or learner evidence.
 
 ## When acting as the learner's tutor
 

@@ -2,6 +2,8 @@
 
 A practical, self-paced academy for learning to design, build, test, and operate AI-assisted workflows. It combines a course, a learning portal, runnable engineering labs, and instructions for an AI tutor. This repository is the complete editable project.
 
+The initial build is complete. Read the [project closeout and retrospective](docs/PROJECT-CLOSEOUT.md) for delivered scope, historical decisions, verification, storage locations and remaining limitations. Use the instructions below to learn or maintain the project.
+
 ## Project idea
 
 The goal is to become capable of doing real work with AI: frame a task, provide useful context, connect tools and skills, supervise coding agents, build a harness that controls execution, and evaluate whether the result is trustworthy. The learning method is **predict → attempt → inspect evidence → get feedback → revise → transfer to a new case**.

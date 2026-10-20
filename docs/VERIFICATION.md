@@ -1,6 +1,6 @@
 # Verification record for the October 2026 academy release
 
-Checked 20 October 2026. The local-database and account-handoff revision below is the latest verification. Earlier observations are retained afterward for provenance; their browser-only storage descriptions refer to earlier releases or hosted mode. Earlier findings remain in the [student audit](STUDENT-AUDIT.md) and [learning experience review](LEARNING-EXPERIENCE-REVIEW.md); the [implementation record](LEARNING-EXPERIENCE-IMPLEMENTATION.md) maps the preceding eight review workstreams.
+Checked 20 October 2026. The [project closeout](PROJECT-CLOSEOUT.md) records the final build verification and limitations. Earlier observations are retained below for provenance; their browser-only storage descriptions refer to earlier releases or hosted mode. Earlier findings remain in the [student audit](STUDENT-AUDIT.md) and [learning experience review](LEARNING-EXPERIENCE-REVIEW.md); the [implementation record](LEARNING-EXPERIENCE-IMPLEMENTATION.md) maps the preceding eight review workstreams.
 
 ## Local database and new-account revision: executed checks
 
