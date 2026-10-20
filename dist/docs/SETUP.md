@@ -1,6 +1,6 @@
 # Start from a fresh copy
 
-Use the hosted portal for reading, quizzes, and notes. Run Python commands in a terminal on your computer, from the project directory. The portal does not execute Python or install a skill for you.
+Use the [private OpenAI-hosted portal](https://signal-desk-ai-engineering-academy.igor-sadovyi87.chatgpt.site/) or run the same site locally. The [Run anywhere guide](RUN-ANYWHERE.md) explains both modes and how to transfer progress. Run Python commands in a terminal on your computer, from the project directory. The portal does not execute Python or install a skill for you.
 
 ## 1. Get the files
 
@@ -44,11 +44,10 @@ The test suite should finish with `OK`. Before installing MCP dependencies, its 
 ## 4. Open the local portal
 
 ```sh
-python3 scripts/build_portal.py
-python3 scripts/serve.py
+python3 academy.py local
 ```
 
-Open [the local portal](http://127.0.0.1:8765). The server command stays running; this is normal. Keep that terminal open, and use a second terminal for exercises. Press **Ctrl+C** in the server terminal when finished. If port 8765 is occupied, use `python3 scripts/serve.py --port 8766` and open `http://127.0.0.1:8766`.
+The launcher builds the portal and opens [the local portal](http://127.0.0.1:8765). The server command stays running; this is normal. Keep that terminal open, and use a second terminal for exercises. Press **Ctrl+C** in the server terminal when finished. If port 8765 is occupied, use `python3 academy.py local --port 8766` and open `http://127.0.0.1:8766`. Add `--no-browser` if you only want the printed URL.
 
 Rebuild after editing lesson or portal source, then reload the page. Do not open `portal/index.html` directly or edit generated files under `dist/`.
 

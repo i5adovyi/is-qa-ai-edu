@@ -56,3 +56,6 @@ details[open]>summary{margin-bottom:15px}
 .incident-card p{margin-bottom:14px}
 #exercise-nextCheck{min-height:110px}
 .assignment-context pre{overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}
+.run-options pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;line-height:1.6;padding:12px;background:var(--paper)}
+.run-options h2{font-size:25px;line-height:1.2}
+.run-options .btn{max-width:100%;white-space:normal}

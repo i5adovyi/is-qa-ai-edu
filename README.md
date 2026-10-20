@@ -4,6 +4,14 @@ A practical training project for learning to design, build, test, and operate AI
 
 ## Start here
 
+Use the [private OpenAI-hosted academy](https://signal-desk-ai-engineering-academy.igor-sadovyi87.chatgpt.site/), or run this copy locally with:
+
+```sh
+python3 academy.py local
+```
+
+This builds from source and opens `http://127.0.0.1:8765/`. The same command works in the ready-built portable ZIP. `python3 academy.py hosted` opens the hosted copy instead. See [Run anywhere](docs/RUN-ANYWHERE.md) for Windows, ports, progress transfer, GitHub updates, and OpenAI Sites publishing.
+
 1. Follow [fresh-copy setup](docs/SETUP.md) to get the files, run the demo and checks, and open the local portal.
 2. Continue with [START HERE](docs/START-HERE.md), including the first 90-minute session. Keep the portal server running in its terminal and use another terminal for exercises.
 
@@ -44,11 +52,10 @@ These are planning estimates, not measured completion times. Use the [study plan
 
 ## Commands
 
-Quick reference for an existing setup. `serve.py` stays running until Ctrl+C; do not start a second server on the same port. Run the lab commands in another terminal.
+Quick reference for an existing setup. The local server stays running until Ctrl+C; do not start a second server on the same port. Run the lab commands in another terminal.
 
 ```sh
-python3 scripts/build_portal.py
-python3 scripts/serve.py
+python3 academy.py local
 python3 -m lab.cli demo
 python3 -m lab.cli evaluate --split train
 python3 -m lab.composed evaluate --components completed --split all

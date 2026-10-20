@@ -1,6 +1,18 @@
-# Verification record for the October 2026 incident release
+# Verification record for the October 2026 academy release
 
-Checked 20 October 2026. The incident revision below is the latest verification. Earlier learning-release observations are retained afterward for provenance. Earlier findings remain in the [student audit](STUDENT-AUDIT.md) and [learning experience review](LEARNING-EXPERIENCE-REVIEW.md); the [implementation record](LEARNING-EXPERIENCE-IMPLEMENTATION.md) maps the preceding eight review workstreams.
+Checked 20 October 2026. The run-anywhere revision below is the latest verification. Earlier incident and learning-release observations are retained afterward for provenance. Earlier findings remain in the [student audit](STUDENT-AUDIT.md) and [learning experience review](LEARNING-EXPERIENCE-REVIEW.md); the [implementation record](LEARNING-EXPERIENCE-IMPLEMENTATION.md) maps the preceding eight review workstreams.
+
+## Run-anywhere revision: executed checks
+
+The [shared launcher and hosting guide](RUN-ANYWHERE.md) provide explicit local and OpenAI-hosted modes. The source and portable archives contain the same launcher and canonical URL configuration. The older server commands remain supported, including the commands printed in the existing fieldbook.
+
+- Python 3.9.6 full suite: **208 discovered, 197 passed, 11 optional MCP skips**. Seven launcher tests cover actual HTTP startup, alternate working directories, legacy commands, port/config/build errors, serving only course assets, and repeated extract/run/download of a portable copy.
+- Portal unit suite: **27 passed**, including mode detection and unchanged progress when opening Run anywhere.
+- The new browser check passed navigation, hosted/local/GitHub destinations, exact portable download bytes, setup and progress links, and desktop/mobile layout. Representative screenshots were visually reviewed.
+- Both final source and portable ZIPs were separately extracted into temporary directories. Their hosted command printed the configured URL without starting a server; their local command served the real course and five essential/download assets. Source rebuilt from its own files; portable ran without a build dependency. Both stopped cleanly on interruption.
+- Content and local-link checks passed. The source ZIP retains only the specific hosting manifest needed for existing-Site publication, not credentials. The portable download is regenerated from course assets when an extracted copy lacks a ZIP of itself.
+
+No OpenAI account or package installation is required for local reading and progress. Hosted access and GitHub permission remain separate. Progress does not synchronize automatically; use export/import. Hosted CI execution is checked separately after pushing the release.
 
 ## Incident revision: executed checks
 

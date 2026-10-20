@@ -40,7 +40,8 @@ def build():
     assets = downloadable_assets()
     learning = json.loads((ROOT/'content/learning.json').read_text())
     incidents = json.loads((ROOT/'content/incidents.json').read_text())
-    data = {'curriculum':curriculum,'learning':learning,'incidents':incidents,'resources':resources,'documents':docs,'assets':assets,'edition':'October 2026','built':'2026-10-20'}
+    runtime = json.loads((ROOT/'academy.json').read_text())
+    data = {'curriculum':curriculum,'learning':learning,'incidents':incidents,'runtime':runtime,'resources':resources,'documents':docs,'assets':assets,'edition':'October 2026','built':'2026-10-20'}
     for name in ['index.html','style.css','app.js']:
         shutil.copyfile(ROOT/'portal'/name,OUT/name)
     (OUT/'data.js').write_text('window.ACADEMY = '+json.dumps(data,ensure_ascii=False).replace('</','<\\/')+';\n')

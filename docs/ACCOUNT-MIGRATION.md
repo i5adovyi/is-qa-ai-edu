@@ -16,8 +16,7 @@ Do not rely on the old portal URL alone as your backup. An owner-only portal wil
 From a Git clone or extracted source ZIP:
 
 ```sh
-python3 scripts/build_portal.py
-python3 scripts/serve_portal.py
+python3 academy.py local
 ```
 
 On Windows, use `py -3` instead of `python3` if that is how Python is installed. Leave the server terminal open and visit the printed URL. Stop it with Ctrl+C.
@@ -27,10 +26,10 @@ The server listens only on your computer at `http://127.0.0.1:8765`. It does not
 For the ready-built portable bundle, extract it and run:
 
 ```sh
-python3 serve.py
+python3 academy.py local
 ```
 
-It includes `dist/` and needs no build step. Reading lessons, hints, walkthroughs, and existing notes is local. External courses/videos need the internet. Optional live model and host labs still require an accessible model and their documented dependencies.
+It includes `dist/` and needs no build step. The earlier `python3 serve.py` command also works. Use `python3 academy.py hosted` to open the existing hosted Site instead. See [Run anywhere](RUN-ANYWHERE.md) for both modes. Reading lessons, hints, walkthroughs, and existing notes is local. External courses/videos need the internet. Optional live model and host labs still require an accessible model and their documented dependencies.
 
 On the local portal, open Progress and import the JSON you exported. Check one saved attempt and one note before discarding any backup. Imports preserve conflicting versions rather than silently overwriting them.
 

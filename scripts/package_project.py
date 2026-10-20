@@ -3,7 +3,7 @@ from pathlib import Path
 from zipfile import ZipFile, ZIP_DEFLATED
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'dist/academy-source.zip'
-INCLUDE=['README.md','.gitignore','.gitattributes','.github','docs','content','templates','capstones','lab','tests','scripts','portal','output/pdf']
+INCLUDE=['README.md','academy.py','academy.json','.openai/hosting.json','.gitignore','.gitattributes','.github','docs','content','templates','capstones','lab','tests','scripts','portal','output/pdf']
 EXCLUDE={'__pycache__','.DS_Store','runs'}
 def package():
     OUT.parent.mkdir(exist_ok=True)

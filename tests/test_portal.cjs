@@ -20,6 +20,7 @@ function academy() {
     }
   }
   return {
+    runtime: JSON.parse(fs.readFileSync(path.join(ROOT,'academy.json'),'utf8')),
     incidents: fs.existsSync(path.join(ROOT,'content/incidents.json')) ? JSON.parse(fs.readFileSync(path.join(ROOT,'content/incidents.json'),'utf8')) : {incidents:[]},
     curriculum: JSON.parse(fs.readFileSync(path.join(ROOT, 'content/curriculum.json'), 'utf8')),
     learning: JSON.parse(fs.readFileSync(path.join(ROOT, 'content/learning.json'), 'utf8')),
@@ -339,4 +340,21 @@ test('import into a just-opened incident adopts its saved draft and step while p
   p.run("state.exercises[inc.id].draft.nextCheck='My new local check should remain visible';var conflictingImport=mergeProgress(state,incidentImport)");
   assert.equal(p.run("conflictingImport.state.exercises[inc.id].draft.nextCheck"),'My new local check should remain visible');
   assert.equal(p.run("conflictingImport.state.exercises[inc.id].history.filter(e=>e.kind==='imported-draft').length"),1);
+});
+
+test('run-anywhere route distinguishes local and hosted copies without changing progress',()=>{
+  const p=portal();
+  p.context.location.hash='#run';
+  p.context.location.hostname='127.0.0.1';
+  p.run("state.notes['lesson-note']='Keep my learning record';render()");
+  assert.match(p.nodes['#main'].innerHTML,/You are using the local academy/);
+  assert.match(p.nodes['#main'].innerHTML,/python3 academy.py local/);
+  assert.match(p.nodes['#main'].innerHTML,/academy-portable.zip/);
+  assert.match(p.nodes['#main'].innerHTML,/Export before switching/);
+  assert.match(p.nodes['#nav'].innerHTML,/Run anywhere/);
+  p.context.location.hostname='signal-desk-ai-engineering-academy.igor-sadovyi87.chatgpt.site';
+  p.run('render()');
+  assert.match(p.nodes['#main'].innerHTML,/You are using the OpenAI-hosted academy/);
+  assert.equal(p.run("state.notes['lesson-note']"),'Keep my learning record');
+  assert.doesNotMatch(p.nodes['#main'].innerHTML,/incident-debrief|requested-hint/);
 });
