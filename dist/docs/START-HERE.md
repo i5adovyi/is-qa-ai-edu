@@ -4,6 +4,8 @@ You will build a small system that reads a synthetic support ticket, retrieves r
 
 Start with the [prerequisites and practice map](PRACTICE-MAP.md). The Python route assumes basic functions, lists, dictionaries, JSON and terminal commands; it does not teach programming from zero. The concept route works on paper. When you have access to an assistant, use the [model bridge](../lab/model-bridge.md) to turn actual model outputs into reproducible experiments. Keep offline, simulated and live-model results labeled separately.
 
+After the foundations, the [integration route](INTEGRATION-LABS.md) adds a real local MCP exchange, skill installation and fresh-host testing, and a complete student harness. It explains which setup and evidence each requires.
+
 ## Your first 90 minutes
 
 **Minutes 0-15: get something running.** From this project directory, run `python3 -m lab.cli demo`. Read the output, locate its trace, and identify a decision, a tool call, and a result. If Python is missing, you can still read the entire curriculum in the portal or Markdown files; install Python before the executable labs.

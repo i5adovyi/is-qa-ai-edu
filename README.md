@@ -15,7 +15,7 @@ Python 3.9+ is supported (tested here with Python 3.9.6). The portal builder and
 ## What is inside
 
 - Eight stages and 24 lessons, each with teaching material, a worked example, three exercises, hints, solution guidance, and a knowledge check.
-- Eight runnable-lab guides with a Python reference harness, synthetic fixtures, traces, checkpoints, budgets, tool permissions, and evaluation.
+- Eleven lab guides: eight component exercises plus a real MCP integration, host-installed skill practice, and a complete composed student harness.
 - Original articles, learner manuals, reusable engineering templates, and three substantial capstone briefs.
 - A curated library of courses, books, documentation, papers, and videos, with practical follow-up tasks.
 - A local learning portal with search, quizzes, progress, personal notes, bookmarks, and JSON progress export/import.
@@ -23,7 +23,9 @@ Python 3.9+ is supported (tested here with Python 3.9.6). The portal builder and
 
 See the [practice map](docs/PRACTICE-MAP.md) for prerequisites and lesson-to-lab links. To try your current chat model without an API integration, follow the [model response bridge](lab/model-bridge.md).
 
-The [second review report](docs/REVIEW-2026-10-20.md) records repaired gaps, verification, and the remaining extension roadmap.
+After the component exercises, follow the [integration route](docs/INTEGRATION-LABS.md). It connects protocol behavior, installed skills, and your own harness components to observable results.
+
+The [second review report](docs/REVIEW-2026-10-20.md) records the earlier findings and their resolution. The [verification record](docs/VERIFICATION.md) states exactly what was run.
 
 ## Choose a pace
 
@@ -43,6 +45,7 @@ python3 scripts/build_portal.py
 python3 scripts/serve.py
 python3 -m lab.cli demo
 python3 -m lab.cli evaluate --split holdout
+python3 -m lab.composed evaluate --components completed --split all
 python3 -m unittest discover -s tests
 python3 scripts/check_content.py
 ```

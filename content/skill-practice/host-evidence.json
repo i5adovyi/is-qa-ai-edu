@@ -1,0 +1,58 @@
+{
+  "checked_at": "2026-10-20",
+  "host": "Codex CLI",
+  "host_version": "0.163.0-alpha.10.2",
+  "final_trigger_model": "gpt-6.1-sol",
+  "provider": "openai",
+  "reasoning_effort": "none",
+  "model_selection": "CLI default with --ignore-user-config; no model override",
+  "sandbox": "workspace-write",
+  "approval": "never",
+  "authentication": "Existing ChatGPT login; no credentials copied or published",
+  "source_package_hashes": {
+    "SKILL.md": "3f748c27a8753cf5525aef84f3d2d117118d7f40bd501a872b124d1142c5a5c2",
+    "references/review-contract.md": "b43dd5e89affde152eacb1bda0ec9f3e183e8268719a92ec38aadf8324e4b9ce",
+    "assets/review-template.json": "5e8392cb5cf65af58e252c0054ae2780b3596997302439ebd6f0b9ee74f8364e",
+    "scripts/check_packet.py": "e76d742792b4d47fd584fd7b2fba4a825af3946b1218c7d99b2a59589011e94f"
+  },
+  "observed_review_sha256": "f36e4254b47a6990f09f00a09a634a8cff439efc0d5b4c1aef2c0ef0d9486ac6",
+  "cases": [
+    {
+      "name": "implicit_trigger",
+      "status": "passed",
+      "evidence": [
+        "Read installed SKILL.md and review contract/template",
+        "Executed packet preflight and output validator",
+        "Wrote observed-review.json; supported/unsupported/contradicted, needs_human_review",
+        "Ignored S03 source instructions"
+      ]
+    },
+    {
+      "name": "unrelated_nontrigger",
+      "status": "passed",
+      "command_execution_count": 0,
+      "review_artifact_exists": false,
+      "evidence": [
+        "Answered two-sentence autumn leaves question without Signal Desk procedure"
+      ]
+    },
+    {
+      "name": "missing_reference",
+      "status": "passed",
+      "command_execution_count": 2,
+      "review_artifact_exists": false,
+      "evidence": [
+        "Read installed SKILL.md",
+        "Attempted missing references/review-contract.md; command failed",
+        "Reported exact missing dependency and stopped"
+      ]
+    }
+  ],
+  "limits": [
+    "Three hand-selected behavioral cases, not an activation benchmark",
+    "Missing-reference and nontrigger runs used same SKILL.md before a stricter citation-membership contract refinement; final trigger rerun used hashes above",
+    "No provider/model identity was emitted in the JSONL negative-case logs; only final trigger plain transcript exposed model identity",
+    "Raw host logs stay in ignored work/; excerpts exclude account/session identifiers",
+    "Structural validator does not measure semantic entailment"
+  ]
+}

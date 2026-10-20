@@ -17,7 +17,9 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 
 The demo prints a local draft and its run-artifact directory. The training gate should report **18/18 cases and 11/11 scenarios**. Unit tests should pass. One test deliberately injects a failing policy to verify the regression gate.
 
-Open [the eight practice labs](../content/labs/README.md) next. Their starter checks intentionally fail until you implement the corresponding function in `lab/student.py`. They do not break the reference harness.
+Open [the practice labs](../content/labs/README.md) next. Their starter checks intentionally fail until you implement the corresponding function in `lab/student.py`. They do not break the reference harness.
+
+After Labs 01–08, [Lab 11](../content/labs/11-complete-student-harness.md) composes all eight functions into the running harness. The complete wiring and a runnable disclosed instructor example ship together; `lab/student.py` remains your intentional exercise workspace. Use `python3 -m lab.composed evaluate --components completed` to inspect the example, then `--components student` to assess your own eight implementations. The student profile never substitutes missing functions, and a passing example report does not count as learner completion. Keep or adapt your existing student work; do not overwrite it with the example just to make the gate green.
 
 For a real-model experiment without an API key, use the [manual model bridge](model-bridge.md): export a prompt, obtain a JSON answer from any chat model, and replay it through this harness. A labeled mock response makes the same workflow runnable offline.
 
@@ -96,10 +98,11 @@ cli.py
   │     ├── contracts.py: schemas, errors, limits and accounting
   │     └── storage.py: local effects, idempotency and traces
   ├── evaluation.py: case assertions and failure-scenario acceptance
-  └── practice.py → student.py: isolated learner extensions
+  ├── practice.py → student.py: focused helper acceptance checks
+  └── composed.py → student.py or completed.py: all eight integrated components
 ```
 
-`model_bridge.py` exports synthetic requests and replays saved responses through `Runner`; it makes no provider calls. Labs 01–07 are isolated micro-exercises. Lab 08 and the model bridge exercise the actual decision seam.
+`model_bridge.py` exports synthetic requests and replays saved responses through `Runner`; it makes no provider calls. Labs 01–08 start with focused function exercises. `composed.py` connects all eight to read authorization, redaction, selected context, retries, mutation keys, citation validation, decision, and trace summary. Lab 08's ordinary `--policy student` mode and the model bridge substitute only the decision seam; use the explicit composition gate for full integration evidence.
 
 Read `contracts.py`, `tools.py`, `engine.py`, then `evaluation.py`. Follow one `save_draft` operation from the decision contract through the dispatcher to the durable store.
 
@@ -112,7 +115,7 @@ Every run produces:
 | `store.json` | Ticket, drafts, tags, idempotency records | Local mutation source of truth |
 | `result.json` | Terminal status, decision, usage, write counts | Created on completion/failure |
 
-Evaluation adds `report.json` above the per-case run directories.
+Evaluation adds `report.json` above the per-case run directories. Composed runs additionally write `components.jsonl` and `composition.json`, with per-hook hashes/calls and explicit `student` or `completed` provenance. Composed checkpoints bind the component source/profile and selected-context limit on resume. See [Lab 11](../content/labs/11-complete-student-harness.md) for the complete gate, deliberate failures, and artifact interpretation.
 
 The trace uses real UTC timestamps; virtual latency is a deterministic accounting dimension. Run IDs and timestamps vary; expected outcomes do not.
 

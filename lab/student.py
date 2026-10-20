@@ -1,6 +1,7 @@
 """Your workspace. TODOs are intentional; the reference harness never imports this.
 
 Run: python3 -m lab.cli practice --lab 01
+Then compose all eight: python3 -m lab.composed evaluate --components student
 Hints and solutions are separate files under content/labs/.
 """
 
@@ -53,7 +54,8 @@ def summarize_trace(events):
 def build_decision(ticket, articles):
     """Lab 08: produce the decision contract used by lab.policy.validate_decision.
 
-    This extension is opt-in: evaluate --policy student. You may import classify
+    This extension is opt-in: evaluate --policy student (decision only), or
+    lab.composed evaluate --components student (all eight helpers). You may import classify
     from lab.policy; focus on grounding, conservative escalation and output schema.
     """
     raise NotImplementedError("Complete lab 08.")

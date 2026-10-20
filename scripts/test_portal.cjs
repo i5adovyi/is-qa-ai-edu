@@ -40,6 +40,14 @@ const path = require('node:path');
  const chooser=await choosing;await chooser.setFiles({name:'progress.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify({...state,done:['01','02'],notes:{...state.notes,'content/lessons/01-systems-before-agents.md':'A note from another device.'}}))});
  await page.waitForFunction(()=>document.querySelector('.stat strong').textContent.startsWith('2/'));
  for(const route of ['path','labs','manuals','capstones']) {await page.goto(base+'/#'+route);await page.locator('h1').waitFor();assert.ok(!await page.getByText('That page is not in this edition.').count());}
+ await page.goto(base+'/#labs');
+ assert.equal(await page.locator('.doc-card').count(),11);
+ for(const guide of ['09-real-mcp.md','10-installed-skill.md','11-complete-student-harness.md']) {
+  await page.goto(base+'/#doc='+encodeURIComponent('content/labs/'+guide));
+  await page.locator('.reading h1').waitFor();
+  assert.ok((await page.locator('.reading').innerText()).length>1500,guide);
+ }
+ await page.screenshot({path:path.join(__dirname,'../tmp/qa/integrated-harness.png'),fullPage:true});
  await page.goto(base+'/#lesson=01');await page.locator('#notes').waitFor();
  assert.match(await page.locator('#notes').inputValue(),/QA note:[\s\S]*Imported backup[\s\S]*another device/);
  await page.goto(base+'/#doc=content%2Flabs%2F08-ship-an-evaluated-policy.md');
@@ -55,7 +63,7 @@ const path = require('node:path');
  assert.ok(await page.locator('#export').isVisible());
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth));
  await page.screenshot({path:path.join(__dirname,'../tmp/qa/mobile.png'),fullPage:true});
- for(const asset of ['fieldbook.pdf','academy-source.zip','content/resources.json']) {const r=await context.request.get(base+'/'+asset);assert.equal(r.status(),200,asset);}
+ for(const asset of ['fieldbook.pdf','academy-source.zip','content/resources.json','lab/composed.py','lab/mcp_lab/server.py','content/skill-practice/signal-desk-evidence-review/scripts/check_packet.py']) {const r=await context.request.get(base+'/'+asset);assert.equal(r.status(),200,asset);}
  assert.deepEqual(errors,[]);
  await browser.close();console.log('Browser checks passed: navigation, skip link, quiz, notes persistence, completion, search, bookmarks, simulator, keyboard progress import/export, conflicting notes, solution links and section focus, malformed routes, mobile layout, downloads.');
 })().catch(e=>{console.error(e);process.exit(1);});

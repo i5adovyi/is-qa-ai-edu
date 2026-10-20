@@ -16,7 +16,7 @@
       "id": 3,
       "title": "Tools, MCP & skills",
       "description": "Design interfaces that make useful actions explicit and bounded.",
-      "outcome": "Specify tools, trace an MCP interaction and package a reusable skill."
+      "outcome": "Specify tools, run a real MCP exchange, and install and test a reusable skill."
     },
     {
       "id": 4,
@@ -263,7 +263,7 @@
       "stage": 3,
       "title": "Package a skill that improves repeatable work",
       "summary": "Turn a successful Signal Desk procedure into a discoverable, testable skill with a clear activation boundary.",
-      "minutes": 90,
+      "minutes": 120,
       "level": "Practitioner",
       "file": "content/lessons/09-reusable-skills.md",
       "objectives": [

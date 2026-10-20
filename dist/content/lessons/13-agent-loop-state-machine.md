@@ -53,6 +53,8 @@ Implement the state machine in a small script or use the bundled lab as an inspe
 
 The bundled lab follows a fixed retrieval/decision/write workflow. Its injected policy supplies a bounded final decision, not arbitrary next-tool proposals. Inspect it as an example of controls, or build the scripted loop above to practice planner-driven action selection. The [model bridge](../../lab/model-bridge.md) exercises the decision seam; adding a model-controlled tool loop requires the separate proposal contract described in the [adapter brief](../../lab/provider-adapter-design.md).
 
+After labs 01–08, use [lab 11](../labs/11-complete-student-harness.md) to connect all eight of your helper functions to this workflow. Inspect its component evidence to identify the exact implementation that redacted the ticket, packed evidence, authorized the read, scheduled a retry, created an operation key, checked citations, summarized events, and proposed the decision. It remains a fixed workflow, but the selected student components now affect its actual execution.
+
 ## Exercise 3 · Adversarial completion
 
 Supply a planner response that says “done” before a draft exists. Supply another that requests an unknown tool and a third that loops forever. Verify that the harness detects all three independently of the planner's confidence. Optional model use can generate proposals, but keep the scripted cases as deterministic regression checks.

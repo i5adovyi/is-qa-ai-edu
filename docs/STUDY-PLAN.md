@@ -19,6 +19,8 @@ Check the [prerequisites and lesson-to-lab map](PRACTICE-MAP.md) first. Add prep
 | 11 | Capstone hardening | Failure injection and fresh-case review | Incident report and measured revision |
 | 12 | Capstone defense | Reproduce from a clean copy; explain to a reviewer | Final dossier and personal next-step plan |
 
+Add the [integration route](INTEGRATION-LABS.md) alongside this core schedule: lab 09 after week 3, lab 10 after week 4, and lab 11 after lab 08 in week 9. Reserve another 5–9 focused hours, either as additional sessions or one to two extra weeks. The original 72-hour plan does not include these new sessions.
+
 Lesson 24's 90-minute estimate covers its proposal clinic. Its build and defense occupy weeks 10–12, with approximately 10–20 focused project hours depending on the chosen brief. Do not add a second full support capstone when choosing the QA or research route.
 
 ## A productive study session

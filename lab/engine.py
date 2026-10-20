@@ -87,10 +87,11 @@ def validate_checkpoint_state(state, run_id):
 
 class Runner:
     def __init__(self, run_dir, case=None, scenario="normal", resume=False,
-                 policy=None, budget=None):
+                 policy=None, budget=None, binding=None):
         self.run_dir = Path(run_dir)
         self.checkpoint_path = self.run_dir / "checkpoint.json"
         self.policy = decide if policy is None else policy
+        self.binding = binding
         if resume:
             try:
                 envelope = json.loads(self.checkpoint_path.read_text(encoding="utf-8"))
@@ -103,6 +104,8 @@ class Runner:
                     raise HarnessError("checkpoint_corrupt", "Checkpoint checksum mismatch.")
                 if payload.get("version") != 1:
                     raise HarnessError("checkpoint_version", "Unsupported checkpoint version.")
+                if payload.get("binding") != self.binding:
+                    raise HarnessError("component_mismatch", "Resume requires the original component profile and source.")
                 self.state = payload["state"]
                 self.budget = Budget(**payload["budget"])
                 self.usage = Usage(**payload["usage"])
@@ -154,8 +157,24 @@ class Runner:
         payload = {
             "version": 1, "run_id": self.run_id, "state": self.state,
             "budget": asdict(self.budget), "usage": asdict(self.usage),
+            "binding": self.binding,
         }
         atomic_json(self.checkpoint_path, {"payload": payload, "sha256": digest(payload)})
+
+    def _read_ticket(self):
+        return self.dispatcher.call("read_ticket", {"ticket_id": self.state["ticket_id"]})
+
+    def _prepare_articles(self, articles):
+        return articles
+
+    def _validate_decision(self, decision):
+        validate_decision(decision, self.state["articles"])
+
+    def _operation_key(self, action):
+        return f"{self.run_id}:{action}:{self.state['ticket_id']}"
+
+    def _retry_delay(self, attempt):
+        return 0
 
     def _complete(self, status, code=None):
         self.state["phase"] = "done"
@@ -179,14 +198,14 @@ class Runner:
                 self.usage.consume(self.budget, "steps")
                 self.trace.emit("phase_started", phase=phase)
                 if phase == "read":
-                    self.state["ticket"] = self.dispatcher.call(
-                        "read_ticket", {"ticket_id": self.state["ticket_id"]})
+                    self.state["ticket"] = self._read_ticket()
                     self.state["phase"] = "retrieve"
                 elif phase == "retrieve":
                     if self.state["scenario"] == "invalid-tool":
                         self.dispatcher.call("run_shell", {"command": "echo unsafe"})
                     topic = classify(self.state["ticket"])
-                    self.state["articles"] = self.dispatcher.call("search_kb", {"topic": topic})
+                    self.state["articles"] = self._prepare_articles(
+                        self.dispatcher.call("search_kb", {"topic": topic}))
                     self.state["phase"] = "decide"
                 elif phase == "decide":
                     try:
@@ -194,7 +213,7 @@ class Runner:
                                                deepcopy(self.state["articles"]))
                     except Exception as exc:
                         raise HarnessError("policy_error", f"Policy failed: {type(exc).__name__}.") from exc
-                    validate_decision(decision, self.state["articles"])
+                    self._validate_decision(decision)
                     self.state["decision"] = decision
                     self.trace.emit("decision", action=decision["action"],
                                     category=decision["category"], citations=decision["citations"])
@@ -207,7 +226,7 @@ class Runner:
                         "reply": self.state["decision"]["reply"],
                         "citations": self.state["decision"]["citations"],
                     }
-                    key = f"{self.run_id}:draft:{self.state['ticket_id']}"
+                    key = self._operation_key("draft")
                     should_crash = self.state["crash_armed"]
                     # Persist intent and disarm synthetic crash before committing.
                     self.state["crash_armed"] = False
@@ -225,7 +244,7 @@ class Runner:
                 elif phase == "tag":
                     self.dispatcher.call(
                         "add_tag", {"ticket_id": self.state["ticket_id"], "tag": "triaged"},
-                        key=f"{self.run_id}:tag:{self.state['ticket_id']}",
+                        key=self._operation_key("tag"),
                     )
                     self.state["phase"] = "finish"
                 elif phase == "finish":
@@ -237,9 +256,14 @@ class Runner:
                 raise
             except HarnessError as exc:
                 if exc.code == "tool_timeout" and self.state["retries"] < 1:
+                    try:
+                        delay_ms = self._retry_delay(self.state["retries"])
+                        self.usage.consume(self.budget, "virtual_ms", delay_ms)
+                    except HarnessError as retry_error:
+                        return self._complete("failed", retry_error.code)
                     self.state["retries"] += 1
                     self.trace.emit("retry_scheduled", phase=phase,
-                                    retry=self.state["retries"], cause=exc.code)
+                                    retry=self.state["retries"], cause=exc.code, delay_ms=delay_ms)
                     self.checkpoint()
                     continue
                 return self._complete("failed", exc.code)

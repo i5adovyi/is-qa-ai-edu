@@ -68,3 +68,7 @@ Design expiration rules for idempotency records. What happens if a retry arrives
 Deliver a recovery runbook: symptoms, files to inspect, safe resume command, expected invariants, and when a human must stop automated retries.
 
 [Hints](hints/05.md) · [Solution discussion](solutions/README.md#lab-05) · [Next lab](06-grounding-and-evaluation.md)
+
+## Connect it to the complete harness
+
+This lab teaches one component contract. After completing Labs 01–08, follow [Lab 11](11-complete-student-harness.md) to use this function in real runs with component evidence, crash recovery, and an integrated acceptance gate. The ordinary reference evaluation does not call this student helper.

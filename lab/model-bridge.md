@@ -2,7 +2,7 @@
 
 **Outcome:** compare a chat model's decision with the deterministic baseline, then replay its answer through Signal Desk's real output validator, tool permissions, budgets, storage, and evaluation. Allow 45–90 minutes. Requirements: Python 3.9+ and optionally any chat model you can access.
 
-The bridge makes no network calls and needs no API key or provider SDK. You paste a synthetic task into your chosen model and save its answer yourself. This is a working experiment with one bounded model decision. It does not implement autonomous tool planning or a live provider transport. The seven earlier helper functions remain isolated micro-exercises; this bridge and lab 08 connect decisions to the working harness.
+The bridge makes no network calls and needs no API key or provider SDK. You paste a synthetic task into your chosen model and save its answer yourself. This is a working experiment with one bounded model decision. It does not implement autonomous tool planning or a live provider transport. This bridge and Lab 08 substitute only the decision function. [Lab 11](../content/labs/11-complete-student-harness.md) separately connects all eight student functions into the complete harness and records which components ran.
 
 ## 1. Export a request
 

@@ -27,6 +27,16 @@ A suggested pass is 15/20, with no dimension below 2. This is this course's peda
 7. **Delegation:** submit task boundaries, artifact contracts, integration evidence, and a comparison against one worker. Reject delegation if the benefit does not justify its overhead.
 8. **Production:** submit one capstone release dossier including operation limits, stop conditions, a rollback procedure, and an incident exercise.
 
+## Integration evidence
+
+For the expanded engineering route, add [labs 09–11](INTEGRATION-LABS.md) to the relevant stage dossiers:
+
+- **Stage 3, MCP:** an actual SDK client/server run with matched request IDs, rejected invalid arguments, an unknown-record result and bounded disconnect/timeout behavior.
+- **Stage 3, skills:** installation evidence plus fresh-host discovery/use, a non-trigger request and a missing-reference observation. Keep a package-validator pass separate from a host-behavior pass.
+- **Stages 5–6, harness:** the student composition profile, component identity and invocation records, task evaluation, failure/recovery checks, and proof that an incorrect helper changes the outcome. A completed-example pass alone is insufficient for the student's gate.
+
+Use the same scoring dimensions and minimums. If host access is unavailable, record skill behavior as pending; the offline component and protocol work can still be assessed. These additions do not turn self-reported progress into a credential.
+
 ## How to review a submission
 
 Start by running the student's command, using their documented input. Then change one condition: omit a field, duplicate a message, introduce conflicting evidence, or cut the allowed budget. Ask the student to predict behavior before executing. Finally inspect one trace and require a short explanation of which layer enforced the constraint.

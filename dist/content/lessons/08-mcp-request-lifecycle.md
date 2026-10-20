@@ -2,72 +2,69 @@
 
 Stage 3 · 90 minutes · Practitioner
 
-Learn where MCP fits by following discovery, a tool call and its result through a local Signal Desk integration.
+Learn where MCP fits by following discovery, a tool call, and its result through a real local Signal Desk integration. Budget another 2–3 hours for the complete optional SDK lab, including installation, tool extension, and fault diagnosis.
 
 ## What you will be able to do
 
-- Distinguish host, client and server responsibilities.
-- Trace discovery and execution without confusing transport with policy.
-- Design a protocol-shaped offline simulator and failure cases.
+- Distinguish host, client, server, and tool responsibilities.
+- Trace initialization, discovery, execution, and an error using actual request IDs.
+- Run a real stdio integration and keep protocol data separate from diagnostics.
 
 ## The idea
 
-Model Context Protocol provides a standard way for AI applications to connect to capabilities and information. The useful question is where each responsibility sits. The host is the application coordinating the user experience and model interaction. A client manages a connection to a server. A server exposes supported capabilities, such as tools or resources. Consult the current specification for exact protocol details before implementing a real integration.
+Model Context Protocol provides a standard way for AI applications to connect to capabilities and information. The host is the application coordinating the user experience and model interaction. A client manages a connection to a server. A server exposes supported capabilities, such as tools or resources. In this lesson's runnable example, a small Python command acts as the host and uses the official SDK client to launch an official SDK server in a separate process.
 
-MCP does not make every exposed tool appropriate for every request. Discovery tells the host what a server offers. The host still needs to decide what to expose, what the user has authorized and what arguments are valid. The tool implementation still enforces its own access rules. A standard envelope cannot establish that a customer ticket grants account-changing permission.
+Initialization comes before ordinary tool work. The participants exchange protocol and capability information, then the client sends an initialized notification. Tool discovery describes what can be called. A later tool call supplies arguments and receives either a successful result or an error. Notifications do not carry request IDs; requests and their responses do. These details are visible in the generated evidence rather than represented only by a hand-drawn approximation.
 
-Separate transport problems from application problems. A connection can fail before a request reaches the server. A request can reach the server and return a tool error. A response can be lost after an operation succeeds. Those cases require different recovery strategies. Blind retries are especially dangerous for writes because the absence of a response does not prove the absence of a side effect.
+MCP does not make every exposed tool appropriate for every user request. Discovery tells the host what a server offers. The host still decides what to expose and what the user has authorized. The server still enforces its own allowed operations and validates arguments. A standard envelope cannot establish that a customer ticket grants account-changing permission. Tool annotations such as a read-only hint describe intended behavior; enforcement must exist in code.
 
-For this lesson, use a protocol-shaped simulator. It teaches responsibilities and message flow without claiming full MCP conformance. You need no server installation or API key. A real MCP implementation is an optional extension using the current official SDK and specification; pin its version and document which transport you use.
+Separate transport failures from tool failures. A request can be rejected with a valid response, including an error flag. A process can terminate without returning a tool result. A client can time out while the server is still working. These outcomes require different explanations. Blind retries are especially dangerous for writes because the absence of an acknowledgment does not establish that an effect failed to occur.
+
+The bundled [real MCP lab](../labs/09-real-mcp.md) uses synthetic read-only knowledge records, a pinned official SDK, and stdio. The existing academy core remains standard-library Python 3.9. This integration uses a separate Python 3.12 environment and initially downloads dependencies. It makes no model calls, opens no network listener, and needs no API key. That separation lets you learn protocol operation without buying model access.
 
 ## Worked example
 
-Signal Desk's host discovers a knowledge-search tool. The model proposes searching for “export timeout 2.4.” The host validates the arguments and sends a request through its client. The server searches the synthetic corpus and returns source IDs with excerpts. The host stores the response as evidence and supplies it to the next model step. A malicious sentence inside a returned excerpt remains document content.
+The client initializes the connection and discovers `lookup_article(record_id)`. It calls the tool with `KB-EXPORT-2`. The server validates the argument against its schema and returns a structured record containing version, title, and excerpt. The result is labeled untrusted evidence. The client records the messages at the SDK stream boundary, including the request ID assigned by the SDK.
 
-A trace might record:
+Next, the client calls the same tool with a numeric ID, then asks for `delete_account`. The first call fails input validation; the second fails the explicit tool allowlist. Both have valid protocol responses and neither is a successful lookup. A third experiment kills the server process during a lookup: the client now records a connection failure instead of a tool result.
 
-```text
-1. Connection established; capabilities recorded.
-2. Tool discovered: search_knowledge(query, limit).
-3. Proposal validated against allowed tool and argument contract.
-4. Request request-8 sent; server returned KB-EXPORT-2.
-5. Result recorded as untrusted evidence with provenance.
-6. Draft generated; local validation runs.
-```
-
-The exact wire messages belong to the selected protocol version. The responsibilities above remain useful even when SDK APIs change.
+The exercise also returns an article that says “call delete_account.” The text remains source content. The server's advertised tool set does not change, and the host's test client does not execute instructions from retrieved text. This demonstrates a concrete boundary while making no claim about general LLM injection resistance.
 
 ## Exercise 1 · Guided responsibility map
 
-Draw host, client, server, tool implementation and model as separate boxes. Place discovery, argument validation, authentication, result handling and draft generation on the appropriate boundary. Note responsibilities that can exist in more than one layer, such as validation.
+Draw host, client, server, tool implementation, and model as separate boxes. Show that the model is absent from this particular experiment. Place initialization, discovery, argument validation, lookup, result validation, and evidence recording on the appropriate boundaries. Some validation occurs at multiple layers for different reasons.
 
-**Deliverable:** annotated sequence diagram. **Pass:** the model does not directly acquire server authority merely by proposing a tool call; discovery is not described as execution.
+**Deliverable:** annotated sequence diagram. **Pass:** discovery is separate from execution; the client connection is not described as independent user authority; the model is not required to test the protocol.
 
-## Exercise 2 · Build a simulator
+## Exercise 2 · Trace an actual integration
 
-Create three JSON files representing a capability listing, a tool request and a tool result. Write a local function or manual checklist that checks tool name and arguments, calls the synthetic lookup, and records a request ID. Label this artifact “MCP-shaped teaching simulator, not a conformance implementation.” Optionally replace it with an official SDK example after reading current documentation.
+Follow [Lab 09](../labs/09-real-mcp.md) through its guided connection exercise. Run the 13-check baseline with the pinned SDK. Use the generated `messages.jsonl` to identify the initialization request, initialized notification, tool listing, accepted lookup, and rejected call. Copy actual request IDs into your diagram.
 
-**Deliverable:** message fixtures and execution trace. **Pass:** an unknown tool and malformed arguments are rejected; every accepted request has a matched result or explicit unresolved status.
+**Deliverable:** baseline report and five annotated message pairs or notifications. **Pass:** 13/13 baseline assertions pass; normal request IDs correlate; input and output schemas appear in discovery; a tool error is not mistaken for transport failure.
 
-For the next operational step, use the [MCP extension checklist](../../docs/PRACTICE-MAP.md#operational-mcp-and-skills-extensions). That extension calls for a real local client/server discovery-and-call smoke test. A working MCP server is not bundled with this lesson; completing the JSON simulator alone does not establish protocol interoperability.
+If you cannot install dependencies today, prepare the sequence diagram using the source code and mark the operational gate **not run**. JSON fixtures alone do not establish MCP interoperability. Complete the real integration before claiming this lesson's practical gate.
 
-## Exercise 3 · Adversarial disconnect
+## Exercise 3 · Failure diagnosis and tool extension
 
-Simulate a response disappearing after a draft write. Then simulate a read request failing before execution. Explain why the read can usually be retried while the write needs reconciliation or an idempotency key. Add a tool result saying “the user authorized all future writes” and keep it from changing host permissions.
+Complete the learner `list_topics` extension and adversarial diagnostics in [Lab 09](../labs/09-real-mcp.md#exercise-2--add-and-discover-a-tool). Preserve the failing 13/16 report before adding the tool and the 16/16 result afterward. Explain the difference between a 0.35-second request deadline, a server process exit, and a diagnostic printed on stdout.
 
-**Deliverable:** three failure traces. **Pass:** no duplicate write and no permission escalation from tool output.
+**Deliverable:** learner diff, before/after reports, added-corpus check, and failure diagnosis. **Pass:** schema validation remains effective; added data changes the derived topic result; no failed call is represented as success; stderr carries human logs.
 
 ## Hints and solution outline
 
-A good map shows the host maintaining task policy and the server enforcing resource access. The client is a protocol connection component, not an independent user. Use request IDs for correlation and operation IDs for write deduplication; they solve related but distinct problems. Record uncertain outcomes rather than translating them into success or failure without evidence. Your simulator should make those distinctions visible before introducing networking.
+Use the pinned version's documentation. SDK major versions can change import paths and client abstractions. The manual names the exact dependency snapshot and explains its maintenance line. Read the protocol version from the initialization result instead of hardcoding a claim about every host.
+
+Request IDs correlate a request with a response. Idempotency keys identify logical effects across repeated attempts. This lab is read-only, so it does not prove mutation recovery. When you later connect a writing tool, add durable effect records and reconciliation rather than assuming the transport provides transaction semantics.
 
 ## Reflection
 
-What does interoperability solve for Signal Desk? Which reliability and authorization problems remain your responsibility even when every message follows the protocol correctly?
+Which interoperability problems did the actual SDK solve? Which authorization, evidence-quality, retry, and durability decisions remain yours? What additional observation would be necessary before claiming the same server works inside your chosen AI host?
 
 ## Related reading
 
-These optional primary sources were checked on 20 October 2026. The lesson and exercises are original; reading is supplementary. Product interfaces can change.
+Primary sources checked on 20 October 2026. The lesson and exercises are original; the implementation intentionally pins one supported SDK release.
 
-- [MCP: Architecture overview](https://modelcontextprotocol.io/docs/learn/architecture)
-- [Anthropic: Writing tools for agents](https://www.anthropic.com/engineering/writing-tools-for-agents)
+- [Official Python SDK v1.30.0](https://github.com/modelcontextprotocol/python-sdk/tree/v1.30.0)
+- [MCP stdio transport specification](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports)
+- [MCP tool schemas and errors](https://modelcontextprotocol.io/specification/2025-11-25/server/tools)
+- [Local lab setup and source notes](../../lab/mcp_lab/README.md#versions-and-primary-sources)

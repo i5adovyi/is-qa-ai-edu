@@ -68,3 +68,7 @@ Create a manual review rubric for three claim-level labels: supported, contradic
 Deliver a short evaluation card containing scope, split discipline, metrics, baseline, observed failures, limitations, and the next data slice you need.
 
 [Hints](hints/06.md) · [Solution discussion](solutions/README.md#lab-06) · [Next lab](07-traces-and-diagnosis.md)
+
+## Connect it to the complete harness
+
+This lab teaches one component contract. After completing Labs 01–08, follow [Lab 11](11-complete-student-harness.md) to use this function in real runs with component evidence, crash recovery, and an integrated acceptance gate. The ordinary reference evaluation does not call this student helper.

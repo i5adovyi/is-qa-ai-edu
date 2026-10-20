@@ -39,7 +39,7 @@ Input:  Contact ada@example.test; key sk-demo-abc123. Error 503 at 12:00.
 Output: Contact [EMAIL]; key [KEY]. Error 503 at 12:00.
 ```
 
-Your function is an isolated exercise; editing it does not silently alter the reference harness's logging policy.
+The public check tests your function in isolation; editing it does not silently alter the reference harness's logging policy. The explicit student composition in Lab 11 calls it before the ticket reaches classification and decision.
 
 ## Completion gate
 
@@ -62,3 +62,7 @@ Add a small fixture set of 12 strings: six values to remove and six facts to ret
 Deliver a one-page data-flow note showing original ticket → redacted model context → operational trace → checkpoint. Mark which copies are retained and why.
 
 [Hints](hints/01.md) · [Solution discussion](solutions/README.md#lab-01) · [Next lab](02-context-budgets.md)
+
+## Connect it to the complete harness
+
+This lab teaches one component contract. After completing Labs 01–08, follow [Lab 11](11-complete-student-harness.md) to use this function in real runs with component evidence, crash recovery, and an integrated acceptance gate. The ordinary reference evaluation does not call this student helper.

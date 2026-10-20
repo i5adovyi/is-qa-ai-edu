@@ -1,0 +1,14 @@
+{
+  "ticket_id": "replace-with-packet-id",
+  "claims": [
+    {
+      "claim": "copy one draft claim",
+      "verdict": "supported",
+      "evidence_ids": [],
+      "reason": "explain support, contradiction, or the missing evidence"
+    }
+  ],
+  "decision": "needs_human_review",
+  "missing_facts": [],
+  "rejected_source_instructions": []
+}

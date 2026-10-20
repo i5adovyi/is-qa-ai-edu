@@ -62,3 +62,7 @@ Do not present the tool allowlist as an operating-system sandbox. They solve dif
 Design a `save_draft` contract with maximum reply length, unique citations, ticket scope, and an idempotency requirement. Specify which checks belong at schema validation, authorization, evidence validation, and mutation execution. For each check, add one negative test that would fail if the check were removed.
 
 [Hints](hints/03.md) · [Solution discussion](solutions/README.md#lab-03) · [Next lab](04-retries-and-budgets.md)
+
+## Connect it to the complete harness
+
+This lab teaches one component contract. After completing Labs 01–08, follow [Lab 11](11-complete-student-harness.md) to use this function in real runs with component evidence, crash recovery, and an integrated acceptance gate. The ordinary reference evaluation does not call this student helper.

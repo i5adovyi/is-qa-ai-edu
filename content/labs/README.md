@@ -1,4 +1,4 @@
-# Eight engineering labs
+# Eleven engineering labs
 
 Build engineering judgment by observing a working system, predicting a failure, making a narrow change, and testing the prediction. The [Signal Desk manual](../../lab/README.md) explains setup and every CLI command.
 
@@ -14,8 +14,11 @@ The reference implementation works immediately. Your separate workspace is `lab/
 | [06 — Grounding and evaluation](06-grounding-and-evaluation.md) | Does a citation make an answer true? | `citations_valid` | 60–90 min |
 | [07 — Traces and diagnosis](07-traces-and-diagnosis.md) | Can another engineer explain a failed run? | `summarize_trace` | 60–90 min |
 | [08 — Ship an evaluated policy](08-ship-an-evaluated-policy.md) | Can you improve usefulness without weakening the boundary? | `build_decision` | 90–150 min |
+| [09 — Real MCP](09-real-mcp.md) | Can a separate client and server negotiate and exchange valid tool results? | SDK client/server integration | 120–180 min |
+| [10 — Installed skill](10-installed-skill.md) | Can a fresh host discover and correctly use your installed procedure? | Skill package and host evidence | 75–120 min |
+| [11 — Complete student harness](11-complete-student-harness.md) | Do all eight components actually control an evaluated run? | Composed runner and component evidence | 120–240 min |
 
-Times are planning estimates, not promises. Expect roughly 9–13 focused hours for the core implementations and written reviews; stretch work can double that.
+Times are planning estimates, not promises. Expect roughly 9–13 focused hours for the first eight implementations and written reviews, plus 5–9 hours for the integration labs. Setup, debugging and stretch work can add time. See the [integration route](../../docs/INTEGRATION-LABS.md) for prerequisites and sequence.
 
 ## The work loop
 
@@ -27,15 +30,15 @@ Times are planning estimates, not promises. Expect roughly 9–13 focused hours 
 6. Write a short evidence note with the hypothesis, changed behavior, command, output, and remaining weakness.
 7. Consult [progressive hints](hints/README.md) only after a concrete attempt; [solutions](solutions/README.md) are separate spoilers.
 
-Every lab has a public completion gate and a deeper review question. Passing the gate proves its stated contract, not mastery of the entire engineering topic.
+This function-by-function loop applies to labs 01–08. Labs 09–11 supply their own setup, execution and evidence commands. Every lab has a completion gate and a deeper review question. Passing a gate proves its stated contract, not mastery of the entire engineering topic.
 
 ## Portfolio evidence
 
-Keep your own notes under a new `my-work/` directory. For each lab, save:
+Keep your own notes under `work/`, which is excluded from distribution. For each lab, save:
 
 - A prediction and a short decision record.
 - The exact command and a concise result excerpt.
 - Two additional adversarial cases and their outcomes.
 - One remaining limitation and a next experiment.
 
-For the final lab, include the student code, train and holdout reports, an annotated failure trace, and a two-minute explanation of the trust boundary. A reviewer should be able to reproduce your claim without an account or subscription.
+For lab 11, include the student code, train and holdout reports, component invocation evidence, an annotated failure trace, and a two-minute explanation of the trust boundary. A reviewer can reproduce the composed harness offline. Actual host behavior in lab 10 requires the chosen assistant host; do not substitute a local validator result for that evidence.

@@ -68,3 +68,7 @@ Define an alert for repeated retries across runs. Distinguish “a run emitted a
 Deliver one annotated trace and an incident note another learner can use to reproduce the failure.
 
 [Hints](hints/07.md) · [Solution discussion](solutions/README.md#lab-07) · [Next lab](08-ship-an-evaluated-policy.md)
+
+## Connect it to the complete harness
+
+This lab teaches one component contract. After completing Labs 01–08, follow [Lab 11](11-complete-student-harness.md) to use this function in real runs with component evidence, crash recovery, and an integrated acceptance gate. The ordinary reference evaluation does not call this student helper.

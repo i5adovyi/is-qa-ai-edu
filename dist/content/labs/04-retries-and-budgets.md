@@ -64,3 +64,7 @@ Add deterministic jitter using a supplied random seed, then compare delays acros
 Deliver a retry policy with maximum attempts, backoff schedule, total deadline, retryable error classes, and a rule for uncertain writes.
 
 [Hints](hints/04.md) · [Solution discussion](solutions/README.md#lab-04) · [Next lab](05-idempotency-and-recovery.md)
+
+## Connect it to the complete harness
+
+This lab teaches one component contract. After completing Labs 01–08, follow [Lab 11](11-complete-student-harness.md) to use this function in real runs with component evidence, crash recovery, and an integrated acceptance gate. The ordinary reference evaluation does not call this student helper.

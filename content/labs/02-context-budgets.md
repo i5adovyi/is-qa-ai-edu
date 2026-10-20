@@ -57,3 +57,7 @@ Add a provenance envelope containing article ID, revision, source label, retriev
 Deliver a context-allocation table with fixed policy allowance, evidence allowance, task data, and reserved response budget. Clearly state which numbers you measured and which you assumed.
 
 [Hints](hints/02.md) · [Solution discussion](solutions/README.md#lab-02) · [Next lab](03-tool-authority.md)
+
+## Connect it to the complete harness
+
+This lab teaches one component contract. After completing Labs 01–08, follow [Lab 11](11-complete-student-harness.md) to use this function in real runs with component evidence, crash recovery, and an integrated acceptance gate. The ordinary reference evaluation does not call this student helper.

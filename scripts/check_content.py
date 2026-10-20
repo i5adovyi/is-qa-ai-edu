@@ -58,6 +58,9 @@ def validate(root):
     for resource in resources:
         need(resource['url'].startswith('https://'), 'Invalid resource URL ' + resource['id'])
         need(resource['stage'] in range(1, 9), 'Invalid resource stage ' + resource['id'])
+    labs = sorted((root / 'content/labs').glob('[0-9][0-9]-*.md'))
+    need([p.name[:2] for p in labs] == [str(i).zfill(2) for i in range(1, 12)],
+         'Expected eleven unique numbered lab guides, 01 through 11')
     for folder in ['docs', 'templates', 'capstones', 'content', 'lab']:
         for path in (root / folder).rglob('*.md'):
             for target in re.findall(r'\[[^\]]+\]\(([^)]+)\)', path.read_text()):
@@ -74,7 +77,7 @@ def check():
     errors = validate(ROOT)
     if errors:
         raise SystemExit('\n'.join(errors))
-    print('Content checks passed: 24 lessons, actual exercise sections, quizzes, resource metadata, and local file/section links.')
+    print('Content checks passed: 24 lessons, actual exercise sections, 11 lab guides, quizzes, resource metadata, and local file/section links.')
 
 if __name__ == '__main__':
     check()

@@ -1,6 +1,6 @@
 # 09 · Package a skill that improves repeatable work
 
-Stage 3 · 90 minutes · Practitioner
+Stage 3 · 120 minutes · Practitioner
 
 Turn a successful Signal Desk procedure into a discoverable, testable skill with a clear activation boundary.
 
@@ -47,15 +47,15 @@ Write six requests that should activate the skill and six that should not. Inclu
 
 ## Exercise 2 · Build the package
 
-Create the skill directory in your own practice area with `SKILL.md`, a draft template and a short reference file. Add a deterministic local validator or a manual validation checklist. Run the procedure on three synthetic tickets using only those files. Optional model use: give the package to a compatible agent and record which files it reads.
+Complete [Lab 10: install and test a real skill](../labs/10-installed-skill.md). Inspect the supplied Signal Desk evidence-review package, then use the installer to copy it into a disposable `work/` workspace. Validate the package, start a fresh Codex session rooted there, and ask for an evidence review without naming the skill. Record whether the host discovers and selects it. Then test an unrelated task in a separate fresh session. If implicit selection fails, preserve that result before trying an explicit invocation.
 
-**Deliverable:** complete skill package and three output drafts. **Pass:** another learner can execute it without previous chat history; dependencies and expected outputs are explicit; no real external action is required.
+**Deliverable:** installed package inventory, host version, relevant discovery/read events, a real `review.json`, structural validation, and your independent semantic check. **Pass:** the output covers all three claims, cites supplied evidence, distinguishes unsupported from contradicted, and reports the untrusted source instruction. The unrelated task does not load the review procedure. If model access is unavailable, label installation validated and host behavior unverified; the supplied [recorded host evidence](../skill-practice/HOST-EVIDENCE.md) is an example, not a substitute for your own result.
 
-If you have a compatible assistant host, continue with the [skill integration checklist](../../docs/PRACTICE-MAP.md#operational-mcp-and-skills-extensions): install in the host's documented location, start a fresh session, and capture discovery, one triggered run, one non-trigger request and one missing-reference failure. Until those checks run, mark host integration unverified. The manual package exercise and actual host activation are separate evidence.
+After the first successful run, adapt the skill to a second synthetic packet and create two more review artifacts. Explain which invariant belongs in code and which judgment still needs the model and reviewer.
 
 ## Exercise 3 · Adversarial misuse
 
-Place an instruction to reveal unrelated local data inside a knowledge snippet. Add a ticket asking the skill to skip validation because the case is urgent. Run the procedure and document where both attempts are rejected. Then remove a referenced file and check that the skill reports the missing dependency instead of pretending completion.
+Place an instruction to reveal unrelated local data inside a knowledge snippet. Add a ticket asking the skill to skip validation because the case is urgent. Run the procedure and document where both attempts are rejected. Then rename a reference in a separate installed copy and run the real missing-dependency trial from Lab 10. Verify the host names the missing path and produces no successful review artifact. Restore the file and record a repaired run. Do not remove files from the original course package.
 
 **Deliverable:** three failure reports and repairs. **Pass:** source content cannot expand authority; urgency does not erase required checks; a missing dependency produces an actionable error.
 
@@ -71,5 +71,7 @@ What did packaging reveal that your original conversation had left implicit? Whi
 
 These optional primary sources were checked on 20 October 2026. The lesson and exercises are original; reading is supplementary. Product interfaces can change.
 
+- [OpenAI: Build skills](https://learn.chatgpt.com/docs/build-skills)
+- [OpenAI: Developer commands](https://learn.chatgpt.com/docs/developer-commands?surface=cli)
 - [Agent Skills: Format specification](https://agentskills.io/specification)
 - [Anthropic: Effective context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)

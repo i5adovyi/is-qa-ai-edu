@@ -27,33 +27,33 @@ All paths below start at the project root. Save learner artifacts under `work/`;
 | 04 packets, 05 retrieval | Own eight-note corpus; [Lab 02](../content/labs/02-context-budgets.md) packing helper | Recall calculation, source applicability and compression-loss ledger |
 | 06 memory | Handoff and memory ledger; preview [Lab 05](../content/labs/05-idempotency-and-recovery.md) recovery | Resume from artifact evidence; detect stale completion claims |
 | 07 tools | [Lab 01](../content/labs/01-data-boundaries.md) data helper and [Lab 03](../content/labs/03-tool-authority.md) permission helper | Invalid and cross-scope arguments rejected; limits of the helper explained |
-| 08 MCP | Three message fixtures and responsibility diagram | Request/result matching and unresolved outcomes; explicitly a simulator |
-| 09 skills | Complete `SKILL.md`, reference and template in `work/skills/` | Three drafts, trigger/non-trigger table and missing-dependency behavior |
+| 08 MCP | Message fixtures, then [Lab 09](../content/labs/09-real-mcp.md) SDK client/server | Real initialization, capability listing, request/result matching, invalid calls and disconnects |
+| 09 skills | Author a skill, then [Lab 10](../content/labs/10-installed-skill.md) installation and fresh-host practice | Separate installation, discovery and execution evidence; trigger/non-trigger and missing-reference behavior |
 | 10 task design, 11 verification, 12 review | [Development sandbox](../content/dev-sandbox/README.md), copied to `work/router-practice/` | One original failure, narrow patch, five passing checks, mutant failures and reviewed diff |
 | 13 loop, 14 recovery | Reference traces, [Lab 04](../content/labs/04-retries-and-budgets.md) schedule helper and [Lab 05](../content/labs/05-idempotency-and-recovery.md) key helper | Success, exhausted budget, interrupted write and one-effect replay |
 | 15 observability | Ten scripted traces, cost ledger, [Lab 07](../content/labs/07-traces-and-diagnosis.md) summary helper | Step/time stops, explicit cost reservations, complete event accounting |
 | 16 datasets, 17 graders, 18 release | [Lab 06](../content/labs/06-grounding-and-evaluation.md); authored rubric and cases | Frozen split, false acceptance/rejection counts, hard-gate decision |
 | 19 delegation, 20 coordination, 21 comparison | Two worker folders and one integration folder | Versions, stale/duplicate result handling, same-case baseline comparison |
 | 22 production, 23 incidents | Service contract and local rollback rehearsal | Explicit denominators, preserved pending work, incident regression |
-| 24 capstone clinic | Select [support](../capstones/01-support-agent.md), [QA](../capstones/02-qa-copilot.md) or [research](../capstones/03-research-workflow.md); [Lab 08](../content/labs/08-ship-an-evaluated-policy.md) for the support route | Proposal during the clinic; project evidence and common 40-point defense across weeks 10–12 |
+| 24 capstone clinic | Select [support](../capstones/01-support-agent.md), [QA](../capstones/02-qa-copilot.md) or [research](../capstones/03-research-workflow.md); [Lab 08](../content/labs/08-ship-an-evaluated-policy.md) for the support route | Proposal during the clinic; [Lab 11](../content/labs/11-complete-student-harness.md) for full component integration; project evidence and common 40-point defense across weeks 10–12 |
 
 ## What the executable labs actually connect
 
-Labs 01–07 are isolated helper exercises in `lab/student.py`. Their `practice` checks execute those functions, but editing them does **not** change the reference harness's context packing, permissions, backoff, storage or traces. Lab 08 connects only `build_decision` through `evaluate --policy student`. The reference harness has its own implementations of its controls.
+Labs 01–07 first teach isolated helpers in `lab/student.py`. Their `practice` checks execute those functions. The ordinary reference command, `python3 -m lab.cli demo`, continues to use the preserved reference implementations. Lab 08's `evaluate --policy student` injects the decision function only.
 
-Use two separate evidence claims: “my helper meets this contract” and “the reference run demonstrates this control.” Do not claim your helper caused a reference-run improvement. Integration is additional engineering work: add an explicit injection point, prove that the selected helper was called, compare its behavior with the original, then check the same failure scenarios. Preserve the reference path and declare which candidate was evaluated.
+[Lab 11](../content/labs/11-complete-student-harness.md) supplies the complete integration route. Its composed runner selects either your student components or a clearly labeled completed example. All eight functions participate in execution, and component evidence records which code ran. The completion gate includes helper contracts, task cases, failure scenarios and targeted integration probes. A blank student profile is supposed to fail; the completed example is for comparison.
 
-The [model bridge](../lab/model-bridge.md) addresses a different boundary: supplying captured or generated model decisions to the harness. It does not automatically integrate every helper or create a model-controlled tool-planning loop.
+The host retains mandatory schema, scope, approval and budget checks. The read-permission exercise does not silently become authority over every tool. Component identity is preserved across checkpoints so changing the selected code cannot masquerade as resuming the same experiment. Read the lab's seam table to distinguish student behavior from host enforcement.
 
-## Operational MCP and skills extensions
+The [model bridge](../lab/model-bridge.md) remains a separate route for replaying a saved model decision. A composed deterministic harness is not a live model or a model-selected tool loop. Combine claims only when you actually ran the corresponding integration.
 
-The course currently supplies an MCP-shaped simulation, not an installed MCP server. It supplies a skill-authoring exercise, not a verified installation for every assistant host. These are recommended next practical extensions after stage 3:
+## Real MCP and installed skills
 
-**MCP extension:** use the [official architecture guide](https://modelcontextprotocol.io/docs/learn/architecture) to choose a current SDK and supported local transport. Pin the SDK version; implement one read-only synthetic knowledge lookup; start a client and server; save initialization/capability, tool-list and tool-call evidence. Verify unknown-tool, malformed-argument, no-result and server-disconnect behavior. Pass only when another learner can run your documented command and match each accepted request to its result. No paid model is needed to test that protocol boundary. Keep the existing teaching simulator labeled accurately.
+[Lab 09](../content/labs/09-real-mcp.md) uses a pinned official MCP SDK with a real local client and server. The guide includes its Python requirement, isolated installation, request/result evidence, negative cases and failure handling. It makes no model calls. The earlier conceptual simulator remains useful for understanding message ownership, but it is no longer the only protocol exercise.
 
-**Skill extension:** choose one host you actually use and consult its current official skill-installation documentation. Install only your synthetic draft skill in the host's documented project or user location. Start a fresh session with no prior solution context. Capture one triggered run, one non-trigger request, and one missing-reference failure; record host version, discovered skill name, files used and saved artifact. A manually read folder proves procedural clarity; successful discovery and execution in a host proves that particular integration.
+[Lab 10](../content/labs/10-installed-skill.md) installs the supplied skill into a disposable repository workspace. It separates deterministic package checks from fresh-host discovery and behavior. Use the documented host procedure to capture triggered use, a non-trigger request and a missing-reference failure. Host access and authentication are required for that behavioral portion; do not award a host-integration pass merely because a folder validator passed.
 
-If either extension cannot run, preserve its design and mark operational verification pending. Do not award an integration pass from a diagram or the existence of a folder.
+The [integration route](INTEGRATION-LABS.md) gives the sequence, additional time budget and common evidence packet. This edition's actual SDK and host checks are recorded in [verification](VERIFICATION.md).
 
 ## Evidence before completion
 

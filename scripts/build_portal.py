@@ -8,14 +8,19 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'dist'
-DOWNLOAD_ASSETS = (
-    'content/resources.json',
-    'content/labs/solutions/reference.py',
-    'content/research/sources.json',
-    'content/research/cases.json',
-    'content/dev-sandbox/router.py',
-    'content/dev-sandbox/test_router.py',
-)
+DOWNLOAD_SUFFIXES = {'.py', '.json', '.txt', '.toml', '.yaml', '.yml', '.lock'}
+EXCLUDED_PARTS = {'runs', '__pycache__', '.venv', 'node_modules'}
+
+def downloadable_assets():
+    """Build an explicit allowlist from the distributed teaching sources."""
+    return sorted(
+        p.relative_to(ROOT).as_posix()
+        for folder in ('content', 'lab')
+        for p in (ROOT / folder).rglob('*')
+        if p.is_file() and p.suffix in DOWNLOAD_SUFFIXES
+        and not any(part in EXCLUDED_PARTS for part in p.relative_to(ROOT).parts)
+        and not p.is_symlink()
+    )
 
 def build():
     OUT.mkdir(exist_ok=True)
@@ -24,20 +29,25 @@ def build():
     docs = {}
     for folder in ['content', 'docs', 'templates', 'capstones', 'lab']:
         for p in sorted((ROOT/folder).rglob('*.md')):
-            if 'runs' in p.parts:
+            if any(part in EXCLUDED_PARTS for part in p.relative_to(ROOT).parts):
                 continue
             text = p.read_text()
             title = next((line.lstrip('# ').strip() for line in text.splitlines() if line.startswith('# ')), p.stem)
             path = p.relative_to(ROOT).as_posix()
             docs[path] = {'title': title, 'text': text, 'words': len(text.split())}
     docs['README.md'] = {'title':'Project README','text':(ROOT/'README.md').read_text()}
-    assets = [path for path in DOWNLOAD_ASSETS if (ROOT/path).is_file()]
+    assets = downloadable_assets()
     data = {'curriculum':curriculum,'resources':resources,'documents':docs,'assets':assets,'edition':'October 2026','built':'2026-10-20'}
     for name in ['index.html','style.css','app.js']:
         shutil.copyfile(ROOT/'portal'/name,OUT/name)
     (OUT/'data.js').write_text('window.ACADEMY = '+json.dumps(data,ensure_ascii=False).replace('</','<\\/')+';\n')
     for directory in ['content','docs','templates','capstones']:
-        shutil.copytree(ROOT/directory,OUT/directory,dirs_exist_ok=True)
+        shutil.copytree(ROOT/directory,OUT/directory,dirs_exist_ok=True,
+                        ignore=shutil.ignore_patterns(*EXCLUDED_PARTS, '*.pyc'))
+    for relative in assets:
+        destination = OUT / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / relative, destination)
     if (ROOT/'output/pdf/ai-engineering-fieldbook.pdf').exists():
         shutil.copyfile(ROOT/'output/pdf/ai-engineering-fieldbook.pdf',OUT/'fieldbook.pdf')
     subprocess.run([sys.executable, str(ROOT/'scripts/package_project.py')], check=True)

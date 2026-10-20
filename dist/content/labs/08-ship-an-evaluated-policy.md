@@ -4,7 +4,7 @@
 
 ## The problem
 
-You now have data handling, context selection, permissions, budgets, recovery, citations, and traces. The final exercise connects a student policy to the harness while preserving those boundaries.
+You now have data handling, context selection, permissions, budgets, recovery, citations, and traces. This exercise connects a student policy to the harness while preserving those boundaries. Its `--policy student` command substitutes only the decision function. Continue with [Lab 11](11-complete-student-harness.md) to wire all eight student functions into the complete harness and prove every seam is active.
 
 This is still a deterministic offline policy. After completing it, use the working [manual model bridge](../../lab/model-bridge.md) to export a request, ask any chat model for a JSON decision, and replay its answer through the same harness. No API key is needed; a labeled mock response also works offline. A live provider integration is a further extension described in the [adapter design brief](../../lab/provider-adapter-design.md).
 

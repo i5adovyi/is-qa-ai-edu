@@ -9,6 +9,9 @@ The editable source is this repository. The portal is generated into `dist/`; do
 - `content/resources.json`: curated external library.
 - `content/articles/`, `content/library/`: supporting reading.
 - `content/labs/`, `lab/`, `tests/`: practical assignments, the reference harness, and manual model-response bridge.
+- `lab/mcp_lab/`: real SDK client/server exercise with separately installed dependencies.
+- `content/skill-practice/`, `lab/skill_lab/`: installable teaching skill, synthetic inputs, and disposable-workspace tooling.
+- `lab/composed.py`: integrated student-component runner; preserve the ordinary reference CLI.
 - `content/research/`: synthetic source corpus and scored research examples.
 - `content/dev-sandbox/`: intentionally broken development exercise; its one baseline test failure is expected and isolated from reference checks.
 - `docs/`, `templates/`, `capstones/`: learner manuals and reusable project artifacts.
@@ -39,6 +42,10 @@ Open the primary destination, verify its title and relevance, and record the che
 ## Extend the harness
 
 Keep deterministic tests fast and offline. Add live providers behind an explicit adapter and opt-in command. Treat their outputs as untrusted proposals that must pass the same tool validation. Measure provider token use separately from local runtime steps. A simulated timeout does not test real process isolation; a production deployment needs appropriate cancellation and resource boundaries.
+
+Run the integration commands from labs 09–11 as separate release checks. The MCP SDK environment must be isolated from the dependency-free core. Skill package validation and host behavioral checks are different evidence; report both accurately. Changing component code or its selected profile invalidates a composed run's resume identity.
+
+The portal's asset allowlist is generated from teaching code and data under `content/` and `lab/`, excluding runtime/dependency directories. Keep personal outputs under `work/` or `.lab-runs/`; do not place credentials or learner transcripts in distributed source folders.
 
 ## Content rights and commercialization
 
