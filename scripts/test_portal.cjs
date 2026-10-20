@@ -1,4 +1,5 @@
-// Optional browser checks. Supply Playwright through NODE_PATH; start serve.py first.
+// Optional hosted-mode browser checks. Supply Playwright through NODE_PATH;
+// serve dist with a static HTTP server (see docs/MAINTENANCE.md).
 const { chromium } = require('playwright');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -40,7 +41,7 @@ const path = require('node:path');
  assert.match(await page.locator('#trace').textContent(),/1 drafts created/);
  await page.locator('#budget').fill('1');await page.locator('#sim-run').click();
  assert.match(await page.locator('#trace').textContent(),/budget exhausted/);
- await page.goto(base+'/#progress');assert.equal(await page.getByRole('link',{name:/Changing accounts/}).getAttribute('href'),'#doc=docs%2FACCOUNT-MIGRATION.md');assert.equal(await page.getByRole('link',{name:/Download portable academy/}).getAttribute('href'),'academy-portable.zip');await page.locator('[data-gate="1"]').check();
+ await page.goto(base+'/#progress');assert.equal(await page.getByRole('link',{name:/Using another account/}).getAttribute('href'),'#doc=docs%2FNEW-ACCOUNT.md');assert.equal(await page.getByRole('link',{name:/Download portable academy/}).getAttribute('href'),'academy-portable.zip');await page.locator('[data-gate="1"]').check();
  const exported=page.waitForEvent('download');await page.locator('#export').click();const dl=await exported;const file=await dl.path();const state=JSON.parse(fs.readFileSync(file,'utf8'));assert.deepEqual(state.done,['01']);assert.ok(state.gates.includes(1));
  const choosing=page.waitForEvent('filechooser');await page.locator('#import-progress').focus();await page.keyboard.press('Enter');
  const chooser=await choosing;await chooser.setFiles({name:'progress.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify({...state,done:['01','02'],notes:{...state.notes,'content/lessons/01-systems-before-agents.md':'A note from another device.'}}))});

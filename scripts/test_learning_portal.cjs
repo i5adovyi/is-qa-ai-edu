@@ -21,6 +21,8 @@ const path=require('node:path');
   assert.equal(await page.locator('#exercise-step option').count(),5);
   await page.locator('#exercise-attempt').fill('Ticket input → evidence retrieval. The ticket description crosses the boundary.');
   await page.locator('#save-attempt').click();
+  // Blur must not change the status paragraph height between pointer down/up.
+  assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('ai-engineering-academy-v1')).exercises['L01-E1'].history.filter(x=>x.kind==='attempt').length),1);
   await page.locator('#exercise-attempt').fill('Revision: include product version and observed symptoms with the ticket.');
   await page.locator('#exercise-artifacts').fill('worksheet.txt; manually reviewed at first checkpoint');
   await page.locator('#exercise-minutes').fill('12');

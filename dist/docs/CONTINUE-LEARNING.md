@@ -2,6 +2,8 @@
 
 Paste the text below into the assistant you will use next, with access to this repository. Attach your exported progress JSON only if you want that assistant to review those private records.
 
+For a different Codex account, follow [Open this project with a new account](NEW-ACCOUNT.md). The local portal saves learning records to a separate [SQLite database](LOCAL-DATA.md); it does not store them in the conversation or GitHub. Export your latest record from the portal when you want a new tutor to review it.
+
 ---
 
 I am studying this AI Engineering Academy. Help me learn prompting, context engineering, tools, MCP, reusable skills, coding agents, harness engineering, evaluation, and agent coordination through this course.

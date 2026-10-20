@@ -32,25 +32,26 @@ function academy() {
   };
 }
 
-function portal() {
-  const nodes = {}, handlers = {}, storage = {};
+function portal(options={}) {
+  const nodes = {}, handlers = {}, storage = options.storage||{};
   const context = vm.createContext({
     window: {ACADEMY: academy(), scrollTo() {}, addEventListener() {}},
     document: {
       title: '',
       querySelector: selector => nodes[selector] ||= {
-        innerHTML: '', textContent: '', style: {}, focus() {}, click() {this.clicked = true;},
+        innerHTML: '', textContent: '', style: {}, dataset: {}, focus() {}, click() {this.clicked = true;},
       },
       querySelectorAll: () => [],
       getElementById: () => null,
       addEventListener: (kind, callback) => {handlers[kind] = callback;},
     },
-    localStorage: {getItem: key => storage[key] || null, setItem: (key, value) => {storage[key] = value;}},
-    location: {hash: '#overview'},
-    URLSearchParams, setTimeout: () => 0, clearTimeout() {},
+    localStorage: {getItem: key => storage[key] || null, setItem: (key, value) => {storage[key] = value;}, removeItem:key=>{delete storage[key]},key:i=>Object.keys(storage)[i],get length(){return Object.keys(storage).length}},
+    location: {hash: '#overview',...(options.location||{})},
+    ...(options.fetch?{fetch:options.fetch}:{}),
+    URLSearchParams, TextEncoder, setTimeout: () => 0, clearTimeout() {},
   });
   vm.runInContext(fs.readFileSync(path.join(ROOT, 'portal/app.js'), 'utf8'), context);
-  return {run: code => vm.runInContext(code, context), nodes, handlers, context};
+  return {run: code => vm.runInContext(code, context), nodes, handlers, context,storage};
 }
 
 test('solution code resolves to a whitelisted existing distribution asset', () => {
@@ -350,11 +351,170 @@ test('run-anywhere route distinguishes local and hosted copies without changing 
   assert.match(p.nodes['#main'].innerHTML,/You are using the local academy/);
   assert.match(p.nodes['#main'].innerHTML,/python3 academy.py local/);
   assert.match(p.nodes['#main'].innerHTML,/academy-portable.zip/);
-  assert.match(p.nodes['#main'].innerHTML,/Export before switching/);
+  assert.match(p.nodes['#main'].innerHTML,/Export and import JSON/);
   assert.match(p.nodes['#nav'].innerHTML,/Run anywhere/);
   p.context.location.hostname='signal-desk-ai-engineering-academy.igor-sadovyi87.chatgpt.site';
   p.run('render()');
   assert.match(p.nodes['#main'].innerHTML,/You are using the OpenAI-hosted academy/);
   assert.equal(p.run("state.notes['lesson-note']"),'Keep my learning record');
   assert.doesNotMatch(p.nodes['#main'].innerHTML,/incident-debrief|requested-hint/);
+});
+
+const tick=()=>new Promise(resolve=>setImmediate(resolve));
+function localServer(){
+ const store={state:null,revision:0,databaseId:'test-db',databasePath:'/private/test/progress.sqlite3',puts:[],fail:false};
+ store.fetch=async (url,options={})=>{
+  assert.equal(url,'/api/local-state');
+  if(options.method==='PUT'){
+   if(store.fail)throw Error('Connection lost');
+   assert.equal(options.headers['X-Academy-Token'],'token');
+   const body=JSON.parse(options.body);store.puts.push(body);
+   if(body.revision!==store.revision)return {ok:false,status:409};
+   store.state=body.state;store.revision++;
+   return {ok:true,status:200,json:async()=>({revision:store.revision})};
+  }
+  return {ok:true,status:200,json:async()=>({kind:'academy-local',databaseId:store.databaseId,databasePath:store.databasePath,revision:store.revision,state:store.state&&JSON.parse(JSON.stringify(store.state)),csrfToken:'token'})};
+ };
+ return store;
+}
+async function localPortal(server,options={}){
+ const p=portal({...options,location:{hostname:'127.0.0.1',hash:'#overview',...(options.location||{})},fetch:server.fetch});
+ await tick();return p;
+}
+
+test('hosted pages never probe or send progress to the local API',async()=>{
+ const p=portal({location:{hostname:'academy.example'},fetch:()=>{throw Error('Must not call API')}});
+ p.run("state.notes.example='Hosted-only note';save()");
+ assert.equal(p.run('persistence.mode'),'browser');assert.equal(p.run('saveStatusText()'),'Saved in this browser');
+ assert.equal(p.run("JSON.parse(localStorage.getItem(KEY)).notes.example"),'Hosted-only note');
+});
+
+test('local startup blocks editing until the database response is validated',async()=>{
+ const server=localServer();let resolve;
+ const p=portal({location:{hostname:'127.0.0.1'},fetch:()=>new Promise(r=>{resolve=r})});
+ assert.equal(p.run('storageLocked()'),true);assert.match(p.nodes['#main'].innerHTML,/Connect your saved work first/);
+ const button={id:'mark-done',dataset:{id:'01'}};
+ p.handlers.click({target:{closest:s=>s==='button'?button:null}});
+ assert.equal(p.run('state.done.length'),0);
+ resolve(await server.fetch('/api/local-state'));await tick();
+ assert.equal(p.run('persistence.mode'),'local');assert.equal(p.run('storageLocked()'),false);
+});
+
+test('committed local state restores all learning fields in a fresh browser with no cache',async()=>{
+ const server=localServer(),p=await localPortal(server);
+ p.run("state.notes.example='Retained note';state.done=['01'];state.onboarding=['diagram'];state.quiz['01']=1;state.exercises['L01-E1']=blankRecord(getActivity('L01-E1'));state.exercises['L01-E1'].draft.attempt='A draft before saving history';state.exercises['L01-E1'].draft.misconception='Context boundaries';addRetention(getActivity('L01-E1'),state.exercises['L01-E1']);save()");
+ await tick();await p.run('flushLocal()');
+ assert.equal(p.run('saveStatusText()'),'Saved locally in SQLite');
+ const restored=await localPortal(server);
+ assert.deepEqual(JSON.parse(restored.run('JSON.stringify(state)')),JSON.parse(p.run('JSON.stringify(state)')));
+ assert.equal(restored.run('state.retention.length'),1);assert.equal(restored.run("state.exercises['L01-E1'].draft.attempt"),'A draft before saving history');
+});
+
+test('legacy browser migration requires a choice, preserves both conflicting notes, and provides recovery copies',async()=>{
+ const server=localServer(),base=portal();server.state=JSON.parse(base.run('JSON.stringify(fresh())'));server.state.notes.example='Database observation';server.revision=3;
+ const old={...server.state,notes:{example:'Older browser observation'}};
+ const p=await localPortal(server,{storage:{'ai-engineering-academy-v1':JSON.stringify(old)}});
+ assert.equal(p.run('persistence.mode'),'conflict');assert.equal(server.puts.length,0);
+ p.run("handleStorageClick({id:'storage-merge',dataset:{}})");await tick();
+ assert.match(server.state.notes.example,/Database observation/);assert.match(server.state.notes.example,/Older browser observation/);
+ assert.ok(p.run('recoveries.length')>=2);assert.equal(p.run('persistence.mode'),'local');
+});
+
+test('a stale tab cannot overwrite newer work and explicit merge keeps both drafts',async()=>{
+ const server=localServer(),first=await localPortal(server),second=await localPortal(server);
+ first.run("state.exercises['L01-E1']=blankRecord(getActivity('L01-E1'));state.exercises['L01-E1'].draft.attempt='First browser draft';save()");await tick();
+ second.run("state.exercises['L01-E1']=blankRecord(getActivity('L01-E1'));state.exercises['L01-E1'].draft.attempt='Second browser draft';save()");await tick();
+ assert.equal(second.run('persistence.mode'),'conflict');assert.equal(server.state.exercises['L01-E1'].draft.attempt,'First browser draft');
+ second.run("handleStorageClick({id:'storage-merge',dataset:{}})");await tick();
+ assert.equal(server.state.exercises['L01-E1'].draft.attempt,'First browser draft');
+ assert.ok(server.state.exercises['L01-E1'].history.some(x=>x.kind==='imported-draft'&&x.attempt==='Second browser draft'));
+ assert.equal(second.run('saveStatusText()'),'Saved locally in SQLite');
+});
+
+test('failed writes remain visibly unsaved, survive reload as pending recovery, and save only after reconciliation',async()=>{
+ const server=localServer(),p=await localPortal(server);server.fail=true;
+ p.run("state.notes.example='Do not lose this uncommitted draft';save()");await tick();
+ assert.match(p.run('saveStatusText()'),/Unsaved/);assert.equal(server.state,null);
+ const reloaded=await localPortal(server,{storage:p.storage});
+ assert.equal(reloaded.run('persistence.mode'),'conflict');assert.equal(reloaded.run('state.notes.example'),'Do not lose this uncommitted draft');
+ server.fail=false;reloaded.run("handleStorageClick({id:'storage-merge',dataset:{}})");await tick();
+ assert.equal(server.state.notes.example,'Do not lose this uncommitted draft');assert.equal(reloaded.run('saveStatusText()'),'Saved locally in SQLite');
+});
+
+test('local writes are serialized and edits made during a write are included in the next revision',async()=>{
+ const server=localServer(),originalFetch=server.fetch;let release;
+ server.fetch=async(url,options)=>{if(options.method==='PUT'&&!release)await new Promise(r=>{release=r});return originalFetch(url,options)};
+ const p=await localPortal(server);p.run("state.notes.example='First';save()");p.run("state.notes.example='Last';save()");
+ assert.match(p.run('saveStatusText()'),/Saving/);release();await tick();await p.run('flushLocal()');
+ assert.equal(server.puts.length,2);assert.deepEqual(server.puts.map(x=>x.revision),[0,1]);assert.equal(server.state.notes.example,'Last');
+});
+
+test('static preview explicitly reports browser-only storage; server failure never reports a database save',async()=>{
+ const p=portal({location:{hostname:'localhost'},fetch:async()=>({ok:false,status:404})});await tick();
+ assert.equal(p.run('persistence.mode'),'browser');assert.match(p.nodes['#storage-notice'].innerHTML,/Static preview/);
+ p.run("state.notes.example='Static preview';save()");assert.match(p.run('saveStatusText()'),/browser/);
+ const broken=portal({location:{hostname:'localhost'},fetch:async()=>{throw Error('Offline')}});await tick();
+ assert.equal(broken.run('persistence.mode'),'unavailable');assert.equal(broken.run('storageLocked()'),true);assert.doesNotMatch(broken.run('saveStatusText()'),/Saved locally/);
+});
+
+test('a prepared new-account copy points to publishing instructions and not the old Site',()=>{
+ const p=portal();p.run('A.runtime.hostedUrl=null');
+ assert.match(p.run('runAnywhere()'),/Publish in your new OpenAI account/);
+ assert.doesNotMatch(p.run('runAnywhere()'),/href="null|href="#\/|signal-desk-ai-engineering-academy/);
+});
+
+test('reconciling a recovered tab copy never removes a newer pending draft from that live tab',async()=>{
+ const server=localServer(),first=await localPortal(server);server.fail=true;
+ first.run("state.notes.example='Original pending draft';save()");await tick();
+ const second=await localPortal(server,{storage:first.storage});assert.equal(second.run('persistence.mode'),'conflict');
+ first.run("state.notes.example='Newer pending draft from the still-open tab';save()");await tick();
+ const firstKey=first.run('TAB_CACHE');assert.match(first.storage[firstKey],/Newer pending draft/);
+ server.fail=false;second.run("handleStorageClick({id:'storage-merge',dataset:{}})");await tick();
+ assert.match(first.storage[firstKey],/Newer pending draft/);
+ const third=await localPortal(server,{storage:first.storage});assert.equal(third.run('persistence.mode'),'conflict');assert.match(third.run('JSON.stringify(state)'),/Newer pending draft/);
+});
+
+test('independent tabs retain immutable recovery archives rather than replacing a shared array',async()=>{
+ const server=localServer(),one=await localPortal(server),two=await localPortal(server,{storage:one.storage});
+ one.run("state.notes.example='First archived draft';archiveRecovery(state,'First tab')");
+ two.run("state.notes.example='Second archived draft';archiveRecovery(state,'Second tab')");
+ const reloaded=await localPortal(server,{storage:one.storage});
+ assert.equal(reloaded.run("recoveries.filter(x=>x.label==='First tab'||x.label==='Second tab').length"),2);
+ assert.match(reloaded.run('JSON.stringify(recoveries)'),/First archived draft/);assert.match(reloaded.run('JSON.stringify(recoveries)'),/Second archived draft/);
+});
+
+test('a valid database-sized progress export above the old 5 MB limit can be reimported',async()=>{
+ const p=portal();const text=p.run("JSON.stringify({...fresh(),notes:{example:'x'.repeat(5100000)}})");
+ const input={id:'import',dataset:{},files:[{size:Buffer.byteLength(text),text:async()=>text}],value:'selected'};
+ await p.handlers.change({target:input});assert.equal(p.run('state.notes.example.length'),5100000);
+ assert.equal(input.value,'');
+});
+
+test('import validates the final merged UTF-8 request size before changing current work',async()=>{
+ const p=portal();p.run("state.notes.current='Current observation'");
+ const text=p.run("JSON.stringify({...fresh(),notes:{large:'中'.repeat(3000000)}})");
+ await p.handlers.change({target:{id:'import',dataset:{},files:[{size:Buffer.byteLength(text),text:async()=>text}],value:'selected'}});
+ assert.equal(p.run('state.notes.current'),'Current observation');assert.equal(p.run('state.notes.large'),undefined);
+ assert.match(p.nodes['#toast'].textContent,/8 MiB/);
+});
+
+test('indented setup fences keep new-account clone and launch commands on separate preformatted lines',()=>{
+ const p=portal();
+ const html=p.run("markdown(A.documents['docs/NEW-ACCOUNT.md'].text,'docs/NEW-ACCOUNT.md')");
+ assert.match(html,/<pre><code>[^<]*git clone[^<]*\n[^<]*cd is-qa-ai-edu[^<]*<\/code><\/pre>/);
+ const escaped=p.run("markdown('1. Example\\n\\n   ```sh\\n   echo <safe>\\n   pwd\\n   ```','docs/NEW-ACCOUNT.md')");
+ assert.match(escaped,/<pre><code>   echo &lt;safe&gt;\n   pwd<\/code><\/pre>/);
+ assert.doesNotMatch(escaped,/<safe>/);
+});
+
+test('restoring an older database or changing content at the same revision preserves newer browser work for reconciliation',async()=>{
+ for(const restoredRevision of [5,10]){
+  const server=localServer(),baseline=portal();server.state=JSON.parse(baseline.run('JSON.stringify(fresh())'));server.state.notes.example='Older restored database copy';server.revision=restoredRevision;
+  const newer={...server.state,notes:{example:'Newer previously committed browser copy'}};
+  const storage={'ai-engineering-academy-v1-local-cache':JSON.stringify({databaseId:server.databaseId,revision:10,pending:false,state:newer})};
+  const p=await localPortal(server,{storage});assert.equal(p.run('persistence.mode'),'conflict');assert.equal(server.puts.length,0);
+  assert.equal(p.run('state.notes.example'),'Newer previously committed browser copy');
+  p.run("handleStorageClick({id:'storage-merge',dataset:{}})");await tick();
+  assert.match(server.state.notes.example,/Newer previously committed/);assert.match(server.state.notes.example,/Older restored/);
+ }
 });

@@ -10,3 +10,13 @@ tmp/
 !.env.example
 *.zip
 .lab-runs/
+.academy-data/
+*.sqlite
+*.sqlite3
+*.sqlite-*
+*.sqlite3-*
+*.db
+*.db-*
+academy-progress*.json
+academy-recovery*.json
+academy-*-progress*.json

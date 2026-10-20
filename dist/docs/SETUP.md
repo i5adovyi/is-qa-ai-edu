@@ -51,7 +51,9 @@ The launcher builds the portal and opens [the local portal](http://127.0.0.1:876
 
 Rebuild after editing lesson or portal source, then reload the page. Do not open `portal/index.html` directly or edit generated files under `dist/`.
 
-The hosted portal and each local port have separate browser progress. Use **Export my progress** before switching, then **Import progress** at the destination. The ZIP and Git repository do not contain your browser notes. Keep an exported backup.
+The local launcher stores progress in `.academy-data/progress.sqlite3`, shared by sessions using this project even across ports or browsers. Watch the portal's save status before closing it. Hosted portals keep separate browser progress. Use **Export my progress** before switching between hosted/local copies, then **Import progress** at the destination. The ZIP and Git repository do not contain your notes or database. Read [local data and backups](LOCAL-DATA.md).
+
+To use the project in Codex under another OpenAI account or publish a separate Site owned by that account, follow [NEW-ACCOUNT.md](NEW-ACCOUNT.md). Keep the original project and data folder when changing logins.
 
 ## 5. Keep your evidence
 

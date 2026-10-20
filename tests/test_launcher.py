@@ -24,7 +24,7 @@ class LauncherTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name) / "course with spaces"
         self.root.mkdir()
-        for name in ("academy.py", "academy.json"):
+        for name in ("academy.py", "academy_local.py", "academy.json"):
             shutil.copyfile(ROOT / name, self.root / name)
         (self.root / "dist").mkdir()
         for name in ("index.html", "app.js", "data.js", "style.css"):
@@ -108,6 +108,7 @@ class LauncherTests(unittest.TestCase):
         with ZipFile(BytesIO(data)) as archive:
             names = archive.namelist()
             self.assertIn("ai-engineering-academy-portable/academy.py", names)
+            self.assertIn("ai-engineering-academy-portable/academy_local.py", names)
             self.assertIn("ai-engineering-academy-portable/academy.json", names)
             self.assertNotIn("ai-engineering-academy-portable/private-note.txt", names)
             extracted = Path(self.temp.name) / "roundtrip"

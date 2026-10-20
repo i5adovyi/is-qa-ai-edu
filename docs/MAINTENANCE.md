@@ -22,6 +22,9 @@ The editable source is this repository. The portal is generated into `dist/`; do
 - `docs/`, `templates/`, `capstones/`: learner manuals and reusable project artifacts.
 - `portal/`: interface source.
 - `academy.py`, `academy.json`: shared local/hosted launcher and canonical hosted/GitHub URLs. Both source and portable packages include them; legacy server commands delegate to this launcher.
+- `academy_local.py`, `.academy-data/`: local SQLite persistence and the ignored default learner data directory. Never distribute its database, sidecars, or backups.
+- `AGENTS.md`: tutor and maintainer instructions for opening the project in a new Codex session/account.
+- `scripts/prepare_new_site.py`: creates a separate publication copy with a fresh hosting manifest and no hosted URL; actual registration happens through Sites in the target account.
 - `scripts/`: build, serving, packaging, and content validation.
 - `work/`: your private experiment outputs, intentionally excluded from distribution.
 
@@ -34,12 +37,14 @@ python3 -m unittest discover -s tests
 node --test tests/test_portal.cjs
 python3 scripts/check_content.py
 python3 scripts/build_portal.py
-python3 scripts/serve.py
+python3 -m http.server 8792 --bind 127.0.0.1 --directory dist
 ```
 
-Open overview, a lesson, a lab, the library, and a manual. Check keyboard navigation, narrow screens, quiz feedback, saved notes, progress export, and import. Browser storage is local to its origin; a local preview and hosted portal do not share progress. Export and import JSON to transfer it. Browser data can be erased; keep backups.
+Open overview, a lesson, a lab, the library, and a manual. Check keyboard navigation, narrow screens, quiz feedback, saved notes, progress export, and import. Use an isolated temporary `--data-dir` for maintainer checks; do not overwrite a learner's profile. Verify local database save/reload, a server restart, and conflict/error handling. Hosted browser storage is local to its origin; local databases and hosted portals do not share progress. Export/import JSON to transfer records, and use the database backup command for local recovery.
 
-With the local server running and Playwright available, run `node scripts/test_portal.cjs` for interactions and `node scripts/audit_portal.cjs` for every document, internal link, quiz answer, downloadable asset, and mobile document layout. `ACADEMY_BROWSER_PATH` selects an installed browser executable. When testing another checkout, set `ACADEMY_TEST_URL` to its server and `ACADEMY_DIST_DIR` to its matching `dist/`; the audit compares download hashes with that exact build.
+The static test server above deliberately uses browser storage, matching hosted behavior; its visible static-preview notice is expected. With that server running and Playwright available, set `ACADEMY_TEST_URL=http://127.0.0.1:8792`, then run `node scripts/test_portal.cjs` for interactions and `node scripts/audit_portal.cjs` for every document, internal link, quiz answer, downloadable asset, and mobile document layout. `ACADEMY_BROWSER_PATH` selects an installed browser executable. When testing another checkout, set `ACADEMY_TEST_URL` to its server and `ACADEMY_DIST_DIR` to its matching `dist/`; the audit compares download hashes with that exact build.
+
+Run `node scripts/test_local_progress.cjs` separately for actual SQLite browser behavior. It starts its own launcher with a temporary data directory, so the check does not write into a learner's default database. Python discovery includes real HTTP/database tests, backup restoration, new-account preparation, and source-distribution privacy checks.
 
 Also run `node scripts/test_learning_portal.cjs` for the exercise workspace, spoiler protection, v1 progress migration, feedback history, import conflicts, recall, and narrow-screen behavior. The v2 progress schema must preserve original attempts; do not silently overwrite a learner's history on import.
 
@@ -48,6 +53,10 @@ Run `node scripts/test_incident_portal.cjs` for incident attempt gates, progress
 The GitHub Actions workflow runs core and optional MCP checks with no model credentials. Live Codex/provider calls are deliberately explicit local checks. Record CI execution separately from a locally passing workflow command.
 
 The [Run anywhere guide](RUN-ANYWHERE.md) separates local startup, private GitHub source updates, and OpenAI Sites publication. `python3 academy.py local` rebuilds source copies and serves only `dist/` on loopback; `python3 academy.py hosted` opens the existing hosted copy. A GitHub push does not by itself deploy Sites.
+
+The [new-account guide](NEW-ACCOUNT.md) explains fresh publication identities. `scripts/prepare_new_site.py` uses the same source allowlist as source ZIP packaging, excludes the original `.openai` identity, then writes only a new static manifest and sets `hostedUrl` to `null`. Keep nullable URL handling in the launcher and portal: an unpublished copy must not send a learner to the previous account's Site. New-account exports must refuse existing destinations and leave the original source/data unchanged. `tests/test_new_site.py` checks these boundaries and failure paths.
+
+The [local data guide](LOCAL-DATA.md) documents persistence and backup/restore. Database updates use revisions to reject stale overwrites. Do not replace a corrupt database automatically, silently downgrade failed saves to browser-only success, or put local persistence endpoints into the static hosted bundle as if it had a server.
 
 Launcher checks are included in Python discovery (`tests/test_launcher.py`). They cover source/portable startup from a different directory, legacy commands, occupied/invalid ports, missing files, build failures, serving only the built directory, and an extract/run/download round trip. An extracted portable copy regenerates its portable ZIP download in memory from the course assets; it does not package arbitrary files from the learner's directory. Run `node scripts/test_run_anywhere.cjs` for the mode selector, links, portable download, progress navigation and mobile layout.
 

@@ -1,10 +1,10 @@
 # Keep learning after changing OpenAI accounts
 
-Your course files and Python labs do not require this OpenAI account. Your private GitHub repository is controlled by GitHub access. The hosted Sites portal has a separate OpenAI access policy, and browser progress is stored separately from both.
+Your course files and Python labs do not require this OpenAI account. Your private GitHub repository is controlled by GitHub access. The hosted Sites portal has a separate OpenAI access policy. The local launcher stores progress in SQLite on your computer; hosted progress stays in browser storage.
 
 ## Before signing out
 
-1. Open the portal's progress page and **Export progress**. Save the JSON file somewhere you control. It contains attempts, feedback, drafts, notes, recall history, and route preferences. Keep it private; do not commit it to the course repository.
+1. Open the portal's progress page and **Export progress**. Save the JSON file somewhere you control. It contains attempts, feedback, drafts, notes, recall history, and route preferences. Keep it private; do not commit it to the course repository. For a local profile, also run `python3 academy.py backup --output ../academy-progress-backup.sqlite3` with a new output name.
 2. Download the source ZIP and PDF, or keep your clone of [the private repository](https://github.com/i5adovyi/is-qa-ai-edu). The release also provides a portable portal bundle containing the already-built website.
 3. Keep the [new tutor handoff](CONTINUE-LEARNING.md). It preserves how you want to learn, but is not a copy of the conversation or your browser records.
 4. If you need the hosted portal with the new account, arrange access for that exact account email before signing out. An invitation must be accepted and verified while signed in as the new account. Access does not transfer ownership, subscription benefits, chat history, or connected-app credentials.
@@ -21,7 +21,7 @@ python3 academy.py local
 
 On Windows, use `py -3` instead of `python3` if that is how Python is installed. Leave the server terminal open and visit the printed URL. Stop it with Ctrl+C.
 
-The server listens only on your computer at `http://127.0.0.1:8765`. It does not sign in to OpenAI or publish a website. Use the same address and port each time so the browser can find its saved progress. If that port is busy, `--port 8766` uses another origin; import your progress backup there.
+The server listens only on your computer at `http://127.0.0.1:8765`. It does not sign in to OpenAI or publish a website. Reuse the same project/data directory to continue from its SQLite records, even if you switch accounts or browsers. If the port is busy, `--port 8766` uses the same database. See [local data and recovery](LOCAL-DATA.md).
 
 For the ready-built portable bundle, extract it and run:
 
@@ -37,12 +37,12 @@ On the local portal, open Progress and import the JSON you exported. Check one s
 
 Sign in to GitHub with the account that can read the private repository. If using a GitHub connector from the new OpenAI account, connect it again and grant that repository explicitly. A working local Git clone and GitHub permission do not automatically configure the new OpenAI connector.
 
-You can also open the local project directory in Codex and paste [the handoff](CONTINUE-LEARNING.md). Local files remain on disk when an OpenAI account changes. Back them up independently of any application login.
+You can also open the local project directory in Codex and paste [the handoff](CONTINUE-LEARNING.md). The root `AGENTS.md` supplies tutor and maintainer instructions. Local files remain on disk when an OpenAI account changes. Back them up independently of any application login. Follow the complete [new-account setup](NEW-ACCOUNT.md) to reconnect GitHub, open the project, and prepare a separately owned Site.
 
 ## Hosted access after the change
 
 The original account remains the Site owner unless a supported ownership transfer is actually completed. Viewer access lets the next account use the portal, but is not a promise that it can administer or republish that Site.
 
-If the original account becomes unavailable, use the local/GitHub copy. A new Site can be published from the source under the new account if that account has Sites access. It will have its own identity and URL. Preserve the old hosting identity until deliberately preparing a new Site; do not overwrite it as a shortcut.
+If the original account becomes unavailable, use the local/GitHub copy. A new Site can be published from the source under the new account if that account has Sites access. It will have its own identity and URL. Prepare it with `python3 scripts/prepare_new_site.py --destination ../academy-new-account`, then follow [NEW-ACCOUNT.md](NEW-ACCOUNT.md). The original hosting identity remains unchanged; the prepared copy starts with no project ID or hosted URL.
 
-Browser data is tied to its origin and browser profile, not automatically to your OpenAI account. Signing in elsewhere, opening a new Site URL, or clearing browser storage may give you an empty record until you import your backup.
+Hosted browser data is tied to its origin and browser profile, not automatically to your OpenAI account. Signing in elsewhere, opening a new Site URL, or clearing browser storage may give you an empty record until you import your backup. A fresh local clone also needs an import or restored database; GitHub does not hold your personal learning records.

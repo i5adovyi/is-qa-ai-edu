@@ -10,7 +10,9 @@ Use the [private OpenAI-hosted academy](https://signal-desk-ai-engineering-acade
 python3 academy.py local
 ```
 
-This builds from source and opens `http://127.0.0.1:8765/`. The same command works in the ready-built portable ZIP. `python3 academy.py hosted` opens the hosted copy instead. See [Run anywhere](docs/RUN-ANYWHERE.md) for Windows, ports, progress transfer, GitHub updates, and OpenAI Sites publishing.
+This builds from source and opens `http://127.0.0.1:8765/`. Local attempts, notes, and progress are saved between sessions in `.academy-data/progress.sqlite3`. The same command works in the ready-built portable ZIP. `python3 academy.py hosted` opens the configured hosted copy instead. See [Run anywhere](docs/RUN-ANYWHERE.md) for Windows, ports, progress transfer, GitHub updates, and OpenAI Sites publishing.
+
+**Using another OpenAI account?** Open this same folder in Codex after signing in to that account. Follow [NEW-ACCOUNT.md](docs/NEW-ACCOUNT.md) for the tutor handoff, GitHub reconnection, and preparing a separate private Site owned by that account. The local project and database work independently of OpenAI login. Follow [LOCAL-DATA.md](docs/LOCAL-DATA.md) to back up or move personal progress.
 
 1. Follow [fresh-copy setup](docs/SETUP.md) to get the files, run the demo and checks, and open the local portal.
 2. Continue with [START HERE](docs/START-HERE.md), including the first 90-minute session. Keep the portal server running in its terminal and use another terminal for exercises.
@@ -24,7 +26,7 @@ Python 3.9+ is supported (tested here with Python 3.9.6). The portal builder and
 - Six incident exercises and one capstone incident, with disposable local workspaces, conflicting evidence, transfer variants, and hints/debriefs unlocked after a recorded attempt.
 - Original articles, learner manuals, reusable engineering templates, and three substantial capstone briefs.
 - A curated library of courses, books, documentation, papers, and videos, with practical follow-up tasks.
-- A local learning portal with beginner preparation, 72 exercise workspaces, 72 applied checks, progressive hints, attempt/feedback history, tutor packets, recall practice, notes, bookmarks, and JSON progress export/import.
+- A local learning portal with beginner preparation, 72 exercise workspaces, 72 applied checks, progressive hints, attempt/feedback history, tutor packets, recall practice, notes, bookmarks, SQLite persistence, and JSON progress export/import.
 - An original PDF fieldbook and a downloadable source archive.
 
 See the [practice map](docs/PRACTICE-MAP.md) for prerequisites and lesson-to-lab links. To try your current chat model without an API integration, follow the [model response bridge](lab/model-bridge.md).
@@ -56,6 +58,8 @@ Quick reference for an existing setup. The local server stays running until Ctrl
 
 ```sh
 python3 academy.py local
+python3 academy.py backup --output ../academy-progress-backup.sqlite3
+python3 scripts/prepare_new_site.py --destination ../academy-new-account
 python3 -m lab.cli demo
 python3 -m lab.cli evaluate --split train
 python3 -m lab.composed evaluate --components completed --split all

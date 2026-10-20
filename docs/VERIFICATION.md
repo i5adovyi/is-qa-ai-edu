@@ -1,6 +1,19 @@
 # Verification record for the October 2026 academy release
 
-Checked 20 October 2026. The run-anywhere revision below is the latest verification. Earlier incident and learning-release observations are retained afterward for provenance. Earlier findings remain in the [student audit](STUDENT-AUDIT.md) and [learning experience review](LEARNING-EXPERIENCE-REVIEW.md); the [implementation record](LEARNING-EXPERIENCE-IMPLEMENTATION.md) maps the preceding eight review workstreams.
+Checked 20 October 2026. The local-database and account-handoff revision below is the latest verification. Earlier observations are retained afterward for provenance; their browser-only storage descriptions refer to earlier releases or hosted mode. Earlier findings remain in the [student audit](STUDENT-AUDIT.md) and [learning experience review](LEARNING-EXPERIENCE-REVIEW.md); the [implementation record](LEARNING-EXPERIENCE-IMPLEMENTATION.md) maps the preceding eight review workstreams.
+
+## Local database and new-account revision: executed checks
+
+The [new-account workflow](NEW-ACCOUNT.md) separates opening the existing source in Codex from preparing a new private Site. [Local records](LOCAL-DATA.md) now persist in SQLite; hosted records remain in browser storage with explicit JSON transfer.
+
+- Python 3.9.6 full suite: **226 discovered, 215 passed, 11 optional MCP skips**. The new checks exercise real HTTP/database writes, stale revisions, server restarts and changed ports, consistent backup/restore, invalid requests, corrupt-database preservation, new-account exports, and private-data exclusions.
+- Portal unit suite: **42 passed**. New cases cover serialized writes, startup barriers, failed saves, deliberate reconciliation, independent recovery copies, restored older databases, large progress imports, hosted/static behavior, and unpublished Site configuration.
+- The original portal, learning workflow, incident workflow, and Run anywhere browser suites passed. The learning suite exposed a blur-time status change that moved the save button between pointer down and pointer up; the status update is now consistent, and the test checks the first saved attempt immediately.
+- The isolated SQLite browser suite passed saved drafts/history/notes/completion, a fresh browser context, conflicting tabs, failed-write recovery, a real server restart on a different port, static fallback, and mobile layout. The exhaustive audit covered **141 documents and Markdown downloads, 428 internal link occurrences, 170 distinct internal links, all 96 quiz choices, eight stages, 70 assets, and every document at mobile width**, with zero page errors.
+- Both source and portable ZIPs were extracted separately. Each served all six tested assets/downloads, saved a synthetic learning record, restored it after a process restart on another port, and restored a live-created SQLite backup into a separate data directory. The extracted source successfully prepared a new-account copy with a fresh hosting manifest, no old hosted URL or learner database, and working local startup.
+- The fieldbook was regenerated: **288 pages**, no empty pages or detected text outside the inspected safety bounds. New account, database, and recovery pages were rendered and visually reviewed. Indented setup code fences now preserve separate command lines in both the portal and PDF.
+
+These are local macOS execution results; Windows-specific execution and creation of a Site while signed in to the destination account were not performed. New-account registration must run in that account's authenticated Sites session. Personal progress is excluded from Git and course downloads; database backups and lab evidence need separate private storage. GitHub CI results are checked after pushing the exact release commit.
 
 ## Run-anywhere revision: executed checks
 

@@ -43,7 +43,7 @@ def markdown(text):
     i=0
     while i<len(lines):
         l=lines[i];i+=1
-        if l.startswith('```'):
+        if l.lstrip().startswith('```'):
             flush()
             if code:
                 wrapped=[]
@@ -88,7 +88,7 @@ def build():
     additions=[]
     for folder in ['content/onboarding','content/assessment','content/walkthroughs']:
         additions.extend(sorted((ROOT/folder).glob('*.md')))
-    additions.extend([ROOT/'docs/FUTURE-PROJECT-READINESS.md',ROOT/'docs/ACCOUNT-MIGRATION.md',ROOT/'docs/CONTINUE-LEARNING.md',ROOT/'lab/planner_lab/README.md'])
+    additions.extend([ROOT/'docs/FUTURE-PROJECT-READINESS.md',ROOT/'docs/RUN-ANYWHERE.md',ROOT/'docs/NEW-ACCOUNT.md',ROOT/'docs/LOCAL-DATA.md',ROOT/'docs/ACCOUNT-MIGRATION.md',ROOT/'docs/CONTINUE-LEARNING.md',ROOT/'lab/planner_lab/README.md'])
     incident_position=paths.index(ROOT/'lab/mcp_lab/README.md')
     incident_paths=[ROOT/'content/incidents/README.md']+sorted((ROOT/'content/incidents').glob('[0-9]*.md'))+[ROOT/'content/incidents/ASSESSMENT.md',ROOT/'lab/incidents/README.md']
     paths[incident_position:incident_position]=incident_paths
