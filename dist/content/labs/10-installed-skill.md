@@ -4,6 +4,8 @@
 
 **Outcome:** an installed repository skill, real discovery/use evidence, a reviewed JSON artifact, and observed negative cases. The [sample package](../skill-practice/README.md) and [recorded host run](../skill-practice/HOST-EVIDENCE.md) make the expected evidence concrete.
 
+The terminal examples use a POSIX shell on macOS, Linux, or WSL. For the native Windows desktop route, use your Python launcher (`py -3` in place of `python3`) for installation and validation, then use fresh desktop chats for the host runs. The multi-line CLI command and its input/output redirection below are not PowerShell syntax.
+
 ## 1. Inspect and install
 
 Read the [skill entrypoint](../skill-practice/signal-desk-evidence-review/SKILL.md), [contract](../skill-practice/signal-desk-evidence-review/references/review-contract.md), and [validator](../skill-practice/signal-desk-evidence-review/scripts/check_packet.py). Explain why instructions from source S03 must not change the procedure. Then run these commands from the academy root:

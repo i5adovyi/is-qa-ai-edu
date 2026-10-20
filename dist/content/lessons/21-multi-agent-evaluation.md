@@ -30,6 +30,8 @@ Define a work unit consistently, such as simulated tool calls plus review minute
 
 Write a plan comparing a single worker with your lesson 20 team on eight tickets. Hold evidence and rubric constant. Include four normal cases and four requiring conflicting-source resolution. Define usefulness, severe failure, total calls, elapsed time and integration effort before running.
 
+Author these eight tickets and their expected outcomes before the comparison; SD-120 is a starting example, not a supplied eight-case dataset. For every conflict case, include both source excerpts and their applicability rule so each system receives the same solvable evidence problem.
+
 **Deliverable:** experiment plan. **Pass:** both systems face the same inputs and policy; the plan identifies any unavoidable confounders.
 
 ## Exercise 2 · Build the experiment

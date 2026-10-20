@@ -42,6 +42,8 @@ Define messages for assignment, progress, blocked, completed and cancelled. Each
 
 Create two worker folders and one parent folder. Assign different analyses of SD-120. Have each worker write an output file with its input version. Integrate matching outputs, then update the policy and rerun only the affected worker. Execute manually or with optional agents; no model API is required.
 
+Use this learner-created fixture: SD-120 reports an 80 MB export in version 2.4, with browser unknown. `policy-v2` permits exports up to 100 MB; `policy-v3` changes the limit to 75 MB for version 2.4. Both are invented policies for this exercise. Give the evidence worker the ticket and policy version, and give the completeness checker only the ticket plus the stable requirement to collect browser and reproduction details. After the update, recheck the evidence worker's limit finding. The completeness result can be reused because none of its actual inputs changed. Save both policy texts and identify each worker's complete input set in its assignment.
+
 **Deliverable:** assignments, worker artifacts and integration log. **Pass:** workers do not overwrite each other's files; the final packet names the versions it incorporates; unaffected work is reused deliberately.
 
 ## Exercise 3 · Adversarial delivery order

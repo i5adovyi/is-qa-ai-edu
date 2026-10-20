@@ -22,7 +22,8 @@ Run from the academy repository root:
 ```sh
 python3 -m lab.skill_lab install
 python3 -m lab.skill_lab validate
-python3 work/skill-practice/.agents/skills/signal-desk-evidence-review/scripts/check_packet.py work/skill-practice/fixtures/ticket.json
+python3 work/skill-practice/.agents/skills/signal-desk-evidence-review/scripts/check_packet.py \
+  work/skill-practice/fixtures/ticket.json
 ```
 
 Use `--workspace work/skill-second-attempt` for another attempt. Destinations must be dedicated children of this repository's `work/` folder; parent traversal and symlink components are rejected. The installer copies the skill and fixture, then records a SHA-256 inventory in `installation.json`. Its `host_behavior` field remains `not_tested`: a copy is not proof of host discovery. The inventory describes the current validated files and is not a cryptographic signature or a third-party trust assessment.

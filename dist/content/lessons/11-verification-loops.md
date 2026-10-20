@@ -34,13 +34,13 @@ The repair checks membership in the available source set. Add a valid-source cas
 
 ## Exercise 1 · Guided failure
 
-Continue with lesson 10's copy of the [development sandbox](../dev-sandbox/README.md). Write expected results for below-limit, exactly-at-limit and already-over-limit calls to `take_step`, then run its five starter checks. Confirm that the exactly-at-limit case exposes the seeded defect. Do not remove checks from the working reference harness to manufacture a failure. As an alternative exercise, create the deliberately faulty source validator from the worked example and test unknown, valid and empty source lists.
+Continue with lesson 10's copy of the [development sandbox](../dev-sandbox/README.md). Write expected results for below-limit, exactly-at-limit and already-over-limit calls to `take_step`. If you repaired the copy in lesson 10, inspect your saved failing result and original diff, then run the checks against the repaired copy; it should already pass. To reproduce the baseline again, copy the untouched fixture to a different, unused path such as `work/router-baseline/` and run the five starter checks there. Keep your repaired `work/router-practice/` copy intact. The exactly-at-limit case exposes the seeded defect only in the original fixture. Do not remove checks from the working reference harness to manufacture a failure. As an alternative exercise, create the deliberately faulty source validator from the worked example and test unknown, valid and empty source lists.
 
 **Deliverable:** cases and failing result. **Pass:** the boundary case detects the chosen defect; the expected outcome does not depend on the buggy implementation.
 
 ## Exercise 2 · Build a repair loop
 
-Implement the smallest repair, then run the boundary cases and the relevant existing suite. For the sandbox, rerun `python3 -m unittest discover -s work/router-practice -p 'test_router.py' -v`; all five starter checks should pass. Save a short log with hypothesis, change, result and next decision. Optional agent use: ask the agent to inspect the failure and propose a repair; review the patch before accepting its completion claim. Keep the original failure as a regression case.
+Implement the smallest repair, or review the repair already completed in lesson 10, then run the boundary cases and the relevant existing suite. For the sandbox, rerun `python3 -m unittest discover -s work/router-practice -p 'test_router.py' -v`; all five starter checks should pass, along with any extra boundary tests you added. Save a short log with hypothesis, change, result and next decision. Optional agent use: ask the agent to inspect the failure and propose a repair; review the patch before accepting its completion claim. Keep the original failure as a regression case.
 
 **Deliverable:** patch, checks and repair log. **Pass:** the original failure is fixed; valid input still passes; rejected boundary inputs remain rejected; no unrelated test was weakened.
 

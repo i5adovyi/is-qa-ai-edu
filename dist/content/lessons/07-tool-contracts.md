@@ -33,7 +33,7 @@ It returns `status`, `draft_id` and `validation_errors`. It never claims deliver
 
 ## Exercise 1 · Guided specification
 
-Write contracts for `get_ticket`, `search_knowledge` and `save_draft`. For each, include one valid call, one invalid call, one empty result and one operational failure. State whether it reads or writes. Give every field a type and describe the scope of identifiers.
+Write contracts for `get_ticket`, `search_knowledge` and `save_draft`. For each, include one valid call, one invalid call and one operational failure. Define absent-data behavior where applicable: `get_ticket` can return `not_found`, and `search_knowledge` can return a successful empty list. For `save_draft`, an empty body is an invalid argument, not an empty successful write. State whether each tool reads or writes. Give every field a type and describe the scope of identifiers.
 
 **Deliverable:** three tool specifications. **Pass:** a caller can distinguish absent data from unavailable service and can tell precisely what a successful operation changed.
 

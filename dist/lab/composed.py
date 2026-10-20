@@ -10,16 +10,16 @@ from copy import deepcopy
 import hashlib
 import importlib
 import json
-import marshal
 from pathlib import Path
 import re
+from types import CodeType
 import uuid
 
 from .contracts import Budget, HarnessError, SimulatedCrash
 from .engine import Runner, get_case, load_cases
 from .evaluation import assess, SCENARIO_EXPECTATIONS
 from .policy import classify, validate_decision
-from .practice import check_lesson
+from .practice import check_lesson, load_student
 from .storage import Trace, atomic_json, digest, read_trace
 from .tools import load_knowledge
 
@@ -30,6 +30,37 @@ HOOKS = (
 )
 EMAIL = re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b")
 DEMO_KEY = re.compile(r"\bsk-demo-[A-Za-z0-9_-]+")
+
+
+def code_identity(value):
+    """Canonical code metadata; marshal's set order varies across processes."""
+    if isinstance(value, CodeType):
+        names = (
+            "co_argcount", "co_posonlyargcount", "co_kwonlyargcount", "co_nlocals",
+            "co_stacksize", "co_flags", "co_code", "co_consts", "co_names",
+            "co_varnames", "co_filename", "co_name", "co_qualname", "co_firstlineno",
+            "co_exceptiontable", "co_freevars", "co_cellvars",
+        )
+        metadata = {name: code_identity(getattr(value, name, None)) for name in names}
+        line_table = value.co_linetable if hasattr(value, "co_linetable") else value.co_lnotab
+        metadata["line_table"] = code_identity(line_table)
+        return ["code", metadata]
+    if isinstance(value, (tuple, frozenset)):
+        items = [code_identity(item) for item in value]
+        if isinstance(value, frozenset):
+            items.sort(key=lambda item: json.dumps(item, sort_keys=True))
+        return [type(value).__name__, items]
+    if isinstance(value, bytes):
+        return ["bytes", value.hex()]
+    if isinstance(value, float):
+        return ["float", value.hex()]
+    if isinstance(value, complex):
+        return ["complex", value.real.hex(), value.imag.hex()]
+    if value is Ellipsis:
+        return ["ellipsis"]
+    if value is None or type(value) in (bool, int, str):
+        return [type(value).__name__, value]
+    raise ValueError(f"Unsupported component code constant: {type(value).__name__}.")
 
 
 def trace_counts(events):
@@ -48,7 +79,8 @@ class Components:
         if profile not in {"student", "completed", "injected-test"}:
             raise ValueError("Components must be student or completed.")
         self.profile = profile
-        self.module = module or importlib.import_module("lab." + profile)
+        self.module = module or (load_student() if profile == "student"
+                                 else importlib.import_module("lab." + profile))
         self.functions = {}
         hashes = {}
         for name in HOOKS:
@@ -56,7 +88,7 @@ class Components:
             if not callable(fn) or not hasattr(fn, "__code__"):
                 raise HarnessError("component_missing", f"Missing Python function: {name}.")
             self.functions[name] = fn
-            hashes[name] = hashlib.sha256(marshal.dumps(fn.__code__)).hexdigest()
+            hashes[name] = digest(code_identity(fn.__code__))
         path = getattr(self.module, "__file__", None)
         source_hash = hashlib.sha256(Path(path).read_bytes()).hexdigest() if path else None
         self.identity = {"profile": profile, "source_sha256": source_hash,
@@ -84,7 +116,7 @@ class ComposedRunner(Runner):
             raise ValueError("Context selection limit must be a nonnegative integer.")
         self.components = components or Components("student")
         self.context_limit = context_limit
-        binding = {"kind": "composed-v1", "components": self.components.identity,
+        binding = {"kind": "composed-v2", "components": self.components.identity,
                    "selected_context_chars": context_limit}
         super().__init__(run_dir, case=case, scenario=scenario, resume=resume,
                          policy=self._decision, budget=budget, binding=binding)

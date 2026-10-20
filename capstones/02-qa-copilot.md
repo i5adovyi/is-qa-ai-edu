@@ -11,7 +11,7 @@ Create a tiny service fixture with at least three intentionally different change
 ## Build milestones
 
 1. Write an input contract: specification, diff, test inventory, and trusted command results. Mark code comments and issue text as untrusted data.
-2. Establish a manual review baseline on five changes. Record which risks you found and how long review took.
+2. Establish a manual review baseline on five changes. Use the three scenarios above and author two additional variants, such as a zero-budget boundary and a retry whose side effect commits before its acknowledgment is lost. Save the specification, actual diff, and expected behavior for each; the course does not supply five completed change cases. Record which risks you found and how long review took.
 3. Build a context selector that includes the changed function, relevant caller, test contract, and requirements. Measure the effect of removing each component.
 4. Generate a risk-oriented test plan with a requirement-to-test mapping. Require explicit labels: proposed, executed, passed, failed, blocked.
 5. Add a bounded execution workflow in your own isolated practice environment or consume precomputed test results. Do not permit arbitrary commands supplied by retrieved content.
@@ -28,7 +28,7 @@ Create a tiny service fixture with at least three intentionally different change
 
 ## Evaluation design
 
-Create a labeled set of changes with at least one no-defect example. Measure useful findings, missed defects, and unsupported findings separately. A system that reports a defect in every patch may have high recall and terrible usefulness. Ask a second reviewer to assess a sample and record disagreements.
+Create a labeled set of changes with at least one no-defect example. Measure useful findings, missed defects, and unsupported findings separately. A system that reports a defect in every patch may have high recall and terrible usefulness. Ask a second reviewer to assess a sample and record disagreements. If working alone, perform a delayed review with case order and identifiers shuffled and initial labels hidden; disclose that this is repeated self-review, not independent agreement.
 
 Keep a fresh change set for final evaluation. If your model has seen the public example or answer key, disclose possible contamination and create new variants. Do not use the same model's opinion as the only ground truth.
 

@@ -10,7 +10,7 @@ List files or data the worker owns. List shared interfaces it may read but must 
 
 ## Minimal context
 
-Provide the objective, constraints, relevant source excerpts, and exact schema or API contract. Avoid forwarding unrelated conversation history.
+Provide the task ID, input versions, objective, constraints, relevant source excerpts, and exact schema or API contract. Avoid forwarding unrelated conversation history.
 
 ## Acceptance and verification
 
@@ -22,7 +22,7 @@ Set a deadline or action budget. Specify when to stop and which unresolved decis
 
 ## Return format
 
-Completed artifacts; checks and results; assumptions; unresolved problems; integration instructions. A final status message should not claim work that is only planned.
+Task ID and input versions used; status; completed artifacts; checks and results; assumptions; unresolved problems; integration instructions. A final status message should not claim work that is only planned. The integrator should reject or explicitly reconcile stale or cancelled assignments before accepting their output.
 
 ## Integration review
 

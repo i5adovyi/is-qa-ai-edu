@@ -8,8 +8,9 @@ from pathlib import Path
 from types import SimpleNamespace
 import tempfile
 import unittest
+from unittest.mock import patch
 
-from lab import completed, student
+from lab import completed
 from lab.composed import Components, ComposedRunner, HOOKS, evaluate_composed, main
 from lab.contracts import Budget, HarnessError, SimulatedCrash
 from lab.engine import Runner, get_case
@@ -21,6 +22,13 @@ def altered(**functions):
     values = {name: getattr(completed, name) for name in HOOKS}
     values.update(functions)
     return Components("injected-test", SimpleNamespace(**values))
+
+
+def unfinished_student():
+    """Keep starter regressions independent of the learner's real workspace."""
+    def unfinished(*args):
+        raise NotImplementedError("Intentional test fixture; complete the exercise.")
+    return SimpleNamespace(**{name: unfinished for name in HOOKS})
 
 
 class ComposedHarnessTest(unittest.TestCase):
@@ -47,7 +55,8 @@ class ComposedHarnessTest(unittest.TestCase):
         self.assertEqual(report["components"]["profile"], "completed")
 
     def test_blank_student_does_not_fall_back_to_reference(self):
-        report = evaluate_composed(self.root / "student", components=Components("student"))
+        report = evaluate_composed(
+            self.root / "student", components=Components("student", unfinished_student()))
         self.assertFalse(report["passed"])
         self.assertEqual(report["cases_passed"], 0)
         self.assertTrue(all(not row["passed"] for row in report["helper_gates"]))
@@ -210,9 +219,14 @@ class ComposedHarnessTest(unittest.TestCase):
         with self.assertRaises(SimulatedCrash):
             runner.run()
         original_checkpoint = runner.checkpoint_path.read_bytes()
+        changed_function = {name: getattr(completed, name) for name in HOOKS}
+        changed_function["operation_key"] = lambda *args: "other"
         variants = (
             {"components": Components("student", completed)},
             {"components": altered(operation_key=lambda *args: "other")},
+            # Same profile and file fingerprint; only the live function changed.
+            {"components": Components("completed", SimpleNamespace(
+                __file__=completed.__file__, **changed_function))},
             {"components": self.components, "context_limit": 1},
         )
         for variant in variants:
@@ -239,7 +253,8 @@ class ComposedHarnessTest(unittest.TestCase):
         self.assertEqual({p.name: p.read_bytes() for p in runner.run_dir.iterdir()}, before)
 
     def test_command_exit_status_distinguishes_example_and_blank_student(self):
-        with contextlib.redirect_stdout(io.StringIO()):
+        with contextlib.redirect_stdout(io.StringIO()), \
+                patch.dict("sys.modules", {"lab.student": unfinished_student()}):
             good = main(["evaluate", "--components", "completed", "--out", str(self.root / "good")])
             bad = main(["evaluate", "--components", "student", "--out", str(self.root / "bad")])
         self.assertEqual((good, bad), (0, 1))

@@ -50,6 +50,8 @@ Write a one-page proposal naming your selected capstone, target user, supported 
 
 Implement the improvement and assemble a reproducible package. Include exact setup and run commands, successful and failed execution evidence, saved resumption state, evaluation results and a review note. If extending the support lab through `lab/student.py`, run `python3 -m lab.cli evaluate --policy student --split train`, freeze the candidate, then run `python3 -m lab.cli evaluate --policy student --split holdout` and relevant tests. The command without `--policy student` evaluates the reference policy and cannot prove that a student change works. For other implementations, provide commands that actually exercise your candidate and selected cases.
 
+Those `lab.cli --policy student` commands exercise the student decision policy only. If your improvement uses the complete student harness from lab 11, use `python3 -m lab.composed evaluate --components student --split train`, freeze the candidate, then evaluate `--split holdout` and the full `--split all` release gate. Preserve the component manifest and integration-probe results. Do not substitute `--components completed`: that selects the instructor example, not your submitted functions.
+
 **Deliverable:** working project plus evidence folder. **Pass:** a fresh reviewer can reproduce the main path; every reported metric identifies dataset and rubric versions; the project contains no required paid API dependency for the core demonstration.
 
 ## Exercise 3 · Adversarial defense

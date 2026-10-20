@@ -56,6 +56,8 @@ Add a separate cost ledger with a 10-unit budget and a maximum reservation of 7 
 
 Insert a synthetic secret marker into a ticket and force a tool error that echoes its arguments. Check every event and error path for the marker. Then remove the final event from one trace and create a negative duration in another. Make your trace reader flag incomplete or impossible records.
 
+Use the event schema you designed in exercise 1 and add these integrity checks to your own reader or apply them mechanically in a documented review. The bundled `lab.cli trace` checks JSON structure, sequence numbers, and run IDs; it does not require a terminal event or validate your new duration field. Its successful exit alone cannot satisfy these two checks.
+
 **Deliverable:** leakage check and trace-integrity report. **Pass:** the synthetic marker is excluded from retained logs according to your policy; malformed traces cannot silently produce reassuring metrics.
 
 ## Hints and solution outline

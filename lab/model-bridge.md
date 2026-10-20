@@ -38,13 +38,15 @@ No model access today? Skip the chat step and use `mock-response.json` in the ne
 For your saved model response:
 
 ```sh
-python3 -m lab.model_bridge run --case train-01 --response work/model-01/response.json --out .lab-runs/model-01
+python3 -m lab.model_bridge run --case train-01 \
+  --response work/model-01/response.json --out .lab-runs/model-01
 ```
 
 Offline smoke test using the explicitly labeled mock:
 
 ```sh
-python3 -m lab.model_bridge run --case train-01 --response work/model-01/mock-response.json --out .lab-runs/model-01-mock
+python3 -m lab.model_bridge run --case train-01 \
+  --response work/model-01/mock-response.json --out .lab-runs/model-01-mock
 ```
 
 Keep the `--case` value the same as the exported request. The replay loads the original fixture and retrieves its evidence again. A copied response is only a proposal; `Runner` validates its exact schema and citation relevance before calling `save_draft`. Extra fields cannot grant tools or permissions.

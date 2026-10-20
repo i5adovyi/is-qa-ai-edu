@@ -40,6 +40,8 @@ The second handoff distinguishes work performed from a possible explanation. A n
 
 Write a handoff for SD-106 after retrieval but before draft validation. Limit it to 250 words. Include a next action that is executable without guessing. Then remove all previous chat context and use only the handoff to explain what is known and what remains.
 
+Create the artifacts you reference first in a new `work/handoff-practice/` folder (or an equivalent paper artifact table). For this exercise, save this synthetic KB-EXPORT-2 excerpt: “For export failures in version 2.4, collect the browser version and request a clean-session reproduction. These steps do not establish the cause or confirm resolution.” Save a `D-106.txt` draft asking for those details and a `validation.json` with `{"draft_id":"D-106","status":"not_run"}`. These are learner-created fixtures, not files already supplied by the course. Record their actual paths in the handoff.
+
 **Deliverable:** handoff and resumption notes. **Pass:** no claim of validated completion; all referenced artifacts have IDs or locations; one hypothesis is explicitly marked unverified.
 
 ## Exercise 2 · Build a memory ledger
@@ -51,6 +53,8 @@ Create ten memory items spanning task state, knowledge and preferences. Give eac
 ## Exercise 3 · Adversarial stale state
 
 Alter the handoff to claim that D-106 passed validation, but leave a failed validation result in the artifact folder. Separately, mark an unavailable tool as permanently broken. Resume from each handoff. Write reconciliation rules that prefer current observable evidence and treat temporary failures as time-bounded observations.
+
+For the first case, add an unsupported “The issue is fixed” claim to the draft, change your `validation.json` to `{"draft_id":"D-106","status":"failed","reason":"unsupported remediation claim"}`, and preserve the contradictory handoff. For the second, provide a later successful synthetic tool observation with a timestamp, so the reader has observable evidence that the capability recovered.
 
 **Deliverable:** two recovery traces. **Pass:** neither stale summary causes an incorrect completion claim or permanent avoidance of a recovered capability.
 

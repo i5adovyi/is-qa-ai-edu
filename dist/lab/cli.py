@@ -11,7 +11,7 @@ import uuid
 from .contracts import HarnessError, SimulatedCrash
 from .engine import Runner, SCENARIOS, get_case
 from .evaluation import evaluate
-from .practice import check_lesson
+from .practice import check_lesson, load_student
 from .storage import read_trace
 
 
@@ -76,8 +76,7 @@ def main(argv=None):
         if args.command == "evaluate":
             policy = None
             if args.policy == "student":
-                from .student import build_decision
-                policy = build_decision
+                policy = load_student().build_decision
             directory = args.out or fresh_path("eval-" + args.split)
             report = evaluate(directory, args.split, policy, not args.no_scenarios)
             print(f"Cases: {report['cases_passed']}/{report['case_count']} | "

@@ -248,7 +248,7 @@ class EvaluationTest(unittest.TestCase):
             return {"action": "escalate", "category": "unknown", "reply": "",
                     "citations": [], "reason": "regression"}
         with tempfile.TemporaryDirectory() as temp:
-            with patch("lab.student.build_decision", broken_policy):
+            with patch.dict("sys.modules", {"lab.student": SimpleNamespace(build_decision=broken_policy)}):
                 with contextlib.redirect_stdout(io.StringIO()):
                     code = main(["evaluate", "--policy", "student", "--no-scenarios",
                                  "--out", str(Path(temp) / "eval")])

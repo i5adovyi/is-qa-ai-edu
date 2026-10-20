@@ -1,12 +1,27 @@
 """Executable public acceptance criteria for eight student extensions."""
 
-from . import student
+import importlib
+
+from .contracts import HarnessError
 from .engine import get_case
 from .policy import validate_decision
 from .tools import load_knowledge
 
 
-def check_lesson(number, module=student):
+def load_student():
+    """Load learner code only when requested, leaving the reference usable."""
+    try:
+        return importlib.import_module("lab.student")
+    except (ImportError, SyntaxError) as exc:
+        raise HarnessError(
+            "student_import",
+            f"Cannot load lab/student.py: {exc}. Fix its syntax or imports, then retry."
+        ) from exc
+
+
+def check_lesson(number, module=None):
+    if module is None:
+        module = load_student()
     checks = []
 
     def check(name, predicate):

@@ -21,6 +21,8 @@ The editable source is this repository. The portal is generated into `dist/`; do
 
 ## Release checks
 
+These are maintainer checks. Install Node.js 22 or newer for the JavaScript tests; it is not required for the student Python route. Browser checks additionally need Playwright and a compatible browser. The PDF rebuild needs ReportLab; the generated PDF is included for readers.
+
 ```sh
 python3 -m unittest discover -s tests
 node --test tests/test_portal.cjs
@@ -30,6 +32,8 @@ python3 scripts/serve.py
 ```
 
 Open overview, a lesson, a lab, the library, and a manual. Check keyboard navigation, narrow screens, quiz feedback, saved notes, progress export, and import. Browser storage is local to its origin; a local preview and hosted portal do not share progress. Export and import JSON to transfer it. Browser data can be erased; keep backups.
+
+With the local server running and Playwright available, run `node scripts/test_portal.cjs` for interactions and `node scripts/audit_portal.cjs` for every document, internal link, quiz answer, downloadable asset, and mobile document layout. `ACADEMY_BROWSER_PATH` selects an installed browser executable. When testing another checkout, set `ACADEMY_TEST_URL` to its server and `ACADEMY_DIST_DIR` to its matching `dist/`; the audit compares download hashes with that exact build.
 
 ## Add a lesson
 

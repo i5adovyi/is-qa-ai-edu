@@ -6,6 +6,8 @@ Start with the [prerequisites and practice map](PRACTICE-MAP.md). The Python rou
 
 After the foundations, the [integration route](INTEGRATION-LABS.md) adds a real local MCP exchange, skill installation and fresh-host testing, and a complete student harness. It explains which setup and evidence each requires.
 
+If you have just cloned or downloaded the project, complete [fresh-copy setup](SETUP.md) first. It explains the working directory, Python versions, expected failures, local server, and progress backups.
+
 ## Your first 90 minutes
 
 **Minutes 0-15: get something running.** From this project directory, run `python3 -m lab.cli demo`. Read the output, locate its trace, and identify a decision, a tool call, and a result. If Python is missing, you can still read the entire curriculum in the portal or Markdown files; install Python before the executable labs.

@@ -19,6 +19,8 @@ The demo prints a local draft and its run-artifact directory. The training gate 
 
 Open [the practice labs](../content/labs/README.md) next. Their starter checks intentionally fail until you implement the corresponding function in `lab/student.py`. They do not break the reference harness.
 
+Reference commands and the completed composition example do not import your student module. If an explicit student command reports `student_import`, fix the syntax error or missing import it names in `lab/student.py`, then retry. You can still run the reference demo to compare behavior while your code is incomplete. The unit suite uses isolated unfinished fixtures for starter-failure tests, so completing a student function must not make the reference suite fail.
+
 After Labs 01–08, [Lab 11](../content/labs/11-complete-student-harness.md) composes all eight functions into the running harness. The complete wiring and a runnable disclosed instructor example ship together; `lab/student.py` remains your intentional exercise workspace. Use `python3 -m lab.composed evaluate --components completed` to inspect the example, then `--components student` to assess your own eight implementations. The student profile never substitutes missing functions, and a passing example report does not count as learner completion. Keep or adapt your existing student work; do not overwrite it with the example just to make the gate green.
 
 For a real-model experiment without an API key, use the [manual model bridge](model-bridge.md): export a prompt, obtain a JSON answer from any chat model, and replay it through this harness. A labeled mock response makes the same workflow runnable offline.

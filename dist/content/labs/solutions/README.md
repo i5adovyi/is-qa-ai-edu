@@ -1,6 +1,6 @@
 # Solution review
 
-**Spoilers.** [reference.py](reference.py) contains one complete implementation of each student function. Read the relevant function after attempting the lab and its progressive hints. Copy only the function you are reviewing if you need a working comparison; the learner module is intentionally separate from the baseline.
+**Spoilers.** [reference.py](reference.py) contains one complete implementation of each student function. Read the relevant function after attempting the lab and its progressive hints. Copy only the function you are reviewing if you need a working comparison; the learner module is intentionally separate from the baseline. Include its imports at the top of `lab/student.py`: Lab 01 needs `import re`; Lab 05 needs `import hashlib` and `import json`; Lab 08 needs `from lab.policy import classify`. The other examples need no imports. A `NameError` naming one of these dependencies means the function was copied without its import.
 
 The baseline unit suite executes these solution functions against every public practice check. That proves the examples meet the teaching contract. It does not make them production implementations.
 

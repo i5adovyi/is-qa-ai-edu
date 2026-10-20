@@ -86,6 +86,8 @@ Automated regressions reproduce these boundaries:
 python3 -m unittest discover -s tests -p 'test_composed_harness.py' -v
 ```
 
+These tests use their own unfinished-function fixtures when checking failure behavior. They must pass whether your actual `lab/student.py` is untouched, partly implemented, or complete; your implementation is assessed by the separate `practice` and student composition gates.
+
 Do not leave deliberate regressions in your final student version. Include one failure trace and its explanation in your release evidence.
 
 ## 5. Crash, resume, and change identity
@@ -101,7 +103,9 @@ Expected final effect: **one draft, one write**, a replay hit, and increased con
 
 Resume binds the profile, component source/function fingerprints, and selected-context limit. Trying `--components student` on the example checkpoint, changing a helper's source after a crash, or resuming with a different `--context-chars` is rejected with `component_mismatch` before dispatch. Preserve the original code to finish an old experiment or start a new run for changed code. Do not reset budgets to make a pending run pass.
 
-Function fingerprints include Python bytecode metadata and can vary with the Python version or source location. Resume is intended in the same runtime and checkout. Imported dependency changes are not completely attested by this binding. The binding detects accidental mismatch, not malicious local editing. Checksums are not signatures, Python code executes with your user privileges, and neither hashing nor the dispatcher creates an operating-system sandbox. Virtual retry delay is accounting, not a real timed network retry.
+Function fingerprints canonicalize Python bytecode metadata, including unordered set constants, so a fresh process's randomized hash seed does not change identity. They can still vary with the Python version or source location. Resume is intended in the same runtime and checkout. Imported dependency changes are not completely attested by this binding. The binding detects accidental mismatch, not malicious local editing. Checksums are not signatures, Python code executes with your user privileges, and neither hashing nor the dispatcher creates an operating-system sandbox. Virtual retry delay is accounting, not a real timed network retry.
+
+The October 20 fresh-clone audit changed the fingerprint format to fix an intermittent cross-process mismatch. Checkpoints produced before that fix are intentionally not migrated; keep the original checkout/runtime to finish those old runs or start a new experiment after updating.
 
 ## 6. Freeze, evaluate, and submit
 

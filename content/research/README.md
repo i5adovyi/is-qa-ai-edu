@@ -30,4 +30,8 @@ The source IDs make citation existence easy to check. Claim support still needs 
 
 For each pair, choose supported, partially supported, unsupported, or contradicted. Use the supplied labels as the initial calibration set, and record disagreements with a supporting passage. Evaluate claims about numbers separately from inferences about which design to choose. For Q-05 and Q-06, freeze the workflow before final review and retain its first answers.
 
+The capstone requires at least **20 claim-source pairs**; the twelve supplied pairs are a calibration starting point. Author at least eight additional pairs across several questions before the final assessment, retaining exact supporting or contradicting passages and your label rationale. Include a real but irrelevant citation and an unanswerable claim. Do not count paraphrases of the same claim as independent evidence of generalization.
+
+Keep grading labels out of the workflow's input. `cases.json` deliberately combines questions and an answer key for easy inspection; pass only each question's `id` and `question`, plus the source corpus, to the system under test. The `required_sources`, `expected_behavior`, and `claim_pairs` fields belong to the reviewer. If you have already read final-review answers while exploring the file, record that exposure and create fresh questions for any claim of unseen performance. A clean runtime input does not undo prior human or model exposure.
+
 Do not call the two final-review questions a statistically representative benchmark. They are deliberately small exercises. Add new cases before claiming generalization.

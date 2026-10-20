@@ -57,7 +57,7 @@ After labs 01–08, use [lab 11](../labs/11-complete-student-harness.md) to conn
 
 ## Exercise 3 · Adversarial completion
 
-Supply a planner response that says “done” before a draft exists. Supply another that requests an unknown tool and a third that loops forever. Verify that the harness detects all three independently of the planner's confidence. Optional model use can generate proposals, but keep the scripted cases as deterministic regression checks.
+Supply a planner response that says “done” before a draft exists. Supply another that requests an unknown tool and a third that loops forever. Use your exercise 2 planner-driven script, or mechanically apply your transition table to these three scripted proposal sequences and label the results as simulations. The bundled `lab.cli demo` does not accept arbitrary planner proposals and cannot by itself execute this exercise. Verify that your execution or simulation rules detect all three independently of the planner's confidence. Optional model use can generate proposals, but keep the scripted cases as deterministic regression checks.
 
 **Deliverable:** three failure traces and expected terminal states. **Pass:** no false completion, no unknown-tool execution and no unbounded loop.
 

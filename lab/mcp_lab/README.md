@@ -8,6 +8,8 @@ Start with [Lab 09: real MCP](../../content/labs/09-real-mcp.md) for the exercis
 
 Use **Python 3.12** in a separate environment. The academy's existing standard-library route still runs on Python 3.9. The pinned SDK itself supports Python 3.10+, but the complete dependency snapshot here was verified on Python 3.12.14 and macOS ARM64, not on every Python/platform combination.
 
+First check `python3.12 --version`. If that command is missing, install Python 3.12 from the [official Python downloads](https://www.python.org/downloads/) or use the full path to an existing Python 3.12 interpreter in the first command below. A newer system `python3` is not a substitute for the tested interpreter without a separate compatibility check. Creating the virtual environment does not install Python itself.
+
 From the repository root:
 
 ```sh
@@ -75,9 +77,22 @@ The stdout experiment deliberately corrupts the transport. This SDK can report t
 Copy the server and corpus, then implement `list_topics`:
 
 ```sh
-mkdir -p work/mcp-student
-cp lab/mcp_lab/server.py lab/mcp_lab/corpus.json work/mcp-student/
-work/mcp-venv/bin/python -m lab.mcp_lab --server-file work/mcp-student/server.py --exercise --out work/mcp-before
+mkdir work/mcp-student &&
+  cp lab/mcp_lab/server.py lab/mcp_lab/corpus.json work/mcp-student/
+work/mcp-venv/bin/python -m lab.mcp_lab \
+  --server-file work/mcp-student/server.py --exercise --out work/mcp-before
+```
+
+The copy command deliberately refuses an existing `work/mcp-student` directory; do not replace `mkdir` with `mkdir -p`, because copying again would overwrite your implementation. If it exists, reuse your work without copying or choose a new directory name and use it in the following commands. The copy command uses a POSIX shell. In PowerShell, use this guarded copy instead, then run the Python gate with the Windows interpreter path:
+
+```powershell
+if (Test-Path work/mcp-student) {
+  throw "Choose a new learner directory; existing work is preserved."
+} else {
+  New-Item -ItemType Directory -Path work/mcp-student | Out-Null
+  Copy-Item lab/mcp_lab/server.py, lab/mcp_lab/corpus.json `
+    -Destination work/mcp-student/
+}
 ```
 
 Expected before implementation: **13/16**, exit code `1`. Add the tool with an empty-object input schema that rejects extra properties. Return exactly `{"topics": ["account", "adversarial", "export"]}` by deriving sorted unique topics from the corpus. Advertise a structured output schema and read-only annotations. Keep lookup validation intact. Rerun with `--out work/mcp-after`; target **16/16**. See [solution guidance](solutions.md) after your attempt.

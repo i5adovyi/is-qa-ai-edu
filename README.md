@@ -4,11 +4,8 @@ A practical training project for learning to design, build, test, and operate AI
 
 ## Start here
 
-1. Read [START HERE](docs/START-HERE.md), including the first 90-minute session.
-2. Run `python3 scripts/build_portal.py` to rebuild the learning portal.
-3. Run `python3 scripts/serve.py` and open **http://127.0.0.1:8765**.
-4. In another terminal, run `python3 -m lab.cli demo`.
-5. Run `python3 -m unittest discover -s tests` to check the reference implementation.
+1. Follow [fresh-copy setup](docs/SETUP.md) to get the files, run the demo and checks, and open the local portal.
+2. Continue with [START HERE](docs/START-HERE.md), including the first 90-minute session. Keep the portal server running in its terminal and use another terminal for exercises.
 
 Python 3.9+ is supported (tested here with Python 3.9.6). The portal builder and reference lab use the standard library; no package install, model subscription, or API key is needed. The bundled lab policy is deterministic and is explicitly not an LLM. Bring a model of your choice for the optional model experiments.
 
@@ -25,7 +22,7 @@ See the [practice map](docs/PRACTICE-MAP.md) for prerequisites and lesson-to-lab
 
 After the component exercises, follow the [integration route](docs/INTEGRATION-LABS.md). It connects protocol behavior, installed skills, and your own harness components to observable results.
 
-The [second review report](docs/REVIEW-2026-10-20.md) records the earlier findings and their resolution. The [verification record](docs/VERIFICATION.md) states exactly what was run.
+The [fresh-clone student audit](docs/STUDENT-AUDIT.md) records the final end-to-end checks and fixes. The [second review report](docs/REVIEW-2026-10-20.md) records the earlier findings and their resolution. The [verification record](docs/VERIFICATION.md) states exactly what was run.
 
 ## Choose a pace
 
@@ -40,11 +37,13 @@ These are planning estimates, not measured completion times. Readings and extens
 
 ## Commands
 
+Quick reference for an existing setup. `serve.py` stays running until Ctrl+C; do not start a second server on the same port. Run the lab commands in another terminal.
+
 ```sh
 python3 scripts/build_portal.py
 python3 scripts/serve.py
 python3 -m lab.cli demo
-python3 -m lab.cli evaluate --split holdout
+python3 -m lab.cli evaluate --split train
 python3 -m lab.composed evaluate --components completed --split all
 python3 -m unittest discover -s tests
 python3 scripts/check_content.py

@@ -52,6 +52,8 @@ Design three rollout stages with entry criteria, exit criteria, data access and 
 
 Create ten requests: six useful drafts, two useful review outcomes, one fast error and one timeout. Calculate availability, latency coverage and useful-outcome rate according to your definitions. Then change the definition to count every HTTP-like response as success and explain how it hides user failure.
 
+Assign each request a synthetic start time and terminal time, and predeclare a timeout deadline. Retain the timed-out request in the ten-request denominator; record its deadline and missing completion instead of inventing a successful duration. Under the worked contract, eight of ten requests are useful outcomes, while nine have a non-timeout terminal response. Report both the useful-outcome count and the timing coverage, and state whether your latency statistic includes errors or censored timeout observations.
+
 **Deliverable:** metric table and interpretation note. **Pass:** the original denominator remains explicit; missing or timed-out requests cannot disappear from the report.
 
 ## Hints and solution outline

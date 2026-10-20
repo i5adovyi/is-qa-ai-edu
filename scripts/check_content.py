@@ -61,16 +61,18 @@ def validate(root):
     labs = sorted((root / 'content/labs').glob('[0-9][0-9]-*.md'))
     need([p.name[:2] for p in labs] == [str(i).zfill(2) for i in range(1, 12)],
          'Expected eleven unique numbered lab guides, 01 through 11')
+    paths = [root / 'README.md']
     for folder in ['docs', 'templates', 'capstones', 'content', 'lab']:
-        for path in (root / folder).rglob('*.md'):
-            for target in re.findall(r'\[[^\]]+\]\(([^)]+)\)', path.read_text()):
-                if re.match(r'https?://|mailto:', target):
-                    continue
-                file_part, _, fragment = target.partition('#')
-                dest = (path.parent / unquote(file_part)).resolve() if file_part else path.resolve()
-                need(dest.is_file(), f'Broken link {path.relative_to(root)} -> {target}')
-                if dest.is_file() and fragment and dest.suffix == '.md':
-                    need(unquote(fragment) in headings(dest.read_text()), f'Broken section {path.relative_to(root)} -> {target}')
+        paths.extend((root / folder).rglob('*.md'))
+    for path in paths:
+        for target in re.findall(r'\[[^\]]+\]\(([^)]+)\)', path.read_text()):
+            if re.match(r'https?://|mailto:', target):
+                continue
+            file_part, _, fragment = target.partition('#')
+            dest = (path.parent / unquote(file_part)).resolve() if file_part else path.resolve()
+            need(dest.is_file(), f'Broken link {path.relative_to(root)} -> {target}')
+            if dest.is_file() and fragment and dest.suffix == '.md':
+                need(unquote(fragment) in headings(dest.read_text()), f'Broken section {path.relative_to(root)} -> {target}')
     return errors
 
 def check():
