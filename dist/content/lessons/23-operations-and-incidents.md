@@ -1,6 +1,6 @@
 # 23 · Operate the system and learn from incidents
 
-Stage 8 · 90 minutes · Advanced
+Stage 8 · 110 minutes · Advanced
 
 Practice diagnosis, containment and learning so failures improve the system instead of becoming repeated surprises.
 
@@ -51,6 +51,8 @@ A useful timeline records UTC or clearly labeled local timestamps consistently. 
 For a real service, escalation and notification follow the organization's authorized channels. This exercise requires only a local incident record; it does not authorize contacting real customers or teammates.
 
 ## Reflection
+
+Use [lab 15](../labs/15-review-and-operations.md) to execute a local review queue and release/rollback rehearsal. It checks approval against the exact artifact version and preserves pending work across restarts. Its synthetic reviewer label is not an authentication system for a hosted service.
 
 Which missing trace field slowed diagnosis? What manual step was most error-prone? Which corrective action changes the system, and which merely documents a risk that remains?
 

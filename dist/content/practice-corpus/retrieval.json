@@ -1,0 +1,29 @@
+{
+  "version": "retrieval-classroom-v1",
+  "records": [
+    {"id":"EXPORT-OLD","version":"2.3","title":"Export size policy","text":"Export files above 50 MB exceed the supported limit. This policy applies only to version 2.3.","supports":["limit-50-v23"],"contradicts":["limit-100-v23"]},
+    {"id":"EXPORT-CURRENT","version":"2.4","title":"Export size policy","text":"Export files up to 100 MB are supported. Larger jobs require batch export. This policy applies to version 2.4.","supports":["limit-100-v24","batch-large"],"contradicts":["limit-50-v24","instant-large"]},
+    {"id":"EXPORT-EXCEPTION","version":"2.4","title":"Restricted workspace export exception","text":"Restricted workspaces require administrator review before any export, even below the usual size limit.","supports":["restricted-review"],"contradicts":["restricted-auto"]},
+    {"id":"ACCESS-RESET","version":"all","title":"Password reset expiration","text":"Password reset links expire after thirty minutes. Request a fresh link for a local account. Enterprise SSO is an exception.","supports":["reset-30"],"contradicts":["reset-unlimited"]},
+    {"id":"ACCESS-SSO","version":"all","title":"Enterprise authentication","text":"Enterprise SSO authentication is owned by the identity administrator. Local password reset does not change an SSO credential.","supports":["sso-admin"],"contradicts":["sso-local-reset"]},
+    {"id":"BILLING-REVIEW","version":"all","title":"Duplicate invoice review","text":"Compare invoice identifiers and settlement status before confirming a duplicate payment. Refunds are not guaranteed before review.","supports":["settlement-review"],"contradicts":["refund-complete","refund-guaranteed"]},
+    {"id":"BILLING-PENDING","version":"all","title":"Pending card authorization","text":"A pending authorization and settled payment are different states. A pending entry does not independently prove duplicate settlement.","supports":["pending-not-settled"],"contradicts":["pending-proves-duplicate"]},
+    {"id":"SEARCH-DISTRACTOR","version":"all","title":"Export newsletter","text":"Our newsletter discusses export success stories and download usage statistics. It does not define customer troubleshooting policy.","supports":[],"contradicts":[]},
+    {"id":"EXPORT-CONFLICT","version":"2.4","title":"Unresolved export policy draft","text":"An unapproved draft proposes a 75 MB export limit for version 2.4. Its applicability conflicts with the approved policy and requires review.","supports":["draft-75-unapproved"],"contradicts":["draft-75-approved"]},
+    {"id":"EXPORT-DUPLICATE","version":"2.4","title":"Export size policy copy","text":"Export files up to 100 MB are supported. Larger jobs require batch export. Copy of EXPORT-CURRENT; not independent evidence.","supports":["limit-100-v24","batch-large"],"contradicts":["limit-50-v24","instant-large"]}
+  ],
+  "cases": [
+    {"id":"R01","query":"export size 80 MB","version":"2.4","required":["EXPORT-CURRENT"],"tags":["normal","version"]},
+    {"id":"R02","query":"huge download","version":"2.4","required":["EXPORT-CURRENT"],"tags":["paraphrase"],"candidate_claims":[{"source_id":"EXPORT-CURRENT","claim_id":"instant-large"}]},
+    {"id":"R03","query":"restricted workspace export","version":"2.4","required":["EXPORT-CURRENT","EXPORT-EXCEPTION"],"tags":["exception","two-sources"]},
+    {"id":"R04","query":"SSO reset link expired","version":"2.4","required":["ACCESS-SSO","ACCESS-RESET"],"tags":["misleading-keyword"],"candidate_claims":[{"source_id":"ACCESS-RESET","claim_id":"sso-local-reset"}]},
+    {"id":"R05","query":"charged twice pending payment","version":"2.4","required":["BILLING-REVIEW","BILLING-PENDING"],"tags":["synonym","two-sources"],"candidate_claims":[{"source_id":"BILLING-REVIEW","claim_id":"refund-guaranteed"}]},
+    {"id":"R06","query":"invoice settlement identifiers","version":"2.4","required":["BILLING-REVIEW"],"tags":["normal"],"candidate_claims":[{"source_id":"BILLING-REVIEW","claim_id":"settlement-review"}]},
+    {"id":"R07","query":"quantum sensor warranty","version":"2.4","required":[],"tags":["unanswerable"]},
+    {"id":"R08","query":"export size policy","version":"2.3","required":["EXPORT-OLD"],"tags":["old-version"]},
+    {"id":"R09","query":"export policy draft conflict 75","version":"2.4","required":["EXPORT-CURRENT","EXPORT-CONFLICT"],"tags":["conflict"],"candidate_claims":[{"source_id":"EXPORT-CONFLICT","claim_id":"draft-75-approved"}]},
+    {"id":"R10","query":"download success statistics","version":"2.4","required":["SEARCH-DISTRACTOR"],"tags":["non-policy","negative-control"]},
+    {"id":"R11","query":"authentication identity administrator","version":"2.4","required":["ACCESS-SSO"],"tags":["normal"],"candidate_claims":[{"source_id":"ACCESS-SSO","claim_id":"sso-admin"}]},
+    {"id":"R12","query":"export refund completed","version":"2.4","required":[],"tags":["unanswerable","keyword-trap"],"candidate_claims":[{"source_id":"EXPORT-CURRENT","claim_id":"refund-complete"}]}
+  ]
+}

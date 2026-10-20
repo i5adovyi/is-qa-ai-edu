@@ -55,7 +55,7 @@
       "stage": 1,
       "title": "Think in systems, then choose the smallest useful agent",
       "summary": "Map Signal Desk from a customer ticket to a verifiable support draft before choosing any model or framework.",
-      "minutes": 90,
+      "minutes": 70,
       "level": "Foundation",
       "file": "content/lessons/01-systems-before-agents.md",
       "objectives": [
@@ -66,22 +66,29 @@
       "quiz": {
         "question": "What belongs to the harness?",
         "options": [
-          "Context preparation, execution controls, state and validation",
           "Only the model weights",
+          "Context preparation, execution controls, state and validation",
           "The customer ticket alone",
           "Only the final prose"
         ],
-        "answer": 0,
+        "answer": 1,
         "explanation": "The harness is the surrounding runtime that turns model proposals into observable, controlled work."
       },
-      "exerciseCount": 3
+      "exerciseCount": 3,
+      "timing": {
+        "reading": 15,
+        "guided": 20,
+        "independent": 35,
+        "optional": 20
+      },
+      "timingBasis": "Provisional planning estimate; record actual minutes and help requested."
     },
     {
       "id": "02",
       "stage": 1,
       "title": "Write task contracts that survive ambiguity",
       "summary": "Replace vague prompting with explicit inputs, constraints, evidence rules and outputs you can check.",
-      "minutes": 90,
+      "minutes": 85,
       "level": "Foundation",
       "file": "content/lessons/02-task-contracts.md",
       "objectives": [
@@ -92,22 +99,29 @@
       "quiz": {
         "question": "What is the strongest response to missing diagnostic evidence?",
         "options": [
-          "Invent the likely cause",
           "Specify missing facts and an appropriate next question",
           "Add a more impressive role description",
+          "Invent the likely cause",
           "Force a category and omit uncertainty"
         ],
-        "answer": 1,
+        "answer": 0,
         "explanation": "An explicit uncertainty path preserves usefulness without treating guesses as facts."
       },
-      "exerciseCount": 3
+      "exerciseCount": 3,
+      "timing": {
+        "reading": 15,
+        "guided": 20,
+        "independent": 50,
+        "optional": 20
+      },
+      "timingBasis": "Provisional planning estimate; record actual minutes and help requested."
     },
     {
       "id": "03",
       "stage": 1,
       "title": "Run prompt experiments without fooling yourself",
       "summary": "Use controlled comparisons to discover whether a prompt revision improves Signal Desk rather than merely looking better.",
-      "minutes": 90,
+      "minutes": 110,
       "level": "Foundation",
       "file": "content/lessons/03-prompt-experiments.md",
       "objectives": [
@@ -118,15 +132,22 @@
       "quiz": {
         "question": "After repeatedly tuning against your held-out set, what should you do?",
         "options": [
-          "Keep calling it unseen data",
           "Delete its failures",
-          "Treat it as development data and obtain a new final set",
-          "Report only its best run"
+          "Report only its best run",
+          "Keep calling it unseen data",
+          "Treat it as development data and obtain a new final set"
         ],
-        "answer": 2,
+        "answer": 3,
         "explanation": "Repeated tuning consumes the independence of the held-out set."
       },
-      "exerciseCount": 3
+      "exerciseCount": 3,
+      "timing": {
+        "reading": 20,
+        "guided": 25,
+        "independent": 65,
+        "optional": 30
+      },
+      "timingBasis": "Provisional planning estimate; record actual minutes and help requested."
     },
     {
       "id": "04",
@@ -144,22 +165,29 @@
       "quiz": {
         "question": "A newer document conflicts with a version-specific policy. What matters?",
         "options": [
-          "Timestamp alone",
           "Document length",
           "Whichever statement is easier to answer",
+          "Timestamp alone",
           "Applicability, authority and provenance as well as freshness"
         ],
         "answer": 3,
         "explanation": "Freshness does not establish that a document applies to the same product version or has authority."
       },
-      "exerciseCount": 3
+      "exerciseCount": 3,
+      "timing": {
+        "reading": 20,
+        "guided": 25,
+        "independent": 45,
+        "optional": 20
+      },
+      "timingBasis": "Provisional planning estimate; record actual minutes and help requested."
     },
     {
       "id": "05",
       "stage": 2,
       "title": "Retrieve evidence before generating answers",
       "summary": "Build a small retrieval experiment that exposes why finding a document and supporting a claim are different tasks.",
-      "minutes": 90,
+      "minutes": 110,
       "level": "Foundation",
       "file": "content/lessons/05-retrieval-and-grounding.md",
       "objectives": [
@@ -170,15 +198,22 @@
       "quiz": {
         "question": "A draft cites a real document. What is still required?",
         "options": [
-          "Check that the cited passage supports the specific claim",
-          "Nothing; citations guarantee correctness",
           "Make the response longer",
-          "Retrieve the entire corpus"
+          "Nothing; citations guarantee correctness",
+          "Retrieve the entire corpus",
+          "Check that the cited passage supports the specific claim"
         ],
-        "answer": 0,
+        "answer": 3,
         "explanation": "Source existence and claim support are different checks."
       },
-      "exerciseCount": 3
+      "exerciseCount": 3,
+      "timing": {
+        "reading": 20,
+        "guided": 30,
+        "independent": 60,
+        "optional": 35
+      },
+      "timingBasis": "Provisional planning estimate; record actual minutes and help requested."
     },
     {
       "id": "06",
@@ -196,22 +231,29 @@
       "quiz": {
         "question": "What should a resuming agent do first with a completion claim in memory?",
         "options": [
-          "Trust it because it was summarized",
-          "Verify the referenced artifacts and current evidence",
           "Delete the original evidence",
-          "Send the draft immediately"
+          "Send the draft immediately",
+          "Trust it because it was summarized",
+          "Verify the referenced artifacts and current evidence"
         ],
-        "answer": 1,
+        "answer": 3,
         "explanation": "A summary can be stale or inconsistent; observable artifacts establish current state."
       },
-      "exerciseCount": 3
+      "exerciseCount": 3,
+      "timing": {
+        "reading": 15,
+        "guided": 25,
+        "independent": 50,
+        "optional": 20
+      },
+      "timingBasis": "Provisional planning estimate; record actual minutes and help requested."
     },
     {
       "id": "07",
       "stage": 3,
       "title": "Design tools as precise contracts",
       "summary": "Build tool interfaces that make the right operation obvious and invalid operations easy to reject.",
-      "minutes": 90,
+      "minutes": 115,
       "level": "Practitioner",
       "file": "content/lessons/07-tool-contracts.md",
       "objectives": [
@@ -223,47 +265,61 @@
         "question": "A save-draft tool returns success. What can the agent conclude?",
         "options": [
           "The customer received the message",
-          "The issue is resolved",
           "The specific documented local write succeeded",
-          "Any future write is approved"
+          "Any future write is approved",
+          "The issue is resolved"
         ],
-        "answer": 2,
+        "answer": 1,
         "explanation": "Tool success supports only the side effect defined by that tool contract."
       },
-      "exerciseCount": 3
+      "exerciseCount": 3,
+      "timing": {
+        "reading": 20,
+        "guided": 30,
+        "independent": 65,
+        "optional": 30
+      },
+      "timingBasis": "Provisional planning estimate; record actual minutes and help requested."
     },
     {
       "id": "08",
       "stage": 3,
       "title": "Understand MCP by tracing one request",
       "summary": "Learn where MCP fits by following discovery, a tool call and its result through a local Signal Desk integration.",
-      "minutes": 90,
+      "minutes": 120,
       "level": "Practitioner",
       "file": "content/lessons/08-mcp-request-lifecycle.md",
       "objectives": [
         "Distinguish host, client and server responsibilities.",
         "Trace discovery and execution without confusing transport with policy.",
-        "Design a protocol-shaped offline simulator and failure cases."
+        "Run a real local SDK exchange and diagnose schema, timeout, disconnect, and logging failures."
       ],
       "quiz": {
         "question": "Does discovering a tool establish permission to execute it?",
         "options": [
-          "Yes, discovery is authorization",
-          "Only for write tools",
           "Yes, if its description sounds safe",
-          "No; host and server policy still govern execution"
+          "No; host and server policy still govern execution",
+          "Yes, discovery is authorization",
+          "Only for write tools"
         ],
-        "answer": 3,
+        "answer": 1,
         "explanation": "Discovery describes available capabilities; authorization and validation remain separate controls."
       },
-      "exerciseCount": 3
+      "exerciseCount": 3,
+      "timing": {
+        "reading": 20,
+        "guided": 35,
+        "independent": 65,
+        "optional": 40
+      },
+      "timingBasis": "Provisional planning estimate; record actual minutes and help requested."
     },
     {
       "id": "09",
       "stage": 3,
       "title": "Package a skill that improves repeatable work",
       "summary": "Turn a successful Signal Desk procedure into a discoverable, testable skill with a clear activation boundary.",
-      "minutes": 120,
+      "minutes": 135,
       "level": "Practitioner",
       "file": "content/lessons/09-reusable-skills.md",
       "objectives": [
@@ -275,21 +331,28 @@
         "question": "What is the best evidence that a skill is reusable?",
         "options": [
           "It works from its files on new cases without hidden chat context",
-          "Its instructions are very long",
+          "It always activates",
           "It contains many role adjectives",
-          "It always activates"
+          "Its instructions are very long"
         ],
         "answer": 0,
         "explanation": "A reusable procedure must transfer to new cases with explicit dependencies and completion criteria."
       },
-      "exerciseCount": 3
+      "exerciseCount": 3,
+      "timing": {
+        "reading": 20,
+        "guided": 35,
+        "independent": 80,
+        "optional": 45
+      },
+      "timingBasis": "Provisional planning estimate; record actual minutes and help requested."
     },
     {
       "id": "10",
       "stage": 4,
       "title": "Turn a feature request into a bounded coding task",
       "summary": "Give an agent a change request that defines behavior, boundaries and verification without dictating every implementation detail.",
-      "minutes": 90,
+      "minutes": 85,
       "level": "Practitioner",
       "file": "content/lessons/10-coding-task-design.md",
       "objectives": [
@@ -300,22 +363,29 @@
       "quiz": {
         "question": "What should define a coding task before implementation?",
         "options": [
-          "A preferred framework only",
           "Observable before/after behavior and acceptance cases",
+          "The number of files to create",
           "A request for maximum autonomy",
-          "The number of files to create"
+          "A preferred framework only"
         ],
-        "answer": 1,
+        "answer": 0,
         "explanation": "Behavior and acceptance cases give implementation and review a shared target."
       },
-      "exerciseCount": 3
+      "exerciseCount": 3,
+      "timing": {
+        "reading": 15,
+        "guided": 25,
+        "independent": 45,
+        "optional": 30
+      },
+      "timingBasis": "Provisional planning estimate; record actual minutes and help requested."
     },
     {
       "id": "11",
       "stage": 4,
       "title": "Use verification loops that catch real defects",
       "summary": "Drive a coding change with independent checks and learn why an agent saying its work is correct is not evidence.",
-      "minutes": 90,
+      "minutes": 110,
       "level": "Practitioner",
       "file": "content/lessons/11-verification-loops.md",
       "objectives": [
@@ -326,15 +396,22 @@
       "quiz": {
         "question": "Why test an always-successful mutant?",
         "options": [
-          "To improve code style",
           "To measure model intelligence",
-          "To verify that tests can detect a validator that rejects nothing",
-          "To replace the real suite"
+          "To replace the real suite",
+          "To improve code style",
+          "To verify that tests can detect a validator that rejects nothing"
         ],
-        "answer": 2,
+        "answer": 3,
         "explanation": "A suite that passes an always-successful validator cannot establish rejection behavior."
       },
-      "exerciseCount": 3
+      "exerciseCount": 3,
+      "timing": {
+        "reading": 20,
+        "guided": 30,
+        "independent": 60,
+        "optional": 30
+      },
+      "timingBasis": "Provisional planning estimate; record actual minutes and help requested."
     },
     {
       "id": "12",
@@ -352,22 +429,29 @@
       "quiz": {
         "question": "What makes a review finding actionable?",
         "options": [
-          "A broad warning without an example",
-          "A preference for another framework",
           "A statement that AI code is risky",
-          "A trigger, consequence and evidence pointing to the defect"
+          "A broad warning without an example",
+          "A trigger, consequence and evidence pointing to the defect",
+          "A preference for another framework"
         ],
-        "answer": 3,
+        "answer": 2,
         "explanation": "Actionable findings show how the defect occurs and why it matters."
       },
-      "exerciseCount": 3
+      "exerciseCount": 3,
+      "timing": {
+        "reading": 15,
+        "guided": 25,
+        "independent": 50,
+        "optional": 25
+      },
+      "timingBasis": "Provisional planning estimate; record actual minutes and help requested."
     },
     {
       "id": "13",
       "stage": 5,
       "title": "Build the agent loop as an explicit state machine",
       "summary": "Turn model proposals into a bounded execution loop with clear transitions and useful terminal outcomes.",
-      "minutes": 90,
+      "minutes": 120,
       "level": "Practitioner",
       "file": "content/lessons/13-agent-loop-state-machine.md",
       "objectives": [
@@ -378,22 +462,29 @@
       "quiz": {
         "question": "Who should enforce the maximum number of steps?",
         "options": [
-          "The harness runtime",
           "The model alone",
-          "The customer ticket",
-          "A final summary"
+          "A final summary",
+          "The harness runtime",
+          "The customer ticket"
         ],
-        "answer": 0,
+        "answer": 2,
         "explanation": "Runtime enforcement remains effective even when the planner ignores or misunderstands its instructions."
       },
-      "exerciseCount": 3
+      "exerciseCount": 3,
+      "timing": {
+        "reading": 20,
+        "guided": 35,
+        "independent": 65,
+        "optional": 45
+      },
+      "timingBasis": "Provisional planning estimate; record actual minutes and help requested."
     },
     {
       "id": "14",
       "stage": 5,
       "title": "Recover from crashes without duplicating work",
       "summary": "Design checkpoints and idempotent operations so interruption becomes a recoverable state rather than a mystery.",
-      "minutes": 90,
+      "minutes": 120,
       "level": "Practitioner",
       "file": "content/lessons/14-checkpointing-and-idempotency.md",
       "objectives": [
@@ -404,22 +495,29 @@
       "quiz": {
         "question": "A write times out after it may have succeeded. What is the correct interpretation?",
         "options": [
+          "It definitely succeeded",
           "It definitely failed",
           "Its outcome is uncertain until reconciled or safely deduplicated",
-          "It definitely succeeded",
           "Retry immediately with a new operation ID"
         ],
-        "answer": 1,
+        "answer": 2,
         "explanation": "A missing response does not establish whether the side effect occurred."
       },
-      "exerciseCount": 3
+      "exerciseCount": 3,
+      "timing": {
+        "reading": 20,
+        "guided": 35,
+        "independent": 65,
+        "optional": 30
+      },
+      "timingBasis": "Provisional planning estimate; record actual minutes and help requested."
     },
     {
       "id": "15",
       "stage": 5,
       "title": "Make cost, latency and behavior observable",
       "summary": "Instrument the harness so you can explain what happened, where time went and why a run stopped.",
-      "minutes": 90,
+      "minutes": 120,
       "level": "Practitioner",
       "file": "content/lessons/15-budgets-and-observability.md",
       "objectives": [
@@ -431,21 +529,28 @@
         "question": "Why distinguish budget exhaustion from task failure?",
         "options": [
           "They are identical",
+          "Only the model can tell them apart",
           "It makes success rates look better",
-          "Budget exhaustion describes a runtime limit, not proof the task is impossible",
-          "Only the model can tell them apart"
+          "Budget exhaustion describes a runtime limit, not proof the task is impossible"
         ],
-        "answer": 2,
+        "answer": 3,
         "explanation": "A bounded run can stop before resolving an otherwise solvable task; reporting the reason supports recovery."
       },
-      "exerciseCount": 3
+      "exerciseCount": 3,
+      "timing": {
+        "reading": 20,
+        "guided": 30,
+        "independent": 70,
+        "optional": 30
+      },
+      "timingBasis": "Provisional planning estimate; record actual minutes and help requested."
     },
     {
       "id": "16",
       "stage": 6,
       "title": "Build an evaluation set that reflects the job",
       "summary": "Create a versioned benchmark with meaningful coverage, defensible labels and explicit limits.",
-      "minutes": 90,
+      "minutes": 115,
       "level": "Advanced",
       "file": "content/lessons/16-evaluation-datasets.md",
       "objectives": [
@@ -457,21 +562,28 @@
         "question": "What should a label specify for a generative support draft?",
         "options": [
           "One exact sentence only",
-          "The longest possible answer",
+          "Acceptable behavior, required evidence and forbidden claims",
           "Only the category",
-          "Acceptable behavior, required evidence and forbidden claims"
+          "The longest possible answer"
         ],
-        "answer": 3,
+        "answer": 1,
         "explanation": "Behavioral labels allow valid wording variation while preserving the requirements that matter."
       },
-      "exerciseCount": 3
+      "exerciseCount": 3,
+      "timing": {
+        "reading": 20,
+        "guided": 30,
+        "independent": 65,
+        "optional": 35
+      },
+      "timingBasis": "Provisional planning estimate; record actual minutes and help requested."
     },
     {
       "id": "17",
       "stage": 6,
       "title": "Use graders carefully and report uncertainty",
       "summary": "Combine deterministic checks, human judgment and optional model graders without confusing a score with truth.",
-      "minutes": 90,
+      "minutes": 115,
       "level": "Advanced",
       "file": "content/lessons/17-graders-and-statistics.md",
       "objectives": [
@@ -482,22 +594,29 @@
       "quiz": {
         "question": "A candidate improves average score but introduces an unauthorized-action failure. What should you do?",
         "options": [
-          "Inspect the severe regression and apply the release policy",
-          "Release because the mean improved",
+          "Change the grader to pass it",
           "Hide the failed case",
-          "Change the grader to pass it"
+          "Inspect the severe regression and apply the release policy",
+          "Release because the mean improved"
         ],
-        "answer": 0,
+        "answer": 2,
         "explanation": "Averages cannot override explicit critical failure constraints."
       },
-      "exerciseCount": 3
+      "exerciseCount": 3,
+      "timing": {
+        "reading": 20,
+        "guided": 30,
+        "independent": 65,
+        "optional": 30
+      },
+      "timingBasis": "Provisional planning estimate; record actual minutes and help requested."
     },
     {
       "id": "18",
       "stage": 6,
       "title": "Red-team the whole system and set release gates",
       "summary": "Test how failures cross boundaries, then define a release decision that remains meaningful under pressure.",
-      "minutes": 90,
+      "minutes": 110,
       "level": "Advanced",
       "file": "content/lessons/18-red-teaming-and-release-gates.md",
       "objectives": [
@@ -508,22 +627,29 @@
       "quiz": {
         "question": "What is a strong release response to a critical tool-boundary failure?",
         "options": [
-          "Add a reassuring disclaimer",
           "Fix it or remove the affected capability and verify the narrower scope",
           "Raise the average score",
-          "Ask the model to be more careful"
+          "Ask the model to be more careful",
+          "Add a reassuring disclaimer"
         ],
-        "answer": 1,
+        "answer": 0,
         "explanation": "A concrete capability change or verified repair addresses the failure; presentation changes do not."
       },
-      "exerciseCount": 3
+      "exerciseCount": 3,
+      "timing": {
+        "reading": 20,
+        "guided": 30,
+        "independent": 60,
+        "optional": 30
+      },
+      "timingBasis": "Provisional planning estimate; record actual minutes and help requested."
     },
     {
       "id": "19",
       "stage": 7,
       "title": "Decide when delegation is worth its coordination cost",
       "summary": "Use multiple agents where tasks can be separated and verified, then compare the result with a simpler baseline.",
-      "minutes": 90,
+      "minutes": 95,
       "level": "Advanced",
       "file": "content/lessons/19-delegation-design.md",
       "objectives": [
@@ -534,22 +660,29 @@
       "quiz": {
         "question": "Which work is best suited to parallel delegation?",
         "options": [
-          "Tasks that all edit the same file without coordination",
-          "A strict dependency chain with no independent work",
+          "Anything, if enough agents are available",
           "Independent subtasks with explicit inputs and verifiable outputs",
-          "Anything, if enough agents are available"
+          "Tasks that all edit the same file without coordination",
+          "A strict dependency chain with no independent work"
         ],
-        "answer": 2,
+        "answer": 1,
         "explanation": "Independence and clear contracts reduce coordination cost and integration risk."
       },
-      "exerciseCount": 3
+      "exerciseCount": 3,
+      "timing": {
+        "reading": 15,
+        "guided": 30,
+        "independent": 50,
+        "optional": 25
+      },
+      "timingBasis": "Provisional planning estimate; record actual minutes and help requested."
     },
     {
       "id": "20",
       "stage": 7,
       "title": "Coordinate workers without losing ownership or state",
       "summary": "Design handoffs, ownership and conflict resolution so parallel work produces a coherent result.",
-      "minutes": 90,
+      "minutes": 115,
       "level": "Advanced",
       "file": "content/lessons/20-multi-agent-coordination.md",
       "objectives": [
@@ -560,22 +693,29 @@
       "quiz": {
         "question": "A worker returns an older policy version after a newer result was accepted. What should happen?",
         "options": [
-          "Overwrite the final result because it arrived last",
           "Ignore version information",
           "Restart all workers unconditionally",
+          "Overwrite the final result because it arrived last",
           "Detect the version mismatch and reconcile or reject automatic integration"
         ],
         "answer": 3,
         "explanation": "Arrival order is not evidence of freshness; input versions determine applicability."
       },
-      "exerciseCount": 3
+      "exerciseCount": 3,
+      "timing": {
+        "reading": 20,
+        "guided": 30,
+        "independent": 65,
+        "optional": 30
+      },
+      "timingBasis": "Provisional planning estimate; record actual minutes and help requested."
     },
     {
       "id": "21",
       "stage": 7,
       "title": "Measure whether your agent team is actually better",
       "summary": "Compare a team with a single-agent baseline using outcome quality, coordination failures and total resource use.",
-      "minutes": 90,
+      "minutes": 125,
       "level": "Advanced",
       "file": "content/lessons/21-multi-agent-evaluation.md",
       "objectives": [
@@ -586,22 +726,29 @@
       "quiz": {
         "question": "Three workers agree using the same mistaken source. What does their agreement establish?",
         "options": [
-          "Only shared agreement; the evidence can still be wrong",
+          "That the minority should always be ignored",
           "Independent confirmation",
           "A guaranteed correct answer",
-          "That the minority should always be ignored"
+          "Only shared agreement; the evidence can still be wrong"
         ],
-        "answer": 0,
+        "answer": 3,
         "explanation": "Correlated evidence and assumptions can produce unanimous error."
       },
-      "exerciseCount": 3
+      "exerciseCount": 3,
+      "timing": {
+        "reading": 20,
+        "guided": 35,
+        "independent": 70,
+        "optional": 40
+      },
+      "timingBasis": "Provisional planning estimate; record actual minutes and help requested."
     },
     {
       "id": "22",
       "stage": 8,
       "title": "Design a production boundary and service contract",
       "summary": "Translate a successful local prototype into a scoped operating plan with ownership, reliability targets and controlled rollout.",
-      "minutes": 90,
+      "minutes": 105,
       "level": "Advanced",
       "file": "content/lessons/22-production-design.md",
       "objectives": [
@@ -612,22 +759,29 @@
       "quiz": {
         "question": "What makes a service indicator meaningful?",
         "options": [
-          "A very high target percentage",
           "A clear user-relevant event, denominator and measurement window",
           "A dashboard with many colors",
+          "A very high target percentage",
           "Only counting successful requests"
         ],
-        "answer": 1,
+        "answer": 0,
         "explanation": "Explicit definitions prevent misleading comparisons and hidden failures."
       },
-      "exerciseCount": 3
+      "exerciseCount": 3,
+      "timing": {
+        "reading": 20,
+        "guided": 30,
+        "independent": 55,
+        "optional": 30
+      },
+      "timingBasis": "Provisional planning estimate; record actual minutes and help requested."
     },
     {
       "id": "23",
       "stage": 8,
       "title": "Operate the system and learn from incidents",
       "summary": "Practice diagnosis, containment and learning so failures improve the system instead of becoming repeated surprises.",
-      "minutes": 90,
+      "minutes": 110,
       "level": "Advanced",
       "file": "content/lessons/23-operations-and-incidents.md",
       "objectives": [
@@ -638,15 +792,22 @@
       "quiz": {
         "question": "A reviewer confidently blames the model for an incident. What should guide diagnosis?",
         "options": [
-          "The confidence of the reviewer",
           "The newest component automatically",
-          "The first observable failing boundary and supporting artifacts",
-          "The longest trace event only"
+          "The longest trace event only",
+          "The confidence of the reviewer",
+          "The first observable failing boundary and supporting artifacts"
         ],
-        "answer": 2,
+        "answer": 3,
         "explanation": "Incident diagnosis should follow evidence and distinguish symptoms from contributing causes."
       },
-      "exerciseCount": 3
+      "exerciseCount": 3,
+      "timing": {
+        "reading": 20,
+        "guided": 30,
+        "independent": 60,
+        "optional": 30
+      },
+      "timingBasis": "Provisional planning estimate; record actual minutes and help requested."
     },
     {
       "id": "24",
@@ -664,15 +825,22 @@
       "quiz": {
         "question": "What makes the capstone credible?",
         "options": [
-          "Many agents and a dramatic demo",
-          "A claim of production readiness without deployment",
+          "Reproducible behavior, failure evidence, clear scope and honest limits",
           "A large prompt collection alone",
-          "Reproducible behavior, failure evidence, clear scope and honest limits"
+          "Many agents and a dramatic demo",
+          "A claim of production readiness without deployment"
         ],
-        "answer": 3,
+        "answer": 0,
         "explanation": "Credibility comes from reviewable outcomes and evidence, including the system’s limits."
       },
-      "exerciseCount": 3
+      "exerciseCount": 3,
+      "timing": {
+        "reading": 15,
+        "guided": 30,
+        "independent": 45,
+        "optional": 30
+      },
+      "timingBasis": "Provisional planning estimate; record actual minutes and help requested."
     }
   ]
 }

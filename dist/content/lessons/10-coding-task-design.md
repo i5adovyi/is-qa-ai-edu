@@ -1,6 +1,6 @@
 # 10 · Turn a feature request into a bounded coding task
 
-Stage 4 · 90 minutes · Practitioner
+Stage 4 · 85 minutes · Practitioner
 
 Give an agent a change request that defines behavior, boundaries and verification without dictating every implementation detail.
 

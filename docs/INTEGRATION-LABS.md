@@ -8,6 +8,17 @@ Complete these three labs to connect the course's diagrams and helper functions 
 | [10: Installed skill](../content/labs/10-installed-skill.md) | A skill copied into a disposable project, then used in fresh Codex sessions | Lesson 09; basic Python; host access for behavioral testing | Installation manifest, discovered skill, generated artifact, trigger/non-trigger and missing-reference observations |
 | [11: Complete student harness](../content/labs/11-complete-student-harness.md) | Eight student components connected to the checkpointed workflow | Labs 01–08; lessons 13–18 | Component calls, source identity, evaluation, budget stops, crash/resume behavior and one-effect replay |
 
+Then choose the extensions matching the skill you need to demonstrate:
+
+| Lab | When to take it | What to prove |
+| --- | --- | --- |
+| [12: Model-directed tool loop](../content/labs/12-model-tool-loop.md) | After lessons 08 and 13–15 | Scripted planner controls; optional actual model→MCP→observation→model execution and direct host integration |
+| [13: Coding and workers](../content/labs/13-coding-and-workers.md) | Coding mission after lessons 10–12; worker comparison after 19–21 | Reproduced bug, reviewed Git change, fresh-session handoff, single/team comparisons, coordination faults |
+| [14: Retrieval comparison](../content/labs/14-retrieval-comparison.md) | After lessons 05 and 16–17 | Version-aware lexical/hybrid retrieval, separate claim support, changed cases and limitations |
+| [15: Review and operations](../content/labs/15-review-and-operations.md) | After lessons 14 and 22–23 | Exact-revision review, stale-approval rejection, preserved pending work, CI and rollback |
+
+Reserve another 7–12 hours for these extensions, and use the study plan's longer route rather than squeezing them into the original 72-hour schedule. A scripted process worker is not an AI agent. A fake provider test is not a live call. Every extension names its own evidence boundary.
+
 The MCP lab uses an official SDK in an isolated environment. It requires package installation but no model or provider account. The skill installer and composed harness retain the standard-library Python route. The portal remains a reading and progress interface; run the commands locally after downloading or cloning the project.
 
 ## Sequence and time

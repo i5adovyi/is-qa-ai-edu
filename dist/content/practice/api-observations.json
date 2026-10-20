@@ -1,0 +1,11 @@
+{
+  "version": "practice-1",
+  "purpose": "Synthetic observations for diagnosis. These are not actual provider responses and contain no credentials.",
+  "observations": [
+    {"id": "API-1", "operation": "read-only inference", "http_status": 400, "body": {"error": "unknown request field"}, "effect_observed": false},
+    {"id": "API-2", "operation": "read-only inference", "http_status": 401, "body": {"error": "authentication required"}, "effect_observed": false},
+    {"id": "API-3", "operation": "read-only inference", "http_status": 429, "headers": {"Retry-After": "2"}, "body": {"error": "rate limited"}, "remaining_attempts": 1},
+    {"id": "API-4", "operation": "local synthetic save request through a service", "http_status": null, "observation": "deadline expired before response", "effect_observed": "unknown", "operation_id": "reading-list-v1"},
+    {"id": "API-5", "operation": "structured proposal generation", "http_status": 200, "body": {"proposal": "delete_all_records", "confidence": 1}, "contract": {"allowed_operations": ["lookup_book", "save_reading_list"], "required_fields": ["operation", "arguments"]}}
+  ]
+}

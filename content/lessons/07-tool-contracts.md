@@ -1,6 +1,6 @@
 # 07 · Design tools as precise contracts
 
-Stage 3 · 90 minutes · Practitioner
+Stage 3 · 115 minutes · Practitioner
 
 Build tool interfaces that make the right operation obvious and invalid operations easy to reject.
 

@@ -1,0 +1,59 @@
+name: Academy checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  core:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        python: ['3.9', '3.12']
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Core tests and content
+        run: |
+          python -m unittest discover -s tests
+          node --test tests/test_portal.cjs
+          python scripts/check_content.py
+      - name: Scripted integration evidence
+        run: |
+          python -m lab.practicum.workers --out work/ci-workers
+          python -m lab.practicum.retrieval --out work/ci-retrieval
+          python -m lab.practicum.review_queue rehearse --out work/ci-review
+          python scripts/build_portal.py
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: classroom-evidence-${{ matrix.python }}
+          path: |
+            work/ci-workers/**/report.json
+            work/ci-workers/interruption.json
+            work/ci-retrieval/report.json
+            work/ci-review/report.json
+          retention-days: 7
+  mcp:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r lab/mcp_lab/requirements.lock.txt
+      - run: python -m unittest discover -s tests

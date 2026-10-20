@@ -4,6 +4,8 @@ The course has three connected routes. **Concept practice** uses diagrams, contr
 
 ## Prerequisites and placement
 
+Start with the [three independent beginner entry checks](../content/onboarding/README.md). Diagram notation and proposal-versus-outcome reasoning are enough to begin the concept route. The terminal check creates a disposable input, a generated result, and an intentional failed assertion; it includes a catch-up worksheet.
+
 You do not need machine-learning mathematics or a paid API account. For the Python labs, you should be able to:
 
 - Open a terminal at this project's root and run `python3 --version`.
@@ -15,6 +17,8 @@ You do not need machine-learning mathematics or a paid API account. For the Pyth
 Check these by running `python3 -m lab.cli demo`, opening its `result.json`, and locating `classify` in `lab/policy.py`. Explain one branch in your own words. If that is difficult, start with the concept route and spend a preparation session on the [official Python tutorial](https://docs.python.org/3/tutorial/). Learn functions, data structures, modules, and reading/writing files before Lab 01. The course does not teach Python from zero.
 
 Git is useful for preserving patches, but it is not required: keep before/after copies until you are comfortable with version control. Never overwrite the only copy of an experiment.
+
+Before external APIs or the advanced coding practicum, use the [future-project readiness checks](FUTURE-PROJECT-READINESS.md). They cover Git, JSON/API errors, isolated environments, migration comparisons, and learning from new data. They are placed where needed rather than added as prerequisites to lesson 01.
 
 ## Follow the lesson-to-practice map
 
@@ -54,6 +58,19 @@ The [model bridge](../lab/model-bridge.md) remains a separate route for replayin
 [Lab 10](../content/labs/10-installed-skill.md) installs the supplied skill into a disposable repository workspace. It separates deterministic package checks from fresh-host discovery and behavior. Use the documented host procedure to capture triggered use, a non-trigger request and a missing-reference failure. Host access and authentication are required for that behavioral portion; do not award a host-integration pass merely because a folder validator passed.
 
 The [integration route](INTEGRATION-LABS.md) gives the sequence, additional time budget and common evidence packet. This edition's actual SDK and host checks are recorded in [verification](VERIFICATION.md).
+
+## Added practice, without changing the original exercises
+
+Use [starter fixtures](../content/practice/README.md) before authoring new cases for lessons 05, 16, 17, and 21. Keep the supplied practice examples separate from your own final evaluation split. Use [applied checks and calibration](../content/assessment/README.md) after each lesson and one [new-domain transfer](../content/assessment/transfer-and-retention.md) at each stage gate.
+
+| Extension | Prerequisites | Evidence and remaining boundary |
+| --- | --- | --- |
+| [Lab 12: model/tool loop](../content/labs/12-model-tool-loop.md) | Lessons 07–09 and 13–16; completed lab 11 component gate; lab 09 for actual MCP | Scripted action/observation loop first; optional actual model decision, MCP execution, observation, and subsequent model decision |
+| [Lab 13: coding and workers](../content/labs/13-coding-and-workers.md) | Lessons 10–12; lessons 19–21 for the worker comparison; Git | Original failure, scoped patch, commit/revert/resume; isolated worker outputs, stale/duplicate handling, and all parent/worker effort |
+| [Lab 14: retrieval comparison](../content/labs/14-retrieval-comparison.md) | Lessons 04–05 and 16–17 | Same-case recall/support comparison; applicability and source-refresh errors separated from generation |
+| [Lab 15: review and operations](../content/labs/15-review-and-operations.md) | Lessons 14 and 22–23 | Exact-version human review, stale-approval rejection, persisted pending work, release checks, and rollback |
+
+These extensions add sessions; the [study plan](STUDY-PLAN.md) budgets them explicitly. A process-based worker run establishes process coordination; a scripted planner run establishes the loop boundary. Neither establishes unexecuted live-model behavior.
 
 ## Evidence before completion
 

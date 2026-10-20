@@ -5,6 +5,8 @@ The editable source is this repository. The portal is generated into `dist/`; do
 ## Structure
 
 - `content/curriculum.json`: stage and lesson metadata.
+- `content/learning.json`: exercise/step contracts, progressive hints, applied checks, routes, walkthroughs, and transfer prompts. Tutor packets whitelist prompt fields and exclude hints and solutions.
+- `content/onboarding/`, `content/practice/`, `content/assessment/`, `content/walkthroughs/`: preparation, starter fixtures, calibration, transfer, and original walkthroughs.
 - `content/lessons/`: original lesson text.
 - `content/resources.json`: curated external library.
 - `content/articles/`, `content/library/`: supporting reading.
@@ -12,6 +14,8 @@ The editable source is this repository. The portal is generated into `dist/`; do
 - `lab/mcp_lab/`: real SDK client/server exercise with separately installed dependencies.
 - `content/skill-practice/`, `lab/skill_lab/`: installable teaching skill, synthetic inputs, and disposable-workspace tooling.
 - `lab/composed.py`: integrated student-component runner; preserve the ordinary reference CLI.
+- `lab/planner_lab/`: bounded planner, live-model adapters, real MCP use, host integration, and separately labeled execution evidence.
+- `lab/practicum/`: isolated coding mission, process/model workers, retrieval comparison, and local review queue.
 - `content/research/`: synthetic source corpus and scored research examples.
 - `content/dev-sandbox/`: intentionally broken development exercise; its one baseline test failure is expected and isolated from reference checks.
 - `docs/`, `templates/`, `capstones/`: learner manuals and reusable project artifacts.
@@ -34,6 +38,10 @@ python3 scripts/serve.py
 Open overview, a lesson, a lab, the library, and a manual. Check keyboard navigation, narrow screens, quiz feedback, saved notes, progress export, and import. Browser storage is local to its origin; a local preview and hosted portal do not share progress. Export and import JSON to transfer it. Browser data can be erased; keep backups.
 
 With the local server running and Playwright available, run `node scripts/test_portal.cjs` for interactions and `node scripts/audit_portal.cjs` for every document, internal link, quiz answer, downloadable asset, and mobile document layout. `ACADEMY_BROWSER_PATH` selects an installed browser executable. When testing another checkout, set `ACADEMY_TEST_URL` to its server and `ACADEMY_DIST_DIR` to its matching `dist/`; the audit compares download hashes with that exact build.
+
+Also run `node scripts/test_learning_portal.cjs` for the exercise workspace, spoiler protection, v1 progress migration, feedback history, import conflicts, recall, and narrow-screen behavior. The v2 progress schema must preserve original attempts; do not silently overwrite a learner's history on import.
+
+The GitHub Actions workflow runs core and optional MCP checks with no model credentials. Live Codex/provider calls are deliberately explicit local checks. Record CI execution separately from a locally passing workflow command.
 
 ## Add a lesson
 

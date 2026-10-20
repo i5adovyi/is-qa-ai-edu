@@ -1,4 +1,4 @@
-# Eleven engineering labs
+# Fifteen engineering labs
 
 Build engineering judgment by observing a working system, predicting a failure, making a narrow change, and testing the prediction. The [Signal Desk manual](../../lab/README.md) explains setup and every CLI command.
 
@@ -17,8 +17,14 @@ The reference implementation works immediately. Your separate workspace is `lab/
 | [09 — Real MCP](09-real-mcp.md) | Can a separate client and server negotiate and exchange valid tool results? | SDK client/server integration | 120–180 min |
 | [10 — Installed skill](10-installed-skill.md) | Can a fresh host discover and correctly use your installed procedure? | Skill package and host evidence | 75–120 min |
 | [11 — Complete student harness](11-complete-student-harness.md) | Do all eight components actually control an evaluated run? | Composed runner and component evidence | 120–240 min |
+| [12 — Model-directed tool loop](12-model-tool-loop.md) | Can a model propose, observe, and finish within runtime controls? | Planner, provider adapter, MCP observation | 120–180 min |
+| [13 — Coding and workers](13-coding-and-workers.md) | Can you deliver a reviewed change and compare real workers fairly? | Disposable Git mission and worker coordinator | 120–240 min |
+| [14 — Retrieval comparison](14-retrieval-comparison.md) | Does improved search produce better supported claims? | Versioned corpus and lexical/hybrid comparison | 90–150 min |
+| [15 — Review and operations](15-review-and-operations.md) | Does approval survive revisions correctly, and can releases recover? | Local review queue, CI, rollback | 90–150 min |
 
 Times are planning estimates, not promises. Expect roughly 9–13 focused hours for the first eight implementations and written reviews, plus 5–9 hours for the integration labs. Setup, debugging and stretch work can add time. See the [integration route](../../docs/INTEGRATION-LABS.md) for prerequisites and sequence.
+
+Labs 12–15 extend that original route by roughly 7–12 additional focused hours. Their live-model sections require available host/provider access and are assessed separately. These estimates have not been calibrated through a learner pilot.
 
 ## The work loop
 

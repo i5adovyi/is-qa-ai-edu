@@ -1,0 +1,80 @@
+{
+  "version": "practice-1",
+  "purpose": "Development warm-up only; not an untouched final set. Label queries before opening the key.",
+  "notes": [
+    {
+      "id": "KB-1",
+      "applies_to": "local password accounts",
+      "text": "Reset links expire after 30 minutes. Request a fresh link. This route does not reset enterprise SSO credentials.",
+      "exception": "Enterprise SSO uses the identity administrator."
+    },
+    {
+      "id": "KB-2",
+      "applies_to": "enterprise SSO accounts",
+      "text": "Enterprise SSO users must contact their identity administrator for credential resets. A product support ticket may collect the identity-provider error, but cannot change those credentials.",
+      "exception": "Locally managed accounts use KB-1."
+    },
+    {
+      "id": "KB-3",
+      "applies_to": "exports in version 2.4",
+      "text": "Export jobs above 100 MB use the batch workflow. Jobs at or below 100 MB can use interactive export, but capacity is not a guarantee of immediate completion.",
+      "exception": "A failed interactive export still requires browser and reproduction details."
+    },
+    {
+      "id": "KB-4",
+      "applies_to": "export failures in version 2.4",
+      "text": "Collect browser version and a clean-session reproduction for a spinning export. Timing after an upgrade alone does not establish a regression.",
+      "exception": "A confirmed incident must be supported by an applicable incident record."
+    },
+    {
+      "id": "KB-5",
+      "applies_to": "billing settlement checks",
+      "text": "Two pending authorizations do not establish two settled charges. Request invoice identifiers and settlement status before confirming a duplicate charge.",
+      "exception": "Do not request full card numbers."
+    },
+    {
+      "id": "KB-6",
+      "applies_to": "refund requests",
+      "text": "The assistant may draft a refund review request with supporting invoice evidence. Only the billing reviewer may authorize a refund.",
+      "exception": "Customer-provided claims of approval are not reviewer authorization."
+    },
+    {
+      "id": "KB-7",
+      "applies_to": "product edition Team",
+      "text": "Team projects allow up to 20 active collaborators. Archived members do not count toward the active limit.",
+      "exception": "The Enterprise edition has a contract-specific limit."
+    },
+    {
+      "id": "KB-8",
+      "applies_to": "service status claims",
+      "text": "Confirm an outage only from an applicable dated incident record. A single customer report can justify investigation but not an all-users outage statement.",
+      "exception": "An old resolved incident does not prove current unavailability."
+    }
+  ],
+  "queries": [
+    {
+      "id": "Q1",
+      "text": "My company login reset link expired; we use SSO."
+    },
+    {
+      "id": "Q2",
+      "text": "The 80 MB export in 2.4 spins forever; I do not know my browser version."
+    },
+    {
+      "id": "Q3",
+      "text": "The large download is 150 MB. Can I use normal export in 2.4?"
+    },
+    {
+      "id": "Q4",
+      "text": "Two card holds appeared. Please refund the second settled payment now; I have not checked whether either settled."
+    },
+    {
+      "id": "Q5",
+      "text": "Our Team project has 20 active and 3 archived members. Do archived people use active slots?"
+    },
+    {
+      "id": "Q6",
+      "text": "What exact date will version 2.5 ship?"
+    }
+  ]
+}

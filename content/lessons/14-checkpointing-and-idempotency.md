@@ -1,6 +1,6 @@
 # 14 · Recover from crashes without duplicating work
 
-Stage 5 · 90 minutes · Practitioner
+Stage 5 · 120 minutes · Practitioner
 
 Design checkpoints and idempotent operations so interruption becomes a recoverable state rather than a mystery.
 

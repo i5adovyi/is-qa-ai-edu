@@ -1,0 +1,170 @@
+{
+  "recorded_on": "2026-10-20",
+  "synthetic_data_only": true,
+  "report": {
+    "schema_version": 1,
+    "status": "drafted",
+    "error": null,
+    "planner_evidence": "live_codex_cli_proposal",
+    "lookup_evidence": "real_mcp_sdk_stdio",
+    "attempts": 2,
+    "tool_executions": 1,
+    "decision": {
+      "action": "draft",
+      "category": "export",
+      "reply": "For Signal Desk 2.4, retry the export with a date range of seven days or fewer. If it still fails, provide the job identifier so the issue can be escalated.",
+      "citations": [
+        "KB-EXPORT-2"
+      ],
+      "reason": "Retrieved export guidance matches Signal Desk 2.4 and supports this retry and escalation path."
+    },
+    "limits": {
+      "max_decisions": 2,
+      "max_attempts": 2,
+      "max_retries": 0,
+      "deadline_seconds": 180.0,
+      "max_context_chars": 24000
+    },
+    "elapsed_ms": 12803.369,
+    "task_acceptance": true,
+    "semantic_grounding": "human_review_required",
+    "cost_usd": null,
+    "limitations": [
+      "Schema and citation validation do not establish semantic correctness.",
+      "A failed or cancelled remote request may still incur provider usage.",
+      "Character accounting is not token accounting; no dollar price is assumed."
+    ]
+  },
+  "trace": [
+    {
+      "sequence": 1,
+      "kind": "request",
+      "elapsed_ms": 0.111,
+      "step": 1,
+      "context_chars": 2295,
+      "request_sha256": "403109d271c6aef00e0086e0bba976b91310923219f442a180b61b4b9488fea5"
+    },
+    {
+      "sequence": 2,
+      "kind": "planner_response",
+      "elapsed_ms": 5555.073,
+      "attempt": 1,
+      "proposal": {
+        "kind": "tool",
+        "name": "lookup_article",
+        "arguments": {
+          "record_id": "KB-EXPORT-2"
+        },
+        "decision": null
+      },
+      "latency_ms": 5554.922,
+      "metadata": {
+        "provider": "codex_cli",
+        "requested_model": "gpt-6-astra",
+        "model": "gpt-6-astra",
+        "model_identity_source": "explicit_cli_request",
+        "usage": {
+          "input_tokens": 11253,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 36,
+          "reasoning_output_tokens": 0
+        },
+        "host_tools_used": false,
+        "note": "Fresh CLI session per proposal; outer harness supplies observation history."
+      }
+    },
+    {
+      "sequence": 3,
+      "kind": "validated_tool_call",
+      "elapsed_ms": 5555.317,
+      "name": "lookup_article",
+      "arguments": {
+        "record_id": "KB-EXPORT-2"
+      }
+    },
+    {
+      "sequence": 4,
+      "kind": "observation",
+      "elapsed_ms": 6183.076,
+      "value": {
+        "record": {
+          "id": "KB-EXPORT-2",
+          "topic": "export",
+          "product_version": "2.4",
+          "title": "Export timeout",
+          "excerpt": "For Signal Desk 2.4, retry the export with a date range of seven days or fewer. If that fails, escalate with the job identifier. Do not claim an outage is resolved."
+        },
+        "trust": "untrusted_evidence"
+      }
+    },
+    {
+      "sequence": 5,
+      "kind": "request",
+      "elapsed_ms": 6183.238,
+      "step": 2,
+      "context_chars": 2610,
+      "request_sha256": "95bab271af0615f1c2e6c463d374bf89a313c28e9ee52425718ba317f4cd6293"
+    },
+    {
+      "sequence": 6,
+      "kind": "planner_response",
+      "elapsed_ms": 12803.024,
+      "attempt": 2,
+      "proposal": {
+        "kind": "complete",
+        "name": null,
+        "arguments": null,
+        "decision": {
+          "action": "draft",
+          "category": "export",
+          "reply": "For Signal Desk 2.4, retry the export with a date range of seven days or fewer. If it still fails, provide the job identifier so the issue can be escalated.",
+          "citations": [
+            "KB-EXPORT-2"
+          ],
+          "reason": "Retrieved export guidance matches Signal Desk 2.4 and supports this retry and escalation path."
+        }
+      },
+      "latency_ms": 6619.771,
+      "metadata": {
+        "provider": "codex_cli",
+        "requested_model": "gpt-6-astra",
+        "model": "gpt-6-astra",
+        "model_identity_source": "explicit_cli_request",
+        "usage": {
+          "input_tokens": 11337,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 104,
+          "reasoning_output_tokens": 0
+        },
+        "host_tools_used": false,
+        "note": "Fresh CLI session per proposal; outer harness supplies observation history."
+      }
+    },
+    {
+      "sequence": 7,
+      "kind": "validated_completion",
+      "elapsed_ms": 12803.347,
+      "decision": {
+        "action": "draft",
+        "category": "export",
+        "reply": "For Signal Desk 2.4, retry the export with a date range of seven days or fewer. If it still fails, provide the job identifier so the issue can be escalated.",
+        "citations": [
+          "KB-EXPORT-2"
+        ],
+        "reason": "Retrieved export guidance matches Signal Desk 2.4 and supports this retry and escalation path."
+      }
+    }
+  ],
+  "artifact_hashes": {
+    "report.json": "20d82ed894860e275b600ae428e5580cbc5f7319d390c19fecbfe7ec043fda29",
+    "trace.jsonl": "8ad01175f1589a74b7d9dd6969822b64f025f6803e46fa05d432e100573b0b17",
+    "mcp-messages.jsonl": "9ed402ce9f4f57d8279f26cd2410d068c1fe38317b1a9b1acc06b51ff64305b7"
+  },
+  "review": {
+    "reviewer": "implementation agent",
+    "claim_review": "Retry within seven days and escalation with job identifier are supported by KB-EXPORT-2; no claim of resolved outage.",
+    "scope": "One successful synthetic integration, not a quality benchmark."
+  }
+}

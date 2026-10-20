@@ -82,7 +82,7 @@ const { createHash } = require('node:crypto');
       await page.locator('#resource-stage').waitFor();
       assert.equal(await page.locator('#resource-stage').inputValue(), String(stage.id));
     }
-    for (const asset of [...inventory.assets, 'fieldbook.pdf', 'academy-source.zip']) {
+    for (const asset of [...inventory.assets, 'fieldbook.pdf', 'academy-source.zip', 'academy-portable.zip']) {
       const response = await context.request.get(base + '/' + asset);
       assert.equal(response.status(), 200, asset);
       const local = fs.readFileSync(path.join(dist, asset));
@@ -105,7 +105,7 @@ const { createHash } = require('node:crypto');
       lessons: inventory.lessons.length,
       stages: inventory.stages.length,
       quizAnswers: inventory.lessons.reduce((n, l) => n + l.quiz.options.length, 0),
-      downloadedAssets: inventory.assets.length + 2,
+      downloadedAssets: inventory.assets.length + 3,
       mobileDocuments: inventory.documents.length,
       pageErrors: errors.length
     }));

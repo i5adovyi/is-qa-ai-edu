@@ -80,10 +80,38 @@ class Book(BaseDocTemplate):
 
 def build():
     OUT.parent.mkdir(parents=True,exist_ok=True)
-    story=[Spacer(1,85),Paragraph('FIELD PROGRAM / OCTOBER 2026',styles['Subsection']),Spacer(1,25),Paragraph('AI Engineering<br/>Fieldbook',styles['BookTitle']),Paragraph('From deliberate prompting to reliable agent systems',styles['Section']),Spacer(1,28),Paragraph('24 lessons. 72 lesson exercises. 11 labs. Eight stages of deliberate practice.',styles['Prose']),Paragraph('Context engineering - tools and skills - agentic development - harnesses - evaluation - delegation - production',styles['Prose']),Spacer(1,50),Paragraph('An original companion to the Signal Desk practice project. Read with a terminal, an experiment log, and a willingness to test your assumptions.',styles['Prose']),Paragraph('External courses, books, and videos are linked for independent study. Their content is not reproduced here. Completion is a personal learning record, not an accredited qualification.',styles['SmallText']),PageBreak(),Paragraph('Contents',styles['Chapter'])]
+    lab_count=len(list((ROOT/'content/labs').glob('[0-9]*.md')))
+    story=[Spacer(1,85),Paragraph('FIELD PROGRAM / OCTOBER 2026',styles['Subsection']),Spacer(1,25),Paragraph('AI Engineering<br/>Fieldbook',styles['BookTitle']),Paragraph('From deliberate prompting to reliable agent systems',styles['Section']),Spacer(1,28),Paragraph(f'24 lessons. 72 lesson exercises. {lab_count} labs. Eight stages of deliberate practice.',styles['Prose']),Paragraph('Preparation - context - tools and skills - agentic development - harnesses - evaluation - delegation - production',styles['Prose']),Spacer(1,50),Paragraph('An original companion to the Signal Desk practice project. Read with a terminal, an experiment log, and a willingness to test your assumptions.',styles['Prose']),Paragraph('External courses, books, and videos are linked for independent study. Their content is not reproduced here. Completion is a personal learning record, not an accredited qualification.',styles['SmallText']),PageBreak(),Paragraph('Contents',styles['Chapter'])]
     toc=TableOfContents();toc.levelStyles=[ParagraphStyle(name='TOC',fontName='Helvetica',fontSize=9,leading=13,spaceBefore=5,leftIndent=0,firstLineIndent=0)];story.extend([toc,PageBreak()])
     curriculum=json.loads((ROOT/'content/curriculum.json').read_text())
     paths=[ROOT/'docs/SETUP.md',ROOT/'docs/START-HERE.md',ROOT/'docs/ASSESSMENT.md',ROOT/'docs/GLOSSARY.md',ROOT/'docs/STUDY-PLAN.md',ROOT/'docs/OPERATING-PLAYBOOK.md',ROOT/'docs/PRACTICE-MAP.md',ROOT/'docs/INTEGRATION-LABS.md',ROOT/'lab/model-bridge.md',ROOT/'content/dev-sandbox/README.md',ROOT/'content/research/README.md',ROOT/'content/research/worked-example.md']+[ROOT/l['file'] for l in curriculum['lessons']]+sorted((ROOT/'content/labs').glob('[0-9]*.md'))+[ROOT/'lab/mcp_lab/README.md',ROOT/'lab/mcp_lab/solutions.md',ROOT/'content/skill-practice/HOST-EVIDENCE.md']+sorted((ROOT/'content/articles').glob('*.md'))+sorted((ROOT/'capstones').glob('*.md'))+sorted((ROOT/'templates').glob('*.md'))+[ROOT/'content/library/README.md',ROOT/'content/library/catalog.md',ROOT/'docs/REUSE.md']
-    for p in paths:story.extend(markdown(p.read_text()));story.append(PageBreak())
+    additions=[]
+    for folder in ['content/onboarding','content/assessment','content/walkthroughs']:
+        additions.extend(sorted((ROOT/folder).glob('*.md')))
+    additions.extend([ROOT/'docs/FUTURE-PROJECT-READINESS.md',ROOT/'docs/ACCOUNT-MIGRATION.md',ROOT/'docs/CONTINUE-LEARNING.md',ROOT/'lab/planner_lab/README.md'])
+    paths=additions+paths
+    answer_sections=[]
+    for p in paths:
+        if not p.exists():continue
+        text=p.read_text()
+        if p.name == 'solutions.md':
+            answer_sections.append(text)
+            continue
+        # Paper readers get answer guidance in a deliberate appendix, not beside the attempt.
+        if p.parent.name=='lessons':
+            match=re.search(r'(?ms)^## Hints and solution outline\n(.*?)(?=^## |\Z)',text)
+            if match:
+                answer_sections.append('# '+text.splitlines()[0].lstrip('# ')+' — guidance\n'+match[1])
+                text=text[:match.start()]+'## Hint access\n\nAttempt the exercise first. Guidance is in the final appendix and behind disclosures in the portal.\n\n'+text[match.end():]
+        story.extend(markdown(text));story.append(PageBreak())
+    learning=json.loads((ROOT/'content/learning.json').read_text())
+    story.extend(markdown('# Applied checks\n\nPredict, explain, or inspect a new case. Preserve your attempt before consulting a tutor. These checks supplement the lesson quizzes.\n'))
+    for check in learning['checks']:
+        story.extend(markdown('## '+check['id']+'\n\n'+check['prompt']+'\n\nReview criteria: '+'; '.join(check['criteria'])))
+    story.append(PageBreak())
+    story.extend(markdown('# Guidance appendix — open after your attempt\n\nThese are hints and solution outlines. Return to the exercises if you want to try independently first.\n'))
+    story.append(PageBreak())
+    for section in answer_sections:
+        story.extend(markdown(section));story.append(PageBreak())
     Book(OUT).multiBuild(story);print(OUT)
 if __name__=='__main__':build()

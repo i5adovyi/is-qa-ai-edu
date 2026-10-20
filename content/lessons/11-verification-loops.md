@@ -1,6 +1,6 @@
 # 11 · Use verification loops that catch real defects
 
-Stage 4 · 90 minutes · Practitioner
+Stage 4 · 110 minutes · Practitioner
 
 Drive a coding change with independent checks and learn why an agent saying its work is correct is not evidence.
 

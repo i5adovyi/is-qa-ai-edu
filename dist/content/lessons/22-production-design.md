@@ -1,6 +1,6 @@
 # 22 · Design a production boundary and service contract
 
-Stage 8 · 90 minutes · Advanced
+Stage 8 · 105 minutes · Advanced
 
 Translate a successful local prototype into a scoped operating plan with ownership, reliability targets and controlled rollout.
 

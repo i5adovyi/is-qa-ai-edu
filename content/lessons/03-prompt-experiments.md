@@ -1,6 +1,6 @@
 # 03 · Run prompt experiments without fooling yourself
 
-Stage 1 · 90 minutes · Foundation
+Stage 1 · 110 minutes · Foundation
 
 Use controlled comparisons to discover whether a prompt revision improves Signal Desk rather than merely looking better.
 

@@ -1,0 +1,47 @@
+{
+  "version": "practice-1",
+  "labels": [
+    {
+      "id": "Q1",
+      "required_evidence": [
+        "KB-2"
+      ],
+      "reason": "SSO applicability changes the credential path; KB-1 is tempting but not the required route."
+    },
+    {
+      "id": "Q2",
+      "required_evidence": [
+        "KB-3",
+        "KB-4"
+      ],
+      "reason": "Size eligibility and failure diagnostics answer different parts of this case."
+    },
+    {
+      "id": "Q3",
+      "required_evidence": [
+        "KB-3"
+      ],
+      "reason": "The batch threshold applies; immediate completion remains unsupported."
+    },
+    {
+      "id": "Q4",
+      "required_evidence": [
+        "KB-5",
+        "KB-6"
+      ],
+      "reason": "Settlement must be established and refund authorization remains outside assistant scope."
+    },
+    {
+      "id": "Q5",
+      "required_evidence": [
+        "KB-7"
+      ],
+      "reason": "The active/archived exception directly addresses the count."
+    },
+    {
+      "id": "Q6",
+      "required_evidence": [],
+      "reason": "The corpus contains no release-date evidence."
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # 16 · Build an evaluation set that reflects the job
 
-Stage 6 · 90 minutes · Advanced
+Stage 6 · 115 minutes · Advanced
 
 Create a versioned benchmark with meaningful coverage, defensible labels and explicit limits.
 
@@ -35,6 +35,10 @@ Provenance: synthetic; label reviewed against policy v2.
 ```
 
 This record tests the behavior that matters without requiring an exact draft. It also states why the label exists. A future policy change can be traced to the affected cases.
+
+## Optional starter practice
+
+Before inventing your own cases, use the [lesson 16 starter pack](../practice/lesson-16-starter.json) and [fixture workflow](../practice/README.md). Label one or two cases yourself before deliberately opening a separate key. These are warm-up examples; complete the original exercises below with new learner-authored cases. Supplied practice examples are not untouched evaluation evidence.
 
 ## Exercise 1 · Guided coverage matrix
 

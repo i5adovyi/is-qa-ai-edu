@@ -1,0 +1,88 @@
+{
+  "recorded_on": "2026-10-20",
+  "synthetic_data_only": true,
+  "report": {
+    "evidence_label": "actual_assistant_host_mcp_call",
+    "requested_model": "gpt-6-astra",
+    "model_identity_source": "explicit_cli_request",
+    "model_selected_tool_observed": true,
+    "mcp_calls": [
+      {
+        "server": "signal_desk",
+        "tool": "lookup_article",
+        "arguments": {
+          "article_id": "KB-EXPORT-2"
+        },
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "Input validation error: 'record_id' is a required property"
+            }
+          ],
+          "structured_content": null
+        },
+        "error": null,
+        "status": "failed"
+      },
+      {
+        "server": "signal_desk",
+        "tool": "lookup_article",
+        "arguments": {
+          "record_id": "KB-EXPORT-2"
+        },
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"record\": {\n    \"id\": \"KB-EXPORT-2\",\n    \"topic\": \"export\",\n    \"product_version\": \"2.4\",\n    \"title\": \"Export timeout\",\n    \"excerpt\": \"For Signal Desk 2.4, retry the export with a date range of seven days or fewer. If that fails, escalate with the job identifier. Do not claim an outage is resolved.\"\n  },\n  \"trust\": \"untrusted_evidence\"\n}"
+            }
+          ],
+          "structured_content": {
+            "record": {
+              "id": "KB-EXPORT-2",
+              "topic": "export",
+              "product_version": "2.4",
+              "title": "Export timeout",
+              "excerpt": "For Signal Desk 2.4, retry the export with a date range of seven days or fewer. If that fails, escalate with the job identifier. Do not claim an outage is resolved."
+            },
+            "trust": "untrusted_evidence"
+          }
+        },
+        "error": null,
+        "status": "completed"
+      }
+    ],
+    "final_response": {
+      "action": "draft",
+      "category": "export",
+      "reply": "Please retry your Signal Desk 2.4 export with a date range of seven days or fewer. If it still times out, share the job identifier so support can investigate.",
+      "citations": [
+        "KB-EXPORT-2"
+      ],
+      "reason": "Retrieved KB-EXPORT-2 applies to version 2.4 and supports reducing the date range, then escalating with the job identifier if the retry fails. Local draft only."
+    },
+    "usage": {
+      "input_tokens": 41872,
+      "cached_input_tokens": 27264,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 249,
+      "reasoning_output_tokens": 0
+    },
+    "elapsed_ms": 16466.309,
+    "semantic_grounding": "human_review_required",
+    "cost_usd": null,
+    "note": "This host controls its own loop. This is distinct from the course planner runtime."
+  },
+  "artifact_sha256": "c70d6b39e01a90e28584671078432c7b921e71e5074651b10e2dba23f6af9239",
+  "post_run_structural_validation": {
+    "validator": "lab.policy.validate_decision",
+    "passed": true
+  },
+  "review": {
+    "reviewer": "implementation agent",
+    "claim_review": "Retry within seven days and follow-up using job identifier supported by retrieved KB-EXPORT-2.",
+    "observed_repair": "First call used article_id and failed server schema validation. The host retried with record_id; second call succeeded.",
+    "scope": "One synthetic host integration, not a general quality benchmark."
+  }
+}

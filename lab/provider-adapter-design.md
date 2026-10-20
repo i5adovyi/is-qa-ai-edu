@@ -1,6 +1,6 @@
 # Design exercise: add a model without removing the harness
 
-This document is an implementation brief, not a working provider integration. Provider APIs, SDK methods, pricing, structured-output options, and model identifiers change. Consult the provider's current official documentation before implementing an adapter. The baseline remains offline.
+This document remains an implementation/design exercise for the original single-decision seam. A separate working integration now exists in [Lab 12](../content/labs/12-model-tool-loop.md): a bounded planner, actual MCP lookup, Responses API adapter, and supported CLI adapter with fault tests. Use that lab to execute the proposal → observation → next-decision path, then apply the design questions below to your own extension. Provider APIs, pricing, output options, and model identifiers change; the baseline remains offline.
 
 First try the working [manual model bridge](model-bridge.md). It exports a prompt and replays your saved model response through the harness without credentials or SDKs. The steps below replace that manual exchange with a transport.
 

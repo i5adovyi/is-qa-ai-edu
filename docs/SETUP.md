@@ -66,7 +66,7 @@ with (p/'first-run.md').open('x') as f:
 
 Save your baseline, prompts, outputs, and experiment logs under `work/`; it is excluded from Git and the downloadable course. Preserve before/after evidence. Commands that refuse an existing run directory are protecting your earlier work: choose a new output name instead of deleting the record.
 
-Now follow [your first 90 minutes](START-HERE.md#your-first-90-minutes), then [the practice map](PRACTICE-MAP.md).
+Now follow [your first session](START-HERE.md#your-first-session-one-small-artifact), then [the practice map](PRACTICE-MAP.md). If the terminal was unfamiliar, complete the [preparation worksheet](../content/onboarding/terminal-worksheet.md) before the executable labs.
 
 ## Optional tools and later setup
 

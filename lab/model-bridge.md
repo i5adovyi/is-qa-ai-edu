@@ -91,4 +91,4 @@ Use training cases while iterating. A holdout export requires an explicit holdou
 
 Submit an experiment note with the model/settings/date, exact prompt versions, saved response hashes, reports for successful and failed cases, one rejected mutation proposal, claim-level human review, and a conclusion supported by those observations. Distinguish measured facts from unknown provider details.
 
-Next: [implement a provider adapter](provider-adapter-design.md), including fake-transport failures, deadlines, and cost accounting. The manual bridge establishes the decision boundary you will keep.
+Next: [Lab 12's working planner integration](../content/labs/12-model-tool-loop.md) adds proposals, validated tool execution, observations, and subsequent model decisions. Its optional API and CLI adapters have separate evidence labels and fault tests. The [provider-adapter design exercise](provider-adapter-design.md) remains useful for extending the original single-decision seam. The manual bridge establishes the decision boundary you will keep.

@@ -1,6 +1,6 @@
 # 05 · Retrieve evidence before generating answers
 
-Stage 2 · 90 minutes · Foundation
+Stage 2 · 110 minutes · Foundation
 
 Build a small retrieval experiment that exposes why finding a document and supporting a claim are different tasks.
 
@@ -32,6 +32,10 @@ KB-3: Export jobs above 100 MB require the batch export workflow.
 
 Ticket SD-105 says, “My company login reset link expired; we use SSO.” A keyword query for “reset link expired” strongly matches KB-1. However, SSO makes KB-2 decision-critical. The answer should not blindly promise that a fresh password-reset link solves enterprise access. The retrieval query or selection rule needs to account for authentication mode, and the draft should preserve that distinction.
 
+## Optional starter practice
+
+Before inventing your own cases, use the [lesson 05 starter pack](../practice/lesson-05-starter.json) and [fixture workflow](../practice/README.md). Label one or two cases yourself before deliberately opening a separate key. These are warm-up examples; complete the original exercises below with new learner-authored cases. Supplied practice examples are not untouched evaluation evidence.
+
 ## Exercise 1 · Guided corpus
 
 Write eight short knowledge notes with IDs, applicability and one exception each. Create six queries including synonyms, a misleading keyword and an unanswerable request. Label the required evidence for each query before running any retrieval. Include the SSO example.
@@ -55,6 +59,8 @@ Write a draft that cites KB-1 while claiming SSO users can reset credentials thr
 Token overlap can be calculated as the number of shared normalized terms. Break ties deterministically, for example by source ID. For the SSO ticket, the desired retrieval set includes KB-2; KB-1 can explain why the ordinary reset route is tempting but insufficient. Use “No applicable source found” as a valid outcome. A source existence check is automatic; an entailment check asks whether the cited text actually warrants the claim. Keep those checks separate in your report.
 
 ## Reflection
+
+After lessons 16–17, extend this first experiment with [lab 14's versioned retrieval comparison](../labs/14-retrieval-comparison.md). It supplies a richer corpus and separates recall, source applicability, and claim support. Complete this lesson's basic reasoning before adding retrieval complexity.
 
 Would your proposed improvement help unseen wording or only your six queries? What happens when a new document contradicts an old one? Which failure belongs to search, which to chunking, and which to answer generation?
 

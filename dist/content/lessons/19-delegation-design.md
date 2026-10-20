@@ -1,6 +1,6 @@
 # 19 · Decide when delegation is worth its coordination cost
 
-Stage 7 · 90 minutes · Advanced
+Stage 7 · 95 minutes · Advanced
 
 Use multiple agents where tasks can be separated and verified, then compare the result with a simpler baseline.
 

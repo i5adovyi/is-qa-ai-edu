@@ -60,6 +60,8 @@ A separate reviewer improves perspective but does not create independent truth a
 
 ## Reflection
 
+For a complete repository mission, use [lab 13, Part A](../labs/13-coding-and-workers.md#part-a-a-reproducible-coding-agent-mission). It carries a reproduced failure through a scoped patch, diff, commit/revert, and fresh-session handoff. Its two-worker comparison belongs after lessons 19–21.
+
 Which part of the patch did the author's explanation make you initially overlook? What evidence was strongest? What would make your delivery note misleading even if every sentence were technically true?
 
 ## Related reading

@@ -1,6 +1,6 @@
 # 13 · Build the agent loop as an explicit state machine
 
-Stage 5 · 90 minutes · Practitioner
+Stage 5 · 120 minutes · Practitioner
 
 Turn model proposals into a bounded execution loop with clear transitions and useful terminal outcomes.
 
@@ -51,7 +51,7 @@ Implement the state machine in a small script or use the bundled lab as an inspe
 
 **Deliverable:** implementation or annotated trace for three runs. **Pass:** each run terminates with an explicit reason; the executor receives only validated proposals; step limits are enforced by code or a mechanically applied simulation rule.
 
-The bundled lab follows a fixed retrieval/decision/write workflow. Its injected policy supplies a bounded final decision, not arbitrary next-tool proposals. Inspect it as an example of controls, or build the scripted loop above to practice planner-driven action selection. The [model bridge](../../lab/model-bridge.md) exercises the decision seam; adding a model-controlled tool loop requires the separate proposal contract described in the [adapter brief](../../lab/provider-adapter-design.md).
+The original bundled lab follows a fixed retrieval/decision/write workflow. Its injected policy supplies a bounded final decision, not arbitrary next-tool proposals. Inspect it as an example of controls, or build the scripted loop above to practice planner-driven action selection. The [model bridge](../../lab/model-bridge.md) exercises the saved-decision seam. After lesson 16 and the lab 11 component gate, [lab 12](../labs/12-model-tool-loop.md) provides the separate runnable planner loop: scripted proposals first, actual MCP execution, then optional live-model decisions and observations.
 
 After labs 01–08, use [lab 11](../labs/11-complete-student-harness.md) to connect all eight of your helper functions to this workflow. Inspect its component evidence to identify the exact implementation that redacted the ticket, packed evidence, authorized the read, scheduled a retry, created an operation key, checked citations, summarized events, and proposed the decision. It remains a fixed workflow, but the selected student components now affect its actual execution.
 

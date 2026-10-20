@@ -1,6 +1,6 @@
 # 18 · Red-team the whole system and set release gates
 
-Stage 6 · 90 minutes · Advanced
+Stage 6 · 110 minutes · Advanced
 
 Test how failures cross boundaries, then define a release decision that remains meaningful under pressure.
 

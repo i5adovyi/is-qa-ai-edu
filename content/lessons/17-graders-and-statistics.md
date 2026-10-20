@@ -1,6 +1,6 @@
 # 17 · Use graders carefully and report uncertainty
 
-Stage 6 · 90 minutes · Advanced
+Stage 6 · 115 minutes · Advanced
 
 Combine deterministic checks, human judgment and optional model graders without confusing a score with truth.
 
@@ -32,6 +32,10 @@ Both fail: 1
 ```
 
 A passes fifteen and B passes seventeen. B has a two-case net gain, but it regresses two cases. If one regression is an unsupported refund claim, the release decision may be negative despite the higher total. The table says what happened on these cases. It does not prove the same gain on all future traffic. Inspect the six discordant cases before celebrating the aggregate.
+
+## Optional starter practice
+
+Before inventing your own cases, use the [lesson 17 starter pack](../practice/lesson-17-starter.json) and [fixture workflow](../practice/README.md). Label one or two cases yourself before deliberately opening a separate key. These are warm-up examples; complete the original exercises below with new learner-authored cases. Supplied practice examples are not untouched evaluation evidence.
 
 ## Exercise 1 · Guided grader assignment
 

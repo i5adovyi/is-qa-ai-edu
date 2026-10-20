@@ -1,6 +1,6 @@
 # 09 · Package a skill that improves repeatable work
 
-Stage 3 · 120 minutes · Practitioner
+Stage 3 · 135 minutes · Practitioner
 
 Turn a successful Signal Desk procedure into a discoverable, testable skill with a clear activation boundary.
 

@@ -1,6 +1,6 @@
 # 02 · Write task contracts that survive ambiguity
 
-Stage 1 · 90 minutes · Foundation
+Stage 1 · 85 minutes · Foundation
 
 Replace vague prompting with explicit inputs, constraints, evidence rules and outputs you can check.
 

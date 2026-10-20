@@ -1,6 +1,6 @@
 # 08 · Understand MCP by tracing one request
 
-Stage 3 · 90 minutes · Practitioner
+Stage 3 · 120 minutes · Practitioner
 
 Learn where MCP fits by following discovery, a tool call, and its result through a real local Signal Desk integration. Budget another 2–3 hours for the complete optional SDK lab, including installation, tool extension, and fault diagnosis.
 

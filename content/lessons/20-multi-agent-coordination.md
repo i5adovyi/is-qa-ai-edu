@@ -1,6 +1,6 @@
 # 20 · Coordinate workers without losing ownership or state
 
-Stage 7 · 90 minutes · Advanced
+Stage 7 · 115 minutes · Advanced
 
 Design handoffs, ownership and conflict resolution so parallel work produces a coherent result.
 

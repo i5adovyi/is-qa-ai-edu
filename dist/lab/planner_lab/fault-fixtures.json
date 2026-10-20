@@ -1,0 +1,8 @@
+[
+  {"scenario": "happy", "expected_status": "drafted", "expected_error": null, "expected_tool_executions": 1},
+  {"scenario": "repeated", "expected_status": "failed", "expected_error": "repeated_action", "expected_tool_executions": 1},
+  {"scenario": "premature", "expected_status": "failed", "expected_error": "unsupported_citation", "expected_tool_executions": 0},
+  {"scenario": "malformed", "expected_status": "failed", "expected_error": "malformed_output", "expected_tool_executions": 0},
+  {"scenario": "refusal", "expected_status": "failed", "expected_error": "refusal", "expected_tool_executions": 0},
+  {"scenario": "rate-limit", "expected_status": "drafted", "expected_error": null, "expected_tool_executions": 1}
+]

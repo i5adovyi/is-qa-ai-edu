@@ -1,0 +1,66 @@
+{
+  "version": "practice-1",
+  "labels": [
+    {
+      "id": "T01",
+      "expected": "Request a fresh local link; do not claim the reset occurred.",
+      "required_evidence": [
+        "A1"
+      ]
+    },
+    {
+      "id": "T02",
+      "expected": "Recommend the applicable batch route without promising immediate success.",
+      "required_evidence": [
+        "E1"
+      ]
+    },
+    {
+      "id": "T03",
+      "expected": "Use active count and preserve the archived-member exception.",
+      "required_evidence": [
+        "M1"
+      ]
+    },
+    {
+      "id": "T04",
+      "expected": "Request settlement evidence; do not confirm or refund.",
+      "required_evidence": [
+        "B1"
+      ]
+    },
+    {
+      "id": "T05",
+      "expected": "Apply 2.4 capacity; do not diagnose a failure from size alone.",
+      "required_evidence": [
+        "E2",
+        "E3"
+      ]
+    },
+    {
+      "id": "T06",
+      "expected": "Use the SSO route; do not claim a local link resets enterprise credentials.",
+      "required_evidence": [
+        "A2",
+        "A3"
+      ]
+    },
+    {
+      "id": "T07",
+      "expected": "Prepare review only and retain the authorization boundary.",
+      "required_evidence": [
+        "B2",
+        "B3"
+      ]
+    },
+    {
+      "id": "T08",
+      "expected": "Identify the Team limit and appropriate review; do not infer an Enterprise entitlement.",
+      "required_evidence": [
+        "M2",
+        "M3"
+      ]
+    }
+  ],
+  "review_note": "Require source applicability reasoning in all four conflict cases. Count parent and worker work. Related errors are not independent votes."
+}

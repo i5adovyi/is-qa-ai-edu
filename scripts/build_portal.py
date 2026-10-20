@@ -37,7 +37,8 @@ def build():
             docs[path] = {'title': title, 'text': text, 'words': len(text.split())}
     docs['README.md'] = {'title':'Project README','text':(ROOT/'README.md').read_text()}
     assets = downloadable_assets()
-    data = {'curriculum':curriculum,'resources':resources,'documents':docs,'assets':assets,'edition':'October 2026','built':'2026-10-20'}
+    learning = json.loads((ROOT/'content/learning.json').read_text())
+    data = {'curriculum':curriculum,'learning':learning,'resources':resources,'documents':docs,'assets':assets,'edition':'October 2026','built':'2026-10-20'}
     for name in ['index.html','style.css','app.js']:
         shutil.copyfile(ROOT/'portal'/name,OUT/name)
     (OUT/'data.js').write_text('window.ACADEMY = '+json.dumps(data,ensure_ascii=False).replace('</','<\\/')+';\n')
@@ -51,6 +52,7 @@ def build():
     if (ROOT/'output/pdf/ai-engineering-fieldbook.pdf').exists():
         shutil.copyfile(ROOT/'output/pdf/ai-engineering-fieldbook.pdf',OUT/'fieldbook.pdf')
     subprocess.run([sys.executable, str(ROOT/'scripts/package_project.py')], check=True)
+    subprocess.run([sys.executable, str(ROOT/'scripts/package_portable.py')], check=True)
     print(f'Built {len(curriculum["lessons"])} lessons, {len(resources)} resources, {len(docs)} documents in {OUT}')
 
 if __name__ == '__main__':

@@ -59,8 +59,23 @@ def validate(root):
         need(resource['url'].startswith('https://'), 'Invalid resource URL ' + resource['id'])
         need(resource['stage'] in range(1, 9), 'Invalid resource stage ' + resource['id'])
     labs = sorted((root / 'content/labs').glob('[0-9][0-9]-*.md'))
-    need([p.name[:2] for p in labs] == [str(i).zfill(2) for i in range(1, 12)],
-         'Expected eleven unique numbered lab guides, 01 through 11')
+    need([p.name[:2] for p in labs] == [str(i).zfill(2) for i in range(1, 16)],
+         'Expected fifteen unique numbered lab guides, 01 through 15')
+    learning = json.loads((root / 'content/learning.json').read_text())
+    exercises = learning['exercises']
+    need(len(exercises) == 72, 'Expected 72 exercise workspace records')
+    need(len({e['id'] for e in exercises}) == 72, 'Duplicate workspace exercise ID')
+    for exercise in exercises:
+        need(exercise['lesson'] in ids, 'Unknown exercise lesson')
+        need(bool(exercise.get('prompt')) and bool(exercise.get('criteria')), 'Missing exercise contract')
+        need(len(exercise.get('hints', [])) == 3, 'Expected three progressive hints')
+        need(bool(exercise.get('steps')), 'Missing exercise steps')
+    need(len(learning['checks']) >= 72, 'Expected at least 72 applied checks')
+    need(len({x['id'] for x in learning['checks']}) == len(learning['checks']), 'Duplicate applied-check ID')
+    for key in ('starterLinks', 'transferLinks', 'walkthroughLinks'):
+        for exercise in exercises:
+            for link in exercise.get(key, []):
+                need((root / link['path'].split('#')[0]).is_file(), 'Missing learning asset ' + link['path'])
     paths = [root / 'README.md']
     for folder in ['docs', 'templates', 'capstones', 'content', 'lab']:
         paths.extend((root / folder).rglob('*.md'))
@@ -79,7 +94,7 @@ def check():
     errors = validate(ROOT)
     if errors:
         raise SystemExit('\n'.join(errors))
-    print('Content checks passed: 24 lessons, actual exercise sections, 11 lab guides, quizzes, resource metadata, and local file/section links.')
+    print('Content checks passed: 24 lessons, 72 exercise workspaces, applied checks, 15 lab guides, resource metadata, and local file/section links.')
 
 if __name__ == '__main__':
     check()

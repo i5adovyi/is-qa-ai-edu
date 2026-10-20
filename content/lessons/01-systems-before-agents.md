@@ -1,6 +1,6 @@
 # 01 · Think in systems, then choose the smallest useful agent
 
-Stage 1 · 90 minutes · Foundation
+Stage 1 · 70 minutes · Foundation
 
 Map Signal Desk from a customer ticket to a verifiable support draft before choosing any model or framework.
 
@@ -36,6 +36,16 @@ Forbidden action in this exercise: sending messages or changing accounts.
 A sensible draft asks for the missing reproduction details and cites KB-EXPORT-1 internally. It does not claim a confirmed regression merely because the timing suggests one. Your system diagram should show a boundary between the proposed draft and any future send operation. This boundary is a product decision you can inspect, not a sentence you hope the model remembers.
 
 ## Exercise 1 · Guided map
+
+If diagrams are unfamiliar, first complete [beginner entry checks A and B](../onboarding/README.md) and open the [blank worksheet](../../templates/first-diagram.md). The hiking example demonstrates the notation using a different problem. It is not the Signal Desk solution.
+
+Work through these checkpoints **one at a time**. Ask your tutor to review the current checkpoint before advancing; do not request the entire diagram unless you want a worked answer.
+
+1. **One relationship:** put `Ticket input` on the left. Choose one other responsibility that needs information from it. Draw one connection and explain your choice.
+2. **Its data label:** label that connection with the information crossing it. Replace vague labels such as “process” with actual data.
+3. **Another relationship:** add one responsibility and one connection. Explain what the new box supplies or consumes.
+4. **The complete flow:** expand to all six required responsibilities below. Label every connection and show the boundary before any external send.
+5. **The contract and explanation:** mark responsibilities that can work without a model, explain one useful role for language understanding, then complete the five contract lines: input, required output, evidence, allowed/forbidden actions, and done/stopped condition.
 
 Draw six boxes: ticket input, policy, evidence retrieval, decision, validation and draft output. Label every arrow with the data crossing it. Put a human beside the send boundary. Then underline each box that can be implemented without a model. Write one sentence explaining why the decision box might still benefit from language understanding.
 

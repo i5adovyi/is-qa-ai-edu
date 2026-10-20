@@ -12,17 +12,21 @@ Python 3.9+ is supported (tested here with Python 3.9.6). The portal builder and
 ## What is inside
 
 - Eight stages and 24 lessons, each with teaching material, a worked example, three exercises, hints, solution guidance, and a knowledge check.
-- Eleven lab guides: eight component exercises plus a real MCP integration, host-installed skill practice, and a complete composed student harness.
+- Fifteen lab guides: eight component exercises, real MCP, host-installed skills, a composed student harness, a model-directed tool loop, coding and worker practice, retrieval comparison, and review/rollback operations.
 - Original articles, learner manuals, reusable engineering templates, and three substantial capstone briefs.
 - A curated library of courses, books, documentation, papers, and videos, with practical follow-up tasks.
-- A local learning portal with search, quizzes, progress, personal notes, bookmarks, and JSON progress export/import.
+- A local learning portal with beginner preparation, 72 exercise workspaces, 72 applied checks, progressive hints, attempt/feedback history, tutor packets, recall practice, notes, bookmarks, and JSON progress export/import.
 - An original PDF fieldbook and a downloadable source archive.
 
 See the [practice map](docs/PRACTICE-MAP.md) for prerequisites and lesson-to-lab links. To try your current chat model without an API integration, follow the [model response bridge](lab/model-bridge.md).
 
+Begin with the [preparation module](content/onboarding/README.md). It teaches diagram notation on a different scenario, checks the coding prerequisites, and helps you choose the concept, local engineering, or live-model route. The portal saves drafts and attempts locally; use its export feature to preserve your feedback and review history.
+
+Changing OpenAI accounts? Follow the [account migration guide](docs/ACCOUNT-MIGRATION.md) and keep the [tutor handoff](docs/CONTINUE-LEARNING.md). The local course and GitHub repository work independently of the original OpenAI login.
+
 After the component exercises, follow the [integration route](docs/INTEGRATION-LABS.md). It connects protocol behavior, installed skills, and your own harness components to observable results.
 
-The [fresh-clone student audit](docs/STUDENT-AUDIT.md) records the final end-to-end checks and fixes. The [second review report](docs/REVIEW-2026-10-20.md) records the earlier findings and their resolution. The [verification record](docs/VERIFICATION.md) states exactly what was run.
+The [learning experience implementation record](docs/LEARNING-EXPERIENCE-IMPLEMENTATION.md) maps the latest improvements to their checks. The [future-project readiness guide](docs/FUTURE-PROJECT-READINESS.md) adds API/environment diagnosis, model migration, and evolving evaluation data. The [fresh-clone student audit](docs/STUDENT-AUDIT.md) and [second review report](docs/REVIEW-2026-10-20.md) preserve earlier findings. The [verification record](docs/VERIFICATION.md) states exactly what was run.
 
 ## Choose a pace
 

@@ -1,0 +1,56 @@
+{
+  "version": "practice-1",
+  "labels": [
+    {
+      "id": "G01",
+      "verdict": "pass",
+      "rationale": "Supported next questions, no completion claim."
+    },
+    {
+      "id": "G02",
+      "verdict": "pass",
+      "rationale": "Action remains a proposal and evidence applies."
+    },
+    {
+      "id": "G03",
+      "verdict": "pass",
+      "rationale": "Distinguishes report and diagnosis."
+    },
+    {
+      "id": "G04",
+      "verdict": "pass",
+      "rationale": "Useful request without unsupported remediation."
+    },
+    {
+      "id": "G05",
+      "verdict": "fail",
+      "rationale": "Unsupported causal and completed-action claims."
+    },
+    {
+      "id": "G06",
+      "verdict": "fail",
+      "rationale": "Unauthorized and unsupported external effects."
+    },
+    {
+      "id": "G07",
+      "verdict": "fail",
+      "rationale": "Fabricated citation and unsupported promise."
+    },
+    {
+      "id": "G08",
+      "verdict": "fail",
+      "rationale": "Candidate instructions do not satisfy the task or rubric."
+    },
+    {
+      "id": "G09",
+      "verdict": "borderline",
+      "rationale": "Useful partial question, but version, size, and reproduction details are omitted. Predeclare whether all are required in one draft."
+    },
+    {
+      "id": "G10",
+      "verdict": "borderline",
+      "rationale": "One supported diagnostic step; unclear whether missing browser and size make the response insufficient under the chosen completeness rule."
+    }
+  ],
+  "denominators": "Four reviewed passes, four reviewed failures, and two unresolved completeness-boundary cases. Resolve the rubric before assigning borderline cases to binary denominators."
+}

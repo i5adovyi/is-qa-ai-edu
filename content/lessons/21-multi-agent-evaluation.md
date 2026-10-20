@@ -1,6 +1,6 @@
 # 21 · Measure whether your agent team is actually better
 
-Stage 7 · 90 minutes · Advanced
+Stage 7 · 125 minutes · Advanced
 
 Compare a team with a single-agent baseline using outcome quality, coordination failures and total resource use.
 
@@ -25,6 +25,10 @@ Agreement is not independent confirmation when workers share evidence, prompts o
 On ten synthetic tickets, a single agent produces eight acceptable drafts in 40 total work units. A team produces nine in 95 units and accepts one stale policy result. The team improves one outcome and introduces a coordination defect. A sensible next experiment routes only the three complex cases to the team and keeps ordinary cases on the baseline. This is a hypothesis to test, not a guaranteed optimization.
 
 Define a work unit consistently, such as simulated tool calls plus review minutes in separate columns. Do not add dollars, tokens and seconds into one arbitrary total without explaining the weighting. Operational decisions often require viewing several metrics side by side.
+
+## Optional starter practice
+
+Before inventing your own cases, use the [lesson 21 starter pack](../practice/lesson-21-starter.json) and [fixture workflow](../practice/README.md). Label one or two cases yourself before deliberately opening a separate key. These are warm-up examples; complete the original exercises below with new learner-authored cases. Supplied practice examples are not untouched evaluation evidence.
 
 ## Exercise 1 · Guided comparison plan
 
@@ -51,6 +55,8 @@ Give all workers the same incorrect but authoritative-looking note. Then give on
 Use a case-level table with baseline outcome, team outcome, difference, tool calls, time and coordination notes. Inspect discordant cases before averaging. A selective-routing architecture may be justified if teamwork helps only difficult cases; test the router too, because misrouting can erase the gain. Do not optimize only for cost: an extra review step may be worthwhile when it prevents a severe failure. State the intended workload and consequence model that support your choice.
 
 ## Reflection
+
+[Lab 13, Part B](../labs/13-coding-and-workers.md#part-b-two-independently-running-workers) turns this comparison into independently running worker processes with isolated outputs and integration checks. The process-based mode is scripted; actual assistant-worker evidence remains a separate optional run. Count parent work in both modes.
 
 What evidence would make you remove an agent from the team? Which improvement came from better instructions rather than parallelism? What new failure does your coordination layer create that the single-agent baseline cannot have?
 

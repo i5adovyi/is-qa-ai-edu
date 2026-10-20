@@ -2,6 +2,10 @@
 
 The unit of assessment is a reproducible artifact plus an explanation. A good-looking generated answer is not sufficient. Use this rubric to review your own work, or ask a peer to challenge the evidence.
 
+Each lesson also has three [applied checks](../content/assessment/README.md), alongside its original quiz and exercises. Predict an outcome, interpret evidence, and transfer the idea to another case. Use [calibrated specimens](../content/assessment/calibration.md) before scoring your own work. Their strong contract/report examples do not claim unperformed execution.
+
+Keep a sequence of attempt, feedback, revision, and reassessment in the portal exercise workspace or [offline record](../templates/exercise-attempt.md). Identify feedback as self-review, tutor, peer, or reproduced execution. “Reviewed” means a review was recorded; it is not an automatically awarded stage credential. A correct multiple-choice answer cannot substitute for an implemented or explained artifact.
+
 ## Common scoring rubric
 
 Score each dimension from 0 to 4. Zero means absent; one means a demonstration with major gaps; two means a happy path works; three means repeatable behavior with relevant failures handled; four means clear tradeoffs, adversarial evidence, and documented limitations.
@@ -78,3 +82,5 @@ One strong dimension cannot rescue another from its minimum. For example, stage 
 ## Reassessment
 
 Keep the original submission. Make a focused revision, rerun the failed cases, and run the untouched cases once. Write a short change note. A pass after a thoughtful failure is as valuable as a first-attempt pass; hiding the failure destroys the evidence of learning.
+
+At each stage, add the relevant [new-domain transfer task](../content/assessment/transfer-and-retention.md) to your dossier. After a delay, attempt a changed case without notes and explain one earlier error. If the concept is not yet independent, add a focused item to your recall queue instead of hiding the need for help.

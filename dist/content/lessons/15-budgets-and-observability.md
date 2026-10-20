@@ -1,6 +1,6 @@
 # 15 · Make cost, latency and behavior observable
 
-Stage 5 · 90 minutes · Practitioner
+Stage 5 · 120 minutes · Practitioner
 
 Instrument the harness so you can explain what happened, where time went and why a run stopped.
 
