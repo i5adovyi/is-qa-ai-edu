@@ -1,5 +1,7 @@
 # 22 · Design a production boundary and service contract
 
+> Optional practice edition. You can read this explanation without completing its exercises. For the guided SDET route, use [Start here](../../docs/START-HERE.md).
+
 Stage 8 · 105 minutes · Advanced
 
 Translate a successful local prototype into a scoped operating plan with ownership, reliability targets and controlled rollout.

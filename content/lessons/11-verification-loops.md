@@ -1,5 +1,7 @@
 # 11 · Use verification loops that catch real defects
 
+> Optional practice edition. You can read this explanation without completing its exercises. For the guided SDET route, use [Start here](../../docs/START-HERE.md).
+
 Stage 4 · 110 minutes · Practitioner
 
 Drive a coding change with independent checks and learn why an agent saying its work is correct is not evidence.

@@ -62,3 +62,23 @@ details[open]>summary{margin-bottom:15px}
 
 /* Storage remains visible outside lesson re-renders. */
 .storage-notice{margin:24px 48px 0;padding:22px;border:1px solid #b99443;border-radius:12px;background:#fff8e6;line-height:1.6}.storage-notice[hidden]{display:none}.storage-notice p{margin:8px 0 14px}.storage-notice .actions{flex-wrap:wrap}.local-label{max-width:260px;text-align:right}.recovery-copies{margin:20px 0;overflow-wrap:anywhere}.notice code{overflow-wrap:anywhere;word-break:break-word}@media(max-width:700px){.storage-notice{margin:16px 20px 0}.local-label{display:block;max-width:none;text-align:left;font-size:11px}.topbar{height:auto;min-height:77px;padding-top:12px;padding-bottom:12px;align-items:flex-start;flex-direction:column;gap:4px}}
+/* The guided route keeps one reading task visible; the original collection stays accessible. */
+.guide-welcome,.guide-reader,.guide-map{max-width:900px;margin:0 auto}
+.guide-welcome h1{font:500 clamp(32px,4vw,54px)/1.1 Georgia,serif;letter-spacing:-1.3px;margin:16px 0 24px}
+.guide-lead{font-size:19px;line-height:1.65;max-width:760px}
+.guide-welcome>h2{margin-top:32px}.guide-welcome>p{line-height:1.7}
+.first-topic{margin:28px 0;padding:30px;border-left:4px solid #78994e}
+.first-topic h2{margin:12px 0}.first-topic .btn{margin:8px 0}
+.guide-position{display:flex;align-items:center;justify-content:space-between;gap:15px;margin:12px 0}
+.guide-position .eyebrow{margin:0}.guide-reader .reading{max-width:none}
+.guide-source{margin:24px 0}.guide-source h2{margin:8px 0 16px}.guide-source h3{margin:18px 0 8px}
+.guide-source p,.guide-extra p{line-height:1.65}.guide-next{display:flex;justify-content:space-between;gap:14px;margin:28px 0}
+.guide-next .btn{white-space:normal;text-align:left}.guide-extra{padding:18px;border:1px solid var(--line);border-radius:7px;margin:20px 0;background:#f8faf4}
+.guide-extra h3{margin-top:25px}.guide-extra label{display:block;margin:16px 0 8px}
+.guide-extra textarea{width:100%;min-height:130px;padding:12px;border:1px solid #bfcdb4;border-radius:5px;resize:vertical;font:inherit}
+.guide-map section{margin:30px 0}.guide-map section h2{margin:20px 0}.guide-map .lesson-row .meta{flex-shrink:0}
+.nav-more{margin-top:15px;border-top:1px solid #d1dac8;padding-top:14px}
+.nav-more summary{font-size:12px;padding:8px;color:#c7d3c6;cursor:pointer}.nav-more[open]>summary{margin-bottom:8px}
+.practice-notice{margin-bottom:25px}.practice-notice a{font-weight:700}
+@media(max-width:850px){.sidebar nav{flex-wrap:wrap;overflow:visible}.sidebar nav .nav-more{width:100%;flex:1 0 100%}.nav-more[open]{display:block}.nav-more a{display:inline-flex}.guide-next{flex-wrap:wrap}}
+@media(max-width:560px){.guide-position{align-items:flex-start;flex-wrap:wrap}.guide-lead{font-size:17px}.first-topic{padding:22px}.guide-next .btn{width:100%}.guide-map .lesson-row .meta{max-width:70px}}

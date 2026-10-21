@@ -1,5 +1,7 @@
 # 04 · Design an evidence packet with provenance
 
+> Optional practice edition. You can read this explanation without completing its exercises. For the guided SDET route, use [Start here](../../docs/START-HERE.md).
+
 Stage 2 · 90 minutes · Foundation
 
 Construct the smallest useful context packet and make every important claim traceable to its source.

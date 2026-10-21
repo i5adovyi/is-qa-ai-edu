@@ -1,5 +1,7 @@
 # 23 · Operate the system and learn from incidents
 
+> Optional practice edition. You can read this explanation without completing its exercises. For the guided SDET route, use [Start here](../../docs/START-HERE.md).
+
 Stage 8 · 110 minutes · Advanced
 
 Practice diagnosis, containment and learning so failures improve the system instead of becoming repeated surprises.

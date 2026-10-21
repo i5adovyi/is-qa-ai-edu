@@ -1,5 +1,7 @@
 # 03 · Run prompt experiments without fooling yourself
 
+> Optional practice edition. You can read this explanation without completing its exercises. For the guided SDET route, use [Start here](../../docs/START-HERE.md).
+
 Stage 1 · 110 minutes · Foundation
 
 Use controlled comparisons to discover whether a prompt revision improves Signal Desk rather than merely looking better.

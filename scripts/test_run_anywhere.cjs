@@ -34,7 +34,7 @@ const path=require('node:path');
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   await page.screenshot({path:path.join(__dirname,'../work/run-anywhere-mobile.png'),fullPage:true});
   await page.getByRole('link',{name:'Review my progress'}).click();
-  await page.getByRole('heading',{name:'Your progress, your proof.'}).waitFor();
+  await page.getByRole('heading',{name:'Your reading and optional practice.'}).waitFor();
   assert.deepEqual(errors,[]);
   console.log('PASS: run-anywhere navigation, hosted/local/GitHub links, portable download bytes, setup guide, progress navigation, desktop and mobile layout.');
  }finally{await browser.close();}

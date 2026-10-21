@@ -4,6 +4,9 @@ The editable source is this repository. The portal is generated into `dist/`; do
 
 ## Structure
 
+- `content/sdet-path.json`, `content/guide/`: the default guided SDET reading path,
+  original topic explanations, bounded external study, and optional practice
+  links. Keep this entry experience distinct from the original practice track.
 - `content/curriculum.json`: stage and lesson metadata.
 - `content/learning.json`: exercise/step contracts, progressive hints, applied checks, routes, walkthroughs, and transfer prompts. Tutor packets whitelist prompt fields and exclude hints and solutions.
 - `content/onboarding/`, `content/practice/`, `content/assessment/`, `content/walkthroughs/`: preparation, starter fixtures, calibration, transfer, and original walkthroughs.
@@ -48,6 +51,8 @@ Run `node scripts/test_local_progress.cjs` separately for actual SQLite browser 
 
 Also run `node scripts/test_learning_portal.cjs` for the exercise workspace, spoiler protection, v1 progress migration, feedback history, import conflicts, recall, and narrow-screen behavior. The v2 progress schema must preserve original attempts; do not silently overwrite a learner's history on import.
 
+Run `node scripts/test_sdet_path.cjs` for the guided reading route: first-session navigation, topic sequencing, resource scope and access notes, explicit reading-position saves, optional notes, retained practice links, and narrow-screen behavior. Opening or reading a topic must not create exercise attempts, mark a lesson complete, or pass a gate. Confirm that the saved position survives the supported reload/export/import flow without replacing existing practice records. Inspect the actual assertions before claiming coverage of all those behaviors; add the relevant check when changing a behavior.
+
 Run `node scripts/test_incident_portal.cjs` for incident attempt gates, progressive hints, deliberate debrief reveal, reload and import behavior. Incident guidance must stay out of the DOM and tutor packet before explicit disclosure. The source archive contains editable guidance; the static portal is not an examination security system. The PDF includes incident briefs but omits their guidance because it cannot enforce an attempt gate.
 
 The GitHub Actions workflow runs core and optional MCP checks with no model credentials. Live Codex/provider calls are deliberately explicit local checks. Record CI execution separately from a locally passing workflow command.
@@ -60,9 +65,19 @@ The [local data guide](LOCAL-DATA.md) documents persistence and backup/restore. 
 
 Launcher checks are included in Python discovery (`tests/test_launcher.py`). They cover source/portable startup from a different directory, legacy commands, occupied/invalid ports, missing files, build failures, serving only the built directory, and an extract/run/download round trip. An extracted portable copy regenerates its portable ZIP download in memory from the course assets; it does not package arbitrary files from the learner's directory. Run `node scripts/test_run_anywhere.cjs` for the mode selector, links, portable download, progress navigation and mobile layout.
 
-## Add a lesson
+## Maintain the guided SDET path
 
-Create a Markdown file and add metadata with a unique two-digit ID, integer stage, title, summary, time estimate in minutes, objectives, quiz, and file path. A lesson needs a useful explanation, an example, three exercises, clear evidence requirements, and solution guidance. The portal uses the metadata rather than guessing titles from filenames.
+The default start is `#guide`; topic routes use stable two-digit IDs such as `#guide=01`. The sequence belongs in `content/sdet-path.json`, and teaching text belongs in the referenced `content/guide/` Markdown files. A topic should explain the concept in plain language, show why it matters to an SDET, and use a concrete testing example before directing the reader elsewhere. Avoid unexplained jargon, required artifacts, and links that send a beginner into a whole catalog.
+
+Each topic has one primary resource. Keep its title, provider, URL, exact reading or viewing scope, stopping point, prerequisites, access requirements, and verification date accurate. Distinguish public reading from optional execution that needs an account, paid credits, an IDE, Python, or a configured agent. Alternatives are substitutes or explicitly deeper reading; they must not become another completion checklist. Select across providers by instructional fit rather than filling vendor quotas. When a linked course contains its own assignments, say whether to skip them for this reading route.
+
+Retain useful material in the original lessons, labs, articles, templates, and library, and link to it at the point it helps. Do not delete practice IDs or rewrite learner history to simplify navigation. Keep the original attempt/hint/debrief contract within chosen practice, but do not apply it to basic concept explanations or block the next reading topic. The explicit **Save my place** action records where to resume; neither a page visit nor that bookmark demonstrates understanding or mastery. Notes remain optional.
+
+Keep [the start guide](START-HERE.md), [study plan](STUDY-PLAN.md), [tutor handoff](CONTINUE-LEARNING.md), [learning tutor prompt](../templates/tutor-prompt.md), and assistant entry points consistent with this learning-first route. The [practice tutor prompt](../templates/practice-tutor-prompt.md) retains coaching for selected assignments. Historical closeout and audit records describe their earlier releases; do not silently rewrite them as if they validated the revised learning experience.
+
+## Add an optional practice lesson
+
+Create a Markdown file and add metadata with a unique two-digit ID, integer stage, title, summary, time estimate in minutes, objectives, quiz, and file path. A lesson in the existing practice curriculum needs a useful explanation, an example, three exercises, clear evidence requirements, and solution guidance. This contract applies to practice lessons, not to guided reading topics. The portal uses the metadata rather than guessing titles from filenames.
 
 ## Update external resources
 

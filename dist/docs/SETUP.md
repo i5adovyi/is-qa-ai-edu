@@ -1,5 +1,7 @@
 # Start from a fresh copy
 
+> For the guided SDET reading route, use [Start here](START-HERE.md). This page is for local setup or optional practical work; its exercises and checks are not required before reading.
+
 Use the [private OpenAI-hosted portal](https://signal-desk-ai-engineering-academy.igor-sadovyi87.chatgpt.site/) or run the same site locally. The [Run anywhere guide](RUN-ANYWHERE.md) explains both modes and how to transfer progress. Run Python commands in a terminal on your computer, from the project directory. The portal does not execute Python or install a skill for you.
 
 ## 1. Get the files
@@ -67,7 +69,7 @@ with (p/'first-run.md').open('x') as f:
 
 Save your baseline, prompts, outputs, and experiment logs under `work/`; it is excluded from Git and the downloadable course. Preserve before/after evidence. Commands that refuse an existing run directory are protecting your earlier work: choose a new output name instead of deleting the record.
 
-Now follow [your first session](START-HERE.md#your-first-session-one-small-artifact), then [the practice map](PRACTICE-MAP.md). If the terminal was unfamiliar, complete the [preparation worksheet](../content/onboarding/terminal-worksheet.md) before the executable labs.
+Now follow [your first session](START-HERE.md#a-first-session-that-stays-small), then [the practice map](PRACTICE-MAP.md). If the terminal was unfamiliar, complete the [preparation worksheet](../content/onboarding/terminal-worksheet.md) before the executable labs.
 
 ## Optional tools and later setup
 

@@ -1,5 +1,7 @@
 # 18 · Red-team the whole system and set release gates
 
+> Optional practice edition. You can read this explanation without completing its exercises. For the guided SDET route, use [Start here](../../docs/START-HERE.md).
+
 Stage 6 · 110 minutes · Advanced
 
 Test how failures cross boundaries, then define a release decision that remains meaningful under pressure.

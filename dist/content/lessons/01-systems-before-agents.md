@@ -1,5 +1,7 @@
 # 01 · Think in systems, then choose the smallest useful agent
 
+> Optional practice edition. You can read this explanation without completing its exercises. For the guided SDET route, use [Start here](../../docs/START-HERE.md).
+
 Stage 1 · 70 minutes · Foundation
 
 Map Signal Desk from a customer ticket to a verifiable support draft before choosing any model or framework.

@@ -1,5 +1,7 @@
 # 21 · Measure whether your agent team is actually better
 
+> Optional practice edition. You can read this explanation without completing its exercises. For the guided SDET route, use [Start here](../../docs/START-HERE.md).
+
 Stage 7 · 125 minutes · Advanced
 
 Compare a team with a single-agent baseline using outcome quality, coordination failures and total resource use.

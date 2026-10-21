@@ -1,5 +1,7 @@
 # 19 · Decide when delegation is worth its coordination cost
 
+> Optional practice edition. You can read this explanation without completing its exercises. For the guided SDET route, use [Start here](../../docs/START-HERE.md).
+
 Stage 7 · 95 minutes · Advanced
 
 Use multiple agents where tasks can be separated and verified, then compare the result with a simpler baseline.

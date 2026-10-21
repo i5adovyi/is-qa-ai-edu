@@ -1,5 +1,7 @@
 # 09 · Package a skill that improves repeatable work
 
+> Optional practice edition. You can read this explanation without completing its exercises. For the guided SDET route, use [Start here](../../docs/START-HERE.md).
+
 Stage 3 · 135 minutes · Practitioner
 
 Turn a successful Signal Desk procedure into a discoverable, testable skill with a clear activation boundary.

@@ -1,5 +1,7 @@
 # Project closeout and retrospective
 
+> Historical closeout of the initial build. The project was reopened after learner feedback; the [21 October learning-design correction](LEARNING-DESIGN-2026-10-21.md) and [current start guide](START-HERE.md) supersede its practice-first entry route.
+
 Recorded 20 October 2026. This is the historical handoff for the academy's initial
 build. Annotated Git tag `academy-2026-10-20` identifies the delivered tree and
 stores the final GitHub Actions and Sites version/deployment receipts. Current

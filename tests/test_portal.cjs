@@ -20,6 +20,7 @@ function academy() {
     }
   }
   return {
+    guide: JSON.parse(fs.readFileSync(path.join(ROOT,'content/sdet-path.json'),'utf8')),
     runtime: JSON.parse(fs.readFileSync(path.join(ROOT,'academy.json'),'utf8')),
     incidents: fs.existsSync(path.join(ROOT,'content/incidents.json')) ? JSON.parse(fs.readFileSync(path.join(ROOT,'content/incidents.json'),'utf8')) : {incidents:[]},
     curriculum: JSON.parse(fs.readFileSync(path.join(ROOT, 'content/curriculum.json'), 'utf8')),
@@ -517,4 +518,48 @@ test('restoring an older database or changing content at the same revision prese
   p.run("handleStorageClick({id:'storage-merge',dataset:{}})");await tick();
   assert.match(server.state.notes.example,/Newer previously committed/);assert.match(server.state.notes.example,/Older restored/);
  }
+});
+
+test('the new entrance offers reading without creating practice or completion records',()=>{
+ const p=portal();const before=p.run('JSON.stringify(state)');
+ assert.match(p.nodes['#main'].innerHTML,/Start reading/);
+ assert.match(p.nodes['#main'].innerHTML,/href="#guide=01"/);
+ assert.doesNotMatch(p.nodes['#nav'].innerHTML,/<details class="nav-more" open/);
+ for(let i=1;i<=8;i++){
+  p.context.topic=String(i).padStart(2,'0');
+  p.run("location.hash='#guide='+topic;render()");
+  assert.match(p.nodes['#main'].innerHTML,/One selected reading/);
+  assert.doesNotMatch(p.nodes['#main'].innerHTML,/id="exercise-attempt"|id="mark-done"/);
+ }
+ assert.equal(p.run('JSON.stringify(state)'),before);
+});
+
+test('saved reading location survives export, validation, and merge without awarding completion',()=>{
+ const p=portal();
+ p.run("state.reading='04';state.notes[A.guide.topics[3].file]='Question about graders';var restored=validateState(JSON.parse(JSON.stringify(state)));var merged=mergeProgress(fresh(),restored).state");
+ assert.equal(p.run('restored.reading'),'04');assert.equal(p.run('merged.reading'),'04');
+ assert.equal(p.run('merged.done.length'),0);assert.equal(p.run('Object.keys(merged.exercises).length'),0);
+ p.run("var old=clone(state);delete old.reading;var legacy=validateState(old)");
+ assert.equal(p.run('legacy.reading'),'');
+ p.run("state.reading='07';var conflict=mergeProgress(state,restored).state");
+ assert.equal(p.run('conflict.reading'),'07');
+ assert.match(p.run('overview()'),/href="#guide=07"/);
+});
+
+test('guided reading notes and position survive the local database persistence adapter',async()=>{
+ const server=localServer(),p=await localPortal(server);
+ p.run("state.reading='05';state.notes[A.guide.topics[4].file]='Which source was retrieved?';save()");await tick();
+ const resumed=await localPortal(server);
+ assert.equal(resumed.run('state.reading'),'05');
+ assert.equal(resumed.run('state.notes[A.guide.topics[4].file]'),'Which source was retrieved?');
+ assert.equal(resumed.run('state.done.length'),0);
+});
+
+test('legacy lesson and full practice indexes remain available with a guided-route signpost',()=>{
+ const p=portal();
+ p.run("location.hash='#lesson=01';render()");
+ assert.match(p.nodes['#main'].innerHTML,/This is optional practice material/);
+ assert.match(p.nodes['#main'].innerHTML,/Exercise 1/);
+ assert.match(p.nodes['#main'].innerHTML,/href="#guide=01"/);
+ assert.equal((p.run('learningPath()').match(/class="lesson-row"/g)||[]).length,24);
 });

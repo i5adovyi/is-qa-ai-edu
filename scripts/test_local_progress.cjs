@@ -36,6 +36,11 @@ async function db(page){return page.evaluate(async()=>(await(await fetch('/api/l
   await page.locator('#notes').fill('Evidence note saved before closing the whole browser context.');await saved(page);
   await page.getByRole('button',{name:'Mark lesson complete',exact:true}).click();await saved(page);
   const first=await db(page);assert.ok(first.done.includes('01'));assert.ok(first.exercises['L01-E1'].history.some(x=>x.kind==='attempt'));
+  await page.goto(server.base+'/#guide=04');await saved(page);
+  await page.locator('#save-reading').click();await saved(page);
+  await page.getByText('Keep a question or note · optional',{exact:true}).click();
+  await page.locator('#notes').fill('Reading question saved in SQLite.');await saved(page);
+  assert.equal((await db(page)).reading,'04');
   await context.close();
   const nextContext=await browser.newContext({viewport:{width:1440,height:1000}}),next=await nextContext.newPage();next.on('dialog',dialog=>dialog.accept());next.on('pageerror',e=>errors.push(e.message));
   await next.goto(server.base+'/#exercise=L01-E1');await saved(next);
@@ -71,12 +76,16 @@ async function db(page){return page.evaluate(async()=>(await(await fetch('/api/l
   // Restart the process and change port: a fresh context still reads the same SQLite file.
   const oldBase=server.base;await stop(server.child);server=await launch();assert.notEqual(server.base,oldBase);
   const restartedContext=await browser.newContext(),restarted=await restartedContext.newPage();await restarted.goto(server.base+'/#lesson=01');await saved(restarted);
-  assert.match(await restarted.locator('#notes').inputValue(),/Uncommitted work survives/);assert.ok((await db(restarted)).done.includes('01'));await restartedContext.close();
+  assert.match(await restarted.locator('#notes').inputValue(),/Uncommitted work survives/);assert.ok((await db(restarted)).done.includes('01'));assert.equal((await db(restarted)).reading,'04');
+  await restarted.goto(server.base+'/#guide=04');await saved(restarted);
+  await restarted.getByText('Keep a question or note · optional',{exact:true}).click();
+  assert.equal(await restarted.locator('#notes').inputValue(),'Reading question saved in SQLite.');
+  await restartedContext.close();
   const staticServer=await launch(true),staticContext=await browser.newContext(),preview=await staticContext.newPage();await preview.goto(staticServer.base+'/#lesson=01');
   await preview.waitForFunction(()=>document.querySelector('#global-save-status').textContent.includes('static preview'));
   await preview.locator('#notes').fill('Browser-only static preview');assert.match(await preview.locator('#global-save-status').innerText(),/browser/);assert.match(await preview.locator('#storage-notice').innerText(),/browser storage only/);
   await preview.reload();assert.equal(await preview.locator('#notes').inputValue(),'Browser-only static preview');await staticContext.close();
   assert.deepEqual(errors,[]);
-  console.log('PASS: SQLite drafts, history, notes and completion; browser context restart; concurrent revision conflict and explicit merge; failed PUT + reload recovery; server restart + different port; static preview fallback; mobile layout.');
+  console.log('PASS: SQLite reading place, reading notes, drafts, history, notes and completion; browser context restart; concurrent revision conflict and explicit merge; failed PUT + reload recovery; server restart + different port; static preview fallback; mobile layout.');
  }finally{if(browser)await browser.close();for(const child of processes)await stop(child);fs.rmSync(scratch,{recursive:true,force:true});}
 })().catch(error=>{console.error(error);process.exitCode=1});

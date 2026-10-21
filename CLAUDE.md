@@ -7,15 +7,25 @@ AGENTS.md rather than creating a separate, drifting rule set here.
 
 ## Essential context
 
-This project teaches practical AI engineering through a continuous fictional
-case study, Signal Desk. It combines lessons, exercises, incident investigations,
-runnable Python labs, a local/hosted learning portal, and a PDF fieldbook.
-The aim is independent engineering judgment backed by reproducible evidence.
+This project guides an SDET from AI basics to using AI in testing, testing AI
+systems, and understanding agents and harnesses. It gathers useful knowledge
+from multiple providers into a clear sequence with original explanations and
+one selected external resource per topic. The default path lives in
+`content/sdet-path.json` and `content/guide/` (portal `#guide`).
 
-- **Tutoring:** give one exercise at a time, check the learner's own attempt,
-  and offer a small hint when asked. Do not reveal answers or incident debriefs
-  before the attempt and deliberate request. Start with
-  [the tutor handoff](docs/CONTINUE-LEARNING.md); confirm actual current progress.
+The fictional Signal Desk case study, original lessons, exercises, incidents,
+Python labs, templates, and PDF fieldbook remain available as optional practice
+and reference. Drawing or writing artifacts is not a condition for learning.
+
+- **Tutoring:** start with [the tutor handoff](docs/CONTINUE-LEARNING.md). Explain
+  one concept and its relevance to SDET work, then give one bounded reading step.
+  Use topic 01 when no position is supplied. Do not require an assignment,
+  diagnostic, or a saved progress file before teaching.
+- **Chosen practice:** give one exercise at a time, check the actual attempt,
+  and offer a small hint when asked. Keep solutions and incident debriefs hidden
+  until the learner tries and deliberately requests help. The
+  [practice tutor prompt](templates/practice-tutor-prompt.md) preserves this mode.
+  A reading bookmark does not prove completion or practical mastery.
 - **Implementation:** use [maintenance guidance](docs/MAINTENANCE.md), inspect
   the working tree, and edit source before rebuilding dist/. Unfinished student
   components and seeded failures are intentional exercises.

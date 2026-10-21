@@ -1,5 +1,7 @@
 # 07 · Design tools as precise contracts
 
+> Optional practice edition. You can read this explanation without completing its exercises. For the guided SDET route, use [Start here](../../docs/START-HERE.md).
+
 Stage 3 · 115 minutes · Practitioner
 
 Build tool interfaces that make the right operation obvious and invalid operations easy to reject.

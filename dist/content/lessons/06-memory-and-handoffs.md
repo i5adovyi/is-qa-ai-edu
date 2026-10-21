@@ -1,5 +1,7 @@
 # 06 · Make memory resumable, inspectable and forgettable
 
+> Optional practice edition. You can read this explanation without completing its exercises. For the guided SDET route, use [Start here](../../docs/START-HERE.md).
+
 Stage 2 · 90 minutes · Foundation
 
 Preserve useful progress across sessions without turning stale summaries into permanent truth.

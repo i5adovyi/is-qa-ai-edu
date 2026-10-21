@@ -31,6 +31,27 @@ def validate(root):
     def need(ok, message):
         if not ok:
             errors.append(message)
+    guide = json.loads((root / 'content/sdet-path.json').read_text())
+    topics = guide.get('topics', [])
+    need(guide.get('version') == 1, 'Unknown guided-path version')
+    need([t.get('id') for t in topics] == [str(i).zfill(2) for i in range(1, 9)],
+         'Guided path must have eight ordered, unique topics')
+    for topic in topics:
+        name = topic.get('id', '?')
+        for key in ('title', 'file', 'phase', 'summary', 'prerequisite', 'takeaway'):
+            need(bool(topic.get(key)), 'Missing guide field ' + key + ': ' + name)
+        text_path = root / topic['file']
+        need(text_path.is_file(), 'Missing guided reading ' + topic['file'])
+        if text_path.is_file():
+            need(text_path.read_text().startswith('# ' + topic['title'] + '\n'),
+                 'Guided topic title differs from its reading: ' + name)
+        for resource in [topic['resource']] + topic.get('alternatives', []):
+            for key in ('provider', 'title', 'scope', 'access', 'checked', 'verification'):
+                need(bool(resource.get(key)), 'Missing selected-source ' + key + ': ' + name)
+            need(resource.get('url', '').startswith('https://'), 'Invalid selected URL: ' + name)
+        need(bool(topic.get('practice')), 'Guided topic has no link to retained material: ' + name)
+        for target in topic.get('practice', []):
+            need((root / target).is_file(), 'Missing related practice ' + target)
     need(len(c['lessons']) == 24, 'Expected 24 lessons')
     need({s['id'] for s in c['stages']} == set(range(1, 9)), 'Expected stages 1 through 8')
     ids = set()

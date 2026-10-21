@@ -1,5 +1,7 @@
 # 24 · Choose, build and defend your capstone
 
+> Optional practice edition. You can read this explanation without completing its exercises. For the guided SDET route, use [Start here](../../docs/START-HERE.md).
+
 Stage 8 · 90-minute proposal clinic, then 10–20 project hours · Advanced
 
 Integrate the course into a portfolio-grade system and defend its design with a live failure drill and reproducible evidence.

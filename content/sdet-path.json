@@ -1,0 +1,243 @@
+{
+  "version": 1,
+  "updated": "2026-10-21",
+  "topics": [
+    {
+      "id": "01",
+      "title": "What AI can do for an SDET",
+      "file": "content/guide/01-ai-basics.md",
+      "phase": "Use AI in testing",
+      "summary": "Understand models, assistants, prompts, and context through a failed CI test.",
+      "prerequisite": "No AI background or setup.",
+      "takeaway": "A model's suggestion and verified behavior are different things.",
+      "resource": {
+        "provider": "Microsoft",
+        "title": "Introduction to Generative AI and Large Language Models",
+        "url": "https://github.com/microsoft/generative-ai-for-beginners/blob/main/01-introduction-to-genai/README.md#how-do-large-language-models-work",
+        "scope": "Start at “How do large language models work?” and read the following practical-use discussion. Skip the educational-startup scenario, assignment, and next-lesson links. Return to this portal afterward.",
+        "access": "Public reading. No installation or account needed to read.",
+        "checked": "2026-10-21",
+        "verification": "Primary page opened; described scope checked. External course completion and enrollment were not tested."
+      },
+      "alternatives": [
+        {
+          "provider": "Microsoft Developer",
+          "title": "Introduction to Generative AI and LLMs — video",
+          "url": "https://www.youtube.com/watch?v=lFXQkBvEe0o",
+          "scope": "Watch this instead of the written Microsoft introduction if you prefer video. Do not do both unless it helps.",
+          "access": "Public YouTube video; playback availability varies.",
+          "checked": "2026-10-21",
+          "verification": "Official lesson and indexed Microsoft Developer video metadata checked. Direct YouTube fetch and video playback were not verified."
+        },
+        {
+          "provider": "Google",
+          "title": "Introduction to Large Language Models",
+          "url": "https://developers.google.com/machine-learning/crash-course/llm",
+          "scope": "Deeper study later: tokens, model architecture, and training. Assumes prior ML, neural networks, and embeddings; not the first-session route.",
+          "access": "Public reading; prerequisite modules linked on the page.",
+          "checked": "2026-10-21",
+          "verification": "Primary page opened; described scope checked. External course completion and enrollment were not tested."
+        }
+      ],
+      "practice": [
+        "content/lessons/01-systems-before-agents.md"
+      ]
+    },
+    {
+      "id": "02",
+      "title": "Give AI enough information to help",
+      "file": "content/guide/02-prompts-and-context.md",
+      "phase": "Use AI in testing",
+      "summary": "Frame a testing request and supply relevant, current evidence.",
+      "prerequisite": "Topic 01: model, prompt, and context.",
+      "takeaway": "Useful context reduces missing facts; detailed wording alone cannot supply them.",
+      "resource": {
+        "provider": "OpenAI",
+        "title": "Prompt engineering",
+        "url": "https://developers.openai.com/api/docs/guides/prompt-engineering#message-formatting-with-markdown-and-xml",
+        "scope": "Read “Message formatting with Markdown and XML”, “Few-shot learning”, and “Include relevant context information”. Stop before “Prompting current models”. Skip API setup and code examples you do not need.",
+        "access": "Public documentation. Reading does not require API credits.",
+        "checked": "2026-10-21",
+        "verification": "Primary page opened; described scope checked. External course completion and enrollment were not tested."
+      },
+      "alternatives": [
+        {
+          "provider": "Anthropic",
+          "title": "AI Fluency: Framework & Foundations",
+          "url": "https://academy.claude.com/courses/ai-fluency-framework-foundations",
+          "scope": "Optional structured course on working with AI and reviewing its output. Choose it if you want a broader course, not as another mandatory checklist.",
+          "access": "Course overview is public; lesson enrollment may require an account.",
+          "checked": "2026-10-21",
+          "verification": "Primary page opened; described scope checked. External course completion and enrollment were not tested."
+        }
+      ],
+      "practice": [
+        "content/lessons/03-prompt-experiments.md",
+        "content/lessons/04-evidence-packets.md",
+        "content/lessons/06-memory-and-handoffs.md"
+      ]
+    },
+    {
+      "id": "03",
+      "title": "Use AI in everyday testing work",
+      "file": "content/guide/03-ai-assisted-testing.md",
+      "phase": "Use AI in testing",
+      "summary": "Generate and review tests without letting code define its own correctness.",
+      "prerequisite": "Topic 02 and familiarity with ordinary automated tests.",
+      "takeaway": "Generated tests need an independent expectation and an actual relevant test run.",
+      "resource": {
+        "provider": "GitHub",
+        "title": "Writing tests with GitHub Copilot",
+        "url": "https://docs.github.com/en/copilot/tutorials/write-tests",
+        "scope": "Read the unit-test example and its execution/review steps. Treat it as an illustration if you use another assistant. A green example run is not proof of complete coverage.",
+        "access": "Public reading. Following the IDE steps requires a Copilot plan, supported IDE, and extension.",
+        "checked": "2026-10-21",
+        "verification": "Primary page opened; described scope checked. External course completion and enrollment were not tested."
+      },
+      "alternatives": [],
+      "practice": [
+        "content/lessons/10-coding-task-design.md",
+        "content/lessons/11-verification-loops.md",
+        "content/lessons/12-review-and-delivery.md",
+        "content/labs/13-coding-and-workers.md"
+      ]
+    },
+    {
+      "id": "04",
+      "title": "Test software whose answers can vary",
+      "file": "content/guide/04-evaluating-ai.md",
+      "phase": "Test AI systems",
+      "summary": "Understand evals, test data, rubrics, graders, and regression decisions.",
+      "prerequisite": "Topic 03; basic test and CI concepts.",
+      "takeaway": "Check deterministic properties and judged quality separately, using realistic cases.",
+      "resource": {
+        "provider": "OpenAI",
+        "title": "Evaluation best practices",
+        "url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
+        "scope": "Read evaluation principles and the eval-process steps. Focus on objectives, datasets, scoring, and comparison; defer provider APIs.",
+        "access": "Public documentation. No paid execution required for reading.",
+        "checked": "2026-10-21",
+        "verification": "Primary page opened; described scope checked. External course completion and enrollment were not tested."
+      },
+      "alternatives": [],
+      "practice": [
+        "content/lessons/16-evaluation-datasets.md",
+        "content/lessons/17-graders-and-statistics.md",
+        "content/lessons/18-red-teaming-and-release-gates.md"
+      ]
+    },
+    {
+      "id": "05",
+      "title": "Help AI find the right evidence",
+      "file": "content/guide/05-retrieval.md",
+      "phase": "Test AI systems",
+      "summary": "Understand RAG and separate retrieval mistakes from answer mistakes.",
+      "prerequisite": "Topics 02 and 04: context and evaluation.",
+      "takeaway": "The right answer needs the right authorized, current evidence and correct interpretation.",
+      "resource": {
+        "provider": "Microsoft",
+        "title": "Retrieval Augmented Generation and Vector Databases",
+        "url": "https://github.com/microsoft/generative-ai-for-beginners/blob/main/15-rag-and-vector-databases/README.md",
+        "scope": "Read the RAG and vector-search explanation. Stop before implementation and assignment sections unless you choose hands-on work.",
+        "access": "Public reading. Build examples have separate environment and provider requirements.",
+        "checked": "2026-10-21",
+        "verification": "Primary page opened; described scope checked. External course completion and enrollment were not tested."
+      },
+      "alternatives": [],
+      "practice": [
+        "content/lessons/05-retrieval-and-grounding.md",
+        "content/labs/14-retrieval-comparison.md"
+      ]
+    },
+    {
+      "id": "06",
+      "title": "Tools, MCP, and skills without the jargon pile",
+      "file": "content/guide/06-tools-mcp-skills.md",
+      "phase": "Understand agents and harnesses",
+      "summary": "Distinguish operations, integration protocols, and reusable instructions.",
+      "prerequisite": "Topics 02–05. Python/terminal only for optional installation work.",
+      "takeaway": "A skill, tool, MCP connection, and permission each serve different purposes.",
+      "resource": {
+        "provider": "Hugging Face",
+        "title": "The Context Course",
+        "url": "https://huggingface.co/learn/context-course/unit0/introduction",
+        "scope": "Read the overview, then the explanations in Units 1 (skills) and 2 (MCP). Defer plugins, subagents, hooks, and Nano Harness until topics 07–08.",
+        "access": "Public course text. Hands-on work assumes Python, CLI, a Hugging Face account, and a configured coding agent; provider access may cost money.",
+        "checked": "2026-10-21",
+        "verification": "Primary page opened; described scope checked. External course completion and enrollment were not tested."
+      },
+      "alternatives": [],
+      "practice": [
+        "content/lessons/07-tool-contracts.md",
+        "content/lessons/08-mcp-request-lifecycle.md",
+        "content/lessons/09-reusable-skills.md",
+        "content/labs/09-real-mcp.md",
+        "content/labs/10-installed-skill.md"
+      ]
+    },
+    {
+      "id": "07",
+      "title": "Understand an agent before building one",
+      "file": "content/guide/07-agents-and-workflows.md",
+      "phase": "Understand agents and harnesses",
+      "summary": "Follow tool selection, observations, stopping, and coordination failures.",
+      "prerequisite": "Topic 06: tools and permissions.",
+      "takeaway": "Evaluate the actions and their effects as well as the final answer.",
+      "resource": {
+        "provider": "Hugging Face",
+        "title": "Agents Course — What is an Agent?",
+        "url": "https://huggingface.co/learn/agents-course/unit1/what-are-agents",
+        "scope": "Read this page and Unit 1's tools and action/observation explanations. Skip the first-agent build and certificate quizzes unless you want practice.",
+        "access": "Public reading. Coding sections require basic Python and their own setup.",
+        "checked": "2026-10-21",
+        "verification": "Primary page opened; described scope checked. External course completion and enrollment were not tested."
+      },
+      "alternatives": [],
+      "practice": [
+        "content/lessons/13-agent-loop-state-machine.md",
+        "content/lessons/19-delegation-design.md",
+        "content/lessons/20-multi-agent-coordination.md",
+        "content/lessons/21-multi-agent-evaluation.md",
+        "content/labs/12-model-tool-loop.md"
+      ]
+    },
+    {
+      "id": "08",
+      "title": "Make agent work reliable enough to operate",
+      "file": "content/guide/08-harness-and-reliability.md",
+      "phase": "Understand agents and harnesses",
+      "summary": "Understand runtime controls, recovery, security, and evidence for release.",
+      "prerequisite": "Topics 04–07: evaluations, retrieval, tools, and agents.",
+      "takeaway": "Reliability comes from observable execution, enforced limits, and tested recovery.",
+      "resource": {
+        "provider": "OWASP",
+        "title": "Top 10 for LLMs and Generative AI Applications",
+        "url": "https://genai.owasp.org/llm-top-10/",
+        "scope": "Start with Prompt Injection, Sensitive Information Disclosure, and Excessive Agency. Use the other entries later as a risk reference, not a memorization list.",
+        "access": "Public reference; no account or tool setup needed.",
+        "checked": "2026-10-21",
+        "verification": "Primary page opened; described scope checked. External course completion and enrollment were not tested."
+      },
+      "alternatives": [
+        {
+          "provider": "Anthropic",
+          "title": "Effective harnesses for long-running agents",
+          "url": "https://www.anthropic.com/research/effective-harnesses-for-long-running-agents",
+          "scope": "Read for long-running work, environment setup, and session handoffs. This is a specific engineering approach, not a universal architecture.",
+          "access": "Public engineering article.",
+          "checked": "2026-10-21",
+          "verification": "Primary page opened; described scope checked. External course completion and enrollment were not tested."
+        }
+      ],
+      "practice": [
+        "content/lessons/14-checkpointing-and-idempotency.md",
+        "content/lessons/15-budgets-and-observability.md",
+        "content/lessons/22-production-design.md",
+        "content/lessons/23-operations-and-incidents.md",
+        "content/labs/11-complete-student-harness.md",
+        "content/incidents/README.md",
+        "content/lessons/24-capstone.md"
+      ]
+    }
+  ]
+}

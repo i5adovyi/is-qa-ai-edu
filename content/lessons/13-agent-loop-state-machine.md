@@ -1,5 +1,7 @@
 # 13 · Build the agent loop as an explicit state machine
 
+> Optional practice edition. You can read this explanation without completing its exercises. For the guided SDET route, use [Start here](../../docs/START-HERE.md).
+
 Stage 5 · 120 minutes · Practitioner
 
 Turn model proposals into a bounded execution loop with clear transitions and useful terminal outcomes.

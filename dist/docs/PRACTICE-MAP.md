@@ -1,5 +1,7 @@
 # Turn lessons into working practice
 
+> For the guided SDET reading route, use [Start here](START-HERE.md). This page is for local setup or optional practical work; its exercises and checks are not required before reading.
+
 The course has three connected routes. **Concept practice** uses diagrams, contracts and manual simulations. **Engineering practice** implements local Python helpers and inspects a deterministic harness. **Model practice** captures actual assistant output and evaluates it through the [model bridge](../lab/model-bridge.md). Complete the model route when you have access to an assistant; keep it marked “not attempted” when you do not. An offline pass does not establish live-model performance.
 
 ## Prerequisites and placement

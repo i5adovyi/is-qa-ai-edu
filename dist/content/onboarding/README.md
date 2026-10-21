@@ -1,5 +1,7 @@
 # Begin with one small result
 
+> For the guided SDET reading route, use [Start here](../../docs/START-HERE.md). This page is for local setup or optional practical work; its exercises and checks are not required before reading.
+
 You do not need to understand the entire architecture before starting. These three entry checks are independent. Complete the first two for the concept route. Add the third before the Python labs. Estimated time: 15–25 minutes for the first two, another 20–40 minutes for the terminal check. These are planning estimates, not observed learner timings.
 
 ## Entry check A · Read a tiny diagram

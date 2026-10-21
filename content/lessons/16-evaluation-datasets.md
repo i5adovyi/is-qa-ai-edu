@@ -1,5 +1,7 @@
 # 16 · Build an evaluation set that reflects the job
 
+> Optional practice edition. You can read this explanation without completing its exercises. For the guided SDET route, use [Start here](../../docs/START-HERE.md).
+
 Stage 6 · 115 minutes · Advanced
 
 Create a versioned benchmark with meaningful coverage, defensible labels and explicit limits.

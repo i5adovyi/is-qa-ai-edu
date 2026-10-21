@@ -1,5 +1,7 @@
 # 08 · Understand MCP by tracing one request
 
+> Optional practice edition. You can read this explanation without completing its exercises. For the guided SDET route, use [Start here](../../docs/START-HERE.md).
+
 Stage 3 · 120 minutes · Practitioner
 
 Learn where MCP fits by following discovery, a tool call, and its result through a real local Signal Desk integration. Budget another 2–3 hours for the complete optional SDK lab, including installation, tool extension, and fault diagnosis.

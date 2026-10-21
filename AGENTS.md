@@ -2,16 +2,24 @@
 
 ## Purpose and context
 
-This is a complete AI engineering academy: original curriculum, a local/hosted
-learning portal, runnable labs, and AI tutor guidance. The learner practices
-prompting, context engineering, tools, MCP, skills, coding agents, harness
-engineering, evaluation, delegation, and recovery from realistic failures.
+This is a provider-neutral AI learning project for an SDET: a guided reading
+path, selected external courses and references, a local/hosted portal, and
+optional engineering practice. Teach the concepts before sending the learner
+to a resource. Give a clear order and a manageable next step; do not turn the
+provider catalogs or the academy's library into a required checklist.
+
+The default path starts with using AI in testing work, then testing AI systems,
+then tools, MCP, skills, agents, harness engineering, and reliability. The
+original lessons, exercises, templates, labs, and incidents remain useful as
+optional practice. Drawing diagrams, producing documents, taking diagnostics,
+and passing exercise gates are not required to begin or continue reading.
 
 The recurring case study is Signal Desk, a fictional support and QA team.
-The learning loop is predict, attempt, inspect evidence, receive feedback,
-revise, then transfer to a new case. The desired outcome is independent,
-reproducible engineering work. This is an educational environment with synthetic
-fixtures; running the reference code does not prove the learner has mastered it.
+When the learner chooses practice, use the loop: predict, attempt, inspect
+evidence, receive feedback, revise, then transfer to a new case. The desired
+outcome is understanding and, through practice, independent engineering work.
+This is an educational environment with synthetic fixtures; reading a page or
+running the reference code does not prove the learner has mastered it.
 
 The project must remain usable across assistant sessions, accounts, and local
 installations. README.md is the project overview. This file is the canonical
@@ -23,8 +31,10 @@ working guide for assistants; CLAUDE.md points here so the rules stay consistent
    maintaining the project, or setup/account migration. Do not switch a tutoring
    request into an implementation task or solve assignments as maintenance.
 2. For tutoring, read docs/CONTINUE-LEARNING.md, docs/START-HERE.md, and
-   templates/tutor-prompt.md. Use docs/STUDY-PLAN.md and docs/PRACTICE-MAP.md to
-   find prerequisites, then read only the current activity's material.
+   templates/tutor-prompt.md. Use content/sdet-path.json and docs/STUDY-PLAN.md
+   for the default sequence. Read the current topic in content/guide/. Use
+   docs/PRACTICE-MAP.md and templates/practice-tutor-prompt.md only when the
+   learner chooses hands-on work.
 3. For implementation, read docs/MAINTENANCE.md, inspect `git status`, and inspect
    relevant source/tests before editing. Preserve unrelated work.
 4. For setup or migration, read docs/SETUP.md, docs/NEW-ACCOUNT.md, and
@@ -37,11 +47,20 @@ working guide for assistants; CLAUDE.md points here so the rules stay consistent
 
 ## When acting as the learner's tutor
 
-- Use the learner's latest submitted attempt or supplied progress export.
-  The old first-lesson position in docs/CONTINUE-LEARNING.md is historical, not
-  proof of current progress. Ask for the latest attempt when it is unknown.
-- Give one exercise or checkpoint at a time. Let the learner try before showing
-  solutions, worked answers, incident debriefs, or further hint levels.
+- Start with the learner's current topic or question. With no supplied position,
+  start guided topic 01; do not require an attempt or placement diagnostic.
+  Earlier diagram work is historical, not the learner's current obligation.
+- Explain one concept in plain language and connect it to an SDET example.
+  Then select one primary resource with the section to study, a stopping point,
+  prerequisites, and access requirements. Alternatives are choices, not extra
+  mandatory homework. Keep the route provider-neutral.
+- Do not withhold ordinary concept explanations as exercise answers. The learner
+  may read, ask questions, and continue without an artifact or passing check.
+  If an active assignment would be spoiled, teach with a different example.
+- When the learner chooses practice, use their latest supplied attempt and give
+  one exercise or checkpoint at a time. Let them try before showing solutions,
+  worked answers, incident debriefs, or further hint levels, then reveal those
+  only on request. Ask for an attempt only in this practice context.
 - When asked for a hint, give the smallest useful hint. Check the learner's work
   against the criteria, explain the gap, and let the learner revise.
 - Preserve the incident workflow: substantive recorded attempt, then a separate
@@ -51,13 +70,21 @@ working guide for assistants; CLAUDE.md points here so the rules stay consistent
   completed work, certification, or remembered progress from another account.
 - Do not mark work completed or change personal progress without the learner's
   instruction. Do not solve an assignment when they asked to practise it.
-- Use preparation examples when a prerequisite is missing. Keep live-model work
-  visibly pending when access is unavailable; the offline route can continue.
+- A saved reading position is a bookmark, not a completion or mastery claim.
+  The portal's explicit “Save my place” action records that position; merely
+  opening a topic must not mark it completed.
+- Explain missing prerequisites as needed. Use preparation examples when useful
+  for chosen practice. Keep live-model work visibly pending when access is
+  unavailable; reading and the offline practice route can continue.
 
 ## Source and runtime map
 
-- `content/curriculum.json` and `content/learning.json`: sequence and activity
-  contracts. Student guides live in content/, docs/, templates/, and capstones/.
+- `content/sdet-path.json` and `content/guide/`: default SDET topic sequence,
+  original explanations, one primary resource per topic, optional alternatives,
+  and links to retained practice. The portal routes are `#guide` and `#guide=01`.
+- `content/curriculum.json` and `content/learning.json`: original practice
+  sequence and activity contracts. Student guides live in content/, docs/,
+  templates/, and capstones/. Preserve their IDs and existing learner records.
 - `lab/`: Python reference/student implementations and practice environments.
   `lab/student.py`, the coding sandbox defect, and incident starters are
   deliberately incomplete or broken. Do not repair them as incidental cleanup.

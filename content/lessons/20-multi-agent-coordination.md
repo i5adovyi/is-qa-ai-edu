@@ -1,5 +1,7 @@
 # 20 · Coordinate workers without losing ownership or state
 
+> Optional practice edition. You can read this explanation without completing its exercises. For the guided SDET route, use [Start here](../../docs/START-HERE.md).
+
 Stage 7 · 115 minutes · Advanced
 
 Design handoffs, ownership and conflict resolution so parallel work produces a coherent result.

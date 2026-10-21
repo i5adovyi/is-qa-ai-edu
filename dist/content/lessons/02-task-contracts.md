@@ -1,5 +1,7 @@
 # 02 · Write task contracts that survive ambiguity
 
+> Optional practice edition. You can read this explanation without completing its exercises. For the guided SDET route, use [Start here](../../docs/START-HERE.md).
+
 Stage 1 · 85 minutes · Foundation
 
 Replace vague prompting with explicit inputs, constraints, evidence rules and outputs you can check.

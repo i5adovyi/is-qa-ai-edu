@@ -1,5 +1,26 @@
 # Verification record for the October 2026 academy release
 
+## Guided SDET learning revision — 21 October 2026
+
+The [learning-design correction](LEARNING-DESIGN-2026-10-21.md) explains the change in purpose. The new default route has eight original explanations, selected external material with scope/access notes, an explicit reading-place control, and links into the retained practice collection.
+
+Executed locally for this revision:
+
+- Python core suite: **226 discovered, 215 passed, 11 optional MCP skips**. MCP/host/provider implementations were unchanged; no new live-provider claim is made.
+- Portal unit suite: **46 passed**, including no completion or attempt mutations during reading, reading-position validation/import, local persistence, and preserved practice navigation.
+- New guided-path browser suite: all eight topics and selected-resource links, collapsed optional material, all related-practice links, saved place and notes after reload, export/import into a separate browser context, keyboard operation, and mobile layout passed.
+- Existing portal, practice-learning, incident, and Run anywhere browser suites passed. The incident test covers all seven incident routes and retains the attempt/explicit-reveal contract.
+- Actual SQLite browser integration passed, including a saved reading place and reading notes across a fresh browser context and a real server restart on another port, alongside existing attempts, revision conflicts, failed-save recovery, and mobile behavior. It used an isolated temporary data directory.
+- Exhaustive portal audit: **156 documents and Markdown downloads, 546 internal-link occurrences, 187 distinct internal links, 96 quiz answers, eight practice stages, 71 downloadable assets, 156 mobile documents, zero page errors**.
+- Source preservation check: every previously tracked file remains; the original bodies of all 24 lessons, curriculum/activity/incident metadata, and all 43 original resource records remain unchanged. Lesson additions only label practice as optional. Original overview/start/schedule/tutor material is retained in separately labeled documents.
+- Content validation and static/source/portable builds passed. The broader library now contains 52 entries. Desktop and mobile reading views were visually inspected.
+
+Selected primary reading pages and their described scope were checked against official sources. The Microsoft video was checked through official lesson/indexed video metadata; direct YouTube retrieval/playback was unavailable. External enrollment, certificates, every provider course, and actual learner comprehension were not tested. The PDF remains the original optional practice fieldbook; this revision does not claim a regenerated guided-reading PDF.
+
+These are local checks. GitHub CI and Sites publication are separate release actions; their results must be checked for the actual pushed/deployed commit. Personal learning records were neither reset nor marked complete by this work.
+
+## Earlier verification records
+
 Checked 20 October 2026. The [project closeout](PROJECT-CLOSEOUT.md) records the final build verification and limitations. Earlier observations are retained below for provenance; their browser-only storage descriptions refer to earlier releases or hosted mode. Earlier findings remain in the [student audit](STUDENT-AUDIT.md) and [learning experience review](LEARNING-EXPERIENCE-REVIEW.md); the [implementation record](LEARNING-EXPERIENCE-IMPLEMENTATION.md) maps the preceding eight review workstreams.
 
 ## Local database and new-account revision: executed checks

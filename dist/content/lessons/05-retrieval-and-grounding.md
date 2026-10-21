@@ -1,5 +1,7 @@
 # 05 · Retrieve evidence before generating answers
 
+> Optional practice edition. You can read this explanation without completing its exercises. For the guided SDET route, use [Start here](../../docs/START-HERE.md).
+
 Stage 2 · 110 minutes · Foundation
 
 Build a small retrieval experiment that exposes why finding a document and supporting a claim are different tasks.

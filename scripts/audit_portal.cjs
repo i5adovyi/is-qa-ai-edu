@@ -31,6 +31,7 @@ const { createHash } = require('node:crypto');
       await page.locator('.reading').waitFor();
       await page.waitForFunction(name => document.querySelector('#download-doc')?.dataset.path === name, doc);
       assert.ok((await page.locator('.reading').innerText()).trim().length, doc);
+      if(doc.startsWith('content/guide/'))await page.getByText('Keep a question or note · optional',{exact:true}).click();
       const [download] = await Promise.all([
         page.waitForEvent('download').catch(error => { throw Error(`Markdown download failed: ${doc}: ${error.message}`); }),
         page.locator('#download-doc').click()

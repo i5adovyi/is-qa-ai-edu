@@ -1,5 +1,7 @@
 # 17 · Use graders carefully and report uncertainty
 
+> Optional practice edition. You can read this explanation without completing its exercises. For the guided SDET route, use [Start here](../../docs/START-HERE.md).
+
 Stage 6 · 115 minutes · Advanced
 
 Combine deterministic checks, human judgment and optional model graders without confusing a score with truth.

@@ -1,5 +1,7 @@
 # 12 · Review AI changes through evidence and failure paths
 
+> Optional practice edition. You can read this explanation without completing its exercises. For the guided SDET route, use [Start here](../../docs/START-HERE.md).
+
 Stage 4 · 90 minutes · Practitioner
 
 Perform a review that follows data, authority and state through the patch, then deliver a clear account of what changed.

@@ -1,5 +1,7 @@
 # 10 · Turn a feature request into a bounded coding task
 
+> Optional practice edition. You can read this explanation without completing its exercises. For the guided SDET route, use [Start here](../../docs/START-HERE.md).
+
 Stage 4 · 85 minutes · Practitioner
 
 Give an agent a change request that defines behavior, boundaries and verification without dictating every implementation detail.

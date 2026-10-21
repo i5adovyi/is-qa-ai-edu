@@ -1,5 +1,7 @@
 # 15 · Make cost, latency and behavior observable
 
+> Optional practice edition. You can read this explanation without completing its exercises. For the guided SDET route, use [Start here](../../docs/START-HERE.md).
+
 Stage 5 · 120 minutes · Practitioner
 
 Instrument the harness so you can explain what happened, where time went and why a run stopped.
