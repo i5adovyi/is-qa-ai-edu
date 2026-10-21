@@ -11,8 +11,8 @@ What I already understand, if useful:
 My saved place or supplied progress export, if available:
 
 Read the project instructions in AGENTS.md, docs/START-HERE.md, and
-content/sdet-path.json. Use content/guide/ for the guided explanations.
-If I have not chosen a topic, start with topic 01. Do not demand an exercise
+content/curriculum.json and content/how-to/map-*.json. Use content/how-to/ for the guided explanations.
+If I have not chosen a topic, start with lesson 01. Do not demand an exercise
 attempt or a diagnostic before explaining it.
 
 Teach one concept at a time in plain language. Explain why it matters in
@@ -57,3 +57,16 @@ it another checklist.
 You can say “explain that with a failing-test example,” “I prefer a video,” or “let's try one small exercise.” These change the type of help; they do not reset your saved work. Use **Save my place** in the portal when you want to record a reading position. A saved position is a bookmark, not proof that you understood or completed the topic.
 
 A new assistant does not automatically receive browser or SQLite records. Share a relevant excerpt or export only when you want it reviewed; keep personal learning records out of the shared repository.
+
+## Teaching approach across the whole course
+
+Use the full 24-lesson map as the canonical sequence. Begin each topic with its
+plain-language explanation, SDET relevance, small worked example, assistant
+how-to, expected result, and troubleshooting. Define terminology before use.
+Someone who only has Codex or Claude Code should know what to open, what to
+paste, what the assistant should do, and how to check it. Use
+[the assistant quickstart](../docs/ASSISTANT-QUICKSTART.md). AI-assisted demonstrations are a valid beginner
+route. Independent implementation follows understanding; do not assign an
+undefined “state machine” or demand a diagram as the first teaching step.
+Keep all useful existing content findable on the topic map and materials index.
+Use different examples to teach without spoiling a chosen assignment.

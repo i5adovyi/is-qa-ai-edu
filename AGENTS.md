@@ -8,10 +8,10 @@ optional engineering practice. Teach the concepts before sending the learner
 to a resource. Give a clear order and a manageable next step; do not turn the
 provider catalogs or the academy's library into a required checklist.
 
-The default path starts with using AI in testing work, then testing AI systems,
-then tools, MCP, skills, agents, harness engineering, and reliability. The
-original lessons, exercises, templates, labs, and incidents remain useful as
-optional practice. Drawing diagrams, producing documents, taking diagnostics,
+The default path is the complete 24-lesson, eight-stage curriculum. Each lesson
+starts with its beginner how-to and retains its original explanation and exercises.
+The eight short primers supplement this route; they must not replace or hide it.
+Templates, labs, incidents, and independent implementation are optional practice. Drawing diagrams, producing documents, taking diagnostics,
 and passing exercise gates are not required to begin or continue reading.
 
 The recurring case study is Signal Desk, a fictional support and QA team.
@@ -31,8 +31,8 @@ working guide for assistants; CLAUDE.md points here so the rules stay consistent
    maintaining the project, or setup/account migration. Do not switch a tutoring
    request into an implementation task or solve assignments as maintenance.
 2. For tutoring, read docs/CONTINUE-LEARNING.md, docs/START-HERE.md, and
-   templates/tutor-prompt.md. Use content/sdet-path.json and docs/STUDY-PLAN.md
-   for the default sequence. Read the current topic in content/guide/. Use
+   templates/tutor-prompt.md. Use content/curriculum.json and content/how-to/map-*.json and docs/STUDY-PLAN.md
+   for the default sequence. Read the current topic in content/how-to/. Use
    docs/PRACTICE-MAP.md and templates/practice-tutor-prompt.md only when the
    learner chooses hands-on work.
 3. For implementation, read docs/MAINTENANCE.md, inspect `git status`, and inspect
@@ -48,7 +48,7 @@ working guide for assistants; CLAUDE.md points here so the rules stay consistent
 ## When acting as the learner's tutor
 
 - Start with the learner's current topic or question. With no supplied position,
-  start guided topic 01; do not require an attempt or placement diagnostic.
+  start lesson 01; do not require an attempt or placement diagnostic.
   Earlier diagram work is historical, not the learner's current obligation.
 - Explain one concept in plain language and connect it to an SDET example.
   Then select one primary resource with the section to study, a stopping point,
@@ -79,10 +79,10 @@ working guide for assistants; CLAUDE.md points here so the rules stay consistent
 
 ## Source and runtime map
 
-- `content/sdet-path.json` and `content/guide/`: default SDET topic sequence,
+- `content/curriculum.json` and `content/how-to/map-*.json` and `content/how-to/`: beginner guides and topic material maps,
   original explanations, one primary resource per topic, optional alternatives,
-  and links to retained practice. The portal routes are `#guide` and `#guide=01`.
-- `content/curriculum.json` and `content/learning.json`: original practice
+  and links to retained practice. The portal routes are `#path` and `#lesson=01`.
+- `content/curriculum.json` and `content/learning.json`: canonical full course
   sequence and activity contracts. Student guides live in content/, docs/,
   templates/, and capstones/. Preserve their IDs and existing learner records.
 - `lab/`: Python reference/student implementations and practice environments.
@@ -139,3 +139,16 @@ End with what changed, the checks actually run, any remaining limitation, and
 one concrete next action when work remains. Distinguish local changes, commits,
 GitHub pushes, and Site publication. Record general project decisions in the
 relevant maintained docs; keep personal learning history out of shared context.
+
+## Teaching approach across the whole course
+
+Use the full 24-lesson map as the canonical sequence. Begin each topic with its
+plain-language explanation, SDET relevance, small worked example, assistant
+how-to, expected result, and troubleshooting. Define terminology before use.
+Someone who only has Codex or Claude Code should know what to open, what to
+paste, what the assistant should do, and how to check it. Use
+[docs/ASSISTANT-QUICKSTART.md](docs/ASSISTANT-QUICKSTART.md). AI-assisted demonstrations are a valid beginner
+route. Independent implementation follows understanding; do not assign an
+undefined “state machine” or demand a diagram as the first teaching step.
+Keep all useful existing content findable on the topic map and materials index.
+Use different examples to teach without spoiling a chosen assignment.

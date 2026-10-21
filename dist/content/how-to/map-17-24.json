@@ -1,0 +1,130 @@
+[
+  {
+    "lesson": "17",
+    "file": "content/how-to/17.md",
+    "prerequisites": ["16"],
+    "keywords": ["grader", "rubric", "calibration", "false acceptance", "false rejection", "statistics", "uncertainty", "model judge"],
+    "materials": ["content/guide/04-evaluating-ai.md", "content/articles/evaluation-vs-demo.md", "templates/evaluation-plan.md", "content/labs/06-grounding-and-evaluation.md"],
+    "resource": {
+      "provider": "OpenAI",
+      "title": "Evaluation best practices — evaluator types",
+      "url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
+      "scope": "Read Create and combine different types of evaluators; stop before Handle edge cases. Prerequisite: understand an expected result and the teaching example. Skip platform and API setup; the page carries a platform deprecation notice.",
+      "access": "Public conceptual reading; no account or API needed. Running a provider service is separate and not required.",
+      "checked": "2026-10-21",
+      "verification": "Opened the official page and read its metric-based, human, and model-grader sections, including the current platform notice. No API or model-grading service was executed."
+    }
+  },
+  {
+    "lesson": "18",
+    "file": "content/how-to/18.md",
+    "prerequisites": ["07", "17"],
+    "keywords": ["red teaming", "prompt injection", "security", "authority", "release gate", "untrusted input", "tool permissions"],
+    "materials": ["content/guide/06-tools-mcp-skills.md", "content/labs/03-tool-authority.md", "content/labs/08-ship-an-evaluated-policy.md", "templates/tool-contract.md"],
+    "resource": {
+      "provider": "OWASP",
+      "title": "LLM01:2025 Prompt Injection",
+      "url": "https://genai.owasp.org/llmrisk/llm01-prompt-injection/",
+      "scope": "Read the definition, Types of Prompt Injection Vulnerabilities, and Prevention and Mitigation Strategies; stop before example attack scenarios. Prerequisite: distinguish input data from task authority.",
+      "access": "Public reading without an account or installation; no attack execution is required.",
+      "checked": "2026-10-21",
+      "verification": "Opened the official OWASP risk page and read the definition, direct/indirect input distinction, and mitigation sections. No live security testing was performed."
+    }
+  },
+  {
+    "lesson": "19",
+    "file": "content/how-to/19.md",
+    "prerequisites": ["13"],
+    "keywords": ["delegation", "subagents", "workers", "parallel tasks", "dependencies", "orchestrator", "coordination cost"],
+    "materials": ["content/guide/07-agents-and-workflows.md", "content/articles/agent-delegation.md", "templates/delegation-brief.md", "content/labs/13-coding-and-workers.md"],
+    "resource": {
+      "provider": "Anthropic",
+      "title": "Building effective agents — parallelization and orchestrator-workers",
+      "url": "https://www.anthropic.com/research/building-effective-agents",
+      "scope": "Read Workflow: Parallelization and Workflow: Orchestrator-workers; stop before Workflow: Evaluator-optimizer. Prerequisite: understand agent and dependency. Study the architecture patterns, not historical model recommendations.",
+      "access": "Public article; no account, paid model, or framework installation required for reading.",
+      "checked": "2026-10-21",
+      "verification": "Opened the official article, followed its engineering-to-research redirect, and read both named workflow sections and the tooling-age caveat. No worker execution was performed."
+    }
+  },
+  {
+    "lesson": "20",
+    "file": "content/how-to/20.md",
+    "prerequisites": ["14", "19"],
+    "keywords": ["coordination", "ownership", "stale results", "handoff", "status", "persistence", "checkpoint", "timeout"],
+    "materials": ["content/lessons/06-memory-and-handoffs.md", "content/articles/agent-delegation.md", "templates/delegation-brief.md", "content/labs/13-coding-and-workers.md"],
+    "resource": {
+      "provider": "LangChain / LangGraph",
+      "title": "Persistence — checkpoints, stores, and restarts",
+      "url": "https://docs.langchain.com/oss/python/langgraph/persistence",
+      "scope": "Read the introduction, Checkpointer vs. store table, and MemorySaver does not persist between restarts troubleshooting item; stop there. Skip the Python quickstart. Prerequisite: understand saved state and a running process.",
+      "access": "Public reading without account or installation. Executing the framework examples needs separate Python dependencies and is not required.",
+      "checked": "2026-10-21",
+      "verification": "Opened the official documentation and verified the named sections. The former durable-execution address redirects to this persistence page. Framework code was not installed or executed."
+    }
+  },
+  {
+    "lesson": "21",
+    "file": "content/how-to/21.md",
+    "prerequisites": ["17", "20"],
+    "keywords": ["multi-agent evaluation", "baseline", "paired comparison", "regression", "cost", "latency", "confounder", "benchmark"],
+    "materials": ["content/articles/evaluation-vs-demo.md", "content/articles/agent-delegation.md", "content/labs/13-coding-and-workers.md", "templates/evaluation-plan.md"],
+    "resource": {
+      "provider": "Anthropic",
+      "title": "How we built our multi-agent research system — evaluation",
+      "url": "https://www.anthropic.com/research/multi-agent-research-system",
+      "scope": "Read Effective evaluation of agents; stop before Production reliability and engineering challenges. Prerequisite: understand baseline, rubric, and worker. Treat its company measurements as system-specific observations.",
+      "access": "Public article; no account or product access needed for reading. Reproducing its system is not part of this lesson.",
+      "checked": "2026-10-21",
+      "verification": "Opened the official article, followed its engineering-to-research redirect, and read the evaluation section. Its performance claims were not independently reproduced."
+    }
+  },
+  {
+    "lesson": "22",
+    "file": "content/how-to/22.md",
+    "prerequisites": ["15", "18"],
+    "keywords": ["production", "service boundary", "SLI", "SLO", "rollout", "shadow mode", "fallback", "rollback", "denominator"],
+    "materials": ["content/guide/08-harness-and-reliability.md", "content/articles/harness-architecture.md", "content/labs/15-review-and-operations.md", "templates/evaluation-plan.md"],
+    "resource": {
+      "provider": "Google SRE",
+      "title": "Service Level Objectives — terminology, indicators, and objectives",
+      "url": "https://sre.google/sre-book/service-level-objectives/",
+      "scope": "Read Service Level Terminology, Indicators, and Objectives; stop at The Global Chubby Planned Outage example. Prerequisite: understand a fraction and a request outcome. Historical service examples are not targets for this academy.",
+      "access": "Free web book chapter; no account, cloud setup, or deployment required.",
+      "checked": "2026-10-21",
+      "verification": "Opened the Google SRE book chapter and read the named measurement and target sections. No operational service or availability claim was tested."
+    }
+  },
+  {
+    "lesson": "23",
+    "file": "content/how-to/23.md",
+    "prerequisites": ["15", "22"],
+    "keywords": ["operations", "incident", "triage", "containment", "recovery", "trace", "runbook", "postmortem", "root cause"],
+    "materials": ["content/labs/07-traces-and-diagnosis.md", "content/labs/15-review-and-operations.md", "templates/incident-review.md", "templates/incident-handoff.md"],
+    "resource": {
+      "provider": "Google SRE",
+      "title": "Postmortem Culture: Learning from Failure",
+      "url": "https://sre.google/sre-book/postmortem-culture/",
+      "scope": "Read the introduction and Google's Postmortem Philosophy; stop before Collaborate and Share Knowledge. Prerequisite: distinguish observation from hypothesis. No formal report is required for the teaching example.",
+      "access": "Free web book chapter; no account or production environment required.",
+      "checked": "2026-10-21",
+      "verification": "Opened the Google SRE book chapter and read the introduction and postmortem-philosophy section. No real incident was investigated; the guide uses a separate synthetic import trace."
+    }
+  },
+  {
+    "lesson": "24",
+    "file": "content/how-to/24.md",
+    "prerequisites": ["10", "11", "12", "16"],
+    "keywords": ["capstone", "beginner project", "QA copilot", "prototype", "vertical slice", "acceptance criteria", "portfolio", "assistant-assisted implementation"],
+    "materials": ["content/guide/03-ai-assisted-testing.md", "capstones/02-qa-copilot.md", "capstones/01-support-agent.md", "capstones/03-research-workflow.md", "content/labs/13-coding-and-workers.md"],
+    "resource": {
+      "provider": "GitHub",
+      "title": "Writing tests with GitHub Copilot",
+      "url": "https://docs.github.com/en/copilot/tutorials/write-tests",
+      "scope": "Read the introduction and Writing unit tests with Copilot Chat; stop before Writing integration tests with Copilot. Prerequisite: understand test inputs and expected results; Python familiarity helps with the example. Study the method rather than copying Copilot UI instructions into another assistant.",
+      "access": "Public reading. Following the product-specific actions requires Copilot access, a supported IDE, and its extension. The academy's own demonstration works in an existing Codex or Claude Code conversation.",
+      "checked": "2026-10-21",
+      "verification": "Opened the official GitHub tutorial and checked its stated prerequisites and unit-test section. No Copilot interaction or generated test execution was performed."
+    }
+  }
+]

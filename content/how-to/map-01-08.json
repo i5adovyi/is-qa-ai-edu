@@ -1,0 +1,130 @@
+[
+  {
+    "lesson": "01",
+    "file": "content/how-to/01.md",
+    "prerequisites": [],
+    "keywords": ["AI basics", "SDET", "language model", "assistant", "workflow", "agent", "tool", "harness", "observed versus executed"],
+    "materials": ["content/guide/01-ai-basics.md", "content/guide/07-agents-and-workflows.md", "content/articles/harness-architecture.md"],
+    "resource": {
+      "provider": "Microsoft",
+      "title": "Introduction to Generative AI and Large Language Models",
+      "url": "https://github.com/microsoft/generative-ai-for-beginners/blob/main/01-introduction-to-genai/README.md#how-do-large-language-models-work",
+      "scope": "Read How do large language models work? and the following practical-use section; stop before Assignment. No technical prerequisite for this selected scope.",
+      "access": "Public reading; no account or installation required.",
+      "checked": "2026-10-21",
+      "verification": "Opened the official repository lesson and checked the selected sections. No course completion or video playback was tested."
+    }
+  },
+  {
+    "lesson": "02",
+    "file": "content/how-to/02.md",
+    "prerequisites": ["01"],
+    "keywords": ["prompt", "task contract", "acceptance criteria", "requirements", "uncertainty", "few-shot examples"],
+    "materials": ["content/guide/02-prompts-and-context.md", "templates/task-contract.md", "content/guide/03-ai-assisted-testing.md"],
+    "resource": {
+      "provider": "OpenAI",
+      "title": "Prompt engineering",
+      "url": "https://developers.openai.com/api/docs/guides/prompt-engineering#message-formatting-with-markdown-and-xml",
+      "scope": "Read Message formatting with Markdown and XML, the example structure, Few-shot learning, and Include relevant context information. Skip API code; stop before model-specific guidance. Prerequisite: lesson 01 concepts.",
+      "access": "Public documentation; reading requires no API credits or setup.",
+      "checked": "2026-10-21",
+      "verification": "Opened the official documentation and checked the named sections. Product API examples were not executed."
+    }
+  },
+  {
+    "lesson": "03",
+    "file": "content/how-to/03.md",
+    "prerequisites": ["02"],
+    "keywords": ["prompt experiment", "eval", "evaluation", "rubric", "paired comparison", "regression", "held-out cases"],
+    "materials": ["content/guide/04-evaluating-ai.md", "content/articles/evaluation-vs-demo.md", "templates/experiment-log.md", "lab/model-bridge.md"],
+    "resource": {
+      "provider": "OpenAI",
+      "title": "Evaluation best practices",
+      "url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
+      "scope": "Read What are evals?, How to read evals, and the five steps under Design your eval process. Stop before product-specific examples. Prerequisite: clear requests and expected outputs from lesson 02.",
+      "access": "Public conceptual reading; no API or hosted evaluation service required. The page includes an Evals platform deprecation notice; platform setup is outside this scope.",
+      "checked": "2026-10-21",
+      "verification": "Opened the official documentation, checked selected sections and the platform transition notice. No hosted evaluation was run."
+    }
+  },
+  {
+    "lesson": "04",
+    "file": "content/how-to/04.md",
+    "prerequisites": ["02"],
+    "keywords": ["context engineering", "evidence packet", "provenance", "source", "applicability", "context budget", "hypothesis"],
+    "materials": ["content/guide/02-prompts-and-context.md", "content/articles/context-budgets.md", "templates/context-packet.md", "content/labs/02-context-budgets.md"],
+    "resource": {
+      "provider": "Anthropic",
+      "title": "Effective context engineering for AI agents",
+      "url": "https://www.anthropic.com/research/effective-context-engineering-for-ai-agents",
+      "scope": "Read Context engineering vs. prompt engineering and The anatomy of effective context. Stop before Context retrieval and agentic search. Prerequisite: basic prompting from lesson 02.",
+      "access": "Public article; no provider account required.",
+      "checked": "2026-10-21",
+      "verification": "Opened the primary article, followed its engineering-to-research redirect, and checked the selected sections."
+    }
+  },
+  {
+    "lesson": "05",
+    "file": "content/how-to/05.md",
+    "prerequisites": ["04"],
+    "keywords": ["RAG", "retrieval", "grounding", "citation", "corpus", "chunking", "embeddings", "vector database"],
+    "materials": ["content/guide/05-retrieval.md", "content/practice/README.md", "content/labs/06-grounding-and-evaluation.md", "content/labs/14-retrieval-comparison.md"],
+    "resource": {
+      "provider": "Microsoft",
+      "title": "Retrieval Augmented Generation and Vector Databases",
+      "url": "https://github.com/microsoft/generative-ai-for-beginners/blob/main/15-rag-and-vector-databases/README.md",
+      "scope": "Read Retrieval Augmented Generation (RAG), How RAGs work, and Why would you use RAGs? Stop before Creating a knowledge base. Skip implementation and assignment. Prerequisite: lesson 04 evidence concepts.",
+      "access": "Public reading; no database, account, or model API required for this scope.",
+      "checked": "2026-10-21",
+      "verification": "Opened the official repository lesson and verified section headings against the primary raw Markdown. Build examples were not executed."
+    }
+  },
+  {
+    "lesson": "06",
+    "file": "content/how-to/06.md",
+    "prerequisites": ["04"],
+    "keywords": ["memory", "handoff", "checkpoint", "stale context", "reconciliation", "invalidation", "new session", "account migration"],
+    "materials": ["docs/CONTINUE-LEARNING.md", "docs/LOCAL-DATA.md", "templates/context-packet.md", "content/labs/05-idempotency-and-recovery.md"],
+    "resource": {
+      "provider": "Anthropic",
+      "title": "Effective context engineering for AI agents — long tasks",
+      "url": "https://www.anthropic.com/research/effective-context-engineering-for-ai-agents",
+      "scope": "Read Compaction and Structured note-taking within Context engineering for long-horizon tasks. Stop before Sub-agent architectures. Prerequisite: context and evidence from lesson 04.",
+      "access": "Public article; treat product behavior as an illustration, not a requirement to install a memory tool.",
+      "checked": "2026-10-21",
+      "verification": "Opened the primary article and checked the compaction and note-taking sections. No product memory integration was executed."
+    }
+  },
+  {
+    "lesson": "07",
+    "file": "content/how-to/07.md",
+    "prerequisites": ["01", "02"],
+    "keywords": ["tool", "arguments", "schema", "JSON", "contract", "side effect", "authorization", "validation", "timeout"],
+    "materials": ["content/guide/06-tools-mcp-skills.md", "templates/tool-contract.md", "content/labs/03-tool-authority.md"],
+    "resource": {
+      "provider": "JSON Schema",
+      "title": "Understanding JSON Schema — object",
+      "url": "https://json-schema.org/understanding-json-schema/reference/object",
+      "scope": "Read Properties, Additional Properties, and Required Properties using section links. Skip pattern matching/composition; stop after required-field examples. Prerequisite: the simple JSON object explained in this guide.",
+      "access": "Public documentation; no account or validator installation required.",
+      "checked": "2026-10-21",
+      "verification": "Opened the official reference and checked the named sections. No external validator was run for this conceptual example."
+    }
+  },
+  {
+    "lesson": "08",
+    "file": "content/how-to/08.md",
+    "prerequisites": ["07"],
+    "keywords": ["MCP", "Model Context Protocol", "host", "client", "server", "discovery", "stdio", "transport", "protocol version"],
+    "materials": ["content/guide/06-tools-mcp-skills.md", "content/labs/09-real-mcp.md", "lab/mcp_lab/README.md"],
+    "resource": {
+      "provider": "Model Context Protocol",
+      "title": "MCP architecture overview",
+      "url": "https://modelcontextprotocol.io/docs/2026-07-28/learn/architecture",
+      "scope": "Read Scope, Participants, and Layers; stop before Data Layer Protocol. Prerequisite: tool contracts from lesson 07. This overview is newer than the pinned lab; use the lab manual for its lifecycle and APIs.",
+      "access": "Public reading. Optional lab execution separately needs Python 3.12 and an initial dependency download, but no model API key.",
+      "checked": "2026-10-21",
+      "verification": "Opened the official architecture page and checked the conceptual roles. Separately ran the pinned local baseline: 13/13 assertions, protocol 2025-11-25. No assistant-host integration was claimed."
+    }
+  }
+]

@@ -23,3 +23,19 @@ The old project overview, start orientation, study schedule, and practice tutor 
 Judge the next iteration by whether a new learner can identify the first topic, understand why it matters, and find a next step without choosing among unrelated tracks. Additional pages alone do not improve that outcome. Keep advanced details accessible, but introduce them when their purpose is clear.
 
 The source pages and the scope of selected external material were reviewed. External enrollment, every embedded video, and learner comprehension are separate checks. Software regression results for this revision belong in the verification record; do not infer them from older releases.
+
+## Whole-course correction after learner testing
+
+The eight-primer revision did not solve the learner's problem. It made the original full curriculum look missing and left the detailed lessons assuming knowledge they had not taught. The learner's example was being asked to implement a state machine without first learning what a state machine was. Passing UI tests in that release did not establish that its learning approach was useful.
+
+The revised approach applies to all 24 lessons, while preserving the eight stages, stable lesson/activity IDs, original lesson bodies, articles, labs, incidents, and capstones. The full course is again the main visible map. Eight short primers remain supporting introductions. A new material finder indexes all distributed Markdown documents and the external library; each lesson and stage collects relevant existing materials.
+
+Every lesson begins with a new beginner guide: definitions before jargon, SDET relevance, a small explained example, concrete steps using Codex or Claude Code, observable expected results, common failure recovery, and one bounded external reading. The assistant quickstart explains the difference between a chat prompt and terminal command, how to open the actual project, and how to learn without local setup. AI-assisted demonstrations are a legitimate beginner route. Independent implementation is offered after understanding. Drawing diagrams and producing documents are not entry requirements.
+
+The original explanations and three exercises remain on each lesson page. Deliberate practice keeps its attempt-first contract, while normal explanations are available immediately. The original lesson solution outline now requires meaningful recorded attempts for all three exercises and a separate reveal; individual exercise workspaces continue to provide their own hints. Incident gates are unchanged. Downloadable source remains inspectable and is not an examination-security system.
+
+Independent review caught stale imperative map titles, conflicting primer route instructions, inappropriate “try first” copy on explanatory pages, and a skill-installation handoff that mixed workspace names and host-specific commands. These were corrected. Bookmark and next-lesson controls appear before the long lesson so mobile readers do not have to scroll past every optional exercise to continue.
+
+Preservation was checked against commit 8264fe535a5c19c3e2038eaaf41291c162b2682b: every previously tracked file remains present; 141 original teaching and lab files are byte-for-byte unchanged. The old short reading selections are retained in [PRIMER-READINGS.md](PRIMER-READINGS.md). Current setup, tutor handoff, README, AGENTS.md, and CLAUDE.md describe one full course rather than competing required routes.
+
+These changes address observed product and instructional defects. Automated tests and editorial review cannot prove that a learner understands the material. The next useful evidence is a learner completing a short lesson with the new guidance and describing where they still get stuck; no mastery, certificate, or commercial valuation is inferred from the test suite.

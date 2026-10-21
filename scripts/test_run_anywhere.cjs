@@ -12,6 +12,7 @@ const path=require('node:path');
   page.on('pageerror',e=>errors.push(e.message));
   const base=process.env.ACADEMY_TEST_URL||'http://127.0.0.1:8765';
   await page.goto(base);
+  await page.locator('.nav-more summary').click();
   await page.getByRole('link',{name:'Run anywhere',exact:false}).click();
   await page.getByRole('heading',{name:'Run the academy your way.'}).waitFor();
   assert.match(await page.locator('#runtime-mode').innerText(),/local academy/);

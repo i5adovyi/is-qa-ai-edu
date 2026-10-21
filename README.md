@@ -2,18 +2,20 @@
 
 A provider-neutral learning project that gathers scattered AI knowledge into a useful sequence for an SDET. Start with plain explanations and testing examples, follow selected external articles or courses when you need depth, and progress toward context engineering, tools, skills, agents, evaluation, and harnesses.
 
-**Start with [What AI can do for an SDET](content/guide/01-ai-basics.md)** or open the [private learning portal](https://signal-desk-ai-engineering-academy.igor-sadovyi87.chatgpt.site/#guide=01). No drawing, report, installation, or graded exercise is required to start.
+**Start with [lesson 01’s beginner guide](content/how-to/01.md)** or open the [private learning portal](https://signal-desk-ai-engineering-academy.igor-sadovyi87.chatgpt.site/#lesson=01). No drawing, report, installation, or graded exercise is required to start.
 
 ## The learning experience
 
-1. Read one guided topic and its SDET example.
-2. Use its selected external reading if you want more detail. The page tells you which sections to read and where to stop.
-3. Choose Next topic. Save my place remembers your chosen reading location without marking completion.
-4. Open related practice when you want to try the concept. A tutor gives one exercise at a time and keeps solutions hidden until you try.
+1. Understand the concept in plain language and see a small SDET example.
+2. Follow the lesson's concrete how-to in Codex or Claude Code. Check its output and learn how to recover when it goes wrong.
+3. Open one selected external reading when you want depth, or continue to the next lesson. Save my place remembers your explicit bookmark without marking completion.
+4. Choose practice after understanding. Your tutor gives one exercise at a time and keeps assignment answers hidden until you try and ask.
 
-The [study plan](docs/STUDY-PLAN.md) starts with using AI in testing, continues with testing AI systems and retrieval, then explains tools, MCP, skills, agents, and reliable harnesses. Microsoft, GitHub, OpenAI, Hugging Face, Google, Anthropic, and OWASP contribute different resources. You do not need to complete every provider's catalog.
+The [full study plan](docs/STUDY-PLAN.md) is one visible course: **24 lessons in eight stages**, covering foundations, context, tools/MCP/skills, agentic development, harnesses, evaluation, multi-agent work, and production. Every lesson has a beginner guide before its complete original text and exercises. [Learn with Codex or Claude Code](docs/ASSISTANT-QUICKSTART.md) explains where to paste prompts, how to open the project, what to expect, and what to do when stuck. Reading and self-contained assistant examples need no local setup.
 
-The original 24 lessons, 15 lab guides, six incidents plus a capstone incident, articles, manuals, templates, books, videos, and capstones are retained as an optional practice and reference collection. The portal links each guided topic to useful existing material. The full collection remains accessible from Optional practice & reference. The PDF is the original practice fieldbook; the new guided route lives in the portal and Markdown files.
+The portal's **Full course map** exposes every lesson. **Find learning materials** searches all distributed documents and external resources by topic or format. Related readings, labs, templates, and one scoped external source are grouped on each lesson. The eight short primers remain available as supporting introductions. Microsoft, GitHub, OpenAI, Hugging Face, Google, Anthropic, and OWASP contribute different sources; you do not need every provider's catalog.
+
+All original lessons, 72 exercises, 15 lab guides, six incidents plus a capstone incident, articles, manuals, templates, books, videos, and capstones are retained. The PDF is the original practice fieldbook; the new beginner guides live in the portal, Markdown, and source download.
 
 ## New assistant session
 
@@ -50,8 +52,9 @@ Local and hosted records do not synchronize automatically. Saving a reading plac
 
 | Source | Purpose |
 | --- | --- |
-| `content/sdet-path.json`, `content/guide/` | Default topic sequence, explanations, selected source scopes, access notes, and links to existing material |
-| `content/curriculum.json`, `content/learning.json`, `content/lessons/` | Retained practical syllabus, exercises, hints, checks, and tutor packets |
+| `content/how-to/` | Beginner teaching guides for all 24 lessons and maps of prerequisites, related materials, and scoped readings |
+| `content/sdet-path.json`, `content/guide/` | Retained short primers and scoped source selections |
+| `content/curriculum.json`, `content/learning.json`, `content/lessons/` | Canonical 24-lesson sequence, original explanations, exercises, hints, checks, and tutor packets |
 | `content/resources.json`, `content/library/` | Broader external resource collection |
 | `content/labs/`, `content/incidents/`, `lab/`, `capstones/` | Optional runnable practice and investigations |
 | `docs/`, `templates/` | Study guidance, operation, account migration, and optional engineering templates |

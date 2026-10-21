@@ -1,25 +1,29 @@
 # Start here: AI for SDET
 
-Open [topic 01: What AI can do for an SDET](../content/guide/01-ai-basics.md). Read it. That is your first step. No account, installation, drawing, or document is required to understand it.
+Open [lesson 01's beginner guide](../content/how-to/01.md). It explains what an AI assistant does using a familiar testing problem. No account, installation, drawing, or document is required to read it. If you want help in Codex or Claude Code, open [the assistant quickstart](ASSISTANT-QUICKSTART.md).
 
-In the portal, choose **Start reading**. Read one topic, then choose **Next topic**. Each page explains a concept using testing work, selects one external reading with a limited scope, and offers related material when you want depth. You can skip external reading and ask a tutor to explain a confusing term instead.
+In the portal, choose **Start reading**. Each lesson begins with an explanation and a worked example, then shows how to explore it with your assistant and how to check the result. The original deeper explanation, exercises, and related materials remain on the same page. **Next lesson** follows the full 24-lesson course.
 
 ## A first session that stays small
 
-Read topic 01 to understand model, assistant, prompt, and context. The key distinction is between an AI suggestion and verified behavior. If you want a second explanation, open the selected Microsoft introduction or its video alternative. You do not need to complete that external course. Continue to topic 02 when you want to learn how to give the assistant useful information.
+Read “Start here,” “The idea in plain language,” and “A small example” in lesson 01. Ask about any unfamiliar term. Try the supplied assistant prompt only if you want to see the concept explained interactively. Compare its response with “What you should see.” Then stop or continue to lesson 02. You do not need to implement an agent or submit a diagram.
 
-Use **Save my place** on a guided topic to remember where to return. Saving a place does not mark a lesson complete. Optional notes save through the existing progress system: SQLite locally, browser storage on the hosted Site. Export/import moves records between them. There is no automatic synchronization.
+Use **Save my place** on a lesson or primer to remember where to return. It does not mark work complete. Optional notes use SQLite locally or browser storage on the hosted Site. Export/import moves records between them; there is no automatic synchronization. Previous primer bookmarks and practice records are retained.
 
-## What the course is for
+## Find the topic you need
 
-First learn to use AI in ordinary testing work. Then learn to test AI features, understand retrieval and tools, and reason about agents and harnesses. The [study plan](STUDY-PLAN.md) gives the sequence, selected sources, prerequisites, and stopping points. Sources are selected for the topic, not for loyalty to one provider.
+- **Full course map:** all eight stages and all 24 lessons, visible together.
+- **Find learning materials:** search lessons, beginner guides, primers, articles, labs, templates, books, courses, and videos by topic or format.
+- **Materials for this topic:** each lesson's relevant internal references and one bounded external reading.
+- **Practice labs:** all 15 runnable lab guides. Their prerequisites are in the [practice map](PRACTICE-MAP.md).
+- **More learning tools:** short primers, external library, incident practice, reference downloads, and capstones.
 
-You can learn with an AI tutor by saying: “Explain this topic using an SDET example; give me one next reading.” Use the [tutor prompt](../templates/tutor-prompt.md) for a fuller handoff. Practice is offered when you ask for it. When you choose an exercise, answers and incident debriefs remain hidden until an attempt and an explicit reveal request.
+The [study plan](STUDY-PLAN.md) explains the whole sequence. The [eight primer selections](PRIMER-READINGS.md) remain useful for a shorter first look, but do not replace the full course. Sources are selected for relevance to SDET work, not allegiance to one provider.
 
-## The previous material is still here
+## Learn with a tutor or practise deliberately
 
-The 24 original lessons, labs, walkthroughs, incidents, articles, books, templates, and capstones form the optional practice and reference collection. Each guided topic points to relevant material. The portal sidebar also exposes the complete practice syllabus and reference shelf.
+Use [the tutor prompt](../templates/tutor-prompt.md) for explanations and assistant-guided examples. Basic teaching is available before an attempt. When you choose an exercise, your tutor gives one task at a time, checks your actual work, and keeps the assignment's answers hidden until you try and deliberately ask for them. Incident debriefs keep their recorded-attempt gate.
 
-For the original hands-on route, use [practice orientation](PRACTICE-START.md), [practice schedule](PRACTICE-STUDY-PLAN.md), and [lab prerequisites](PRACTICE-MAP.md). Those routes can be demanding; they are not entry requirements for reading.
+The [original practice orientation](PRACTICE-START.md), [practice schedule](PRACTICE-STUDY-PLAN.md), all original lessons, labs, walkthroughs, incidents, articles, books, templates, and capstones are retained. Their more demanding engineering work comes after understanding, when you choose it.
 
-Use [setup](SETUP.md) only if you want a local copy or runnable labs. Use [Run anywhere](RUN-ANYWHERE.md) for hosting and [the account guide](NEW-ACCOUNT.md) to reopen the project with another assistant account.
+Use [setup](SETUP.md) for a local copy or runnable labs, [Run anywhere](RUN-ANYWHERE.md) for hosting, and [the account guide](NEW-ACCOUNT.md) to reopen with another account. You do not need local setup just to read.

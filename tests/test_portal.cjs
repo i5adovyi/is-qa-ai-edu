@@ -20,6 +20,7 @@ function academy() {
     }
   }
   return {
+    course: fs.readdirSync(path.join(ROOT,'content/how-to')).filter(n=>/^map-.*\.json$/.test(n)).flatMap(n=>JSON.parse(fs.readFileSync(path.join(ROOT,'content/how-to',n),'utf8'))),
     guide: JSON.parse(fs.readFileSync(path.join(ROOT,'content/sdet-path.json'),'utf8')),
     runtime: JSON.parse(fs.readFileSync(path.join(ROOT,'academy.json'),'utf8')),
     incidents: fs.existsSync(path.join(ROOT,'content/incidents.json')) ? JSON.parse(fs.readFileSync(path.join(ROOT,'content/incidents.json'),'utf8')) : {incidents:[]},
@@ -523,7 +524,7 @@ test('restoring an older database or changing content at the same revision prese
 test('the new entrance offers reading without creating practice or completion records',()=>{
  const p=portal();const before=p.run('JSON.stringify(state)');
  assert.match(p.nodes['#main'].innerHTML,/Start reading/);
- assert.match(p.nodes['#main'].innerHTML,/href="#guide=01"/);
+ assert.match(p.nodes['#main'].innerHTML,/href="#lesson=01"/);
  assert.doesNotMatch(p.nodes['#nav'].innerHTML,/<details class="nav-more" open/);
  for(let i=1;i<=8;i++){
   p.context.topic=String(i).padStart(2,'0');
@@ -555,11 +556,44 @@ test('guided reading notes and position survive the local database persistence a
  assert.equal(resumed.run('state.done.length'),0);
 });
 
-test('legacy lesson and full practice indexes remain available with a guided-route signpost',()=>{
+test('all original lesson exercises remain available below beginner teaching',()=>{
  const p=portal();
  p.run("location.hash='#lesson=01';render()");
- assert.match(p.nodes['#main'].innerHTML,/This is optional practice material/);
+ assert.match(p.nodes['#main'].innerHTML,/Start with the beginner guide/);
  assert.match(p.nodes['#main'].innerHTML,/Exercise 1/);
- assert.match(p.nodes['#main'].innerHTML,/href="#guide=01"/);
+ assert.match(p.nodes['#main'].innerHTML,/id="original-lesson"/);
  assert.equal((p.run('learningPath()').match(/class="lesson-row"/g)||[]).length,24);
+});
+
+test('lesson bookmarks preserve old primer bookmarks and survive local persistence',async()=>{
+ const server=localServer(),p=await localPortal(server);
+ p.run("state.reading='04';state.lessonReading='13';save()");await tick();
+ const resumed=await localPortal(server);
+ assert.equal(resumed.run('state.reading'),'04');assert.equal(resumed.run('state.lessonReading'),'13');
+ assert.match(resumed.run('overview()'),/href="#lesson=13"/);
+ assert.equal(resumed.run('state.done.length'),0);
+ p.run("var imported=validateState(JSON.parse(JSON.stringify(state)));var merged=mergeProgress(fresh(),imported).state");
+ assert.equal(p.run('merged.lessonReading'),'13');assert.equal(p.run('merged.reading'),'04');
+ p.run("var legacy=clone(state);delete legacy.lessonReading;var restored=validateState(legacy)");
+ assert.equal(p.run('restored.lessonReading'),'');
+});
+test('all lessons have a teaching guide, internal materials, and protected original solutions',()=>{
+ const p=portal();assert.equal(p.run('course.length'),24);
+ assert.equal((p.run('overview()').match(/class="lesson-row"/g)||[]).length,24);
+ for(let i=1;i<=24;i++){
+  p.context.lessonId=String(i).padStart(2,'0');
+  p.run("location.hash='#lesson='+lessonId;render()");
+  const html=p.nodes['#main'].innerHTML;
+  for(const id of ['try-it-with-codex-or-claude-code','what-you-should-see','if-it-goes-wrong','lesson-materials','original-lesson'])assert.ok(html.includes('id="'+id+'"'),p.context.lessonId+' '+id);
+  assert.ok(html.includes('id="reveal-lesson-solution" data-id="'+p.context.lessonId+'" disabled'));
+ }
+ assert.equal(p.run('state.done.length'),0);
+});
+
+test('the last explicitly saved kind chooses resume without erasing the other bookmark',()=>{
+ const p=portal();p.run("state.reading='04';state.lessonReading='13';state.readingKind='primer'");
+ assert.match(p.run('overview()'),/href="#guide=04"/);
+ p.run("state.readingKind='lesson'");assert.match(p.run('overview()'),/href="#lesson=13"/);
+ p.run("var copy=validateState(clone(state));var combined=mergeProgress(fresh(),copy).state");
+ assert.equal(p.run('combined.readingKind'),'lesson');assert.equal(p.run('combined.reading'),'04');assert.equal(p.run('combined.lessonReading'),'13');
 });

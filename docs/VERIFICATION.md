@@ -1,5 +1,27 @@
 # Verification record for the October 2026 academy release
 
+## Full-course beginner approach — 21 October 2026
+
+This revision restores one visible 24-lesson course and adds a beginner teaching guide to every lesson. It retains the original explanations, exercises, eight supporting primers, labs, incidents, and external library. The [learning-design history](LEARNING-DESIGN-2026-10-21.md) records why the previous eight-topic entrance did not meet the learner's needs.
+
+Executed checks:
+
+- Python core: **226 discovered, 215 passed, 11 optional MCP skips**. The separately installed Python 3.12 MCP environment passed all **10 MCP tests** plus the **planner's real MCP lookup test**, covering all 11 skipped cases. These use actual local SDK communication, not live provider reasoning.
+- JavaScript portal unit suite: **49 passed**, including complete course coverage, preserved original exercises, no automatic completion, explicit lesson/primer bookmark selection, validation, merge, and local persistence behavior.
+- All eight browser suites passed: general portal, learning workspaces, incident gates, Run anywhere, retained primers, actual SQLite integration, new full-course teaching/navigation, and exhaustive audit.
+- Full-course browser checks cover all **24** beginner guides, **eight** visible stages, related material/source links, full materials search and format filters, anchor focus, old/new bookmark export/import/reload, original solution outlines withheld until recorded attempts plus explicit reveal, and mobile layout. Reading never creates attempts or marks completion.
+- SQLite integration uses a temporary database. It verified lesson and primer positions, notes, attempt history, browser restarts, concurrent revision conflicts, failed-save recovery, a real server restart on a different port, and static browser-storage behavior. The learner's actual database was not used.
+- Exhaustive audit: **182 documents and Markdown downloads**, **938 internal-link occurrences**, **239 distinct internal links**, **96 quiz choices**, **eight stages**, **74 downloadable assets**, **182 mobile document views**, and **zero page errors**. Source content validation also checks relative files and section anchors.
+- Fresh package check: both ZIPs contain all 24 new guides and exclude private runtime data. The extracted source passed content checks, rebuilt its site/downloads, ran the reference demo, and started the local launcher from another working directory with an isolated SQLite database and working HTTP content.
+- Preservation against 8264fe535a5c19c3e2038eaaf41291c162b2682b: **all 485 previously tracked files remain present**; **141 original teaching and lab files are byte-for-byte unchanged**. Original lesson IDs, activity/incident data, and student stubs are retained.
+- Independent content reviews covered all 24 guides and the assistant quickstart. Verified demonstrations include skill installation/validation and duplicate refusal, copied skill dependency checks, toy program pass/fail cases, crash/resume with a single side effect, retry traces, arithmetic/string fixtures, and the real MCP baseline (13/13).
+- Desktop course map, desktop assistant how-to, and mobile navigation/reading screenshots were visually inspected. Bookmark and next-lesson controls precede the long article on mobile.
+
+Selected new source pages were opened and scoped; product-specific paths distinguish Codex and Claude Code, installation checks, automatic discovery, explicit invocation, and actual host behavior. Current provider documentation can change independently of this course. No live authenticated Codex/Claude Code skill activation, paid model run, Windows execution, external enrollment, certificate, complete video playback, or learner comprehension is claimed. The PDF remains the original practice fieldbook; new guides are in portal/Markdown and both downloadable packages.
+
+GitHub CI and Site publication are separate checks for the final commit. This record states local evidence; do not treat it as a substitute for the resulting GitHub run and deployment status. Existing Site identity and private audience must be preserved. Historical records below describe earlier interfaces, not the current canonical route.
+
+
 ## Guided SDET learning revision — 21 October 2026
 
 The [learning-design correction](LEARNING-DESIGN-2026-10-21.md) explains the change in purpose. The new default route has eight original explanations, selected external material with scope/access notes, an explicit reading-place control, and links into the retained practice collection.

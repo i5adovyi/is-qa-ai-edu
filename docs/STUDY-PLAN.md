@@ -1,123 +1,105 @@
-# The guided SDET study plan
+# The complete AI engineering study plan
 
-This is the default learning route. Read the local explanations first. Follow the selected external resource only when more detail helps, then return for the next topic. No diagrams, reports, quizzes, or practical assignments are required to move through it.
+One course, eight stages, 24 lessons. The full topic map is the portal's main learning route. Every lesson starts with a beginner guide: plain-language explanation, SDET relevance, a small worked example, a concrete Codex or Claude Code how-to, expected results, and recovery steps. The original detailed lesson and its exercises remain immediately below it.
 
-The route is provider-neutral. It goes from using AI in testing work to testing AI systems, then understanding tools, agents, and harnesses. The primary recommendations are editorial choices for this learner, not vendor rankings. Reading times and external course durations are not completion guarantees; progress at your own pace.
+Start with [lesson 01](../content/how-to/01.md). If you only have an assistant and do not know how to use it with these files, follow [Learn with Codex or Claude Code](ASSISTANT-QUICKSTART.md). You can learn from self-contained examples without cloning, installing Python, or buying API credits. Local runnable labs have separate prerequisites.
 
-## Where to start
+## How to move through a lesson
 
-[Open topic 01](../content/guide/01-ai-basics.md). In the portal use Start reading and Next topic. Use Save my place if you want to resume there later; it records a location, not mastery. A tutor can explain an unfamiliar term without asking you to produce an artifact.
+1. Read the beginner guide. Follow prerequisite links when a term is unfamiliar.
+2. Inspect the teaching example. Use the supplied prompt in your assistant if you want a guided explanation or demonstration.
+3. Check the response against “What you should see.” An assistant's confident statement is not execution evidence.
+4. Open the selected external section only when more depth would help. Each recommendation includes scope, access, and a stopping point. Return here afterward.
+5. Continue to the next lesson, read the original explanation, or choose a small practice task. Independent builds come after understanding; no diagram, written report, or quiz gate is required for reading.
 
-## The sequence
+Save my place explicitly remembers a reading location. It does not mark a lesson complete. Existing primer bookmarks, lesson notes, exercise attempts, and incident history remain intact. Old lesson time estimates include optional engineering work; they do not measure your ability or prescribe how long you must read.
 
-### 01. What AI can do for an SDET
+## The full sequence
 
-[Read the local explanation](../content/guide/01-ai-basics.md). Understand models, assistants, prompts, and context through a failed CI test.
+### Stage 1 · Foundations & deliberate prompting
 
-Before this: No AI background or setup.
+Turn vague requests into observable, testable work.
 
-Selected depth: [Microsoft — Introduction to Generative AI and Large Language Models](https://github.com/microsoft/generative-ai-for-beginners/blob/main/01-introduction-to-genai/README.md#how-do-large-language-models-work). Start at “How do large language models work?” and read the following practical-use discussion. Skip the educational-startup scenario, assignment, and next-lesson links. Return to this portal afterward.
+- **01 · Understand what your AI assistant is doing** — Technical topic: Think in systems, then choose the smallest useful agent. [Beginner guide](../content/how-to/01.md) · [Original lesson](../content/lessons/01-systems-before-agents.md).
+- **02 · Ask for useful work without expecting mind reading** — Technical topic: Write task contracts that survive ambiguity. [Beginner guide](../content/how-to/02.md) · [Original lesson](../content/lessons/02-task-contracts.md).
+- **03 · Tell whether a prompt change actually helped** — Technical topic: Run prompt experiments without fooling yourself. [Beginner guide](../content/how-to/03.md) · [Original lesson](../content/lessons/03-prompt-experiments.md).
 
-Access: Public reading. No installation or account needed to read.
+### Stage 2 · Context engineering
 
-Move on with this idea: A model's suggestion and verified behavior are different things.
+Select, retrieve, preserve and challenge the information an agent sees.
 
-### 02. Give AI enough information to help
+- **04 · Give the assistant the right evidence** — Technical topic: Design an evidence packet with provenance. [Beginner guide](../content/how-to/04.md) · [Original lesson](../content/lessons/04-evidence-packets.md).
+- **05 · Find the right information before answering** — Technical topic: Retrieve evidence before generating answers. [Beginner guide](../content/how-to/05.md) · [Original lesson](../content/lessons/05-retrieval-and-grounding.md).
+- **06 · Continue work without trusting a stale summary** — Technical topic: Make memory resumable, inspectable and forgettable. [Beginner guide](../content/how-to/06.md) · [Original lesson](../content/lessons/06-memory-and-handoffs.md).
 
-[Read the local explanation](../content/guide/02-prompts-and-context.md). Frame a testing request and supply relevant, current evidence.
+### Stage 3 · Tools, MCP & skills
 
-Before this: Topic 01: model, prompt, and context.
+Design interfaces that make useful actions explicit and bounded.
 
-Selected depth: [OpenAI — Prompt engineering](https://developers.openai.com/api/docs/guides/prompt-engineering#message-formatting-with-markdown-and-xml). Read “Message formatting with Markdown and XML”, “Few-shot learning”, and “Include relevant context information”. Stop before “Prompting current models”. Skip API setup and code examples you do not need.
+- **07 · Understand a tool before letting it act** — Technical topic: Design tools as precise contracts. [Beginner guide](../content/how-to/07.md) · [Original lesson](../content/lessons/07-tool-contracts.md).
+- **08 · See what MCP connects and how one request travels** — Technical topic: Understand MCP by tracing one request. [Beginner guide](../content/how-to/08.md) · [Original lesson](../content/lessons/08-mcp-request-lifecycle.md).
+- **09 · Reuse a useful procedure with a skill** — Technical topic: Package a skill that improves repeatable work. [Beginner guide](../content/how-to/09.md) · [Original lesson](../content/lessons/09-reusable-skills.md).
 
-Access: Public documentation. Reading does not require API credits.
+### Stage 4 · Agentic development
 
-Move on with this idea: Useful context reduces missing facts; detailed wording alone cannot supply them.
+Use agents to change software through small verifiable increments.
 
-### 03. Use AI in everyday testing work
+- **10 · Ask an assistant for one understandable code change** — Technical topic: Turn a feature request into a bounded coding task. [Beginner guide](../content/how-to/10.md) · [Original lesson](../content/lessons/10-coding-task-design.md).
+- **11 · Check the result instead of trusting “done”** — Technical topic: Use verification loops that catch real defects. [Beginner guide](../content/how-to/11.md) · [Original lesson](../content/lessons/11-verification-loops.md).
+- **12 · Review an AI change you can actually understand** — Technical topic: Review AI changes through evidence and failure paths. [Beginner guide](../content/how-to/12.md) · [Original lesson](../content/lessons/12-review-and-delivery.md).
 
-[Read the local explanation](../content/guide/03-ai-assisted-testing.md). Generate and review tests without letting code define its own correctness.
+### Stage 5 · Harness engineering
 
-Before this: Topic 02 and familiarity with ordinary automated tests.
+Build the runtime that turns model proposals into controlled work.
 
-Selected depth: [GitHub — Writing tests with GitHub Copilot](https://docs.github.com/en/copilot/tutorials/write-tests). Read the unit-test example and its execution/review steps. Treat it as an illustration if you use another assistant. A green example run is not proof of complete coverage.
+- **13 · Understand what controls an agent's next step** — Technical topic: Build the agent loop as an explicit state machine. [Beginner guide](../content/how-to/13.md) · [Original lesson](../content/lessons/13-agent-loop-state-machine.md).
+- **14 · Resume interrupted work without doing it twice** — Technical topic: Recover from crashes without duplicating work. [Beginner guide](../content/how-to/14.md) · [Original lesson](../content/lessons/14-checkpointing-and-idempotency.md).
+- **15 · See what happened and know when to stop** — Technical topic: Make cost, latency and behavior observable. [Beginner guide](../content/how-to/15.md) · [Original lesson](../content/lessons/15-budgets-and-observability.md).
 
-Access: Public reading. Following the IDE steps requires a Copilot plan, supported IDE, and extension.
+### Stage 6 · Evaluation & reliability
 
-Move on with this idea: Generated tests need an independent expectation and an actual relevant test run.
+Measure outcomes, expose failure modes and make defensible comparisons.
 
-### 04. Test software whose answers can vary
+- **16 · Choose examples that reveal whether AI helps** — Technical topic: Build an evaluation set that reflects the job. [Beginner guide](../content/how-to/16.md) · [Original lesson](../content/lessons/16-evaluation-datasets.md).
+- **17 · How to check whether an AI answer deserves to pass** — Technical topic: Use graders carefully and report uncertainty. [Beginner guide](../content/how-to/17.md) · [Original lesson](../content/lessons/17-graders-and-statistics.md).
+- **18 · How to test the boundaries of an AI feature** — Technical topic: Red-team the whole system and set release gates. [Beginner guide](../content/how-to/18.md) · [Original lesson](../content/lessons/18-red-teaming-and-release-gates.md).
 
-[Read the local explanation](../content/guide/04-evaluating-ai.md). Understand evals, test data, rubrics, graders, and regression decisions.
+### Stage 7 · Multi-agent systems
 
-Before this: Topic 03; basic test and CI concepts.
+Delegate only when coordination produces measurable value.
 
-Selected depth: [OpenAI — Evaluation best practices](https://developers.openai.com/api/docs/guides/evaluation-best-practices). Read evaluation principles and the eval-process steps. Focus on objectives, datasets, scoring, and comparison; defer provider APIs.
+- **19 · How to decide whether another agent would help** — Technical topic: Decide when delegation is worth its coordination cost. [Beginner guide](../content/how-to/19.md) · [Original lesson](../content/lessons/19-delegation-design.md).
+- **20 · How to keep several workers from losing each other's work** — Technical topic: Coordinate workers without losing ownership or state. [Beginner guide](../content/how-to/20.md) · [Original lesson](../content/lessons/20-multi-agent-coordination.md).
+- **21 · How to tell whether an agent team is worth the extra work** — Technical topic: Measure whether your agent team is actually better. [Beginner guide](../content/how-to/21.md) · [Original lesson](../content/lessons/21-multi-agent-evaluation.md).
 
-Access: Public documentation. No paid execution required for reading.
+### Stage 8 · Production & capstone
 
-Move on with this idea: Check deterministic properties and judged quality separately, using realistic cases.
+Operate, govern and demonstrate a complete system.
 
-### 05. Help AI find the right evidence
+- **22 · How to move from a promising demo to a bounded service** — Technical topic: Design a production boundary and service contract. [Beginner guide](../content/how-to/22.md) · [Original lesson](../content/lessons/22-production-design.md).
+- **23 · How to investigate a failure without guessing the cause** — Technical topic: Operate the system and learn from incidents. [Beginner guide](../content/how-to/23.md) · [Original lesson](../content/lessons/23-operations-and-incidents.md).
+- **24 · How to build a small project with your assistant, then grow it** — Technical topic: Choose, build and defend your capstone. [Beginner guide](../content/how-to/24.md) · [Original lesson](../content/lessons/24-capstone.md).
 
-[Read the local explanation](../content/guide/05-retrieval.md). Understand RAG and separate retrieval mistakes from answer mistakes.
+## Where the other materials fit
 
-Before this: Topics 02 and 04: context and evaluation.
+| Material | Use it for | Where to find it |
+| --- | --- | --- |
+| 24 beginner how-to guides | Learn each concept and use an assistant step by step | Top of every lesson; links above |
+| Original 24 lessons and 72 exercises | More explanation and optional independent application | Same lesson page and exercise workspaces |
+| Eight short primers | A shorter first look or a recap | [Primer reading selections](PRIMER-READINGS.md), portal Short primers |
+| Articles, manuals, and templates | Answer a focused question or reuse an engineering aid | Related materials on each lesson; Find learning materials |
+| 15 runnable labs | Observe and change real local behavior | Practice labs; [prerequisite map](PRACTICE-MAP.md) |
+| Six incidents plus capstone incident | Investigate ambiguous failures after the relevant foundations | Incident practice; prerequisites in each brief |
+| Courses, books, videos, papers, and documentation | Study selected sections or explore deeply | External courses & books; search by format/provider/stage |
+| Capstones | Combine learned skills into a substantial project | Lesson 24 and Capstones |
+| Original fieldbook PDF | Offline reference for the original practice edition | Reference shelf; current beginner guides are in portal/Markdown/source ZIP |
 
-Selected depth: [Microsoft — Retrieval Augmented Generation and Vector Databases](https://github.com/microsoft/generative-ai-for-beginners/blob/main/15-rag-and-vector-databases/README.md). Read the RAG and vector-search explanation. Stop before implementation and assignment sections unless you choose hands-on work.
+Use **Find learning materials** to search topics such as MCP, state machine, skills, retrieval, evaluation, retries, or context. It includes every distributed Markdown document and all external library entries. It shows titles rather than exercise answers. Source code and fixtures remain available from their lab manuals and the full source download.
 
-Access: Public reading. Build examples have separate environment and provider requirements.
+## Choose depth without losing the route
 
-Move on with this idea: The right answer needs the right authorized, current evidence and correct interpretation.
+The [original practice schedule](PRACTICE-STUDY-PLAN.md) retains its time budgets, diagnostic, integration work, and extended routes. The [practice orientation](PRACTICE-START.md) remains available for deliberate engineering practice. These are optional schedules, not a second required curriculum. Use [integration labs](INTEGRATION-LABS.md) when you are ready for real MCP, installed skills, and a composed student harness.
 
-### 06. Tools, MCP, and skills without the jargon pile
+The eight [primer reading selections](PRIMER-READINGS.md) preserve the earlier short explanations and scoped external sources. Use one if a full lesson feels too dense, then return to that lesson. Microsoft, OpenAI, Hugging Face, GitHub, Anthropic, Google, OWASP, standards bodies, and research authors are selected by topic. You do not need to complete every provider's catalog.
 
-[Read the local explanation](../content/guide/06-tools-mcp-skills.md). Distinguish operations, integration protocols, and reusable instructions.
-
-Before this: Topics 02–05. Python/terminal only for optional installation work.
-
-Selected depth: [Hugging Face — The Context Course](https://huggingface.co/learn/context-course/unit0/introduction). Read the overview, then the explanations in Units 1 (skills) and 2 (MCP). Defer plugins, subagents, hooks, and Nano Harness until topics 07–08.
-
-Access: Public course text. Hands-on work assumes Python, CLI, a Hugging Face account, and a configured coding agent; provider access may cost money.
-
-Move on with this idea: A skill, tool, MCP connection, and permission each serve different purposes.
-
-### 07. Understand an agent before building one
-
-[Read the local explanation](../content/guide/07-agents-and-workflows.md). Follow tool selection, observations, stopping, and coordination failures.
-
-Before this: Topic 06: tools and permissions.
-
-Selected depth: [Hugging Face — Agents Course — What is an Agent?](https://huggingface.co/learn/agents-course/unit1/what-are-agents). Read this page and Unit 1's tools and action/observation explanations. Skip the first-agent build and certificate quizzes unless you want practice.
-
-Access: Public reading. Coding sections require basic Python and their own setup.
-
-Move on with this idea: Evaluate the actions and their effects as well as the final answer.
-
-### 08. Make agent work reliable enough to operate
-
-[Read the local explanation](../content/guide/08-harness-and-reliability.md). Understand runtime controls, recovery, security, and evidence for release.
-
-Before this: Topics 04–07: evaluations, retrieval, tools, and agents.
-
-Selected depth: [OWASP — Top 10 for LLMs and Generative AI Applications](https://genai.owasp.org/llm-top-10/). Start with Prompt Injection, Sensitive Information Disclosure, and Excessive Agency. Use the other entries later as a risk reference, not a memorization list.
-
-Access: Public reference; no account or tool setup needed.
-
-Move on with this idea: Reliability comes from observable execution, enforced limits, and tested recovery.
-
-## When an external catalog offers dozens of courses
-
-You do not need a course from every provider. Use the named section for the topic you are studying. Product setup courses are relevant when you choose that product. Cloud deployment, enterprise administration, advanced model training, educator tracks, and certifications can wait unless your job requires them.
-
-The portal's collapsed alternatives include Microsoft's introductory video, Google's deeper LLM material, Anthropic's broader AI-fluency course, and a harness engineering article. Google's module assumes ML foundations; it is not a replacement for the first local explanation. The broader resource library retains the original courses, videos, papers, and books.
-
-Primary pages and their described scope were checked on 21 October 2026. This checks what to read, not enrollment, every video playback region, certificate eligibility, or whether product pricing will stay unchanged. You can always continue with the local text if an external resource is unavailable.
-
-## Turn understanding into practice when you want it
-
-The original material is retained in the [practice schedule](PRACTICE-STUDY-PLAN.md), [practice orientation](PRACTICE-START.md), [practice map](PRACTICE-MAP.md), and [integration labs](INTEGRATION-LABS.md). The portal's practice syllabus lists all 24 original lessons; the labs page lists all 15 numbered labs. The new topic links are selections, not the complete collection.
-
-Choose practical work around your current job: generated-test review, retrieval evaluation, connecting a tool, or recovery from an interrupted agent run. The incident collection introduces ambiguous real-world failures when you are ready. If you ask a tutor for practice, it should give one exercise at a time, inspect your actual attempt, and reveal guidance only deliberately.
-
-Reading gives you orientation and understanding. Independent practical skill requires trying relevant work and checking its results. Neither path should claim automatic mastery or a professional certification.
+When practising with a tutor, attempt one task before requesting its next hint or solution. Teaching examples use different inputs from assignments; ordinary explanations remain available immediately. Incident guidance still requires a substantive recorded attempt and a separate explicit reveal. Reading or running reference code alone is not independent engineering mastery.

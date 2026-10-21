@@ -52,6 +52,34 @@ def validate(root):
         need(bool(topic.get('practice')), 'Guided topic has no link to retained material: ' + name)
         for target in topic.get('practice', []):
             need((root / target).is_file(), 'Missing related practice ' + target)
+    course = sorted([entry for p in (root / 'content/how-to').glob('map-*.json')
+                     for entry in json.loads(p.read_text())], key=lambda e: e['lesson'])
+    lesson_ids = [str(i).zfill(2) for i in range(1, 25)]
+    need([e.get('lesson') for e in course] == lesson_ids,
+         'Every one of the 24 lessons needs exactly one beginner guide')
+    required = ['Start here', 'The idea in plain language', 'A small example',
+                'Try it with Codex or Claude Code', 'What you should see',
+                'If it goes wrong', 'Go deeper', 'Optional practice']
+    for entry in course:
+        name = entry['lesson']
+        path = root / entry['file']
+        need(path.is_file(), 'Missing beginner guide: ' + name)
+        if path.is_file():
+            text = path.read_text()
+            for heading in required:
+                need('## ' + heading + '\n' in text, 'Missing teaching section ' + heading + ': ' + name)
+            need('```text' in text, 'Missing copyable assistant prompt: ' + name)
+            need('ASSISTANT-QUICKSTART.md' in text, 'Missing assistant orientation: ' + name)
+        need(bool(entry.get('keywords')), 'Missing discoverability keywords: ' + name)
+        need(len(entry.get('materials', [])) >= 2, 'Missing topic materials: ' + name)
+        for target in entry.get('materials', []):
+            need((root / target).is_file(), 'Missing topic material ' + target)
+        for prerequisite in entry.get('prerequisites', []):
+            need(prerequisite in lesson_ids and prerequisite != name, 'Invalid prerequisite: ' + name)
+            need(prerequisite < name, 'Reading prerequisite appears later: ' + name)
+        for key in ('provider', 'title', 'url', 'scope', 'access', 'checked', 'verification'):
+            need(bool(entry.get('resource', {}).get(key)), 'Missing beginner source ' + key + ': ' + name)
+        need(entry.get('resource', {}).get('url', '').startswith('https://'), 'Invalid beginner source URL: ' + name)
     need(len(c['lessons']) == 24, 'Expected 24 lessons')
     need({s['id'] for s in c['stages']} == set(range(1, 9)), 'Expected stages 1 through 8')
     ids = set()

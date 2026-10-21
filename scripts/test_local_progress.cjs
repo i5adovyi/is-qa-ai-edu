@@ -41,6 +41,7 @@ async function db(page){return page.evaluate(async()=>(await(await fetch('/api/l
   await page.getByText('Keep a question or note · optional',{exact:true}).click();
   await page.locator('#notes').fill('Reading question saved in SQLite.');await saved(page);
   assert.equal((await db(page)).reading,'04');
+  await page.goto(server.base+'/#lesson=13');await saved(page);await page.locator('#save-lesson-reading').click();await saved(page);assert.equal((await db(page)).lessonReading,'13');
   await context.close();
   const nextContext=await browser.newContext({viewport:{width:1440,height:1000}}),next=await nextContext.newPage();next.on('dialog',dialog=>dialog.accept());next.on('pageerror',e=>errors.push(e.message));
   await next.goto(server.base+'/#exercise=L01-E1');await saved(next);
@@ -76,7 +77,7 @@ async function db(page){return page.evaluate(async()=>(await(await fetch('/api/l
   // Restart the process and change port: a fresh context still reads the same SQLite file.
   const oldBase=server.base;await stop(server.child);server=await launch();assert.notEqual(server.base,oldBase);
   const restartedContext=await browser.newContext(),restarted=await restartedContext.newPage();await restarted.goto(server.base+'/#lesson=01');await saved(restarted);
-  assert.match(await restarted.locator('#notes').inputValue(),/Uncommitted work survives/);assert.ok((await db(restarted)).done.includes('01'));assert.equal((await db(restarted)).reading,'04');
+  assert.match(await restarted.locator('#notes').inputValue(),/Uncommitted work survives/);assert.ok((await db(restarted)).done.includes('01'));assert.equal((await db(restarted)).reading,'04');assert.equal((await db(restarted)).lessonReading,'13');
   await restarted.goto(server.base+'/#guide=04');await saved(restarted);
   await restarted.getByText('Keep a question or note · optional',{exact:true}).click();
   assert.equal(await restarted.locator('#notes').inputValue(),'Reading question saved in SQLite.');

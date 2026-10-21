@@ -20,7 +20,7 @@ const path = require('node:path');
  await page.locator('.skip').focus();await page.keyboard.press('Enter');
  assert.equal(await page.locator('h1').textContent(),'Learn AI, one clear step at a time.');
  await page.getByRole('link',{name:'Start reading',exact:false}).click();
- await page.getByRole('heading',{name:'What AI can do for an SDET'}).waitFor();
+ await page.locator('.beginner-guide h1').waitFor();
  await page.goto(base+'/#lesson=01');
  await page.locator('.reading h1').waitFor();
  await page.locator('#notes').fill('QA note: prediction, observation, next change.');

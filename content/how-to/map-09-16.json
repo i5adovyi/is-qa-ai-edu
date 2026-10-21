@@ -1,0 +1,249 @@
+[
+  {
+    "lesson": "09",
+    "file": "content/how-to/09.md",
+    "prerequisites": [
+      "07"
+    ],
+    "keywords": [
+      "skills",
+      "install",
+      "SKILL.md",
+      "Codex",
+      "Claude Code",
+      "discovery",
+      "activation"
+    ],
+    "materials": [
+      "content/labs/10-installed-skill.md",
+      "content/skill-practice/README.md",
+      "templates/skill-design.md"
+    ],
+    "resource": {
+      "provider": "Agent Skills",
+      "title": "Specification",
+      "url": "https://agentskills.io/specification",
+      "scope": "Read Directory structure, SKILL.md format, and the name/description fields; stop before optional metadata and tool fields. Prerequisite: understand that a folder contains files.",
+      "access": "Public reading; no account, runtime, or installation required.",
+      "checked": "2026-10-21",
+      "verification": "Opened official specification and inspected required fields. Host locations separately checked against official Codex and Claude Code documentation; actual host activation is not certified by reading."
+    }
+  },
+  {
+    "lesson": "10",
+    "file": "content/how-to/10.md",
+    "prerequisites": [
+      "02"
+    ],
+    "keywords": [
+      "coding",
+      "task scope",
+      "acceptance",
+      "patch",
+      "repository",
+      "normalize",
+      "how to prompt"
+    ],
+    "materials": [
+      "content/dev-sandbox/README.md",
+      "content/labs/13-coding-and-workers.md",
+      "templates/task-contract.md"
+    ],
+    "resource": {
+      "provider": "GitHub",
+      "title": "Best practices for using GitHub Copilot",
+      "url": "https://docs.github.com/en/copilot/get-started/best-practices",
+      "scope": "Read Create thoughtful prompts and Check Copilot's work; stop before Guide Copilot towards helpful outputs. Prerequisite: understand an input/output example.",
+      "access": "Public reading. The selected ideas apply to either coding assistant; Copilot access is not required.",
+      "checked": "2026-10-21",
+      "verification": "Opened official page and inspected the two selected sections; no Copilot execution claimed."
+    }
+  },
+  {
+    "lesson": "11",
+    "file": "content/how-to/11.md",
+    "prerequisites": [
+      "10"
+    ],
+    "keywords": [
+      "tests",
+      "assertion",
+      "verification",
+      "regression",
+      "flaky",
+      "false positive",
+      "evidence"
+    ],
+    "materials": [
+      "content/lessons/11-verification-loops.md",
+      "content/dev-sandbox/README.md",
+      "content/labs/13-coding-and-workers.md"
+    ],
+    "resource": {
+      "provider": "Python",
+      "title": "unittest — Unit testing framework",
+      "url": "https://docs.python.org/3/library/unittest.html",
+      "scope": "Read Basic example; stop before Command-Line Interface. Prerequisite: understand expected versus actual results; ask the assistant to explain unfamiliar class syntax.",
+      "access": "Public reading; execution needs Python. Newer documentation may show features beyond the academy's Python 3.9 core.",
+      "checked": "2026-10-21",
+      "verification": "Opened official Basic example and inspected assertions and runner output; local original teaching script tested separately."
+    }
+  },
+  {
+    "lesson": "12",
+    "file": "content/how-to/12.md",
+    "prerequisites": [
+      "11"
+    ],
+    "keywords": [
+      "review",
+      "diff",
+      "patch",
+      "findings",
+      "severity",
+      "delivery",
+      "code review"
+    ],
+    "materials": [
+      "content/lessons/12-review-and-delivery.md",
+      "content/labs/15-review-and-operations.md",
+      "content/dev-sandbox/README.md"
+    ],
+    "resource": {
+      "provider": "Google Engineering Practices",
+      "title": "What to look for in a code review",
+      "url": "https://google.github.io/eng-practices/review/reviewer/looking-for.html",
+      "scope": "Read Functionality, Complexity, and Tests; stop at Naming. CL means changelist. Prerequisite: understand a before/after code change.",
+      "access": "Public reading; no account or review platform required.",
+      "checked": "2026-10-21",
+      "verification": "Opened Google's engineering-practices page and inspected selected sections."
+    }
+  },
+  {
+    "lesson": "13",
+    "file": "content/how-to/13.md",
+    "prerequisites": [
+      "07"
+    ],
+    "keywords": [
+      "state machine",
+      "state",
+      "transition",
+      "loop",
+      "deterministic",
+      "harness",
+      "agent loop",
+      "planner"
+    ],
+    "materials": [
+      "content/articles/harness-architecture.md",
+      "content/labs/11-complete-student-harness.md",
+      "content/labs/12-model-tool-loop.md",
+      "content/guide/07-agents-and-workflows.md"
+    ],
+    "resource": {
+      "provider": "Hugging Face",
+      "title": "Understanding AI Agents through the Thought-Action-Observation Cycle",
+      "url": "https://huggingface.co/learn/agents-course/unit1/agent-steps-and-structure",
+      "scope": "Read The Core Components and Alfred, the weather Agent; stop at the end of this page before proceeding to framework implementation. Prerequisite: know what a tool request and response are.",
+      "access": "Public reading; no account, API key, or framework installation needed.",
+      "checked": "2026-10-21",
+      "verification": "Opened official course page and inspected the cycle and weather example; conceptual example, not evidence of runtime enforcement."
+    }
+  },
+  {
+    "lesson": "14",
+    "file": "content/how-to/14.md",
+    "prerequisites": [
+      "13"
+    ],
+    "keywords": [
+      "recovery",
+      "checkpoint",
+      "idempotency",
+      "retry",
+      "crash",
+      "duplicate",
+      "durable",
+      "reconciliation"
+    ],
+    "materials": [
+      "content/labs/05-idempotency-and-recovery.md",
+      "docs/LOCAL-DATA.md",
+      "content/lessons/14-checkpointing-and-idempotency.md"
+    ],
+    "resource": {
+      "provider": "AWS Builders' Library",
+      "title": "Making retries safe with idempotent APIs",
+      "url": "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/",
+      "scope": "Read Retrying and side effects, Reducing client complexity, and Same client request ID, different intent. Skip EC2 commands; stop before Conclusion. Prerequisite: understand request, response, and retry.",
+      "access": "Public reading; no AWS account or cloud resources needed.",
+      "checked": "2026-10-21",
+      "verification": "Opened official article and inspected retry uncertainty, operation identity, and changed-argument behavior."
+    }
+  },
+  {
+    "lesson": "15",
+    "file": "content/how-to/15.md",
+    "prerequisites": [
+      "13",
+      "14"
+    ],
+    "keywords": [
+      "trace",
+      "log",
+      "observability",
+      "budget",
+      "latency",
+      "cost",
+      "timeout",
+      "run ID"
+    ],
+    "materials": [
+      "content/labs/07-traces-and-diagnosis.md",
+      "content/labs/04-retries-and-budgets.md",
+      "docs/OPERATING-PLAYBOOK.md"
+    ],
+    "resource": {
+      "provider": "OpenTelemetry",
+      "title": "Traces",
+      "url": "https://opentelemetry.io/docs/concepts/signals/traces/",
+      "scope": "Read the opening explanation and Spans through the sample span; stop before Span Context. Prerequisite: understand an operation with a beginning and end.",
+      "access": "Public conceptual reading; no telemetry account or SDK installation required.",
+      "checked": "2026-10-21",
+      "verification": "Opened official traces page and inspected introductory explanation and span fields; no telemetry deployment tested."
+    }
+  },
+  {
+    "lesson": "16",
+    "file": "content/how-to/16.md",
+    "prerequisites": [
+      "03"
+    ],
+    "keywords": [
+      "evaluation",
+      "dataset",
+      "labels",
+      "rubric",
+      "holdout",
+      "contamination",
+      "provenance",
+      "test data"
+    ],
+    "materials": [
+      "content/articles/evaluation-vs-demo.md",
+      "content/practice/README.md",
+      "templates/evaluation-plan.md",
+      "content/guide/04-evaluating-ai.md"
+    ],
+    "resource": {
+      "provider": "OpenAI",
+      "title": "Evaluation best practices",
+      "url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
+      "scope": "Read What are evals? and Design your eval process; stop before the first worked evaluation example. Prerequisite: understand expected behavior in a supplied fixture.",
+      "access": "Public conceptual reading; no account or API needed. Do not set up the deprecated hosted Evals platform for this lesson.",
+      "checked": "2026-10-21",
+      "verification": "Opened official page and inspected evaluation design and its platform deprecation notice; no hosted Evals execution claimed."
+    }
+  }
+]

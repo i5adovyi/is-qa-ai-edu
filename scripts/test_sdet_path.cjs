@@ -15,7 +15,7 @@ const path=require('node:path');
   assert.equal(await page.locator('.nav-more').getAttribute('open'),null);
   assert.equal(await page.locator('#nav>a').count(),5);
   const original=await page.evaluate(k=>localStorage.getItem(k),key);
-  await page.getByRole('link',{name:'Start reading',exact:false}).click();
+  await page.goto(base+'/#guide=01');
   await page.locator('.guide-source a').waitFor();
   await page.getByRole('heading',{name:'What AI can do for an SDET',exact:true}).waitFor();
   assert.equal(await page.locator('#exercise-attempt,#mark-done,[data-answer]').count(),0);
@@ -57,7 +57,7 @@ const path=require('node:path');
   await importPage.getByRole('link',{name:'Resume reading',exact:false}).click();
   assert.equal(new URL(importPage.url()).hash,'#guide=04');await second.close();
   // Existing deep links still show all original material and a route back to the guide.
-  await page.goto(base+'/#lesson=01');await page.locator('.practice-notice').waitFor();
+  await page.goto(base+'/#lesson=01');await page.locator('.beginner-guide').waitFor();
   assert.match(await page.locator('.reading').innerText(),/Exercise 1/);
   await page.goto(base+'/#path');await page.locator('.lesson-row').first().waitFor();
   assert.equal(await page.locator('.lesson-row').count(),24);

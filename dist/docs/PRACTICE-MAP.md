@@ -72,7 +72,7 @@ Use [starter fixtures](../content/practice/README.md) before authoring new cases
 | [Lab 14: retrieval comparison](../content/labs/14-retrieval-comparison.md) | Lessons 04–05 and 16–17 | Same-case recall/support comparison; applicability and source-refresh errors separated from generation |
 | [Lab 15: review and operations](../content/labs/15-review-and-operations.md) | Lessons 14 and 22–23 | Exact-version human review, stale-approval rejection, persisted pending work, release checks, and rollback |
 
-These extensions add sessions; the [study plan](STUDY-PLAN.md) budgets them explicitly. A process-based worker run establishes process coordination; a scripted planner run establishes the loop boundary. Neither establishes unexecuted live-model behavior.
+These extensions add sessions; the [study plan](PRACTICE-STUDY-PLAN.md) budgets them explicitly. A process-based worker run establishes process coordination; a scripted planner run establishes the loop boundary. Neither establishes unexecuted live-model behavior.
 
 ## Investigate unfamiliar incidents
 
@@ -88,7 +88,7 @@ After the component exercises, use the [incident route](../content/incidents/REA
 | [INC-06](../content/incidents/06-resumed-delivery.md) | Lessons 06, 12, 20 and 22–23 | Current acceptance brief, precise clarification, artifact-version comparison and usefulness review |
 | [INC-CAPSTONE](../content/incidents/07-release-rehearsal.md) | Working baseline for one chosen capstone | Unfamiliar incident defense, persisted-state recovery evidence and a fresh project-specific regression |
 
-The route adds 10.5–14.5 planning hours, including the capstone incident. The [study plan](STUDY-PLAN.md) explains where it fits and how to avoid double-counting capstone hardening time. Each case has a transfer variant; record a prediction before running it. The [incident rubric](../content/incidents/ASSESSMENT.md) assesses reasoning, evidence and recovery separately from the executable contract. Use the existing 40-point rubric for the single capstone.
+The route adds 10.5–14.5 planning hours, including the capstone incident. The [study plan](PRACTICE-STUDY-PLAN.md) explains where it fits and how to avoid double-counting capstone hardening time. Each case has a transfer variant; record a prediction before running it. The [incident rubric](../content/incidents/ASSESSMENT.md) assesses reasoning, evidence and recovery separately from the executable contract. Use the existing 40-point rubric for the single capstone.
 
 ## Evidence before completion
 
