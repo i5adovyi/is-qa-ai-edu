@@ -1,5 +1,19 @@
 # Verification record for the October 2026 academy release
 
+## First-time learner navigation — 21 October 2026
+
+Walking the new map exposed three breaks in the reading route: an inline link to the next beginner guide opened a standalone document without lesson controls; a sidebar search hid later lessons after navigation; and the end of each beginner guide offered no prominent continuation before deeper material. This revision keeps normal reading links in the complete lesson, clears the navigation search on selection, adds named next-lesson/stage links, and provides routes back from supporting pages. A direct lesson 01 link and explicit primer/optional-practice labels clarify the starting point and the role of supporting material. Standalone document URLs and Markdown downloads remain available.
+
+Executed checks:
+
+- **54 JavaScript unit tests** passed, including canonical reading links and anchors, every next step, and navigation without progress writes.
+- **Ten browser suites** passed: the new beginner journey, sidebar, general portal, learning workspaces, incident practice, Run anywhere, primers, full-course approach, actual SQLite persistence, and exhaustive audit. The beginner journey also passed against the local launcher with a separate test database.
+- The beginner journey followed all **24** lesson continuations and **eight** stage entrances, the inline lesson 01-to-02 link, search-to-next-lesson flow, setup/material/primer detours, old standalone-guide URLs, and the optional final capstone route. It checked narrow-screen navigation and unchanged learning records. After the final label/click-handler and contrast refinements, the journey and sidebar suites were rerun.
+- Exhaustive audit: **182 documents and Markdown downloads**, **1,036 internal-link occurrences**, **241 distinct internal links**, **96 quiz choices**, **74 downloadable assets**, **182 mobile document views**, and **zero page errors**. Canonical lesson links are now followed and their section targets checked, alongside document links.
+- All **220 tracked teaching, lab, capstone, and template files** were compared with the prior commit and remain byte-for-byte unchanged. No file was removed. Source/portable builds and content/link validation passed.
+
+Browser checks use isolated profiles and temporary data. Return links use only current-session navigation or an explicit saved bookmark; they do not save a reading position or award completion. This is an interface walkthrough and regression check, not evidence of learner comprehension. GitHub CI and Site deployment are checked separately for the final commit.
+
 ## Sidebar site map — 21 October 2026
 
 Navigation now includes eight expandable stages, direct links to all 24 lessons, technical-term search, a current-lesson indicator, and grouped materials, practice, and setup links. A mobile drawer keeps the map accessible while reading. Course and lab sources, progress formats, and lesson URLs are unchanged.

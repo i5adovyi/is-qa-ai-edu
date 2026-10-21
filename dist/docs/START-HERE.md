@@ -4,6 +4,8 @@ Open [lesson 01's beginner guide](../content/how-to/01.md). It explains what an 
 
 In the portal, choose **Start reading**. Each lesson begins with an explanation and a worked example, then shows how to explore it with your assistant and how to check the result. The original deeper explanation, exercises, and related materials remain on the same page. **Next lesson** follows the full 24-lesson course.
 
+The site map also has **New here? Start lesson 01** above its stage list. At the end of each beginner guide, **Continue reading** names the next lesson and announces a new stage when applicable. Extra resources, quizzes, and exercises are optional; you do not have to finish them to move on. Supporting pages offer a return link to the lesson you opened most recently in this session. This navigation context is not a saved bookmark: use **Save my place** if you want to resume after closing the site. Standalone guide downloads remain available and link back to their full lesson.
+
 ## A first session that stays small
 
 Read “Start here,” “The idea in plain language,” and “A small example” in lesson 01. Ask about any unfamiliar term. Try the supplied assistant prompt only if you want to see the concept explained interactively. Compare its response with “What you should see.” Then stop or continue to lesson 02. You do not need to implement an agent or submit a diagram.
@@ -12,7 +14,7 @@ Use **Save my place** on a lesson or primer to remember where to return. It does
 
 ## Find the topic you need
 
-- **Site map in the sidebar:** expand any of the eight stages to open its lessons directly. Search by a familiar term such as testing, MCP, skills, or state machine. Your current lesson is highlighted. On a phone, tap **Site map** at the top; use **Close map** or Escape to return to reading.
+- **Site map in the sidebar:** expand any of the eight stages to open its lessons directly. Search by a familiar term such as testing, MCP, skills, or state machine. Selecting a link clears the search so later lessons remain visible. Your current lesson is highlighted. On a phone, tap **Site map** at the top; use **Close map** or Escape to return to reading.
 - **Full course map:** all eight stages and all 24 lessons, visible together.
 - **Find learning materials:** search lessons, beginner guides, primers, articles, labs, templates, books, courses, and videos by topic or format.
 - **Materials for this topic:** each lesson's relevant internal references and one bounded external reading.

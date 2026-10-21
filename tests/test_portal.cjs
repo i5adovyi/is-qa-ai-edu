@@ -618,3 +618,36 @@ test('sidebar search finds technical terminology and sections without changing p
  p.run("sidebarQuery='';nav('overview')");assert.equal((p.nodes['#nav'].innerHTML.match(/class="nav-lesson /g)||[]).length,24);
  assert.equal(p.run('JSON.stringify(state)'),original);
 });
+
+test('reading links stay in the canonical lesson and retain their target sections',()=>{
+ const p=portal();
+ assert.equal(p.run("resolveHref('02.md','content/how-to/01.md')"),'#lesson=02');
+ assert.equal(p.run("resolveHref('13.md#the-idea-in-plain-language','content/how-to/12.md')"),'#lesson=13&section=the-idea-in-plain-language');
+ assert.equal(p.run("resolveHref('../lessons/01-systems-before-agents.md','content/how-to/01.md')"),'#lesson=01&section=original-lesson');
+ assert.equal(p.run("materialEntries().find(e=>e.kind==='Beginner how-to'&&e.href==='#lesson=01').href"),'#lesson=01');
+});
+
+test('all lessons and stages offer an ungated next step including the last lesson',()=>{
+ const p=portal(),before=p.run('JSON.stringify(state)');
+ for(let n=0;n<24;n++){
+  p.context.n=n;const html=p.run('lessonNext(lessons[n])');
+  assert.match(html,new RegExp(n===23?'href="#capstones"':'href="#lesson='+String(n+2).padStart(2,'0')+'"'));
+  assert.doesNotMatch(html,/disabled|mark-done/);
+ }
+ assert.match(p.run('lessonNext(lessons[2])'),/Next · Stage 2/);
+ assert.match(p.run('stage(1)'),/Begin this stage: lesson 01/);
+ assert.match(p.run('lessonNext(lessons[23])'),/optional capstones/);
+ assert.equal(p.run('JSON.stringify(state)'),before);
+});
+
+test('supporting reading offers a route back without saving inferred progress',()=>{
+ const p=portal(),before=p.run('JSON.stringify(state)');
+ assert.match(p.run("readingReturn('docs/ASSISTANT-QUICKSTART.md')"),/Start lesson 01/);
+ p.run("location.hash='#lesson=13';nav('path')");
+ assert.match(p.run("readingReturn('docs/ASSISTANT-QUICKSTART.md')"),/Return to lesson 13/);
+ assert.match(p.run("readingReturn('content/how-to/02.md')"),/Open lesson 02/);
+ p.run("sidebarQuery='state machine';clearSidebarSearch();nav('path')");
+ assert.equal(p.run('sidebarQuery'),'');
+ assert.equal((p.nodes['#nav'].innerHTML.match(/class="nav-lesson /g)||[]).length,24);
+ assert.equal(p.run('JSON.stringify(state)'),before);
+});

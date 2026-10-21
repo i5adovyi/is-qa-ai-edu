@@ -9,7 +9,7 @@ Use the [private OpenAI-hosted portal](https://signal-desk-ai-engineering-academ
 Choose one route:
 
 - **GitHub:** sign in with an account that has access to this private repository, then clone it. A “repository not found” message can mean your Git credentials do not have access.
-- **Download:** in the portal, open **Field manuals → Download full project**, extract the ZIP, and open a terminal inside its `ai-engineering-academy` folder. This route needs no Git.
+- **Download:** in the portal, open **Site map → Learning materials → Reference shelf → Download full project**, extract the ZIP, and open a terminal inside its `ai-engineering-academy` folder. This route needs no Git.
 
 For GitHub, run:
 
