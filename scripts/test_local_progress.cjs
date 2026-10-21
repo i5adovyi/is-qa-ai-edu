@@ -42,6 +42,7 @@ async function db(page){return page.evaluate(async()=>(await(await fetch('/api/l
   await page.locator('#notes').fill('Reading question saved in SQLite.');await saved(page);
   assert.equal((await db(page)).reading,'04');
   await page.goto(server.base+'/#lesson=13');await saved(page);await page.locator('#save-lesson-reading').click();await saved(page);assert.equal((await db(page)).lessonReading,'13');
+  await page.goto(server.base+'/#topic=mcp-basics?path=builder');await saved(page);await page.locator('#save-topic-reading').click();await saved(page);await page.locator('#notes').fill('What is the protocol boundary?');await saved(page);assert.equal((await db(page)).topicReading,'mcp-basics');
   await context.close();
   const nextContext=await browser.newContext({viewport:{width:1440,height:1000}}),next=await nextContext.newPage();next.on('dialog',dialog=>dialog.accept());next.on('pageerror',e=>errors.push(e.message));
   await next.goto(server.base+'/#exercise=L01-E1');await saved(next);
@@ -81,6 +82,7 @@ async function db(page){return page.evaluate(async()=>(await(await fetch('/api/l
   await restarted.goto(server.base+'/#guide=04');await saved(restarted);
   await restarted.getByText('Keep a question or note · optional',{exact:true}).click();
   assert.equal(await restarted.locator('#notes').inputValue(),'Reading question saved in SQLite.');
+  await restarted.goto(server.base+'/#overview');await saved(restarted);assert.equal(await restarted.getByRole('link',{name:'Resume reading',exact:false}).getAttribute('href'),'#topic=mcp-basics?path=builder');await restarted.getByRole('link',{name:'Resume reading',exact:false}).click();assert.equal(await restarted.locator('#notes').inputValue(),'What is the protocol boundary?');assert.equal((await db(restarted)).topicPath,'builder');
   await restartedContext.close();
   const staticServer=await launch(true),staticContext=await browser.newContext(),preview=await staticContext.newPage();await preview.goto(staticServer.base+'/#lesson=01');
   await preview.waitForFunction(()=>document.querySelector('#global-save-status').textContent.includes('static preview'));

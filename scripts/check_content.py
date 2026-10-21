@@ -3,6 +3,10 @@ import json
 import re
 from pathlib import Path
 from urllib.parse import unquote
+try:
+    from scripts.check_tracks import validate_tracks
+except ModuleNotFoundError:
+    from check_tracks import validate_tracks
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -27,7 +31,7 @@ def headings(text):
 def validate(root):
     c = json.loads((root / 'content/curriculum.json').read_text())
     resources = json.loads((root / 'content/resources.json').read_text())
-    errors = []
+    errors = validate_tracks(root)
     def need(ok, message):
         if not ok:
             errors.append(message)
@@ -166,7 +170,9 @@ def check():
     errors = validate(ROOT)
     if errors:
         raise SystemExit('\n'.join(errors))
-    print('Content checks passed: 24 lessons, 72 exercise workspaces, applied checks, 15 lab guides, six incidents and a capstone incident, resource metadata, and local file/section links.')
+    catalogs = [t for p in (ROOT/'content/tracks').glob('catalog-*.json') for t in json.loads(p.read_text())]
+    print(f'Subjects validated: {len(catalogs)} tracks, {sum(len(t["lessons"]) for t in catalogs)} topics, curated paths and prerequisite closure.')
+    print('Content checks passed: 24 retained lessons, 72 exercise workspaces, applied checks, 15 lab guides, six incidents and a capstone incident, resource metadata, and local file/section links.')
 
 if __name__ == '__main__':
     check()

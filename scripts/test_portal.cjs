@@ -14,12 +14,12 @@ const path = require('node:path');
  const response=await page.goto(base);
  assert.equal(response.status(),200,'The configured ACADEMY_TEST_URL must serve the built portal');
  // Accessible whitespace around <br> differs across Chromium builds.
- await page.getByRole('heading',{name:'Learn AI, one clear step at a time.'}).waitFor();
+ await page.getByRole('heading',{name:'Understand AI. Use it. Build with it.'}).waitFor();
  fs.mkdirSync(path.join(__dirname,'../tmp/qa'),{recursive:true});
  await page.screenshot({path:path.join(__dirname,'../tmp/qa/overview.png'),fullPage:true});
  await page.locator('.skip').focus();await page.keyboard.press('Enter');
- assert.equal(await page.locator('h1').textContent(),'Learn AI, one clear step at a time.');
- await page.getByRole('link',{name:'Start reading',exact:false}).click();
+ assert.equal(await page.locator('h1').textContent(),'Understand AI. Use it. Build with it.');
+ await page.locator('#main .first-topic a.btn').first().click();await page.getByRole('link',{name:'Start the first topic',exact:false}).click();
  await page.locator('.beginner-guide h1').waitFor();
  await page.goto(base+'/#lesson=01');
  await page.locator('.reading h1').waitFor();

@@ -1,0 +1,999 @@
+[
+  {
+    "id": "tools",
+    "order": 6,
+    "title": "Tools, APIs and function calling",
+    "summary": "Understand how an assistant requests actions and how software decides what may run.",
+    "why": "An SDET must distinguish a plausible suggestion from a validated action and a verified result.",
+    "prerequisites": [
+      "foundations",
+      "prompting"
+    ],
+    "outcomes": [
+      "Read a tool request and result without guessing.",
+      "Test input contracts, permissions, failures, and side effects.",
+      "Evolve tool interfaces without breaking existing callers."
+    ],
+    "lessons": [
+      {
+        "id": "tools-requests",
+        "title": "What a tool call actually does",
+        "summary": "Follow a request from the assistant to an application and back.",
+        "level": "beginner",
+        "minutes": 15,
+        "keywords": [
+          "tool call",
+          "API",
+          "arguments",
+          "function calling"
+        ],
+        "prerequisites": [],
+        "file": "content/tracks/tools/requests.md",
+        "materials": [
+          "content/labs/03-tool-authority.md",
+          "content/labs/05-idempotency-and-recovery.md"
+        ],
+        "resource": {
+          "provider": "Model Context Protocol",
+          "title": "Server concepts",
+          "url": "https://modelcontextprotocol.io/docs/learn/server-concepts",
+          "scope": "Read the opening comparison of tools, resources, and prompts, then the Tools example; stop before implementing a server.",
+          "access": "Public reading; no model key or installation required.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official page and inspected the named concepts on 21 October 2026. Reading verification does not certify host or model execution."
+        }
+      },
+      {
+        "id": "tools-contracts",
+        "title": "Tool contracts and authority",
+        "summary": "Retained lesson 07: understand the boundary before running a tool.",
+        "level": "beginner",
+        "minutes": 15,
+        "keywords": [
+          "schema",
+          "authority",
+          "allowlist"
+        ],
+        "prerequisites": [
+          "tools-requests"
+        ],
+        "file": "content/how-to/07.md",
+        "materials": [
+          "content/guide/06-tools-mcp-skills.md",
+          "templates/tool-contract.md",
+          "content/labs/03-tool-authority.md"
+        ],
+        "lesson": "07",
+        "resource": {
+          "provider": "JSON Schema",
+          "title": "Understanding JSON Schema — object",
+          "url": "https://json-schema.org/understanding-json-schema/reference/object",
+          "scope": "Read Properties, Additional Properties, and Required Properties using section links. Skip pattern matching/composition; stop after required-field examples. Prerequisite: the simple JSON object explained in this guide.",
+          "access": "Public documentation; no account or validator installation required.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official reference and checked the named sections. No external validator was run for this conceptual example."
+        }
+      },
+      {
+        "id": "tools-validation",
+        "title": "Validate inputs before anything happens",
+        "summary": "Separate data shape, business rules, and permission checks.",
+        "level": "intermediate",
+        "minutes": 25,
+        "keywords": [
+          "validation",
+          "JSON Schema",
+          "required",
+          "additionalProperties"
+        ],
+        "prerequisites": [
+          "tools-contracts"
+        ],
+        "file": "content/tracks/tools/validation.md",
+        "materials": [
+          "content/labs/03-tool-authority.md",
+          "content/labs/05-idempotency-and-recovery.md"
+        ],
+        "resource": {
+          "provider": "JSON Schema",
+          "title": "Object reference",
+          "url": "https://json-schema.org/understanding-json-schema/reference/object",
+          "scope": "Read only Properties, Required Properties, and Additional Properties. Skip Pattern Properties and Unevaluated Properties; use the small objects in this lesson as preparation.",
+          "access": "Public reading; no validator installation required for the guided example.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official page and inspected the named concepts on 21 October 2026. Reading verification does not certify host or model execution."
+        }
+      },
+      {
+        "id": "tools-results",
+        "title": "Read results, errors and incomplete evidence",
+        "summary": "Recognize empty results, failed calls, pagination, and untrusted output.",
+        "level": "intermediate",
+        "minutes": 25,
+        "keywords": [
+          "result",
+          "error",
+          "pagination",
+          "correlation ID"
+        ],
+        "prerequisites": [
+          "tools-validation"
+        ],
+        "file": "content/tracks/tools/results.md",
+        "materials": [
+          "content/labs/03-tool-authority.md",
+          "content/labs/05-idempotency-and-recovery.md"
+        ],
+        "resource": {
+          "provider": "JSON-RPC Working Group",
+          "title": "JSON-RPC 2.0 Specification",
+          "url": "https://www.jsonrpc.org/specification",
+          "scope": "Read Request object and Response object, including Error object. Stop before Batch; syntax examples are optional.",
+          "access": "Public reading; assumes this track’s request/result vocabulary, not protocol implementation experience.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official page and inspected the named concepts on 21 October 2026. Reading verification does not certify host or model execution."
+        }
+      },
+      {
+        "id": "tools-side-effects",
+        "title": "Retries without duplicate effects",
+        "summary": "Understand uncertain outcomes, operation identity, and reconciliation.",
+        "level": "advanced",
+        "minutes": 25,
+        "keywords": [
+          "idempotency",
+          "side effect",
+          "timeout",
+          "retry"
+        ],
+        "prerequisites": [
+          "tools-results"
+        ],
+        "file": "content/tracks/tools/side-effects.md",
+        "materials": [
+          "content/labs/03-tool-authority.md",
+          "content/labs/05-idempotency-and-recovery.md"
+        ],
+        "resource": {
+          "provider": "AWS Builders’ Library",
+          "title": "Making retries safe with idempotent APIs",
+          "url": "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/",
+          "scope": "Read Retrying and side effects and Same client request ID, different intent; stop at Conclusion. Skip AWS command examples.",
+          "access": "Public reading; no AWS account or cloud resources required.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official page and inspected the named concepts on 21 October 2026. Reading verification does not certify host or model execution."
+        }
+      },
+      {
+        "id": "tools-versioning",
+        "title": "Version and test a tool interface",
+        "summary": "Detect breaking changes and keep recorded tool examples useful.",
+        "level": "advanced",
+        "minutes": 25,
+        "keywords": [
+          "contract testing",
+          "compatibility",
+          "version",
+          "migration"
+        ],
+        "prerequisites": [
+          "tools-side-effects"
+        ],
+        "file": "content/tracks/tools/versioning.md",
+        "materials": [
+          "content/labs/03-tool-authority.md",
+          "content/labs/05-idempotency-and-recovery.md"
+        ],
+        "resource": {
+          "provider": "JSON Schema",
+          "title": "Object reference",
+          "url": "https://json-schema.org/understanding-json-schema/reference/object",
+          "scope": "Read only Properties, Required Properties, and Additional Properties. Skip Pattern Properties and Unevaluated Properties; use the small objects in this lesson as preparation.",
+          "access": "Public reading; no validator installation required for the guided example.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official page and inspected the named concepts on 21 October 2026. Reading verification does not certify host or model execution."
+        }
+      }
+    ]
+  },
+  {
+    "id": "mcp",
+    "order": 7,
+    "title": "Model Context Protocol (MCP)",
+    "summary": "Follow a real integration from discovery to local execution, remote access, and diagnosis.",
+    "why": "Connecting a server is only the start: you need to know what it exposes, why a call fails, and whose authority it uses.",
+    "prerequisites": [
+      "tools"
+    ],
+    "outcomes": [
+      "Explain host, client, server, tools, resources, and prompts.",
+      "Inspect the bundled real client/server lab before optional extension work.",
+      "Diagnose transport, authorization, protocol, and trust failures separately."
+    ],
+    "lessons": [
+      {
+        "id": "mcp-basics",
+        "title": "MCP without the mystery",
+        "summary": "Place MCP beside tools, APIs, and the assistant you already use.",
+        "level": "beginner",
+        "minutes": 15,
+        "keywords": [
+          "MCP",
+          "host",
+          "client",
+          "server",
+          "resource",
+          "prompt"
+        ],
+        "prerequisites": [],
+        "file": "content/tracks/mcp/basics.md",
+        "materials": [
+          "content/labs/09-real-mcp.md",
+          "lab/mcp_lab/README.md"
+        ],
+        "resource": {
+          "provider": "Model Context Protocol",
+          "title": "Architecture overview",
+          "url": "https://modelcontextprotocol.io/docs/learn/architecture",
+          "scope": "Read Scope, Participants, and Transport layer; stop before the detailed protocol example. Compare the documentation version with any SDK transcript.",
+          "access": "Public reading; no account or installation. Optional local lab uses Python 3.12 and pinned dependencies.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official page and inspected the named concepts on 21 October 2026. Reading verification does not certify host or model execution."
+        }
+      },
+      {
+        "id": "mcp-discovery",
+        "title": "Discover and inspect available capabilities",
+        "summary": "Retained lesson 08: read schemas and distinguish a connector from authority.",
+        "level": "beginner",
+        "minutes": 15,
+        "keywords": [
+          "discovery",
+          "capabilities",
+          "tools/list"
+        ],
+        "prerequisites": [
+          "mcp-basics"
+        ],
+        "file": "content/how-to/08.md",
+        "materials": [
+          "content/guide/06-tools-mcp-skills.md",
+          "content/labs/09-real-mcp.md",
+          "lab/mcp_lab/README.md"
+        ],
+        "lesson": "08",
+        "resource": {
+          "provider": "Model Context Protocol",
+          "title": "MCP architecture overview",
+          "url": "https://modelcontextprotocol.io/docs/2026-07-28/learn/architecture",
+          "scope": "Read Scope, Participants, and Layers; stop before Data Layer Protocol. Prerequisite: tool contracts from lesson 07. This overview is newer than the pinned lab; use the lab manual for its lifecycle and APIs.",
+          "access": "Public reading. Optional lab execution separately needs Python 3.12 and an initial dependency download, but no model API key.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official architecture page and checked the conceptual roles. Separately ran the pinned local baseline: 13/13 assertions, protocol 2025-11-25. No assistant-host integration was claimed."
+        }
+      },
+      {
+        "id": "mcp-local-server",
+        "title": "Follow your first real local MCP connection",
+        "summary": "Inspect and optionally run the pinned SDK lab one observable step at a time.",
+        "level": "intermediate",
+        "minutes": 25,
+        "keywords": [
+          "stdio",
+          "SDK",
+          "initialize",
+          "local server"
+        ],
+        "prerequisites": [
+          "mcp-discovery"
+        ],
+        "file": "content/tracks/mcp/local-server.md",
+        "materials": [
+          "content/labs/09-real-mcp.md",
+          "lab/mcp_lab/README.md"
+        ],
+        "resource": {
+          "provider": "Model Context Protocol",
+          "title": "Architecture overview",
+          "url": "https://modelcontextprotocol.io/docs/learn/architecture",
+          "scope": "Read Scope, Participants, and Transport layer; stop before the detailed protocol example. Compare the documentation version with any SDK transcript.",
+          "access": "Public reading; no account or installation. Optional local lab uses Python 3.12 and pinned dependencies.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official page and inspected the named concepts on 21 October 2026. Reading verification does not certify host or model execution."
+        }
+      },
+      {
+        "id": "mcp-remote-auth",
+        "title": "Remote MCP, authentication and authorization",
+        "summary": "Understand endpoints, account identity, scope, and expired access.",
+        "level": "intermediate",
+        "minutes": 25,
+        "keywords": [
+          "HTTP",
+          "OAuth",
+          "scope",
+          "401",
+          "403"
+        ],
+        "prerequisites": [
+          "mcp-local-server"
+        ],
+        "file": "content/tracks/mcp/remote-auth.md",
+        "materials": [
+          "content/labs/09-real-mcp.md",
+          "lab/mcp_lab/README.md"
+        ],
+        "resource": {
+          "provider": "Model Context Protocol",
+          "title": "Understanding Authorization in MCP",
+          "url": "https://modelcontextprotocol.io/docs/tutorials/security/authorization",
+          "scope": "Read When Should You Use Authorization? and the authorization flow through token use; stop before implementation. Understand host, server, and HTTP first.",
+          "access": "Public reading. Actual remote connection requires an authorized server and account; the lesson uses a synthetic transcript.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official page and inspected the named concepts on 21 October 2026. Reading verification does not certify host or model execution."
+        }
+      },
+      {
+        "id": "mcp-diagnosis",
+        "title": "Find the layer that broke",
+        "summary": "Use request IDs and controlled failures to distinguish transport, schema, and tool errors.",
+        "level": "advanced",
+        "minutes": 25,
+        "keywords": [
+          "Inspector",
+          "stderr",
+          "timeout",
+          "disconnect",
+          "protocol version"
+        ],
+        "prerequisites": [
+          "mcp-remote-auth"
+        ],
+        "file": "content/tracks/mcp/diagnosis.md",
+        "materials": [
+          "content/labs/09-real-mcp.md",
+          "lab/mcp_lab/README.md"
+        ],
+        "resource": {
+          "provider": "Model Context Protocol",
+          "title": "MCP Inspector",
+          "url": "https://modelcontextprotocol.io/docs/tools/inspector",
+          "scope": "Read the opening client comparison and Quickstart; stop before selecting a client guide. Inspect the current Node requirement before any optional install.",
+          "access": "Public reading. Optional Inspector execution downloads software and requires its documented Node version; the bundled lab is a separate route.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official page and inspected the named concepts on 21 October 2026. Reading verification does not certify host or model execution."
+        }
+      },
+      {
+        "id": "mcp-trust",
+        "title": "MCP trust boundaries in real projects",
+        "summary": "Separate server installation, returned content, credentials, and action permission.",
+        "level": "advanced",
+        "minutes": 25,
+        "keywords": [
+          "prompt injection",
+          "token audience",
+          "local compromise",
+          "trust"
+        ],
+        "prerequisites": [
+          "mcp-diagnosis"
+        ],
+        "file": "content/tracks/mcp/trust.md",
+        "materials": [
+          "content/labs/09-real-mcp.md",
+          "lab/mcp_lab/README.md"
+        ],
+        "resource": {
+          "provider": "Model Context Protocol",
+          "title": "Security Best Practices",
+          "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic/security_best_practices",
+          "scope": "Read Token Passthrough and Local MCP Server Compromise. Stop after their mitigations; this versioned reading supplements your host’s current controls.",
+          "access": "Public reading; no penetration test or live connection required.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official page and inspected the named concepts on 21 October 2026. Reading verification does not certify host or model execution."
+        }
+      }
+    ]
+  },
+  {
+    "id": "skills",
+    "order": 8,
+    "title": "Skills and reusable workflows",
+    "summary": "Learn what a skill contains, install a disposable copy, test activation, and share changes safely.",
+    "why": "A folder on disk does not prove that a host discovered it or that its instructions produce correct results.",
+    "prerequisites": [
+      "assistants",
+      "prompting"
+    ],
+    "outcomes": [
+      "Distinguish a skill from a tool, project instruction, and saved prompt.",
+      "Install and invoke a project-scoped skill in Codex or Claude Code.",
+      "Test selection, behavior, missing dependencies, and upgrades separately."
+    ],
+    "lessons": [
+      {
+        "id": "skills-basics",
+        "title": "What belongs in a skill",
+        "summary": "Choose when repeated instructions deserve a reusable package.",
+        "level": "beginner",
+        "minutes": 15,
+        "keywords": [
+          "skill",
+          "SKILL.md",
+          "workflow",
+          "metadata"
+        ],
+        "prerequisites": [],
+        "file": "content/tracks/skills/basics.md",
+        "materials": [
+          "content/labs/10-installed-skill.md",
+          "content/skill-practice/README.md"
+        ],
+        "resource": {
+          "provider": "Agent Skills",
+          "title": "Specification",
+          "url": "https://agentskills.io/specification",
+          "scope": "Read Directory structure and SKILL.md format, then Progressive disclosure. Stop before validation tooling; optional fields are reference material.",
+          "access": "Public reading; no host account or package installation required.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official page and inspected the named concepts on 21 October 2026. Reading verification does not certify host or model execution."
+        }
+      },
+      {
+        "id": "skills-package",
+        "title": "Read a skill package",
+        "summary": "Retained lesson 09: inspect the instruction file, references, and helper scripts.",
+        "level": "beginner",
+        "minutes": 15,
+        "keywords": [
+          "frontmatter",
+          "references",
+          "assets",
+          "scripts"
+        ],
+        "prerequisites": [
+          "skills-basics"
+        ],
+        "file": "content/how-to/09.md",
+        "materials": [
+          "content/labs/10-installed-skill.md",
+          "content/skill-practice/README.md",
+          "templates/skill-design.md"
+        ],
+        "lesson": "09",
+        "resource": {
+          "provider": "Agent Skills",
+          "title": "Specification",
+          "url": "https://agentskills.io/specification",
+          "scope": "Read Directory structure, SKILL.md format, and the name/description fields; stop before optional metadata and tool fields. Prerequisite: understand that a folder contains files.",
+          "access": "Public reading; no account, runtime, or installation required.",
+          "checked": "2026-10-21",
+          "verification": "Opened official specification and inspected required fields. Host locations separately checked against official Codex and Claude Code documentation; actual host activation is not certified by reading."
+        }
+      },
+      {
+        "id": "skills-installation",
+        "title": "Install a skill where your host can find it",
+        "summary": "Use a disposable project and keep the whole package together.",
+        "level": "intermediate",
+        "minutes": 25,
+        "keywords": [
+          "installation",
+          ".agents/skills",
+          ".claude/skills",
+          "project scope"
+        ],
+        "prerequisites": [
+          "skills-package"
+        ],
+        "file": "content/tracks/skills/installation.md",
+        "materials": [
+          "content/labs/10-installed-skill.md",
+          "content/skill-practice/README.md"
+        ],
+        "resource": {
+          "provider": "OpenAI",
+          "title": "Build skills",
+          "url": "https://learn.chatgpt.com/docs/build-skills",
+          "scope": "Read How ChatGPT and Codex use skills and Where Codex loads local skills. Stop before distribution; use the local Codex instructions only.",
+          "access": "Public reading. Actual invocation needs an authenticated compatible Codex host; local folder inspection needs no model access.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official page and inspected the named concepts on 21 October 2026. Reading verification does not certify host or model execution."
+        }
+      },
+      {
+        "id": "skills-invocation",
+        "title": "Invocation, discovery and skill conflicts",
+        "summary": "Distinguish choosing a skill explicitly from the host selecting it automatically.",
+        "level": "intermediate",
+        "minutes": 25,
+        "keywords": [
+          "activation",
+          "implicit",
+          "explicit",
+          "name collision"
+        ],
+        "prerequisites": [
+          "skills-installation"
+        ],
+        "file": "content/tracks/skills/invocation.md",
+        "materials": [
+          "content/labs/10-installed-skill.md",
+          "content/skill-practice/README.md"
+        ],
+        "resource": {
+          "provider": "Anthropic",
+          "title": "Extend Claude with skills",
+          "url": "https://code.claude.com/docs/en/skills",
+          "scope": "Read Choose where skills load, Control who invokes a skill, and Troubleshooting. Stop before unrelated advanced patterns. Use local project scope for this lesson.",
+          "access": "Public reading. Actual invocation needs a compatible authenticated Claude Code session; cloud and personal scopes differ.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official page and inspected the named concepts on 21 October 2026. Reading verification does not certify host or model execution."
+        }
+      },
+      {
+        "id": "skills-testing",
+        "title": "Test whether a skill actually helps",
+        "summary": "Compare selection, output quality, missing inputs, and unrelated requests.",
+        "level": "advanced",
+        "minutes": 25,
+        "keywords": [
+          "skill eval",
+          "regression",
+          "non-activation",
+          "semantic check"
+        ],
+        "prerequisites": [
+          "skills-invocation"
+        ],
+        "file": "content/tracks/skills/testing.md",
+        "materials": [
+          "content/labs/10-installed-skill.md",
+          "content/skill-practice/README.md"
+        ],
+        "resource": {
+          "provider": "OpenAI",
+          "title": "Build skills — Plugins",
+          "url": "https://developers.openai.com/plugins/build/skills",
+          "scope": "Read Test the skill and Define the workflow boundary; stop before packaging. Translate the criteria to your chosen host.",
+          "access": "Public reading; no plugin publication or paid API call required.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official page and inspected the named concepts on 21 October 2026. Reading verification does not certify host or model execution."
+        }
+      },
+      {
+        "id": "skills-distribution",
+        "title": "Share, version and retire a skill",
+        "summary": "Package dependencies, review diffs, and provide a practical rollback route.",
+        "level": "advanced",
+        "minutes": 25,
+        "keywords": [
+          "distribution",
+          "plugin",
+          "version",
+          "rollback",
+          "license"
+        ],
+        "prerequisites": [
+          "skills-testing"
+        ],
+        "file": "content/tracks/skills/distribution.md",
+        "materials": [
+          "content/labs/10-installed-skill.md",
+          "content/skill-practice/README.md"
+        ],
+        "resource": {
+          "provider": "OpenAI",
+          "title": "Package your plugin",
+          "url": "https://developers.openai.com/plugins/build/plugins",
+          "scope": "Read the package structure and manifest explanation. Stop before submission or publication; this lesson only reviews a disposable package.",
+          "access": "Public reading; actual distribution is optional and requires the destination’s permissions and tooling.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official page and inspected the named concepts on 21 October 2026. Reading verification does not certify host or model execution."
+        }
+      }
+    ]
+  },
+  {
+    "id": "agentic",
+    "order": 9,
+    "title": "Agentic development and workflows",
+    "summary": "Move from a small controlled coding task to reviewable, bounded workflows.",
+    "why": "Good assisted development depends on task boundaries, independent evidence, and a deliberate stop or replan.",
+    "prerequisites": [
+      "assistants",
+      "tools"
+    ],
+    "outcomes": [
+      "Choose a fixed workflow or a model-directed loop for the actual problem.",
+      "Scope, verify, and review an assistant’s patch using retained lessons.",
+      "Keep CI authority and replanning under explicit control."
+    ],
+    "lessons": [
+      {
+        "id": "agentic-workflows",
+        "title": "From chat to a controlled workflow",
+        "summary": "Understand steps, branches, and who decides the next action.",
+        "level": "beginner",
+        "minutes": 15,
+        "keywords": [
+          "workflow",
+          "agent",
+          "orchestration",
+          "branch"
+        ],
+        "prerequisites": [],
+        "file": "content/tracks/agentic/workflows.md",
+        "materials": [
+          "content/labs/13-coding-and-workers.md",
+          "content/labs/15-review-and-operations.md"
+        ],
+        "resource": {
+          "provider": "Anthropic",
+          "title": "Building effective agents",
+          "url": "https://www.anthropic.com/research/building-effective-agents",
+          "scope": "Read What are agents? and When (and when not) to use agents. Stop before framework discussion; the distinction applies across providers.",
+          "access": "Public reading; no account, framework, or API key required.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official page and inspected the named concepts on 21 October 2026. Reading verification does not certify host or model execution."
+        }
+      },
+      {
+        "id": "agentic-task-scope",
+        "title": "Give an agent a small reviewable task",
+        "summary": "Retained lesson 10: specify expected behavior and the boundary of a change.",
+        "level": "beginner",
+        "minutes": 15,
+        "keywords": [
+          "acceptance criteria",
+          "scope",
+          "patch"
+        ],
+        "prerequisites": [
+          "agentic-workflows"
+        ],
+        "file": "content/how-to/10.md",
+        "materials": [
+          "content/dev-sandbox/README.md",
+          "content/labs/13-coding-and-workers.md",
+          "templates/task-contract.md"
+        ],
+        "lesson": "10",
+        "resource": {
+          "provider": "GitHub",
+          "title": "Best practices for using GitHub Copilot",
+          "url": "https://docs.github.com/en/copilot/get-started/best-practices",
+          "scope": "Read Create thoughtful prompts and Check Copilot's work; stop before Guide Copilot towards helpful outputs. Prerequisite: understand an input/output example.",
+          "access": "Public reading. The selected ideas apply to either coding assistant; Copilot access is not required.",
+          "checked": "2026-10-21",
+          "verification": "Opened official page and inspected the two selected sections; no Copilot execution claimed."
+        }
+      },
+      {
+        "id": "agentic-verification",
+        "title": "Verify the change with useful evidence",
+        "summary": "Retained lesson 11: inspect tests and distinguish a passing command from correctness.",
+        "level": "intermediate",
+        "minutes": 25,
+        "keywords": [
+          "verification",
+          "tests",
+          "regression"
+        ],
+        "prerequisites": [
+          "agentic-task-scope"
+        ],
+        "file": "content/how-to/11.md",
+        "materials": [
+          "content/lessons/11-verification-loops.md",
+          "content/dev-sandbox/README.md",
+          "content/labs/13-coding-and-workers.md"
+        ],
+        "lesson": "11",
+        "resource": {
+          "provider": "Python",
+          "title": "unittest — Unit testing framework",
+          "url": "https://docs.python.org/3/library/unittest.html",
+          "scope": "Read Basic example; stop before Command-Line Interface. Prerequisite: understand expected versus actual results; ask the assistant to explain unfamiliar class syntax.",
+          "access": "Public reading; execution needs Python. Newer documentation may show features beyond the academy's Python 3.9 core.",
+          "checked": "2026-10-21",
+          "verification": "Opened official Basic example and inspected assertions and runner output; local original teaching script tested separately."
+        }
+      },
+      {
+        "id": "agentic-review",
+        "title": "Review and deliver a patch",
+        "summary": "Retained lesson 12: examine the change, evidence, and remaining risk.",
+        "level": "intermediate",
+        "minutes": 25,
+        "keywords": [
+          "review",
+          "diff",
+          "delivery"
+        ],
+        "prerequisites": [
+          "agentic-verification"
+        ],
+        "file": "content/how-to/12.md",
+        "materials": [
+          "content/lessons/12-review-and-delivery.md",
+          "content/labs/15-review-and-operations.md",
+          "content/dev-sandbox/README.md"
+        ],
+        "lesson": "12",
+        "resource": {
+          "provider": "Google Engineering Practices",
+          "title": "What to look for in a code review",
+          "url": "https://google.github.io/eng-practices/review/reviewer/looking-for.html",
+          "scope": "Read Functionality, Complexity, and Tests; stop at Naming. CL means changelist. Prerequisite: understand a before/after code change.",
+          "access": "Public reading; no account or review platform required.",
+          "checked": "2026-10-21",
+          "verification": "Opened Google's engineering-practices page and inspected selected sections."
+        }
+      },
+      {
+        "id": "agentic-ci",
+        "title": "Agent work in CI and pull requests",
+        "summary": "Keep untrusted changes away from privileged automation and check the actual commit.",
+        "level": "advanced",
+        "minutes": 25,
+        "keywords": [
+          "CI",
+          "GitHub Actions",
+          "pull request",
+          "secrets",
+          "commit"
+        ],
+        "prerequisites": [
+          "agentic-review"
+        ],
+        "file": "content/tracks/agentic/ci.md",
+        "materials": [
+          "content/labs/13-coding-and-workers.md",
+          "content/labs/15-review-and-operations.md"
+        ],
+        "resource": {
+          "provider": "GitHub",
+          "title": "Secure use reference",
+          "url": "https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions",
+          "scope": "Read Writing workflows and Mitigating the risks of untrusted code checkout. Stop before Using third-party actions; no workflow change is required.",
+          "access": "Public reading. Executing Actions requires repository access and may consume plan allowances; the lesson stays local.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official page and inspected the named concepts on 21 October 2026. Reading verification does not certify host or model execution."
+        }
+      },
+      {
+        "id": "agentic-replanning",
+        "title": "Know when to stop or change the plan",
+        "summary": "Use evidence, budgets, and user intent to avoid endless unsuccessful editing.",
+        "level": "advanced",
+        "minutes": 25,
+        "keywords": [
+          "replan",
+          "stop condition",
+          "loop",
+          "escalation"
+        ],
+        "prerequisites": [
+          "agentic-ci"
+        ],
+        "file": "content/tracks/agentic/replanning.md",
+        "materials": [
+          "content/labs/13-coding-and-workers.md",
+          "content/labs/15-review-and-operations.md"
+        ],
+        "resource": {
+          "provider": "Anthropic",
+          "title": "Building effective agents",
+          "url": "https://www.anthropic.com/research/building-effective-agents",
+          "scope": "Read What are agents? and When (and when not) to use agents. Stop before framework discussion; the distinction applies across providers.",
+          "access": "Public reading; no account, framework, or API key required.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official page and inspected the named concepts on 21 October 2026. Reading verification does not certify host or model execution."
+        }
+      }
+    ]
+  },
+  {
+    "id": "harness",
+    "order": 10,
+    "title": "Harness engineering",
+    "summary": "Understand the software that validates, executes, observes, and stops an agent.",
+    "why": "An assistant’s promise is weaker than a runtime boundary; reliable systems enforce their own rules.",
+    "prerequisites": [
+      "tools",
+      "agentic"
+    ],
+    "outcomes": [
+      "Explain a harness before reading its code.",
+      "Follow bounded execution, recovery, and trace evidence in existing lessons.",
+      "Reason about cancellation, replay, and changed execution identity."
+    ],
+    "lessons": [
+      {
+        "id": "harness-boundaries",
+        "title": "What a harness is responsible for",
+        "summary": "Separate model proposals from the code that grants and records execution.",
+        "level": "beginner",
+        "minutes": 15,
+        "keywords": [
+          "harness",
+          "dispatcher",
+          "policy",
+          "runtime"
+        ],
+        "prerequisites": [],
+        "file": "content/tracks/harness/boundaries.md",
+        "materials": [
+          "content/articles/harness-architecture.md",
+          "content/labs/11-complete-student-harness.md"
+        ],
+        "resource": {
+          "provider": "Anthropic",
+          "title": "Building effective agents",
+          "url": "https://www.anthropic.com/research/building-effective-agents",
+          "scope": "Read What are agents? and When (and when not) to use agents. Stop before framework discussion; the distinction applies across providers.",
+          "access": "Public reading; no account, framework, or API key required.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official page and inspected the named concepts on 21 October 2026. Reading verification does not certify host or model execution."
+        }
+      },
+      {
+        "id": "harness-loop",
+        "title": "Read a bounded execution loop",
+        "summary": "Retained lesson 13: understand state and transitions with a small example first.",
+        "level": "beginner",
+        "minutes": 15,
+        "keywords": [
+          "state machine",
+          "loop",
+          "budget"
+        ],
+        "prerequisites": [
+          "harness-boundaries"
+        ],
+        "file": "content/how-to/13.md",
+        "materials": [
+          "content/articles/harness-architecture.md",
+          "content/labs/11-complete-student-harness.md",
+          "content/labs/12-model-tool-loop.md",
+          "content/guide/07-agents-and-workflows.md"
+        ],
+        "lesson": "13",
+        "resource": {
+          "provider": "Hugging Face",
+          "title": "Understanding AI Agents through the Thought-Action-Observation Cycle",
+          "url": "https://huggingface.co/learn/agents-course/unit1/agent-steps-and-structure",
+          "scope": "Read The Core Components and Alfred, the weather Agent; stop at the end of this page before proceeding to framework implementation. Prerequisite: know what a tool request and response are.",
+          "access": "Public reading; no account, API key, or framework installation needed.",
+          "checked": "2026-10-21",
+          "verification": "Opened official course page and inspected the cycle and weather example; conceptual example, not evidence of runtime enforcement."
+        }
+      },
+      {
+        "id": "harness-recovery",
+        "title": "Save state and recover without duplicate work",
+        "summary": "Retained lesson 14: checkpoints, operation identities, and uncertain outcomes.",
+        "level": "intermediate",
+        "minutes": 25,
+        "keywords": [
+          "checkpoint",
+          "idempotency",
+          "resume"
+        ],
+        "prerequisites": [
+          "harness-loop"
+        ],
+        "file": "content/how-to/14.md",
+        "materials": [
+          "content/labs/05-idempotency-and-recovery.md",
+          "docs/LOCAL-DATA.md",
+          "content/lessons/14-checkpointing-and-idempotency.md"
+        ],
+        "lesson": "14",
+        "resource": {
+          "provider": "AWS Builders' Library",
+          "title": "Making retries safe with idempotent APIs",
+          "url": "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/",
+          "scope": "Read Retrying and side effects, Reducing client complexity, and Same client request ID, different intent. Skip EC2 commands; stop before Conclusion. Prerequisite: understand request, response, and retry.",
+          "access": "Public reading; no AWS account or cloud resources needed.",
+          "checked": "2026-10-21",
+          "verification": "Opened official article and inspected retry uncertainty, operation identity, and changed-argument behavior."
+        }
+      },
+      {
+        "id": "harness-observability",
+        "title": "Follow traces and budgets",
+        "summary": "Retained lesson 15: inspect operation history, elapsed time, and consumed resources.",
+        "level": "intermediate",
+        "minutes": 25,
+        "keywords": [
+          "trace",
+          "budget",
+          "observability"
+        ],
+        "prerequisites": [
+          "harness-recovery"
+        ],
+        "file": "content/how-to/15.md",
+        "materials": [
+          "content/labs/07-traces-and-diagnosis.md",
+          "content/labs/04-retries-and-budgets.md",
+          "docs/OPERATING-PLAYBOOK.md"
+        ],
+        "lesson": "15",
+        "resource": {
+          "provider": "OpenTelemetry",
+          "title": "Traces",
+          "url": "https://opentelemetry.io/docs/concepts/signals/traces/",
+          "scope": "Read the opening explanation and Spans through the sample span; stop before Span Context. Prerequisite: understand an operation with a beginning and end.",
+          "access": "Public conceptual reading; no telemetry account or SDK installation required.",
+          "checked": "2026-10-21",
+          "verification": "Opened official traces page and inspected introductory explanation and span fields; no telemetry deployment tested."
+        }
+      },
+      {
+        "id": "harness-cancellation",
+        "title": "Timeouts, cancellation and unfinished work",
+        "summary": "Distinguish stopping a wait from stopping a process or reversing an effect.",
+        "level": "advanced",
+        "minutes": 25,
+        "keywords": [
+          "timeout",
+          "cancellation",
+          "cleanup",
+          "subprocess"
+        ],
+        "prerequisites": [
+          "harness-observability"
+        ],
+        "file": "content/tracks/harness/cancellation.md",
+        "materials": [
+          "content/articles/harness-architecture.md",
+          "content/labs/11-complete-student-harness.md"
+        ],
+        "resource": {
+          "provider": "Python",
+          "title": "Coroutines and tasks",
+          "url": "https://docs.python.org/3/library/asyncio-task.html",
+          "scope": "Read Task cancellation and the Task.cancel explanation; stop before uncancel. Ask the assistant to explain await as a place an operation can yield.",
+          "access": "Public reading; the latest docs include APIs beyond Python 3.9. The lesson’s optional demonstration must use the installed version.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official page and inspected the named concepts on 21 October 2026. Reading verification does not certify host or model execution."
+        }
+      },
+      {
+        "id": "harness-replay",
+        "title": "Replay, resume and change identity",
+        "summary": "Know what a recording proves and when a checkpoint no longer matches the program.",
+        "level": "advanced",
+        "minutes": 25,
+        "keywords": [
+          "replay",
+          "resume",
+          "fingerprint",
+          "migration",
+          "checkpoint"
+        ],
+        "prerequisites": [
+          "harness-cancellation"
+        ],
+        "file": "content/tracks/harness/replay.md",
+        "materials": [
+          "content/articles/harness-architecture.md",
+          "content/labs/11-complete-student-harness.md"
+        ],
+        "resource": {
+          "provider": "LangChain",
+          "title": "Persistence",
+          "url": "https://docs.langchain.com/oss/python/langgraph/persistence",
+          "scope": "Read the introduction and Checkpointer vs. store. Stop before Troubleshooting. Treat the framework as one concrete implementation of the concepts.",
+          "access": "Public reading; no LangGraph installation, API key, or account required.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official page and inspected the named concepts on 21 October 2026. Reading verification does not certify host or model execution."
+        }
+      }
+    ]
+  }
+]

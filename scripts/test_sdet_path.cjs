@@ -11,7 +11,7 @@ const path=require('node:path');
   const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
   const base=process.env.ACADEMY_TEST_URL||'http://127.0.0.1:8792',key='ai-engineering-academy-v1';
   assert.equal((await page.goto(base)).status(),200);
-  await page.getByRole('heading',{name:'Learn AI, one clear step at a time.'}).waitFor();
+  await page.getByRole('heading',{name:'Understand AI. Use it. Build with it.'}).waitFor();
   assert.equal(await page.locator('#nav .nav-stage').count(),8);
   assert.equal(await page.locator('#nav .nav-lesson').count(),24);
   const original=await page.evaluate(k=>localStorage.getItem(k),key);
@@ -52,14 +52,14 @@ const path=require('node:path');
   const exported=JSON.parse(fs.readFileSync(await download.path(),'utf8'));assert.equal(exported.reading,'04');
   // Import into a new browser must carry both reading position and notes.
   const second=await browser.newContext(),importPage=await second.newPage();
-  await importPage.goto(base);await importPage.getByRole('link',{name:'Start reading',exact:false}).waitFor();
+  await importPage.goto(base);await importPage.locator('.first-topic').waitFor();
   await importPage.locator('#import').setInputFiles({name:'progress.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(exported))});
   await importPage.getByRole('link',{name:'Resume reading',exact:false}).click();
   assert.equal(new URL(importPage.url()).hash,'#guide=04');await second.close();
   // Existing deep links still show all original material and a route back to the guide.
   await page.goto(base+'/#lesson=01');await page.locator('.beginner-guide').waitFor();
   assert.match(await page.locator('.reading').innerText(),/Exercise 1/);
-  await page.goto(base+'/#path');await page.locator('.lesson-row').first().waitFor();
+  await page.goto(base+'/#legacy');await page.locator('.lesson-row').first().waitFor();
   assert.equal(await page.locator('.lesson-row').count(),24);
   await page.goto(base+'/#labs');await page.locator('.doc-card').first().waitFor();
   assert.equal(await page.locator('.doc-card').count(),15);

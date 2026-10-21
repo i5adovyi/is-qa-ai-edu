@@ -6,6 +6,7 @@ import subprocess
 import sys
 from pathlib import Path
 from package_project import excluded_path
+from build_subject_catalog import build_catalog
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'dist'
@@ -26,6 +27,7 @@ def downloadable_assets():
     )
 
 def build():
+    build_catalog(ROOT)
     OUT.mkdir(exist_ok=True)
     curriculum = json.loads((ROOT/'content/curriculum.json').read_text())
     resources = json.loads((ROOT/'content/resources.json').read_text())
@@ -51,8 +53,10 @@ def build():
     guide = json.loads((ROOT/'content/sdet-path.json').read_text())
     course = sorted([item for p in sorted((ROOT/'content/how-to').glob('map-*.json'))
                      for item in json.loads(p.read_text())], key=lambda item: item['lesson'])
-    data = {'course':course,'guide':guide,'curriculum':curriculum,'learning':learning,'incidents':incidents,'runtime':runtime,'resources':resources,'documents':docs,'assets':assets,'edition':'October 2026','built':'2026-10-21'}
-    for name in ['index.html','style.css','app.js']:
+    tracks = sorted([track for p in sorted((ROOT/'content/tracks').glob('catalog-*.json')) for track in json.loads(p.read_text())], key=lambda t: t['order'])
+    paths = json.loads((ROOT/'content/tracks/paths.json').read_text())
+    data = {'tracks':tracks,'paths':paths,'course':course,'guide':guide,'curriculum':curriculum,'learning':learning,'incidents':incidents,'runtime':runtime,'resources':resources,'documents':docs,'assets':assets,'edition':'October 2026','built':'2026-10-21'}
+    for name in ['index.html','style.css','tracks.js','app.js']:
         shutil.copyfile(ROOT/'portal'/name,OUT/name)
     (OUT/'data.js').write_text('window.ACADEMY = '+json.dumps(data,ensure_ascii=False).replace('</','<\\/')+';\n')
     def ignore_private(directory, names):

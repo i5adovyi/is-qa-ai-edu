@@ -8,9 +8,7 @@ optional engineering practice. Teach the concepts before sending the learner
 to a resource. Give a clear order and a manageable next step; do not turn the
 provider catalogs or the academy's library into a required checklist.
 
-The default path is the complete 24-lesson, eight-stage curriculum. Each lesson
-starts with its beginner how-to and retains its original explanation and exercises.
-The eight short primers supplement this route; they must not replace or hide it.
+The academy is organized into 14 independent subject tracks with beginner-to-advanced topics and four curated cross-subject paths. Start from zero is the default entry. Preserve every original lesson and practice record; the original 24-lesson, eight-stage sequence remains a compatible map, not the limit of curriculum coverage. The eight short primers are optional supporting introductions.
 Templates, labs, incidents, and independent implementation are optional practice. Drawing diagrams, producing documents, taking diagnostics,
 and passing exercise gates are not required to begin or continue reading.
 
@@ -31,8 +29,8 @@ working guide for assistants; CLAUDE.md points here so the rules stay consistent
    maintaining the project, or setup/account migration. Do not switch a tutoring
    request into an implementation task or solve assignments as maintenance.
 2. For tutoring, read docs/CONTINUE-LEARNING.md, docs/START-HERE.md, and
-   templates/tutor-prompt.md. Use content/curriculum.json and content/how-to/map-*.json and docs/STUDY-PLAN.md
-   for the default sequence. Read the current topic in content/how-to/. Use
+   templates/tutor-prompt.md. Use content/tracks/catalog-*.json, content/tracks/paths.json, and docs/STUDY-PLAN.md
+   for the subject structure and default start-from-zero path. Read the topic file named in its catalog entry. Use
    docs/PRACTICE-MAP.md and templates/practice-tutor-prompt.md only when the
    learner chooses hands-on work.
 3. For implementation, read docs/MAINTENANCE.md, inspect `git status`, and inspect
@@ -48,7 +46,7 @@ working guide for assistants; CLAUDE.md points here so the rules stay consistent
 ## When acting as the learner's tutor
 
 - Start with the learner's current topic or question. With no supplied position,
-  start lesson 01; do not require an attempt or placement diagnostic.
+  start foundations-orientation in the zero path; do not require an attempt or placement diagnostic.
   Earlier diagram work is historical, not the learner's current obligation.
 - Explain one concept in plain language and connect it to an SDET example.
   Then select one primary resource with the section to study, a stopping point,
@@ -79,10 +77,13 @@ working guide for assistants; CLAUDE.md points here so the rules stay consistent
 
 ## Source and runtime map
 
+- `content/tracks/catalog-*.json`: 14 independent subject tracks with stable topic IDs, levels, prerequisites, materials, and sources. `content/tracks/paths.json`: four cross-subject learning paths. New articles live under content/tracks/<subject>/. The portal routes are #tracks, #track=mcp, #topic=mcp-basics, #path, and #learn=zero.
+- `portal/tracks.js`: subject views and path sequencing. A saved subject bookmark uses topicReading/topicPath; preserve separate lessonReading and primer reading fields and all original practice IDs.
+
 - `content/curriculum.json` and `content/how-to/map-*.json` and `content/how-to/`: beginner guides and topic material maps,
   original explanations, one primary resource per topic, optional alternatives,
-  and links to retained practice. The portal routes are `#path` and `#lesson=01`.
-- `content/curriculum.json` and `content/learning.json`: canonical full course
+  and links to retained practice. Original routes remain `#legacy` and `#lesson=01`.
+- `content/curriculum.json` and `content/learning.json`: retained original practice
   sequence and activity contracts. Student guides live in content/, docs/,
   templates/, and capstones/. Preserve their IDs and existing learner records.
 - `lab/`: Python reference/student implementations and practice environments.
@@ -142,7 +143,7 @@ relevant maintained docs; keep personal learning history out of shared context.
 
 ## Teaching approach across the whole course
 
-Use the full 24-lesson map as the canonical sequence. Begin each topic with its
+Use content/tracks/catalog-*.json for independent subject tracks and content/tracks/paths.json for curated learning paths. Start from zero is the default; retain the original 24-lesson map as a compatible practice sequence. Begin each topic with its
 plain-language explanation, SDET relevance, small worked example, assistant
 how-to, expected result, and troubleshooting. Define terminology before use.
 Someone who only has Codex or Claude Code should know what to open, what to

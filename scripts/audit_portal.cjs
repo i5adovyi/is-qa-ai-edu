@@ -48,12 +48,16 @@ const { createHash } = require('node:crypto');
       }
     }
     for (const href of links) {
-      if (href.startsWith('#doc=') || href.startsWith('#lesson=')) {
+      if (href.startsWith('#doc=') || href.startsWith('#lesson=') || href.startsWith('#topic=')) {
         await page.goto(base + '/' + href);
         await page.locator('.reading').waitFor();
         if (href.startsWith('#lesson=')) {
           const id = new URLSearchParams(href.slice(1)).get('lesson');
           await page.waitForFunction(id => document.querySelector('#save-lesson-reading')?.dataset.id === id, id);
+        }
+        if (href.startsWith('#topic=')) {
+          const id = new URLSearchParams(href.slice(1)).get('topic').split('?')[0];
+          await page.waitForFunction(id => document.querySelector('#save-topic-reading')?.dataset.id === id, id);
         }
         const anchor = new URLSearchParams(href.slice(1)).get('section');
         if (anchor) {

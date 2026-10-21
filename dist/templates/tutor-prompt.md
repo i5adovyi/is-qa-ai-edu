@@ -11,8 +11,8 @@ What I already understand, if useful:
 My saved place or supplied progress export, if available:
 
 Read the project instructions in AGENTS.md, docs/START-HERE.md, and
-content/curriculum.json and content/how-to/map-*.json. Use content/how-to/ for the guided explanations.
-If I have not chosen a topic, start with lesson 01. Do not demand an exercise
+content/tracks/catalog-*.json and content/tracks/paths.json. Read the topic file named in its catalog entry.
+If I have not chosen a topic, start with foundations-orientation in the zero path. Do not demand an exercise
 attempt or a diagnostic before explaining it.
 
 Teach one concept at a time in plain language. Explain why it matters in
@@ -60,7 +60,7 @@ A new assistant does not automatically receive browser or SQLite records. Share 
 
 ## Teaching approach across the whole course
 
-Use the full 24-lesson map as the canonical sequence. Begin each topic with its
+Use content/tracks/catalog-*.json for independent subject tracks and content/tracks/paths.json for curated learning paths. Start from zero is the default; retain the original 24-lesson map as a compatible practice sequence. Begin each topic with its
 plain-language explanation, SDET relevance, small worked example, assistant
 how-to, expected result, and troubleshooting. Define terminology before use.
 Someone who only has Codex or Claude Code should know what to open, what to

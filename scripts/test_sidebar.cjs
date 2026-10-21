@@ -10,10 +10,11 @@ const path=require('node:path');
   const context=await browser.newContext({viewport:{width:1440,height:1000},acceptDownloads:true});
   const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
   const base=process.env.ACADEMY_TEST_URL||'http://127.0.0.1:8792',key='ai-engineering-academy-v1';
-  await page.goto(base);await page.locator('.nav-stage').first().waitFor();
+  await page.goto(base);await page.locator('.nav-stage').first().waitFor({state:'attached'});
   assert.equal(await page.locator('.nav-stage').count(),8);assert.equal(await page.locator('.nav-lesson').count(),24);
   let state=await page.evaluate(k=>localStorage.getItem(k),key);
   const stages=await page.evaluate(()=>ACADEMY.curriculum.stages);
+  await page.locator('.nav-archive>summary').click();
   for(const s of stages){
    const group=page.locator(`.nav-stage[data-stage="${s.id}"]`);await group.locator('summary').focus();await page.keyboard.press('Enter');
    assert.ok(await group.evaluate(el=>el.open));assert.equal(await group.locator('.nav-lesson:visible').count(),3);

@@ -1,0 +1,1003 @@
+[
+  {
+    "id": "foundations",
+    "order": 1,
+    "title": "AI foundations",
+    "summary": "Understand models, tokens, uncertainty, embeddings, images, and model choices.",
+    "why": "Build the vocabulary to choose and check AI help without assuming a programming background.",
+    "prerequisites": [],
+    "outcomes": [
+      "Distinguish models from assistants and agents.",
+      "Recognise context and evidence limits.",
+      "Choose a model approach against measurable needs."
+    ],
+    "lessons": [
+      {
+        "id": "foundations-orientation",
+        "title": "What AI can do for an SDET",
+        "summary": "Separate model, assistant, workflow, agent, and harness.",
+        "level": "beginner",
+        "minutes": 15,
+        "keywords": [
+          "AI basics",
+          "SDET",
+          "model",
+          "assistant",
+          "agent"
+        ],
+        "prerequisites": [],
+        "file": "content/how-to/01.md",
+        "materials": [
+          "content/guide/01-ai-basics.md",
+          "content/guide/07-agents-and-workflows.md",
+          "content/articles/harness-architecture.md"
+        ],
+        "lesson": "01",
+        "resource": {
+          "provider": "Microsoft",
+          "title": "Introduction to Generative AI and Large Language Models",
+          "url": "https://github.com/microsoft/generative-ai-for-beginners/blob/main/01-introduction-to-genai/README.md#how-do-large-language-models-work",
+          "scope": "Read How do large language models work? and the following practical-use section; stop before Assignment. No technical prerequisite for this selected scope.",
+          "access": "Public reading; no account or installation required.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official repository lesson and checked the selected sections. No course completion or video playback was tested."
+        }
+      },
+      {
+        "id": "foundations-tokens",
+        "title": "Tokens, context windows, and why a chat forgets",
+        "summary": "Understand capacity limits and preserve useful evidence.",
+        "level": "beginner",
+        "minutes": 15,
+        "keywords": [
+          "tokens",
+          "tokenizer",
+          "context window",
+          "truncation"
+        ],
+        "prerequisites": [
+          "foundations-orientation"
+        ],
+        "file": "content/tracks/foundations/tokens.md",
+        "materials": [
+          "docs/ASSISTANT-QUICKSTART.md",
+          "content/guide/01-ai-basics.md"
+        ],
+        "resource": {
+          "provider": "Hugging Face",
+          "title": "Tokenizers",
+          "url": "https://huggingface.co/learn/llm-course/chapter2/4",
+          "scope": "Read the introduction and word, character, and subword explanations; stop before loading and saving tokenizers. Prerequisite: AI orientation.",
+          "access": "Public reading; no account, API key, or installation required for the selected scope. Running product examples is optional and has separate prerequisites.",
+          "checked": "2026-10-21",
+          "verification": "Opened the primary page and inspected its relevant text on 2026-10-21. Linked integrations and live authenticated product workflows were not executed."
+        }
+      },
+      {
+        "id": "foundations-uncertainty",
+        "title": "Why fluent answers can still be wrong",
+        "summary": "Distinguish observations, hypotheses, and invented certainty.",
+        "level": "intermediate",
+        "minutes": 20,
+        "keywords": [
+          "hallucination",
+          "sampling",
+          "temperature",
+          "inference",
+          "training"
+        ],
+        "prerequisites": [
+          "foundations-tokens"
+        ],
+        "file": "content/tracks/foundations/uncertainty.md",
+        "materials": [
+          "docs/ASSISTANT-QUICKSTART.md",
+          "content/guide/01-ai-basics.md"
+        ],
+        "resource": {
+          "provider": "Google",
+          "title": "Introduction to Large Language Models",
+          "url": "https://developers.google.com/machine-learning/crash-course/llm",
+          "scope": "Read What is a language model? and the problems with LLMs; stop before the linked fine-tuning module. The full module has mathematical prerequisites; this conceptual scope uses the academy explanation first.",
+          "access": "Public reading; no account, API key, or installation required for the selected scope. Running product examples is optional and has separate prerequisites.",
+          "checked": "2026-10-21",
+          "verification": "Opened the primary page and inspected its relevant text on 2026-10-21. Linked integrations and live authenticated product workflows were not executed."
+        }
+      },
+      {
+        "id": "foundations-embeddings",
+        "title": "Embeddings: finding similar meaning with numbers",
+        "summary": "Understand vectors and why similarity is not proof.",
+        "level": "intermediate",
+        "minutes": 20,
+        "keywords": [
+          "embedding",
+          "vector",
+          "similarity",
+          "duplicates"
+        ],
+        "prerequisites": [
+          "foundations-uncertainty"
+        ],
+        "file": "content/tracks/foundations/embeddings.md",
+        "materials": [
+          "docs/ASSISTANT-QUICKSTART.md",
+          "content/guide/01-ai-basics.md"
+        ],
+        "resource": {
+          "provider": "Google",
+          "title": "Embeddings",
+          "url": "https://developers.google.com/machine-learning/crash-course/embeddings",
+          "scope": "Read the food-similarity example and representation explanation. Stop before following mathematical prerequisites. Prerequisite: the plain-language vector definition in this topic.",
+          "access": "Public reading; no account, API key, or installation required for the selected scope. Running product examples is optional and has separate prerequisites.",
+          "checked": "2026-10-21",
+          "verification": "Opened the primary page and inspected its relevant text on 2026-10-21. Linked integrations and live authenticated product workflows were not executed."
+        }
+      },
+      {
+        "id": "foundations-multimodal",
+        "title": "Images, screenshots, and multimodal evidence",
+        "summary": "Choose visual inputs and verify what the assistant actually observed.",
+        "level": "advanced",
+        "minutes": 20,
+        "keywords": [
+          "vision",
+          "multimodal",
+          "screenshot",
+          "OCR",
+          "accessibility"
+        ],
+        "prerequisites": [
+          "foundations-embeddings"
+        ],
+        "file": "content/tracks/foundations/multimodal.md",
+        "materials": [
+          "docs/ASSISTANT-QUICKSTART.md",
+          "content/guide/01-ai-basics.md"
+        ],
+        "resource": {
+          "provider": "Hugging Face",
+          "title": "Introduction to Vision Language Models",
+          "url": "https://huggingface.co/learn/smol-course/unit3/1",
+          "scope": "Read the introduction and What are Vision Language Models? Stop before the later model-use and fine-tuning lessons. Prerequisite: uncertainty and evidence concepts.",
+          "access": "Public reading; no account, API key, or installation required for the selected scope. Running product examples is optional and has separate prerequisites.",
+          "checked": "2026-10-21",
+          "verification": "Opened the primary page and inspected its relevant text on 2026-10-21. Linked integrations and live authenticated product workflows were not executed."
+        }
+      },
+      {
+        "id": "foundations-model-choice",
+        "title": "Choose prompting, retrieval, or model adaptation",
+        "summary": "Make an evidence-based choice without chasing model rankings.",
+        "level": "advanced",
+        "minutes": 20,
+        "keywords": [
+          "model selection",
+          "fine-tuning",
+          "RAG",
+          "latency",
+          "benchmark"
+        ],
+        "prerequisites": [
+          "foundations-multimodal"
+        ],
+        "file": "content/tracks/foundations/model-choice.md",
+        "materials": [
+          "docs/ASSISTANT-QUICKSTART.md",
+          "content/guide/01-ai-basics.md"
+        ],
+        "resource": {
+          "provider": "Microsoft",
+          "title": "Exploring and comparing different LLMs",
+          "url": "https://github.com/microsoft/generative-ai-for-beginners/blob/main/02-exploring-and-comparing-different-llms/README.md",
+          "scope": "Read Foundation Models versus LLMs and the Prompt Engineering with Context, Retrieval Augmented Generation (RAG), and Fine-tuned model subsections. Stop before Knowledge check. Prerequisite: AI foundations; skip Azure deployment and use the distinctions rather than dated product rankings.",
+          "access": "Public reading; no account, API key, or installation required for the selected scope. Running product examples is optional and has separate prerequisites.",
+          "checked": "2026-10-21",
+          "verification": "Opened the primary page and inspected its relevant text on 2026-10-21. Linked integrations and live authenticated product workflows were not executed."
+        }
+      }
+    ]
+  },
+  {
+    "id": "assistants",
+    "order": 2,
+    "title": "Codex and Claude Code",
+    "summary": "Learn to open a project, inspect it, make small changes, test, review, and resume.",
+    "why": "Turn an assistant you already have into a controllable everyday SDET tool.",
+    "prerequisites": [
+      "foundations"
+    ],
+    "outcomes": [
+      "Start safely with an existing assistant.",
+      "Verify code changes through diffs and executed checks.",
+      "Resume work across sessions without invented memory."
+    ],
+    "lessons": [
+      {
+        "id": "assistants-first-session",
+        "title": "Your first useful assistant session",
+        "summary": "Find the right folder and ask for one understandable result.",
+        "level": "beginner",
+        "minutes": 15,
+        "keywords": [
+          "Codex",
+          "Claude Code",
+          "setup",
+          "terminal",
+          "first session"
+        ],
+        "prerequisites": [],
+        "file": "content/tracks/assistants/first-session.md",
+        "materials": [
+          "docs/ASSISTANT-QUICKSTART.md",
+          "docs/SETUP.md"
+        ],
+        "resource": {
+          "provider": "Anthropic",
+          "title": "Claude Code quickstart",
+          "url": "https://code.claude.com/docs/en/quickstart",
+          "scope": "Read Before you begin and the setup through Ask your first question. Stop before making changes. Codex users use the parallel academy quickstart instead; a second tool is not required.",
+          "access": "Public reading; no account, API key, or installation required for the selected scope. Running product examples is optional and has separate prerequisites.",
+          "checked": "2026-10-21",
+          "verification": "Opened the primary page and inspected its relevant text on 2026-10-21. Linked integrations and live authenticated product workflows were not executed."
+        }
+      },
+      {
+        "id": "assistants-repository-tour",
+        "title": "Explore a repository without getting lost",
+        "summary": "Find the entry point, test command, and relevant source.",
+        "level": "beginner",
+        "minutes": 15,
+        "keywords": [
+          "repository",
+          "repo",
+          "README",
+          "files",
+          "codebase"
+        ],
+        "prerequisites": [
+          "assistants-first-session"
+        ],
+        "file": "content/tracks/assistants/repository-tour.md",
+        "materials": [
+          "docs/ASSISTANT-QUICKSTART.md",
+          "docs/SETUP.md"
+        ],
+        "resource": {
+          "provider": "Anthropic",
+          "title": "Common workflows — understand new codebases",
+          "url": "https://code.claude.com/docs/en/common-workflows",
+          "scope": "Read Understand new codebases and Find relevant code; stop before bug-fixing recipes. Prerequisite: opening your project folder.",
+          "access": "Public reading; no account, API key, or installation required for the selected scope. Running product examples is optional and has separate prerequisites.",
+          "checked": "2026-10-21",
+          "verification": "Opened the primary page and inspected its relevant text on 2026-10-21. Linked integrations and live authenticated product workflows were not executed."
+        }
+      },
+      {
+        "id": "assistants-safe-change",
+        "title": "Make one small change you can explain",
+        "summary": "Use a disposable example, inspect the patch, and verify behaviour.",
+        "level": "intermediate",
+        "minutes": 20,
+        "keywords": [
+          "edit",
+          "patch",
+          "scope",
+          "safe change",
+          "Git"
+        ],
+        "prerequisites": [
+          "assistants-repository-tour"
+        ],
+        "file": "content/tracks/assistants/safe-change.md",
+        "materials": [
+          "docs/ASSISTANT-QUICKSTART.md",
+          "docs/SETUP.md"
+        ],
+        "resource": {
+          "provider": "GitHub",
+          "title": "Application card: GitHub Copilot Chat",
+          "url": "https://docs.github.com/en/copilot/responsible-use/chat",
+          "scope": "Read Limitations and Best practices for deploying and adopting GitHub Copilot Chat. Focus on reviewing and testing generated code; no Copilot purchase is required.",
+          "access": "Public reading; no account, API key, or installation required for the selected scope. Running product examples is optional and has separate prerequisites.",
+          "checked": "2026-10-21",
+          "verification": "Opened the primary page and inspected its relevant text on 2026-10-21. Linked integrations and live authenticated product workflows were not executed."
+        }
+      },
+      {
+        "id": "assistants-test-failures",
+        "title": "Investigate a failing test with evidence",
+        "summary": "Separate a product defect from environment or test failures.",
+        "level": "intermediate",
+        "minutes": 20,
+        "keywords": [
+          "test failure",
+          "debugging",
+          "reproduction",
+          "exit status"
+        ],
+        "prerequisites": [
+          "assistants-safe-change"
+        ],
+        "file": "content/tracks/assistants/test-failures.md",
+        "materials": [
+          "docs/ASSISTANT-QUICKSTART.md",
+          "docs/SETUP.md"
+        ],
+        "resource": {
+          "provider": "Anthropic",
+          "title": "Common workflows — fix bugs and test",
+          "url": "https://code.claude.com/docs/en/common-workflows",
+          "scope": "Use the bug-fixing and testing recipes as examples of targeted requests. Stop before PR creation. Prerequisite: safe changes and an understood test command.",
+          "access": "Public reading; no account, API key, or installation required for the selected scope. Running product examples is optional and has separate prerequisites.",
+          "checked": "2026-10-21",
+          "verification": "Opened the primary page and inspected its relevant text on 2026-10-21. Linked integrations and live authenticated product workflows were not executed."
+        }
+      },
+      {
+        "id": "assistants-review-diffs",
+        "title": "Review AI changes beyond a green test",
+        "summary": "Read the actual difference and challenge weak verification.",
+        "level": "advanced",
+        "minutes": 20,
+        "keywords": [
+          "diff",
+          "code review",
+          "assertion",
+          "regression",
+          "coverage"
+        ],
+        "prerequisites": [
+          "assistants-test-failures"
+        ],
+        "file": "content/tracks/assistants/review-diffs.md",
+        "materials": [
+          "docs/ASSISTANT-QUICKSTART.md",
+          "docs/SETUP.md"
+        ],
+        "resource": {
+          "provider": "Git",
+          "title": "git diff manual",
+          "url": "https://git-scm.com/docs/git-diff",
+          "scope": "Read Description for git diff and git diff --cached, then Generating patch text with -p. Skip the options catalog. Prerequisite: a repository and a before/after code change.",
+          "access": "Public reading; no account, API key, or installation required for the selected scope. Running product examples is optional and has separate prerequisites.",
+          "checked": "2026-10-21",
+          "verification": "Opened the primary page and inspected its relevant text on 2026-10-21. Linked integrations and live authenticated product workflows were not executed."
+        }
+      },
+      {
+        "id": "assistants-session-handoff",
+        "title": "Resume work in a fresh assistant session",
+        "summary": "Reconcile a short handoff with current files and evidence.",
+        "level": "advanced",
+        "minutes": 20,
+        "keywords": [
+          "handoff",
+          "new session",
+          "memory",
+          "account",
+          "resume"
+        ],
+        "prerequisites": [
+          "assistants-review-diffs"
+        ],
+        "file": "content/tracks/assistants/session-handoff.md",
+        "materials": [
+          "docs/ASSISTANT-QUICKSTART.md",
+          "docs/SETUP.md"
+        ],
+        "resource": {
+          "provider": "Anthropic",
+          "title": "How Claude remembers your project",
+          "url": "https://code.claude.com/docs/en/memory",
+          "scope": "Read CLAUDE.md vs auto memory and When to add to CLAUDE.md. Stop before configuration. Use the distinction between durable guidance and session state, not automatic account transfer assumptions.",
+          "access": "Public reading; no account, API key, or installation required for the selected scope. Running product examples is optional and has separate prerequisites.",
+          "checked": "2026-10-21",
+          "verification": "Opened the primary page and inspected its relevant text on 2026-10-21. Linked integrations and live authenticated product workflows were not executed."
+        }
+      }
+    ]
+  },
+  {
+    "id": "prompting",
+    "order": 3,
+    "title": "Prompting and task design",
+    "summary": "Express outcomes, teach with examples, handle untrusted input, and test prompt changes.",
+    "why": "Replace vague requests with useful, checkable collaboration.",
+    "prerequisites": [
+      "foundations"
+    ],
+    "outcomes": [
+      "Write a clear task and acceptance criteria.",
+      "Use examples and structured results appropriately.",
+      "Compare prompt revisions without hiding regressions."
+    ],
+    "lessons": [
+      {
+        "id": "prompting-task-contract",
+        "title": "Turn a request into a clear task",
+        "summary": "State the outcome, evidence, constraints, and stopping point.",
+        "level": "beginner",
+        "minutes": 15,
+        "keywords": [
+          "prompt",
+          "task contract",
+          "acceptance criteria"
+        ],
+        "prerequisites": [],
+        "file": "content/how-to/02.md",
+        "materials": [
+          "content/guide/02-prompts-and-context.md",
+          "templates/task-contract.md",
+          "content/guide/03-ai-assisted-testing.md"
+        ],
+        "lesson": "02",
+        "resource": {
+          "provider": "OpenAI",
+          "title": "Prompt engineering",
+          "url": "https://developers.openai.com/api/docs/guides/prompt-engineering#message-formatting-with-markdown-and-xml",
+          "scope": "Read Message formatting with Markdown and XML, the example structure, Few-shot learning, and Include relevant context information. Skip API code; stop before model-specific guidance. Prerequisite: lesson 01 concepts.",
+          "access": "Public documentation; reading requires no API credits or setup.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official documentation and checked the named sections. Product API examples were not executed."
+        }
+      },
+      {
+        "id": "prompting-examples",
+        "title": "Teach a task with a few examples",
+        "summary": "Use varied examples without leaking the answer to your evaluation.",
+        "level": "beginner",
+        "minutes": 15,
+        "keywords": [
+          "few-shot",
+          "zero-shot",
+          "examples",
+          "classification"
+        ],
+        "prerequisites": [
+          "prompting-task-contract"
+        ],
+        "file": "content/tracks/prompting/examples.md",
+        "materials": [
+          "docs/ASSISTANT-QUICKSTART.md",
+          "templates/task-contract.md"
+        ],
+        "resource": {
+          "provider": "Google",
+          "title": "Prompt design strategies — examples",
+          "url": "https://ai.google.dev/gemini-api/docs/prompting-strategies",
+          "scope": "Read Zero-shot vs few-shot prompts, Optimal number of examples, and Consistent formatting. Stop at Add context. Prerequisite: a clear task contract.",
+          "access": "Public reading; no account, API key, or installation required for the selected scope. Running product examples is optional and has separate prerequisites.",
+          "checked": "2026-10-21",
+          "verification": "Opened the primary page and inspected its relevant text on 2026-10-21. Linked integrations and live authenticated product workflows were not executed."
+        }
+      },
+      {
+        "id": "prompting-untrusted-inputs",
+        "title": "Keep instructions separate from supplied data",
+        "summary": "Recognise injected instructions in logs and retrieved documents.",
+        "level": "intermediate",
+        "minutes": 20,
+        "keywords": [
+          "prompt injection",
+          "untrusted input",
+          "instructions",
+          "data"
+        ],
+        "prerequisites": [
+          "prompting-examples"
+        ],
+        "file": "content/tracks/prompting/untrusted-inputs.md",
+        "materials": [
+          "docs/ASSISTANT-QUICKSTART.md",
+          "templates/task-contract.md"
+        ],
+        "resource": {
+          "provider": "OWASP",
+          "title": "LLM01:2025 Prompt Injection",
+          "url": "https://genai.owasp.org/llmrisk/llm01-prompt-injection/",
+          "scope": "Read the definition and prevention/mitigation discussion. Stop before following other risk pages. Prerequisite: instructions versus task data.",
+          "access": "Public reading; no account, API key, or installation required for the selected scope. Running product examples is optional and has separate prerequisites.",
+          "checked": "2026-10-21",
+          "verification": "Opened the primary page and inspected its relevant text on 2026-10-21. Linked integrations and live authenticated product workflows were not executed."
+        }
+      },
+      {
+        "id": "prompting-iteration",
+        "title": "Improve a prompt one failure at a time",
+        "summary": "Diagnose an output failure and change one relevant part.",
+        "level": "intermediate",
+        "minutes": 20,
+        "keywords": [
+          "iteration",
+          "prompt debugging",
+          "constraints",
+          "experiment"
+        ],
+        "prerequisites": [
+          "prompting-untrusted-inputs"
+        ],
+        "file": "content/tracks/prompting/iteration.md",
+        "materials": [
+          "docs/ASSISTANT-QUICKSTART.md",
+          "templates/task-contract.md"
+        ],
+        "resource": {
+          "provider": "OpenAI",
+          "title": "Prompt engineering",
+          "url": "https://developers.openai.com/api/docs/guides/prompt-engineering",
+          "scope": "Read the introductory nondeterminism and evaluation guidance and Include relevant context information. Skip API setup and model-specific prompting. Prerequisite: clear tasks and examples.",
+          "access": "Public reading; no account, API key, or installation required for the selected scope. Running product examples is optional and has separate prerequisites.",
+          "checked": "2026-10-21",
+          "verification": "Opened the primary page and inspected its relevant text on 2026-10-21. Linked integrations and live authenticated product workflows were not executed."
+        }
+      },
+      {
+        "id": "prompting-structured-results",
+        "title": "Ask for structured results and validate meaning",
+        "summary": "Separate parseable JSON from a factually correct decision.",
+        "level": "advanced",
+        "minutes": 20,
+        "keywords": [
+          "JSON",
+          "schema",
+          "structured output",
+          "validation",
+          "null"
+        ],
+        "prerequisites": [
+          "prompting-iteration"
+        ],
+        "file": "content/tracks/prompting/structured-results.md",
+        "materials": [
+          "docs/ASSISTANT-QUICKSTART.md",
+          "templates/task-contract.md"
+        ],
+        "resource": {
+          "provider": "JSON Schema",
+          "title": "Understanding JSON Schema — object",
+          "url": "https://json-schema.org/understanding-json-schema/reference/object",
+          "scope": "Read Properties, Required Properties, and Additional Properties. Stop before composition and pattern matching. Prerequisite: the JSON example explained here.",
+          "access": "Public reading; no account, API key, or installation required for the selected scope. Running product examples is optional and has separate prerequisites.",
+          "checked": "2026-10-21",
+          "verification": "Opened the primary page and inspected its relevant text on 2026-10-21. Linked integrations and live authenticated product workflows were not executed."
+        }
+      },
+      {
+        "id": "prompting-regression",
+        "title": "Compare prompts without fooling yourself",
+        "summary": "Use explicit criteria, paired cases, and held-out examples.",
+        "level": "advanced",
+        "minutes": 20,
+        "keywords": [
+          "eval",
+          "regression",
+          "prompt experiment",
+          "held-out"
+        ],
+        "prerequisites": [
+          "prompting-structured-results"
+        ],
+        "file": "content/how-to/03.md",
+        "materials": [
+          "content/guide/04-evaluating-ai.md",
+          "content/articles/evaluation-vs-demo.md",
+          "templates/experiment-log.md",
+          "lab/model-bridge.md"
+        ],
+        "lesson": "03",
+        "resource": {
+          "provider": "OpenAI",
+          "title": "Evaluation best practices",
+          "url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
+          "scope": "Read What are evals?, How to read evals, and the five steps under Design your eval process. Stop before product-specific examples. Prerequisite: clear requests and expected outputs from lesson 02.",
+          "access": "Public conceptual reading; no API or hosted evaluation service required. The page includes an Evals platform deprecation notice; platform setup is outside this scope.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official documentation, checked selected sections and the platform transition notice. No hosted evaluation was run."
+        }
+      }
+    ]
+  },
+  {
+    "id": "context",
+    "order": 4,
+    "title": "Context engineering",
+    "summary": "Select evidence, maintain instructions, budget context, resume, and resolve stale or conflicting facts.",
+    "why": "Give the assistant the right information at the right time.",
+    "prerequisites": [
+      "foundations",
+      "prompting"
+    ],
+    "outcomes": [
+      "Build a small evidence packet.",
+      "Separate durable instructions from temporary state.",
+      "Handle freshness and conflicting sources explicitly."
+    ],
+    "lessons": [
+      {
+        "id": "context-evidence",
+        "title": "Choose the evidence an assistant actually needs",
+        "summary": "Separate observations, hypotheses, sources, and applicability.",
+        "level": "beginner",
+        "minutes": 15,
+        "keywords": [
+          "context engineering",
+          "evidence",
+          "provenance"
+        ],
+        "prerequisites": [],
+        "file": "content/how-to/04.md",
+        "materials": [
+          "content/guide/02-prompts-and-context.md",
+          "content/articles/context-budgets.md",
+          "templates/context-packet.md",
+          "content/labs/02-context-budgets.md"
+        ],
+        "lesson": "04",
+        "resource": {
+          "provider": "Anthropic",
+          "title": "Effective context engineering for AI agents",
+          "url": "https://www.anthropic.com/research/effective-context-engineering-for-ai-agents",
+          "scope": "Read Context engineering vs. prompt engineering and The anatomy of effective context. Stop before Context retrieval and agentic search. Prerequisite: basic prompting from lesson 02.",
+          "access": "Public article; no provider account required.",
+          "checked": "2026-10-21",
+          "verification": "Opened the primary article, followed its engineering-to-research redirect, and checked the selected sections."
+        }
+      },
+      {
+        "id": "context-project-instructions",
+        "title": "Project instructions that help the next session",
+        "summary": "Use AGENTS.md and CLAUDE.md as concise working guidance.",
+        "level": "beginner",
+        "minutes": 15,
+        "keywords": [
+          "AGENTS.md",
+          "CLAUDE.md",
+          "instructions",
+          "scope"
+        ],
+        "prerequisites": [
+          "context-evidence"
+        ],
+        "file": "content/tracks/context/project-instructions.md",
+        "materials": [
+          "docs/ASSISTANT-QUICKSTART.md",
+          "content/articles/context-budgets.md"
+        ],
+        "resource": {
+          "provider": "OpenAI",
+          "title": "Custom instructions with AGENTS.md",
+          "url": "https://learn.chatgpt.com/docs/agent-configuration/agents-md",
+          "scope": "Read How Codex discovers guidance and the project guidance examples. Stop before optional fallback configuration. Claude Code users may use its linked memory documentation; neither instruction filename is a secret store.",
+          "access": "Public reading; no account, API key, or installation required for the selected scope. Running product examples is optional and has separate prerequisites.",
+          "checked": "2026-10-21",
+          "verification": "Opened the primary page and inspected its relevant text on 2026-10-21. Linked integrations and live authenticated product workflows were not executed."
+        }
+      },
+      {
+        "id": "context-budget",
+        "title": "Pack useful context without dumping everything",
+        "summary": "Choose what to include now, retrieve later, and keep out.",
+        "level": "intermediate",
+        "minutes": 20,
+        "keywords": [
+          "context budget",
+          "compaction",
+          "retrieval",
+          "tool output"
+        ],
+        "prerequisites": [
+          "context-project-instructions"
+        ],
+        "file": "content/tracks/context/budget.md",
+        "materials": [
+          "docs/ASSISTANT-QUICKSTART.md",
+          "content/articles/context-budgets.md"
+        ],
+        "resource": {
+          "provider": "Anthropic",
+          "title": "Effective context engineering for AI agents",
+          "url": "https://www.anthropic.com/research/effective-context-engineering-for-ai-agents",
+          "scope": "Read The anatomy of effective context and Context retrieval and agentic search. Stop before long-task techniques. Prerequisite: evidence selection and token limits.",
+          "access": "Public reading; no account, API key, or installation required for the selected scope. Running product examples is optional and has separate prerequisites.",
+          "checked": "2026-10-21",
+          "verification": "Opened the primary page and inspected its relevant text on 2026-10-21. Linked integrations and live authenticated product workflows were not executed."
+        }
+      },
+      {
+        "id": "context-checkpoints",
+        "title": "Carry state across long tasks and new sessions",
+        "summary": "Retain decisions and recheck facts when work resumes.",
+        "level": "intermediate",
+        "minutes": 20,
+        "keywords": [
+          "checkpoint",
+          "handoff",
+          "memory",
+          "recovery"
+        ],
+        "prerequisites": [
+          "context-budget"
+        ],
+        "file": "content/how-to/06.md",
+        "materials": [
+          "docs/CONTINUE-LEARNING.md",
+          "docs/LOCAL-DATA.md",
+          "templates/context-packet.md",
+          "content/labs/05-idempotency-and-recovery.md"
+        ],
+        "lesson": "06",
+        "resource": {
+          "provider": "Anthropic",
+          "title": "Effective context engineering for AI agents — long tasks",
+          "url": "https://www.anthropic.com/research/effective-context-engineering-for-ai-agents",
+          "scope": "Read Compaction and Structured note-taking within Context engineering for long-horizon tasks. Stop before Sub-agent architectures. Prerequisite: context and evidence from lesson 04.",
+          "access": "Public article; treat product behavior as an illustration, not a requirement to install a memory tool.",
+          "checked": "2026-10-21",
+          "verification": "Opened the primary article and checked the compaction and note-taking sections. No product memory integration was executed."
+        }
+      },
+      {
+        "id": "context-freshness",
+        "title": "Check whether evidence is still true",
+        "summary": "Track versions, timestamps, and invalidation triggers.",
+        "level": "advanced",
+        "minutes": 20,
+        "keywords": [
+          "freshness",
+          "stale evidence",
+          "version",
+          "invalidation"
+        ],
+        "prerequisites": [
+          "context-checkpoints"
+        ],
+        "file": "content/tracks/context/freshness.md",
+        "materials": [
+          "docs/ASSISTANT-QUICKSTART.md",
+          "content/articles/context-budgets.md"
+        ],
+        "resource": {
+          "provider": "Google",
+          "title": "Grounding overview",
+          "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/grounding/overview",
+          "scope": "Read the grounding definition and benefits. Stop before trying notebooks or selecting a managed grounding product. Prerequisite: source provenance and applicability.",
+          "access": "Public reading; no account, API key, or installation required for the selected scope. Running product examples is optional and has separate prerequisites.",
+          "checked": "2026-10-21",
+          "verification": "Opened the primary page and inspected its relevant text on 2026-10-21. Linked integrations and live authenticated product workflows were not executed."
+        }
+      },
+      {
+        "id": "context-conflicts",
+        "title": "Resolve conflicting evidence without guessing",
+        "summary": "Separate authority, scope, time, and malicious instructions.",
+        "level": "advanced",
+        "minutes": 20,
+        "keywords": [
+          "conflict",
+          "authority",
+          "source",
+          "contradiction"
+        ],
+        "prerequisites": [
+          "context-freshness"
+        ],
+        "file": "content/tracks/context/conflicts.md",
+        "materials": [
+          "docs/ASSISTANT-QUICKSTART.md",
+          "content/articles/context-budgets.md"
+        ],
+        "resource": {
+          "provider": "OWASP",
+          "title": "LLM01:2025 Prompt Injection",
+          "url": "https://genai.owasp.org/llmrisk/llm01-prompt-injection/",
+          "scope": "Read the definition and direct/indirect injection distinction. Stop before attack scenarios. Compare instruction authority with the separate factual conflict example in this lesson.",
+          "access": "Public reading; no account, API key, or installation required for the selected scope. Running product examples is optional and has separate prerequisites.",
+          "checked": "2026-10-21",
+          "verification": "Opened the primary page and inspected its relevant text on 2026-10-21. Linked integrations and live authenticated product workflows were not executed."
+        }
+      }
+    ]
+  },
+  {
+    "id": "retrieval",
+    "order": 5,
+    "title": "Retrieval, RAG, and memory",
+    "summary": "Prepare sources, find relevant evidence, ground answers, and preserve access boundaries.",
+    "why": "Connect AI answers to the right current information instead of trusting memory.",
+    "prerequisites": [
+      "foundations",
+      "context"
+    ],
+    "outcomes": [
+      "Explain a retrieval pipeline without buying infrastructure.",
+      "Compare chunking and search choices.",
+      "Check citations, abstention, and memory isolation."
+    ],
+    "lessons": [
+      {
+        "id": "retrieval-foundations",
+        "title": "Find evidence before asking for an answer",
+        "summary": "Understand retrieval-augmented generation and its failure points.",
+        "level": "beginner",
+        "minutes": 15,
+        "keywords": [
+          "RAG",
+          "retrieval",
+          "corpus",
+          "grounding"
+        ],
+        "prerequisites": [],
+        "file": "content/how-to/05.md",
+        "materials": [
+          "content/guide/05-retrieval.md",
+          "content/practice/README.md",
+          "content/labs/06-grounding-and-evaluation.md",
+          "content/labs/14-retrieval-comparison.md"
+        ],
+        "lesson": "05",
+        "resource": {
+          "provider": "Microsoft",
+          "title": "Retrieval Augmented Generation and Vector Databases",
+          "url": "https://github.com/microsoft/generative-ai-for-beginners/blob/main/15-rag-and-vector-databases/README.md",
+          "scope": "Read Retrieval Augmented Generation (RAG), How RAGs work, and Why would you use RAGs? Stop before Creating a knowledge base. Skip implementation and assignment. Prerequisite: lesson 04 evidence concepts.",
+          "access": "Public reading; no database, account, or model API required for this scope.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official repository lesson and verified section headings against the primary raw Markdown. Build examples were not executed."
+        }
+      },
+      {
+        "id": "retrieval-chunking",
+        "title": "Split documents without breaking their meaning",
+        "summary": "Preserve headings, exceptions, and source metadata.",
+        "level": "beginner",
+        "minutes": 15,
+        "keywords": [
+          "chunking",
+          "overlap",
+          "ingestion",
+          "metadata"
+        ],
+        "prerequisites": [
+          "retrieval-foundations"
+        ],
+        "file": "content/tracks/retrieval/chunking.md",
+        "materials": [
+          "docs/ASSISTANT-QUICKSTART.md",
+          "content/labs/14-retrieval-comparison.md"
+        ],
+        "resource": {
+          "provider": "Microsoft",
+          "title": "Chunk documents — Azure AI Search",
+          "url": "https://learn.microsoft.com/en-us/azure/search/vector-search-how-to-chunk-documents",
+          "scope": "Read Common chunking techniques and Content overlap considerations. Stop before implementation examples. Prerequisite: RAG foundations; Azure is not required.",
+          "access": "Public reading; no account, API key, or installation required for the selected scope. Running product examples is optional and has separate prerequisites.",
+          "checked": "2026-10-21",
+          "verification": "Opened the primary page and inspected its relevant text on 2026-10-21. Linked integrations and live authenticated product workflows were not executed."
+        }
+      },
+      {
+        "id": "retrieval-semantic-search",
+        "title": "Understand semantic search before installing a database",
+        "summary": "Match questions to meaning and inspect relevance.",
+        "level": "intermediate",
+        "minutes": 20,
+        "keywords": [
+          "semantic search",
+          "embedding",
+          "cosine",
+          "vector database"
+        ],
+        "prerequisites": [
+          "retrieval-chunking"
+        ],
+        "file": "content/tracks/retrieval/semantic-search.md",
+        "materials": [
+          "docs/ASSISTANT-QUICKSTART.md",
+          "content/labs/14-retrieval-comparison.md"
+        ],
+        "resource": {
+          "provider": "Sentence Transformers",
+          "title": "Semantic Search",
+          "url": "https://sbert.net/examples/sentence_transformer/applications/semantic-search/README.html",
+          "scope": "Read Background and Symmetric vs. Asymmetric Semantic Search. Stop before Manual Implementation. Prerequisite: embeddings and chunking.",
+          "access": "Public reading; no account, API key, or installation required for the selected scope. Running product examples is optional and has separate prerequisites.",
+          "checked": "2026-10-21",
+          "verification": "Opened the primary page and inspected its relevant text on 2026-10-21. Linked integrations and live authenticated product workflows were not executed."
+        }
+      },
+      {
+        "id": "retrieval-hybrid-search",
+        "title": "Combine exact and semantic search",
+        "summary": "Handle identifiers, paraphrases, filters, and ranking.",
+        "level": "intermediate",
+        "minutes": 20,
+        "keywords": [
+          "hybrid search",
+          "BM25",
+          "reranking",
+          "RRF",
+          "filters"
+        ],
+        "prerequisites": [
+          "retrieval-semantic-search"
+        ],
+        "file": "content/tracks/retrieval/hybrid-search.md",
+        "materials": [
+          "docs/ASSISTANT-QUICKSTART.md",
+          "content/labs/14-retrieval-comparison.md"
+        ],
+        "resource": {
+          "provider": "Microsoft",
+          "title": "Hybrid search overview",
+          "url": "https://learn.microsoft.com/en-us/azure/search/hybrid-search-overview",
+          "scope": "Read Why use hybrid search? and How does hybrid search work? Stop at Structure of a hybrid query. Prerequisite: semantic search. Do not provision Azure for this conceptual scope.",
+          "access": "Public reading; no account, API key, or installation required for the selected scope. Running product examples is optional and has separate prerequisites.",
+          "checked": "2026-10-21",
+          "verification": "Opened the primary page and inspected its relevant text on 2026-10-21. Linked integrations and live authenticated product workflows were not executed."
+        }
+      },
+      {
+        "id": "retrieval-grounded-answers",
+        "title": "Cite evidence and know when to abstain",
+        "summary": "Check whether each claim is supported and applicable.",
+        "level": "advanced",
+        "minutes": 20,
+        "keywords": [
+          "citation",
+          "abstention",
+          "grounding",
+          "faithfulness"
+        ],
+        "prerequisites": [
+          "retrieval-hybrid-search"
+        ],
+        "file": "content/tracks/retrieval/grounded-answers.md",
+        "materials": [
+          "docs/ASSISTANT-QUICKSTART.md",
+          "content/labs/14-retrieval-comparison.md"
+        ],
+        "resource": {
+          "provider": "Google",
+          "title": "Grounding overview",
+          "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/grounding/overview",
+          "scope": "Read the grounding definition and benefits, including source auditability. Stop before product integration options. Prerequisite: retrieval candidates and evidence checks.",
+          "access": "Public reading; no account, API key, or installation required for the selected scope. Running product examples is optional and has separate prerequisites.",
+          "checked": "2026-10-21",
+          "verification": "Opened the primary page and inspected its relevant text on 2026-10-21. Linked integrations and live authenticated product workflows were not executed."
+        }
+      },
+      {
+        "id": "retrieval-memory-boundaries",
+        "title": "Design memory that respects users and change",
+        "summary": "Separate persistent facts, scope, deletion, and stale preferences.",
+        "level": "advanced",
+        "minutes": 20,
+        "keywords": [
+          "memory",
+          "tenant isolation",
+          "deletion",
+          "retention",
+          "permission"
+        ],
+        "prerequisites": [
+          "retrieval-grounded-answers"
+        ],
+        "file": "content/tracks/retrieval/memory-boundaries.md",
+        "materials": [
+          "docs/ASSISTANT-QUICKSTART.md",
+          "content/labs/14-retrieval-comparison.md"
+        ],
+        "resource": {
+          "provider": "Microsoft",
+          "title": "Memory for AI Agents",
+          "url": "https://github.com/microsoft/ai-agents-for-beginners/blob/main/13-agent-memory/README.md",
+          "scope": "Read Understanding AI Agent Memory and Types of Memory. Stop before Implementing and Storing Memory. Distinguish stored examples from proven improvement; skip notebooks and service setup.",
+          "access": "Public reading; no account, API key, or installation required for the selected scope. Running product examples is optional and has separate prerequisites.",
+          "checked": "2026-10-21",
+          "verification": "Opened the primary page and inspected its relevant text on 2026-10-21. Linked integrations and live authenticated product workflows were not executed."
+        }
+      }
+    ]
+  }
+]

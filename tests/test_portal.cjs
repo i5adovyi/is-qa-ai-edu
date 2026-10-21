@@ -20,6 +20,8 @@ function academy() {
     }
   }
   return {
+    tracks: fs.readdirSync(path.join(ROOT,'content/tracks')).filter(n=>/^catalog-.*\.json$/.test(n)).flatMap(n=>JSON.parse(fs.readFileSync(path.join(ROOT,'content/tracks',n),'utf8'))),
+    paths: JSON.parse(fs.readFileSync(path.join(ROOT,'content/tracks/paths.json'),'utf8')),
     course: fs.readdirSync(path.join(ROOT,'content/how-to')).filter(n=>/^map-.*\.json$/.test(n)).flatMap(n=>JSON.parse(fs.readFileSync(path.join(ROOT,'content/how-to',n),'utf8'))),
     guide: JSON.parse(fs.readFileSync(path.join(ROOT,'content/sdet-path.json'),'utf8')),
     runtime: JSON.parse(fs.readFileSync(path.join(ROOT,'academy.json'),'utf8')),
@@ -52,6 +54,7 @@ function portal(options={}) {
     ...(options.fetch?{fetch:options.fetch}:{}),
     URLSearchParams, TextEncoder, setTimeout: () => 0, clearTimeout() {},
   });
+  vm.runInContext(fs.readFileSync(path.join(ROOT, 'portal/tracks.js'), 'utf8'), context);
   vm.runInContext(fs.readFileSync(path.join(ROOT, 'portal/app.js'), 'utf8'), context);
   return {run: code => vm.runInContext(code, context), nodes, handlers, context,storage};
 }
@@ -523,8 +526,8 @@ test('restoring an older database or changing content at the same revision prese
 
 test('the new entrance offers reading without creating practice or completion records',()=>{
  const p=portal();const before=p.run('JSON.stringify(state)');
- assert.match(p.nodes['#main'].innerHTML,/Start reading/);
- assert.match(p.nodes['#main'].innerHTML,/href="#lesson=01"/);
+ assert.match(p.nodes['#main'].innerHTML,/Start from zero/);
+ assert.match(p.nodes['#main'].innerHTML,/href="#start"/);
  assert.equal((p.nodes['#nav'].innerHTML.match(/class="nav-stage"/g)||[]).length,8);
  for(let i=1;i<=8;i++){
   p.context.topic=String(i).padStart(2,'0');
@@ -579,7 +582,7 @@ test('lesson bookmarks preserve old primer bookmarks and survive local persisten
 });
 test('all lessons have a teaching guide, internal materials, and protected original solutions',()=>{
  const p=portal();assert.equal(p.run('course.length'),24);
- assert.equal((p.run('overview()').match(/class="lesson-row"/g)||[]).length,24);
+ assert.equal((p.run('learningPath()').match(/class="lesson-row"/g)||[]).length,24);
  for(let i=1;i<=24;i++){
   p.context.lessonId=String(i).padStart(2,'0');
   p.run("location.hash='#lesson='+lessonId;render()");
@@ -650,4 +653,58 @@ test('supporting reading offers a route back without saving inferred progress',(
  assert.equal(p.run('sidebarQuery'),'');
  assert.equal((p.nodes['#nav'].innerHTML.match(/class="nav-lesson /g)||[]).length,24);
  assert.equal(p.run('JSON.stringify(state)'),before);
+});
+
+test('subject navigation exposes every subject and retains original lesson identities',()=>{
+ const p=portal(),before=p.run('JSON.stringify(state)');
+ assert.equal(p.run('trackCatalog.length'),14);
+ assert.equal(p.run('trackTopics.length'),84);
+ assert.equal(p.run('new Set(trackTopics.filter(t=>t.lesson).map(t=>t.lesson)).size'),24);
+ assert.equal((p.run('overview()').match(/class="doc-card track-card"/g)||[]).length,14);
+ for(const t of p.run('trackTopics')){
+  p.context.topic=t;
+  const html=p.run('topicPage(topic.id)');
+  assert.match(html,/id="save-topic-reading"/);assert.match(html,/id="try-it-with-codex-or-claude-code"/);
+  if(t.lesson)assert.match(html,/id="reveal-lesson-solution"[^>]+disabled/);
+ }
+ assert.equal(p.run('JSON.stringify(state)'),before);
+});
+test('path navigation follows its own order and rejects unrelated path context',()=>{
+ const p=portal();
+ for(const path of p.run('learningPaths')){
+  p.context.path=path;
+  for(let i=0;i<path.topics.length;i++){
+   p.context.index=i;
+   const html=p.run('topicContinue(getTopic(path.topics[index]),path.id)');
+   assert.ok(html.includes(i+1<path.topics.length?'href="#topic='+path.topics[i+1]+'?path='+path.id+'"':'href="#path"'));
+  }
+ }
+ assert.equal(p.run("topicSequence(getTopic('mcp-basics'),'zero').path"),null);
+ assert.match(p.run("topicPage('mcp-basics','unknown')"),/data-path=""/);
+});
+test('subject bookmark and path survive validation/merge alongside old bookmarks and attempts',()=>{
+ const p=portal();p.run("state.reading='04';state.lessonReading='13';state.topicReading='mcp-basics';state.topicPath='builder';state.readingKind='topic';var restored=validateState(clone(state));var combined=mergeProgress(fresh(),restored).state");
+ assert.equal(p.run('combined.topicReading'),'mcp-basics');assert.equal(p.run('combined.topicPath'),'builder');assert.equal(p.run('combined.lessonReading'),'13');assert.equal(p.run('combined.reading'),'04');
+ assert.match(p.run('overview()'),/href="#topic=mcp-basics\?path=builder"/);
+ p.run("state.readingKind='primer'");assert.match(p.run('overview()'),/href="#guide=04"/);
+ p.run("var old=clone(state);delete old.topicReading;delete old.topicPath;var migrated=validateState(old)");assert.equal(p.run('migrated.topicReading'),'');assert.equal(p.run('migrated.topicPath'),'');
+ p.run("var current=fresh();current.topicReading='skills-basics';current.topicPath='sdet';current.readingKind='topic';var merged=mergeProgress(current,restored).state");assert.equal(p.run('merged.topicReading'),'skills-basics');assert.equal(p.run('merged.topicPath'),'sdet');
+ assert.equal(p.run('combined.done.length'),0);assert.equal(p.run('Object.keys(combined.exercises).length'),0);
+});
+test('subject context keeps internal reading links and detour returns in the chosen path',()=>{
+ const p=portal();p.run("topicPage('foundations-orientation','zero')");
+ assert.equal(p.run("learningLink('content/how-to/02.md')"),'#topic=prompting-task-contract?path=zero');
+ assert.match(p.run("readingReturn('docs/ASSISTANT-QUICKSTART.md')"),/href="#topic=foundations-orientation\?path=zero"/);
+ p.run("location.hash='#lesson=13';render()");assert.match(p.run("readingReturn('docs/ASSISTANT-QUICKSTART.md')"),/href="#lesson=13"/);
+});
+test('subject bookmark uses unchanged local database adapter and preserves original lesson notes',async()=>{
+ const server=localServer(),p=await localPortal(server);p.run("state.topicReading='mcp-basics';state.topicPath='builder';state.readingKind='topic';state.notes[getTopic('mcp-basics').file]='Protocol question';state.notes[lessons[12].file]='Earlier harness note';save()");await tick();
+ const resumed=await localPortal(server);assert.equal(resumed.run('state.topicReading'),'mcp-basics');assert.equal(resumed.run('state.topicPath'),'builder');assert.equal(resumed.run('state.notes[lessons[12].file]'),'Earlier harness note');assert.equal(resumed.run('state.done.length'),0);
+});
+
+test('retained inline next suggestions become related reading inside subject paths',()=>{
+ const p=portal();p.run("readingTopicId='foundations-orientation';readingPathId='zero'");
+ const html=p.run("subjectTeaching(getTopic('foundations-orientation'))");
+ assert.match(html,/Related reading:/);assert.doesNotMatch(html,/Proceed to/);assert.doesNotMatch(html,/<h1[^>]*>01 ·/);
+ assert.match(p.run("topicContinue(getTopic('foundations-orientation'),'zero')"),/href="#topic=foundations-tokens\?path=zero"/);
 });

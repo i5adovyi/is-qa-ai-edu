@@ -1,6 +1,6 @@
 # Learn with Codex or Claude Code
 
-You can start with the assistant you already have. You do not need both products, a model API key, or a working programming environment to understand the lessons. The course has one [full plan](STUDY-PLAN.md): 24 lessons in eight stages. Each lesson now starts with a beginner how-to, then retains its original deeper explanation and optional exercises.
+You can start with the assistant you already have. You do not need both products, a model API key, or a working programming environment to understand the lessons. The [study plan](STUDY-PLAN.md) has 14 independent subjects and four learning paths. Start from zero is the default. Each topic teaches the idea before practice; the original 24 lessons remain inside the relevant subjects.
 
 ## First, choose what you want to do
 

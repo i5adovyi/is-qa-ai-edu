@@ -1,5 +1,7 @@
 """Exercise real local server startup, failure modes, and legacy entry points."""
 from contextlib import contextmanager
+from concurrent.futures import ThreadPoolExecutor
+from threading import Barrier
 from io import BytesIO
 import json
 import os
@@ -27,7 +29,7 @@ class LauncherTests(unittest.TestCase):
         for name in ("academy.py", "academy_local.py", "academy.json"):
             shutil.copyfile(ROOT / name, self.root / name)
         (self.root / "dist").mkdir()
-        for name in ("index.html", "app.js", "data.js", "style.css"):
+        for name in ("index.html", "app.js", "tracks.js", "data.js", "style.css"):
             (self.root / "dist" / name).write_text("ACADEMY-ASSET", encoding="utf-8")
         (self.root / "private-note.txt").write_text("NOT-PUBLIC", encoding="utf-8")
         self.env = {k: v for k, v in os.environ.items() if k not in ("PYTHONPATH", "PYTHONHOME")}
@@ -68,13 +70,24 @@ class LauncherTests(unittest.TestCase):
 
     def test_portable_mode_works_from_another_directory_and_only_serves_dist(self):
         with self.server(args=("local", "--no-browser")) as url:
-            for path in ("app.js", "data.js", "style.css"):
+            for path in ("app.js", "tracks.js", "data.js", "style.css"):
                 with urlopen(url + path) as response:
                     self.assertEqual(response.read(), b"ACADEMY-ASSET")
             for path in ("private-note.txt", "academy.json", "../private-note.txt", ".git/config"):
                 with self.assertRaises(HTTPError) as caught:
                     urlopen(url + path)
                 self.assertEqual(caught.exception.code, 404)
+
+    def test_simultaneous_tabs_can_load_all_assets(self):
+        with self.server(args=("local", "--no-browser")) as url:
+            barrier = Barrier(24)
+            assets = ["app.js", "tracks.js", "data.js", "style.css"] * 6
+            def fetch(name):
+                barrier.wait(timeout=5)
+                with urlopen(url + name, timeout=5) as response:
+                    return response.read()
+            with ThreadPoolExecutor(max_workers=24) as pool:
+                self.assertEqual(list(pool.map(fetch, assets)), [b"ACADEMY-ASSET"] * 24)
 
     def test_source_mode_rebuilds_in_its_own_directory(self):
         scripts = self.root / "scripts"

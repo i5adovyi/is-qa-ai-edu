@@ -1,32 +1,29 @@
-# Start here: AI for SDET
+# Start from zero
 
-Open [lesson 01's beginner guide](../content/how-to/01.md). It explains what an AI assistant does using a familiar testing problem. No account, installation, drawing, or document is required to read it. If you want help in Codex or Claude Code, open [the assistant quickstart](ASSISTANT-QUICKSTART.md).
-
-In the portal, choose **Start reading**. Each lesson begins with an explanation and a worked example, then shows how to explore it with your assistant and how to check the result. The original deeper explanation, exercises, and related materials remain on the same page. **Next lesson** follows the full 24-lesson course.
-
-The site map also has **New here? Start lesson 01** above its stage list. At the end of each beginner guide, **Continue reading** names the next lesson and announces a new stage when applicable. Extra resources, quizzes, and exercises are optional; you do not have to finish them to move on. Supporting pages offer a return link to the lesson you opened most recently in this session. This navigation context is not a saved bookmark: use **Save my place** if you want to resume after closing the site. Standalone guide downloads remain available and link back to their full lesson.
+Open **Start from zero** in the sidebar, or the portal route `#start`. The first topic is [Understand what your AI assistant is doing](../content/how-to/01.md), within the AI foundations subject. Read its explanation and small testing example first. No installation, diagram, report, or placement test is needed.
 
 ## A first session that stays small
 
-Read “Start here,” “The idea in plain language,” and “A small example” in lesson 01. Ask about any unfamiliar term. Try the supplied assistant prompt only if you want to see the concept explained interactively. Compare its response with “What you should see.” Then stop or continue to lesson 02. You do not need to implement an agent or submit a diagram.
+1. Select Start the first topic. Read Start here, The idea in plain language, and A small example.
+2. If you want to explore with your existing assistant, follow [Learn with Codex or Claude Code](ASSISTANT-QUICKSTART.md) and paste the topic's supplied prompt. Ask it to explain unfamiliar terms before creating code.
+3. Compare the response with What you should see. The assistant may be wrong; checking the concrete example is part of learning.
+4. Select Continue this path when ready, or Save my place and stop. A saved bookmark does not mark completion.
 
-Use **Save my place** on a lesson or primer to remember where to return. It does not mark work complete. Optional notes use SQLite locally or browser storage on the hosted Site. Export/import moves records between them; there is no automatic synchronization. Previous primer bookmarks and practice records are retained.
+## Find your way around
 
-## Find the topic you need
+- **Subject tracks:** 14 separate homes visible in the sidebar, including MCP, Skills, Context engineering, and Harness engineering. Each has beginner, intermediate, and advanced topics.
+- **Learning paths:** ordered selections across subjects. Start from zero is the default; SDET work, agent building, and operations are later choices.
+- **All subjects:** the complete catalog on one page. Opening a subject and choosing Begin this subject starts its own sequence.
+- **Find learning materials:** search all retained readings, labs, primers, templates, courses, books, and videos.
+- **Original lesson sequence:** the previous 24-lesson map and stage navigation. All original content remains here and is linked from the relevant subjects.
+- **My progress:** explicit saved reading place, notes, and optional practice records. Export/import transfers these between local and hosted copies.
 
-- **Site map in the sidebar:** expand any of the eight stages to open its lessons directly. Search by a familiar term such as testing, MCP, skills, or state machine. Selecting a link clears the search so later lessons remain visible. Your current lesson is highlighted. On a phone, tap **Site map** at the top; use **Close map** or Escape to return to reading.
-- **Full course map:** all eight stages and all 24 lessons, visible together.
-- **Find learning materials:** search lessons, beginner guides, primers, articles, labs, templates, books, courses, and videos by topic or format.
-- **Materials for this topic:** each lesson's relevant internal references and one bounded external reading.
-- **Practice labs:** all 15 runnable lab guides. Their prerequisites are in the [practice map](PRACTICE-MAP.md).
-- **Learning materials** and **Practice & projects:** sidebar groups for short primers, external courses and books, reference downloads, incidents, and capstones. **Setup & your data** holds assistant how-to, local setup, and backups.
+A topic tells you whether you are following a named path or a single subject. The next link says Continue this path or Next in this subject accordingly. If you take a detour to a manual, use Return to [topic] to resume. On a phone, tap Site map to open the drawer; Close map or Escape returns to the article.
 
-The [study plan](STUDY-PLAN.md) explains the whole sequence. The [eight primer selections](PRIMER-READINGS.md) remain useful for a shorter first look, but do not replace the full course. Sources are selected for relevance to SDET work, not allegiance to one provider.
+Read [the study plan](STUDY-PLAN.md) for the full structure. Use [setup](SETUP.md) only when you want a local copy or runnable labs. The [new-account guide](NEW-ACCOUNT.md) explains portability. Reading the hosted course needs no local setup.
 
-## Learn with a tutor or practise deliberately
+## Teaching first, optional practice afterward
 
-Use [the tutor prompt](../templates/tutor-prompt.md) for explanations and assistant-guided examples. Basic teaching is available before an attempt. When you choose an exercise, your tutor gives one task at a time, checks your actual work, and keeps the assignment's answers hidden until you try and deliberately ask for them. Incident debriefs keep their recorded-attempt gate.
+Every topic explains the concept, gives a small example, and provides a concrete assistant how-to with expected observations and recovery steps. Selected external reading has a bounded scope; no provider's entire catalog is mandatory.
 
-The [original practice orientation](PRACTICE-START.md), [practice schedule](PRACTICE-STUDY-PLAN.md), all original lessons, labs, walkthroughs, incidents, articles, books, templates, and capstones are retained. Their more demanding engineering work comes after understanding, when you choose it.
-
-Use [setup](SETUP.md) for a local copy or runnable labs, [Run anywhere](RUN-ANYWHERE.md) for hosting, and [the account guide](NEW-ACCOUNT.md) to reopen with another account. You do not need local setup just to read.
+Use [the learning tutor prompt](../templates/tutor-prompt.md) for one idea at a time. When you choose an exercise, your tutor checks your actual attempt before revealing its answer. Incident debriefs retain their recorded-attempt and explicit-reveal gates. All earlier practice, including the [practice orientation](PRACTICE-START.md) and [practice schedule](PRACTICE-STUDY-PLAN.md), is still available when you want it.

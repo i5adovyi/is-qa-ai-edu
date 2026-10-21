@@ -1,0 +1,131 @@
+[
+  {
+    "id": "zero",
+    "title": "Start from zero",
+    "audience": "First AI learning sessions",
+    "summary": "Understand an assistant, use a small testing example, ask clear questions, and supply useful context before moving into specialist subjects.",
+    "prerequisite": "No previous AI knowledge. Reading needs only a browser; guided demonstrations use your existing Codex or Claude Code.",
+    "outcome": "Explain what an assistant can and cannot establish, scope a small request, and check its response against evidence.",
+    "after": "Choose AI in everyday SDET work for practical use, or Building agents for the engineering route.",
+    "topics": [
+      "foundations-orientation",
+      "foundations-tokens",
+      "assistants-first-session",
+      "assistants-repository-tour",
+      "prompting-task-contract",
+      "prompting-examples",
+      "context-evidence",
+      "foundations-uncertainty"
+    ],
+    "requires": []
+  },
+  {
+    "id": "sdet",
+    "title": "AI in everyday SDET work",
+    "audience": "Test engineers using an assistant",
+    "summary": "Move from a small repository task to meaningful tests, review, reusable skills, and reliable evaluation. Use the tools you already have.",
+    "prerequisite": "Start from zero, or comfort with prompts, context, and the difference between generated text and execution evidence.",
+    "outcome": "Use AI for bounded test changes and failure investigation while independently checking results and keeping private data safe.",
+    "after": "Deepen skills, MCP, context, or evaluation through their subject tracks. Choose an optional workplace lab when you want independent practice.",
+    "topics": [
+      "context-project-instructions",
+      "security-trust-boundaries",
+      "security-permission-scopes",
+      "assistants-safe-change",
+      "assistants-test-failures",
+      "agentic-workflows",
+      "agentic-task-scope",
+      "agentic-verification",
+      "assistants-review-diffs",
+      "assistants-session-handoff",
+      "skills-basics",
+      "skills-package",
+      "skills-installation",
+      "skills-invocation",
+      "evaluation-evaluating-outputs",
+      "evaluation-datasets",
+      "evaluation-grader-calibration",
+      "evaluation-grounded-retrieval",
+      "evaluation-adversarial-tests",
+      "evaluation-regression-decisions"
+    ],
+    "requires": [
+      "zero"
+    ]
+  },
+  {
+    "id": "builder",
+    "title": "Building controlled agents",
+    "audience": "From assistant use to agent engineering",
+    "summary": "Connect tools and MCP, understand a controlled loop, ground answers in evidence, then handle recovery and delegation.",
+    "prerequisite": "Start from zero. Comfort opening a repository and asking your assistant to explain a small script; optional runnable labs require their listed setup.",
+    "outcome": "Describe and inspect a bounded agent system, understand its tool permissions, and trace failures instead of trusting a successful demo.",
+    "after": "Choose the Operate and evaluate path before deploying a real workflow. The complete student harness and MCP labs are available as optional implementation practice.",
+    "topics": [
+      "agentic-workflows",
+      "security-trust-boundaries",
+      "security-permission-scopes",
+      "tools-requests",
+      "tools-contracts",
+      "tools-validation",
+      "mcp-basics",
+      "mcp-discovery",
+      "mcp-local-server",
+      "mcp-remote-auth",
+      "mcp-diagnosis",
+      "mcp-trust",
+      "harness-boundaries",
+      "harness-loop",
+      "harness-recovery",
+      "harness-observability",
+      "harness-cancellation",
+      "retrieval-foundations",
+      "retrieval-chunking",
+      "retrieval-semantic-search",
+      "retrieval-hybrid-search",
+      "retrieval-grounded-answers",
+      "multiagent-roles-and-handoffs",
+      "multiagent-delegation"
+    ],
+    "requires": [
+      "zero"
+    ]
+  },
+  {
+    "id": "operations",
+    "title": "Operate and evaluate AI systems",
+    "audience": "Reliability, security, and release work",
+    "summary": "Test behavior and evidence, constrain permissions, investigate failures, and make measured release decisions. Includes the problems that demos rarely show.",
+    "prerequisite": "Building controlled agents and Start from zero, or equivalent understanding of tool contracts, MCP, bounded loops, retrieval, and delegation. Reading requires no production deployment.",
+    "outcome": "Recognize leakage, unsafe authority, partial failure, weak graders, and misleading metrics; choose evidence for a release or rollback.",
+    "after": "Choose one retained incident exercise, then a capstone when ready. Their answers remain behind recorded attempts and an explicit reveal.",
+    "topics": [
+      "evaluation-evaluating-outputs",
+      "evaluation-datasets",
+      "evaluation-grader-calibration",
+      "evaluation-grounded-retrieval",
+      "evaluation-adversarial-tests",
+      "evaluation-regression-decisions",
+      "security-trust-boundaries",
+      "security-permission-scopes",
+      "security-injection-defenses",
+      "security-secrets-and-logs",
+      "security-supply-chain",
+      "security-approval-audit",
+      "multiagent-shared-state",
+      "multiagent-conflict-resolution",
+      "multiagent-team-evaluation",
+      "multiagent-partial-failure",
+      "production-runtime-observability",
+      "production-service-reliability",
+      "production-cost-latency",
+      "production-incident-response",
+      "production-releases-fallbacks",
+      "production-capstone-delivery"
+    ],
+    "requires": [
+      "zero",
+      "builder"
+    ]
+  }
+]

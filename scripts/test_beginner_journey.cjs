@@ -11,10 +11,10 @@ const fs=require('node:fs');
   page.on('pageerror',e=>errors.push(e.message));
   const base=process.env.ACADEMY_TEST_URL||'http://127.0.0.1:8792';
   const lesson=async id=>{await page.waitForFunction(id=>document.querySelector('#save-lesson-reading')?.dataset.id===id&&document.querySelector('.nav-lesson.active')?.dataset.lesson===id,id);};
-  await page.goto(base);await page.getByRole('link',{name:'Start reading',exact:false}).waitFor();
+  await page.goto(base);await page.locator('.track-card').first().waitFor();
   const before=await page.evaluate(()=>JSON.stringify(state));
-  assert.equal(await page.locator('.nav-start').getAttribute('href'),'#lesson=01');
-  await page.locator('.nav-start').click();await lesson('01');
+  assert.equal(await page.locator('.nav-start').getAttribute('href'),'#start');
+  await page.goto(base+'/#lesson=01');await lesson('01');
   await page.getByRole('link',{name:'making a clear request',exact:true}).click();await lesson('02');
   assert.equal(new URL(page.url()).hash,'#lesson=02','Inline next link must retain the full lesson navigation');
   // Walk the entire course using the action at the end of each beginner guide.
@@ -63,7 +63,8 @@ const fs=require('node:fs');
   await page.goto(base+'/#guide=08');await page.locator('#save-reading[data-id="08"]').waitFor();assert.equal(await page.locator('.guide-next a.btn').last().getAttribute('href'),'#path');
   // Mobile menu and reading detours retain the same route and fit a narrow screen.
   await page.setViewportSize({width:390,height:844});await page.goto(base+'/#overview');await page.locator('#nav-toggle').click();
-  await page.locator('.nav-start').click();await lesson('01');assert.equal(await page.locator('#nav-toggle').getAttribute('aria-expanded'),'false');
+  await page.locator('.nav-start').click();await page.getByRole('link',{name:'Start the first topic',exact:false}).waitFor();assert.equal(await page.locator('#nav-toggle').getAttribute('aria-expanded'),'false');
+  await page.goto(base+'/#lesson=01');await lesson('01');
   await page.locator('.beginner-guide .lesson-next').scrollIntoViewIfNeeded();
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   const contrast=await page.locator('.beginner-guide .lesson-next a.btn').evaluate(el=>{

@@ -100,6 +100,12 @@ def portable_archive(root):
     return buffer
 
 
+class AcademyServer(ThreadingHTTPServer):
+    # Several tabs can request the JS, styles, data and state API simultaneously.
+    # Python 3.9's default backlog of five can reset these connections on macOS.
+    request_queue_size = 128
+
+
 class AcademyHandler(SimpleHTTPRequestHandler):
     def setup(self):
         super().setup()
@@ -309,13 +315,13 @@ def main(argv=None):
             subprocess.run([sys.executable, str(builder)], cwd=str(ROOT), check=True)
         except subprocess.CalledProcessError:
             parser.error("Build failed; server was not started. Fix the reported error and retry.")
-    required = ("index.html", "app.js", "style.css", "data.js")
+    required = ("index.html", "app.js", "tracks.js", "style.css", "data.js")
     if dist.is_symlink() or not all((dist / name).is_file() for name in required):
         parser.error("Built portal is missing or incomplete. Run without --no-build in the source copy, "
                      "or extract the complete portable ZIP, including dist/.")
     handler = partial(AcademyHandler, directory=str(dist))
     try:
-        server = ThreadingHTTPServer(("127.0.0.1", args.port), handler)
+        server = AcademyServer(("127.0.0.1", args.port), handler)
     except OSError as exc:
         parser.error("Cannot start local server: {}. Try --port 8766.".format(exc))
     try:

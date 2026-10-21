@@ -1,0 +1,834 @@
+[
+  {
+    "id": "evaluation",
+    "order": 11,
+    "title": "Evaluations and testing AI systems",
+    "summary": "Learn to judge outputs, construct trustworthy cases, localize RAG failures, and make regression decisions.",
+    "why": "An SDET needs evidence about behavior, including uncertainty and important failures hidden by averages.",
+    "prerequisites": [
+      "foundations"
+    ],
+    "outcomes": [
+      "Separate answer quality from formatting and model confidence.",
+      "Compare versions using representative data, calibrated judgments, and explicit release rules.",
+      "Localize retrieval, generation, and security failures without inventing execution evidence."
+    ],
+    "lessons": [
+      {
+        "id": "evaluation-evaluating-outputs",
+        "title": "Test an AI answer before trusting it",
+        "summary": "Check shape, task compliance, and evidence before trusting an answer.",
+        "level": "beginner",
+        "minutes": 15,
+        "keywords": [
+          "oracle",
+          "rubric",
+          "precision",
+          "recall",
+          "acceptance criteria"
+        ],
+        "prerequisites": [],
+        "file": "content/tracks/evaluation/evaluating-outputs.md",
+        "materials": [
+          "content/articles/evaluation-vs-demo.md",
+          "content/guide/04-evaluating-ai.md"
+        ],
+        "resource": {
+          "provider": "Google",
+          "title": "Classification: Accuracy, recall, precision, and related metrics",
+          "url": "https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall",
+          "scope": "Read Accuracy, Recall, and Precision. Stop before the end-of-page exercises. Prerequisites: counts and fractions; use the definitions to understand checker mistakes, not as a complete prose evaluation.",
+          "access": "Public reading without an account or paid model. The text demonstration works in an existing Codex or Claude Code conversation; executing external framework examples has separate setup and is optional.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official Google lesson and inspected its metric definitions. No training, model evaluation, or external exercises were executed."
+        }
+      },
+      {
+        "id": "evaluation-datasets",
+        "title": "Choose examples that reveal whether AI helps",
+        "summary": "Choose representative examples and preserve their expected behavior.",
+        "level": "beginner",
+        "minutes": 15,
+        "keywords": [
+          "dataset",
+          "labels",
+          "holdout",
+          "leakage"
+        ],
+        "prerequisites": [
+          "evaluation-evaluating-outputs"
+        ],
+        "file": "content/how-to/16.md",
+        "materials": [
+          "content/articles/evaluation-vs-demo.md",
+          "content/practice/README.md",
+          "templates/evaluation-plan.md",
+          "content/guide/04-evaluating-ai.md"
+        ],
+        "resource": {
+          "provider": "OpenAI",
+          "title": "Evaluation best practices",
+          "url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
+          "scope": "Read What are evals? and Design your eval process; stop before the first worked evaluation example. Prerequisite: understand expected behavior in a supplied fixture.",
+          "access": "Public conceptual reading; no account or API needed. Do not set up the deprecated hosted Evals platform for this lesson.",
+          "checked": "2026-10-21",
+          "verification": "Opened official page and inspected evaluation design and its platform deprecation notice; no hosted Evals execution claimed."
+        },
+        "lesson": "16"
+      },
+      {
+        "id": "evaluation-grader-calibration",
+        "title": "How to check whether an AI answer deserves to pass",
+        "summary": "Check whether human, deterministic, and model judges deserve trust.",
+        "level": "intermediate",
+        "minutes": 15,
+        "keywords": [
+          "grader",
+          "calibration",
+          "uncertainty",
+          "false acceptance"
+        ],
+        "prerequisites": [
+          "evaluation-datasets"
+        ],
+        "file": "content/how-to/17.md",
+        "materials": [
+          "content/guide/04-evaluating-ai.md",
+          "content/articles/evaluation-vs-demo.md",
+          "templates/evaluation-plan.md",
+          "content/labs/06-grounding-and-evaluation.md"
+        ],
+        "resource": {
+          "provider": "OpenAI",
+          "title": "Evaluation best practices — evaluator types",
+          "url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
+          "scope": "Read Create and combine different types of evaluators; stop before Handle edge cases. Prerequisite: understand an expected result and the teaching example. Skip platform and API setup; the page carries a platform deprecation notice.",
+          "access": "Public conceptual reading; no account or API needed. Running a provider service is separate and not required.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official page and read its metric-based, human, and model-grader sections, including the current platform notice. No API or model-grading service was executed."
+        },
+        "lesson": "17"
+      },
+      {
+        "id": "evaluation-grounded-retrieval",
+        "title": "Check retrieval, evidence, and the final answer separately",
+        "summary": "Separate retrieval coverage, supported claims, and applicable sources.",
+        "level": "intermediate",
+        "minutes": 15,
+        "keywords": [
+          "RAG",
+          "faithfulness",
+          "grounding",
+          "citations",
+          "retrieval evaluation"
+        ],
+        "prerequisites": [
+          "evaluation-grader-calibration"
+        ],
+        "file": "content/tracks/evaluation/grounded-retrieval.md",
+        "materials": [
+          "content/labs/06-grounding-and-evaluation.md",
+          "content/articles/evaluation-vs-demo.md"
+        ],
+        "resource": {
+          "provider": "Ragas",
+          "title": "Faithfulness",
+          "url": "https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/faithfulness/",
+          "scope": "Read the definition and How It’s Calculated. Skip code samples and stop before Legacy Metrics API. Prerequisite: understand retrieval and an evidence-supported claim.",
+          "access": "Public reading without an account or paid model. The text demonstration works in an existing Codex or Claude Code conversation; executing external framework examples has separate setup and is optional.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official Ragas page and checked its definition, claim-level calculation, and legacy API notice. No Ragas package or model grader was executed."
+        }
+      },
+      {
+        "id": "evaluation-adversarial-tests",
+        "title": "How to test the boundaries of an AI feature",
+        "summary": "Test boundaries and unacceptable behavior before release.",
+        "level": "advanced",
+        "minutes": 20,
+        "keywords": [
+          "adversarial testing",
+          "red teaming",
+          "prompt injection",
+          "release gate"
+        ],
+        "prerequisites": [
+          "evaluation-grounded-retrieval"
+        ],
+        "file": "content/how-to/18.md",
+        "materials": [
+          "content/guide/06-tools-mcp-skills.md",
+          "content/labs/03-tool-authority.md",
+          "content/labs/08-ship-an-evaluated-policy.md",
+          "templates/tool-contract.md"
+        ],
+        "resource": {
+          "provider": "OWASP",
+          "title": "LLM01:2025 Prompt Injection",
+          "url": "https://genai.owasp.org/llmrisk/llm01-prompt-injection/",
+          "scope": "Read the definition, Types of Prompt Injection Vulnerabilities, and Prevention and Mitigation Strategies; stop before example attack scenarios. Prerequisite: distinguish input data from task authority.",
+          "access": "Public reading without an account or installation; no attack execution is required.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official OWASP risk page and read the definition, direct/indirect input distinction, and mitigation sections. No live security testing was performed."
+        },
+        "lesson": "18"
+      },
+      {
+        "id": "evaluation-regression-decisions",
+        "title": "Decide whether an AI change is actually an improvement",
+        "summary": "Use paired cases, slices, and holdouts to evaluate changes honestly.",
+        "level": "advanced",
+        "minutes": 20,
+        "keywords": [
+          "regression",
+          "paired comparison",
+          "holdout",
+          "data leakage",
+          "release decision"
+        ],
+        "prerequisites": [
+          "evaluation-adversarial-tests"
+        ],
+        "file": "content/tracks/evaluation/regression-decisions.md",
+        "materials": [
+          "templates/evaluation-plan.md",
+          "content/how-to/22.md"
+        ],
+        "resource": {
+          "provider": "scikit-learn",
+          "title": "Common pitfalls — Data leakage",
+          "url": "https://scikit-learn.org/stable/common_pitfalls.html#data-leakage",
+          "scope": "Read Data leakage and How to avoid data leakage. Stop before the feature-selection code example. Prerequisite: development versus holdout cases. The application to prompt tuning is an academy inference.",
+          "access": "Public reading without an account or paid model. The text demonstration works in an existing Codex or Claude Code conversation; executing external framework examples has separate setup and is optional.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official scikit-learn chapter and inspected the leakage definition and prevention section. The source concerns model training; no scikit-learn or LLM evaluation was run."
+        }
+      }
+    ]
+  },
+  {
+    "id": "multiagent",
+    "order": 12,
+    "title": "Multi-agent systems",
+    "summary": "Understand handoffs, delegation, shared state, conflicts, evaluation, and recovery across workers.",
+    "why": "A team of agents creates coordination obligations as well as possible speed or quality gains.",
+    "prerequisites": [
+      "agentic"
+    ],
+    "outcomes": [
+      "Assign clear ownership and pass relevant context with uncertainty intact.",
+      "Recognize semantic conflicts, stale results, and correlated mistakes.",
+      "Recover from partial failure without silently duplicating external effects."
+    ],
+    "lessons": [
+      {
+        "id": "multiagent-roles-and-handoffs",
+        "title": "Understand what one agent hands to another",
+        "summary": "Understand who owns the next step and what context must cross a handoff.",
+        "level": "beginner",
+        "minutes": 15,
+        "keywords": [
+          "handoff",
+          "supervisor",
+          "worker",
+          "coordinator",
+          "role simulation"
+        ],
+        "prerequisites": [],
+        "file": "content/tracks/multiagent/roles-and-handoffs.md",
+        "materials": [
+          "content/articles/agent-delegation.md",
+          "templates/delegation-brief.md"
+        ],
+        "resource": {
+          "provider": "LangChain",
+          "title": "Handoffs",
+          "url": "https://docs.langchain.com/oss/python/langchain/multi-agent/handoffs",
+          "scope": "Read the opening explanation, Key characteristics, and When to use. Stop before Implementation. Prerequisite: know what an agent and tool are.",
+          "access": "Public reading without an account or paid model. The text demonstration works in an existing Codex or Claude Code conversation; executing external framework examples has separate setup and is optional.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official LangChain handoffs page and checked the state-based description and use cases. The lesson uses a role simulation; no independent agents or framework were executed."
+        }
+      },
+      {
+        "id": "multiagent-delegation",
+        "title": "How to decide whether another agent would help",
+        "summary": "Choose when another worker can help and when one agent is enough.",
+        "level": "beginner",
+        "minutes": 15,
+        "keywords": [
+          "delegation",
+          "parallelism",
+          "dependencies",
+          "subagents"
+        ],
+        "prerequisites": [
+          "multiagent-roles-and-handoffs"
+        ],
+        "file": "content/how-to/19.md",
+        "materials": [
+          "content/guide/07-agents-and-workflows.md",
+          "content/articles/agent-delegation.md",
+          "templates/delegation-brief.md",
+          "content/labs/13-coding-and-workers.md"
+        ],
+        "resource": {
+          "provider": "Anthropic",
+          "title": "Building effective agents — parallelization and orchestrator-workers",
+          "url": "https://www.anthropic.com/research/building-effective-agents",
+          "scope": "Read Workflow: Parallelization and Workflow: Orchestrator-workers; stop before Workflow: Evaluator-optimizer. Prerequisite: understand agent and dependency. Study the architecture patterns, not historical model recommendations.",
+          "access": "Public article; no account, paid model, or framework installation required for reading.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official article, followed its engineering-to-research redirect, and read both named workflow sections and the tooling-age caveat. No worker execution was performed."
+        },
+        "lesson": "19"
+      },
+      {
+        "id": "multiagent-shared-state",
+        "title": "How to keep several workers from losing each other's work",
+        "summary": "Keep task identities, ownership, and saved information consistent.",
+        "level": "intermediate",
+        "minutes": 15,
+        "keywords": [
+          "shared state",
+          "checkpoint",
+          "ownership",
+          "stale result"
+        ],
+        "prerequisites": [
+          "multiagent-delegation"
+        ],
+        "file": "content/how-to/20.md",
+        "materials": [
+          "content/lessons/06-memory-and-handoffs.md",
+          "content/articles/agent-delegation.md",
+          "templates/delegation-brief.md",
+          "content/labs/13-coding-and-workers.md"
+        ],
+        "resource": {
+          "provider": "LangChain / LangGraph",
+          "title": "Persistence — checkpoints, stores, and restarts",
+          "url": "https://docs.langchain.com/oss/python/langgraph/persistence",
+          "scope": "Read the introduction, Checkpointer vs. store table, and MemorySaver does not persist between restarts troubleshooting item; stop there. Skip the Python quickstart. Prerequisite: understand saved state and a running process.",
+          "access": "Public reading without account or installation. Executing the framework examples needs separate Python dependencies and is not required.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official documentation and verified the named sections. The former durable-execution address redirects to this persistence page. Framework code was not installed or executed."
+        },
+        "lesson": "20"
+      },
+      {
+        "id": "multiagent-conflict-resolution",
+        "title": "Combine worker results without losing or inventing work",
+        "summary": "Combine worker results without confusing clean merges with correct behavior.",
+        "level": "intermediate",
+        "minutes": 15,
+        "keywords": [
+          "merge conflict",
+          "semantic conflict",
+          "reducer",
+          "revision",
+          "ownership"
+        ],
+        "prerequisites": [
+          "multiagent-shared-state"
+        ],
+        "file": "content/tracks/multiagent/conflict-resolution.md",
+        "materials": [
+          "content/labs/13-coding-and-workers.md",
+          "templates/delegation-brief.md"
+        ],
+        "resource": {
+          "provider": "LangChain / LangGraph",
+          "title": "Use the graph API — state updates and reducers",
+          "url": "https://docs.langchain.com/oss/python/langgraph/use-graph-api",
+          "scope": "Read Define and update state and Process state updates with reducers. Stop before MessagesState; focus on the combining rule rather than Python syntax. Prerequisite: shared state and ownership.",
+          "access": "Public reading without an account or paid model. The text demonstration works in an existing Codex or Claude Code conversation; executing external framework examples has separate setup and is optional.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official LangGraph guide and inspected the state and reducer explanation. No framework installation, concurrency run, or Git merge was performed."
+        }
+      },
+      {
+        "id": "multiagent-team-evaluation",
+        "title": "How to tell whether an agent team is worth the extra work",
+        "summary": "Measure whether a team improves on the simpler baseline.",
+        "level": "advanced",
+        "minutes": 20,
+        "keywords": [
+          "baseline",
+          "multi-agent evaluation",
+          "cost",
+          "latency",
+          "confounder"
+        ],
+        "prerequisites": [
+          "multiagent-conflict-resolution"
+        ],
+        "file": "content/how-to/21.md",
+        "materials": [
+          "content/articles/evaluation-vs-demo.md",
+          "content/articles/agent-delegation.md",
+          "content/labs/13-coding-and-workers.md",
+          "templates/evaluation-plan.md"
+        ],
+        "resource": {
+          "provider": "Anthropic",
+          "title": "How we built our multi-agent research system — evaluation",
+          "url": "https://www.anthropic.com/research/multi-agent-research-system",
+          "scope": "Read Effective evaluation of agents; stop before Production reliability and engineering challenges. Prerequisite: understand baseline, rubric, and worker. Treat its company measurements as system-specific observations.",
+          "access": "Public article; no account or product access needed for reading. Reproducing its system is not part of this lesson.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official article, followed its engineering-to-research redirect, and read the evaluation section. Its performance claims were not independently reproduced."
+        },
+        "lesson": "21"
+      },
+      {
+        "id": "multiagent-partial-failure",
+        "title": "Recover when only part of an agent team finishes",
+        "summary": "Distinguish failure, cancellation, and unknown side effects during recovery.",
+        "level": "advanced",
+        "minutes": 20,
+        "keywords": [
+          "partial failure",
+          "timeout",
+          "cancellation",
+          "idempotency",
+          "late result"
+        ],
+        "prerequisites": [
+          "multiagent-team-evaluation"
+        ],
+        "file": "content/tracks/multiagent/partial-failure.md",
+        "materials": [
+          "content/how-to/20.md",
+          "content/labs/13-coding-and-workers.md"
+        ],
+        "resource": {
+          "provider": "LangChain / LangGraph",
+          "title": "Persistence — checkpoints, stores, and restarts",
+          "url": "https://docs.langchain.com/oss/python/langgraph/persistence",
+          "scope": "Read Checkpointer vs. store and the memory-saver restart troubleshooting entry; stop after that explanation. Prerequisite: saved state versus a running process.",
+          "access": "Public reading without an account or paid model. The text demonstration works in an existing Codex or Claude Code conversation; executing external framework examples has separate setup and is optional.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official persistence page and verified the table and in-memory restart limitation. Recovery is a synthetic scenario; no restart or external side effect was executed."
+        }
+      }
+    ]
+  },
+  {
+    "id": "security",
+    "order": 13,
+    "title": "Security and permissions",
+    "summary": "Learn trust boundaries, access scopes, injection defenses, secrets, supply-chain review, and enforceable approvals.",
+    "why": "Useful AI tools need boundaries that still hold when a model, source, or integration behaves unexpectedly.",
+    "prerequisites": [
+      "tools"
+    ],
+    "outcomes": [
+      "Separate evidence, task authority, and destination permissions.",
+      "Reduce unnecessary access and protect data across prompts, tools, and logs.",
+      "Review installations and bind approvals to concrete actions and observed outcomes."
+    ],
+    "lessons": [
+      {
+        "id": "security-trust-boundaries",
+        "title": "Tell instructions, evidence, and permissions apart",
+        "summary": "Tell accurate information, task instructions, and access authority apart.",
+        "level": "beginner",
+        "minutes": 15,
+        "keywords": [
+          "trust boundary",
+          "authentication",
+          "authorization",
+          "tenant",
+          "untrusted input"
+        ],
+        "prerequisites": [],
+        "file": "content/tracks/security/trust-boundaries.md",
+        "materials": [
+          "content/labs/03-tool-authority.md",
+          "templates/tool-contract.md"
+        ],
+        "resource": {
+          "provider": "OWASP",
+          "title": "Authorization Cheat Sheet",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html",
+          "scope": "Read Introduction and Enforce Least Privileges. Stop before Deny by Default. Prerequisite: understand users and resources.",
+          "access": "Public reading without an account or paid model. The text demonstration works in an existing Codex or Claude Code conversation; executing external framework examples has separate setup and is optional.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official OWASP cheat sheet and inspected its authorization and least-privilege discussion. No account permissions or real security controls were tested."
+        }
+      },
+      {
+        "id": "security-permission-scopes",
+        "title": "Give an assistant only the access its task needs",
+        "summary": "Connect each capability to a task and its enforcing boundary.",
+        "level": "beginner",
+        "minutes": 15,
+        "keywords": [
+          "least privilege",
+          "sandbox",
+          "permissions",
+          "scopes",
+          "connector"
+        ],
+        "prerequisites": [
+          "security-trust-boundaries"
+        ],
+        "file": "content/tracks/security/permission-scopes.md",
+        "materials": [
+          "templates/tool-contract.md",
+          "content/labs/03-tool-authority.md"
+        ],
+        "resource": {
+          "provider": "OWASP",
+          "title": "LLM06:2025 Excessive Agency — functionality and permissions",
+          "url": "https://genai.owasp.org/llmrisk/llm062025-excessive-agency/",
+          "scope": "Read Common Examples of Risks and the first four Prevention and Mitigation Strategies. Stop before user-approval guidance. Prerequisite: trust boundaries.",
+          "access": "Public reading without an account or paid model. The text demonstration works in an existing Codex or Claude Code conversation; executing external framework examples has separate setup and is optional.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official OWASP risk page and inspected functionality, permission, and autonomy risks plus scope-reduction guidance. No host configuration or credentials were changed."
+        }
+      },
+      {
+        "id": "security-injection-defenses",
+        "title": "Keep retrieved instructions from taking over a task",
+        "summary": "Contain instructions hidden in retrieved content without discarding useful evidence.",
+        "level": "intermediate",
+        "minutes": 15,
+        "keywords": [
+          "prompt injection",
+          "indirect injection",
+          "output validation",
+          "tool safety"
+        ],
+        "prerequisites": [
+          "security-permission-scopes"
+        ],
+        "file": "content/tracks/security/injection-defenses.md",
+        "materials": [
+          "content/how-to/18.md",
+          "content/labs/03-tool-authority.md"
+        ],
+        "resource": {
+          "provider": "OWASP",
+          "title": "LLM01:2025 Prompt Injection",
+          "url": "https://genai.owasp.org/llmrisk/llm01-prompt-injection/",
+          "scope": "Read Types of Prompt Injection Vulnerabilities and Prevention and Mitigation Strategies. Stop before Example Attack Scenarios. Prerequisite: instruction/data separation and permission scopes.",
+          "access": "Public reading without an account or paid model. The text demonstration works in an existing Codex or Claude Code conversation; executing external framework examples has separate setup and is optional.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official OWASP page and inspected direct/indirect injection and mitigation sections. The demonstration is synthetic; no live security test or immunity claim is made."
+        }
+      },
+      {
+        "id": "security-secrets-and-logs",
+        "title": "Debug an AI workflow without leaking its data",
+        "summary": "Preserve diagnostic evidence while limiting sensitive-data copies.",
+        "level": "intermediate",
+        "minutes": 15,
+        "keywords": [
+          "secrets",
+          "redaction",
+          "logging",
+          "privacy",
+          "retention",
+          "credentials"
+        ],
+        "prerequisites": [
+          "security-injection-defenses"
+        ],
+        "file": "content/tracks/security/secrets-and-logs.md",
+        "materials": [
+          "docs/LOCAL-DATA.md",
+          "content/labs/07-traces-and-diagnosis.md"
+        ],
+        "resource": {
+          "provider": "OWASP",
+          "title": "Logging Cheat Sheet — event attributes and data to exclude",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html",
+          "scope": "Read Event attributes and Data to exclude. Stop before Customizable logging. Prerequisite: tool requests and operational records.",
+          "access": "Public reading without an account or paid model. The text demonstration works in an existing Codex or Claude Code conversation; executing external framework examples has separate setup and is optional.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official OWASP logging page and inspected event attributes and excluded sensitive-data guidance. Only fictional fields are used; no real logs or secrets were inspected."
+        }
+      },
+      {
+        "id": "security-supply-chain",
+        "title": "Inspect what you install before giving it access",
+        "summary": "Inspect package origins, scripts, dependencies, destinations, and upgrades.",
+        "level": "advanced",
+        "minutes": 20,
+        "keywords": [
+          "supply chain",
+          "MCP",
+          "skills",
+          "dependencies",
+          "provenance",
+          "installation"
+        ],
+        "prerequisites": [
+          "security-secrets-and-logs"
+        ],
+        "file": "content/tracks/security/supply-chain.md",
+        "materials": [
+          "content/skill-practice/README.md",
+          "content/labs/10-installed-skill.md"
+        ],
+        "resource": {
+          "provider": "OWASP",
+          "title": "LLM03:2025 Supply Chain",
+          "url": "https://genai.owasp.org/llmrisk/llm032025-supply-chain/",
+          "scope": "Read the introduction and Common Examples of Risks. Stop before mitigation strategies on the first pass. Prerequisites: tools, skills, MCP, and permissions.",
+          "access": "Public reading without an account or paid model. The text demonstration works in an existing Codex or Claude Code conversation; executing external framework examples has separate setup and is optional.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official OWASP supply-chain page and inspected its component/provenance risk discussion. The package review is fictional; no package or server was installed or audited."
+        }
+      },
+      {
+        "id": "security-approval-audit",
+        "title": "Make approvals match the action that actually runs",
+        "summary": "Bind approval to the precise action and preserve truthful execution evidence.",
+        "level": "advanced",
+        "minutes": 20,
+        "keywords": [
+          "approval",
+          "audit",
+          "TOCTOU",
+          "idempotency",
+          "human in the loop"
+        ],
+        "prerequisites": [
+          "security-supply-chain"
+        ],
+        "file": "content/tracks/security/approval-audit.md",
+        "materials": [
+          "content/labs/15-review-and-operations.md",
+          "templates/tool-contract.md"
+        ],
+        "resource": {
+          "provider": "OWASP",
+          "title": "LLM06:2025 Excessive Agency — approval and complete mediation",
+          "url": "https://genai.owasp.org/llmrisk/llm062025-excessive-agency/",
+          "scope": "Read Require user approval and Complete mediation. Stop after those sections. Prerequisites: scoped permissions and tool effects.",
+          "access": "Public reading without an account or paid model. The text demonstration works in an existing Codex or Claude Code conversation; executing external framework examples has separate setup and is optional.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official OWASP page and checked approval and downstream authorization guidance. Version binding is an original illustrative design; no approval service or send was executed."
+        }
+      }
+    ]
+  },
+  {
+    "id": "production",
+    "order": 14,
+    "title": "Production operations",
+    "summary": "Follow requests, define reliable service behavior, budget work, handle incidents, and release recoverably.",
+    "why": "A promising demonstration needs observable boundaries and recoverable operations before users can depend on it.",
+    "prerequisites": [
+      "harness",
+      "evaluation"
+    ],
+    "outcomes": [
+      "Read traces and separate observations from root-cause hypotheses.",
+      "Measure useful outcomes, tail latency, resource use, and failure costs.",
+      "Connect evaluation, incidents, controlled releases, and a small capstone project."
+    ],
+    "lessons": [
+      {
+        "id": "production-runtime-observability",
+        "title": "Follow one request through an AI system",
+        "summary": "Follow one request and distinguish transport success from a supported answer.",
+        "level": "beginner",
+        "minutes": 15,
+        "keywords": [
+          "observability",
+          "logs",
+          "metrics",
+          "traces",
+          "spans",
+          "debugging"
+        ],
+        "prerequisites": [],
+        "file": "content/tracks/production/runtime-observability.md",
+        "materials": [
+          "content/labs/07-traces-and-diagnosis.md",
+          "content/how-to/22.md"
+        ],
+        "resource": {
+          "provider": "OpenTelemetry",
+          "title": "Traces",
+          "url": "https://opentelemetry.io/docs/concepts/signals/traces/",
+          "scope": "Read the opening request example and Spans definition. Stop before detailed span attributes and SDK sections. Prerequisite: a request with multiple tool/model steps.",
+          "access": "Public reading without an account or paid model. The text demonstration works in an existing Codex or Claude Code conversation; executing external framework examples has separate setup and is optional.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official OpenTelemetry page and inspected the request path and span definition. The example is a synthetic trace; no telemetry SDK, collector, or exporter was run."
+        }
+      },
+      {
+        "id": "production-service-reliability",
+        "title": "How to move from a promising demo to a bounded service",
+        "summary": "Define the bounded service and the outcomes users can depend on.",
+        "level": "beginner",
+        "minutes": 15,
+        "keywords": [
+          "SLO",
+          "SLI",
+          "service boundary",
+          "fallback",
+          "availability"
+        ],
+        "prerequisites": [
+          "production-runtime-observability"
+        ],
+        "file": "content/how-to/22.md",
+        "materials": [
+          "content/guide/08-harness-and-reliability.md",
+          "content/articles/harness-architecture.md",
+          "content/labs/15-review-and-operations.md",
+          "templates/evaluation-plan.md"
+        ],
+        "resource": {
+          "provider": "Google SRE",
+          "title": "Service Level Objectives — terminology, indicators, and objectives",
+          "url": "https://sre.google/sre-book/service-level-objectives/",
+          "scope": "Read Service Level Terminology, Indicators, and Objectives; stop at The Global Chubby Planned Outage example. Prerequisite: understand a fraction and a request outcome. Historical service examples are not targets for this academy.",
+          "access": "Free web book chapter; no account, cloud setup, or deployment required.",
+          "checked": "2026-10-21",
+          "verification": "Opened the Google SRE book chapter and read the named measurement and target sections. No operational service or availability claim was tested."
+        },
+        "lesson": "22"
+      },
+      {
+        "id": "production-cost-latency",
+        "title": "Budget time, tokens, retries, and useful outcomes",
+        "summary": "Measure full workflow cost, time, retries, and budget exhaustion.",
+        "level": "intermediate",
+        "minutes": 15,
+        "keywords": [
+          "latency",
+          "tokens",
+          "cost",
+          "retry",
+          "backpressure",
+          "percentile"
+        ],
+        "prerequisites": [
+          "production-service-reliability"
+        ],
+        "file": "content/tracks/production/cost-latency.md",
+        "materials": [
+          "content/articles/harness-architecture.md",
+          "content/labs/15-review-and-operations.md"
+        ],
+        "resource": {
+          "provider": "Google SRE",
+          "title": "Handling Overload",
+          "url": "https://sre.google/sre-book/handling-overload/",
+          "scope": "Read the introduction and The Pitfalls of Queries per Second. Stop before Per-Customer Limits. Prerequisite: resource use and request duration. The AI workflow connection is an academy adaptation.",
+          "access": "Public reading without an account or paid model. The text demonstration works in an existing Codex or Claude Code conversation; executing external framework examples has separate setup and is optional.",
+          "checked": "2026-10-21",
+          "verification": "Opened the Google SRE chapter and inspected overload and request-cost measurement sections. The lesson uses fictional units; no provider prices, billing, or throughput measurements are claimed."
+        }
+      },
+      {
+        "id": "production-incident-response",
+        "title": "How to investigate a failure without guessing the cause",
+        "summary": "Contain problems and investigate evidence without guessing the cause.",
+        "level": "intermediate",
+        "minutes": 15,
+        "keywords": [
+          "incident",
+          "triage",
+          "recovery",
+          "postmortem",
+          "root cause"
+        ],
+        "prerequisites": [
+          "production-cost-latency"
+        ],
+        "file": "content/how-to/23.md",
+        "materials": [
+          "content/labs/07-traces-and-diagnosis.md",
+          "content/labs/15-review-and-operations.md",
+          "templates/incident-review.md",
+          "templates/incident-handoff.md"
+        ],
+        "resource": {
+          "provider": "Google SRE",
+          "title": "Postmortem Culture: Learning from Failure",
+          "url": "https://sre.google/sre-book/postmortem-culture/",
+          "scope": "Read the introduction and Google's Postmortem Philosophy; stop before Collaborate and Share Knowledge. Prerequisite: distinguish observation from hypothesis. No formal report is required for the teaching example.",
+          "access": "Free web book chapter; no account or production environment required.",
+          "checked": "2026-10-21",
+          "verification": "Opened the Google SRE book chapter and read the introduction and postmortem-philosophy section. No real incident was investigated; the guide uses a separate synthetic import trace."
+        },
+        "lesson": "23"
+      },
+      {
+        "id": "production-releases-fallbacks",
+        "title": "Release an AI change with a way to stop and recover",
+        "summary": "Version behavior, observe limited rollouts, and plan safe fallback and rollback.",
+        "level": "advanced",
+        "minutes": 20,
+        "keywords": [
+          "release",
+          "canary",
+          "shadow mode",
+          "rollback",
+          "fallback",
+          "configuration"
+        ],
+        "prerequisites": [
+          "production-incident-response"
+        ],
+        "file": "content/tracks/production/releases-fallbacks.md",
+        "materials": [
+          "content/labs/15-review-and-operations.md",
+          "content/how-to/24.md"
+        ],
+        "resource": {
+          "provider": "Google SRE",
+          "title": "Canarying Releases",
+          "url": "https://sre.google/workbook/canarying-releases/",
+          "scope": "Read the introduction, Release Engineering Principles, and Balancing Release Velocity and Reliability. Stop before detailed canary implementation. Prerequisites: baseline evaluation, reliability, and incident response.",
+          "access": "Public reading without an account or paid model. The text demonstration works in an existing Codex or Claude Code conversation; executing external framework examples has separate setup and is optional.",
+          "checked": "2026-10-21",
+          "verification": "Opened the Google SRE workbook chapter and inspected its canary definition and release principles. The prompt/retrieval example is an academy application; no deployment or recovery was performed."
+        }
+      },
+      {
+        "id": "production-capstone-delivery",
+        "title": "How to build a small project with your assistant, then grow it",
+        "summary": "Combine the tracks in a small inspectable project and grow from evidence.",
+        "level": "advanced",
+        "minutes": 20,
+        "keywords": [
+          "capstone",
+          "QA copilot",
+          "vertical slice",
+          "acceptance criteria",
+          "portfolio"
+        ],
+        "prerequisites": [
+          "production-releases-fallbacks"
+        ],
+        "file": "content/how-to/24.md",
+        "materials": [
+          "content/guide/03-ai-assisted-testing.md",
+          "capstones/02-qa-copilot.md",
+          "capstones/01-support-agent.md",
+          "capstones/03-research-workflow.md",
+          "content/labs/13-coding-and-workers.md"
+        ],
+        "resource": {
+          "provider": "GitHub",
+          "title": "Writing tests with GitHub Copilot",
+          "url": "https://docs.github.com/en/copilot/tutorials/write-tests",
+          "scope": "Read the introduction and Writing unit tests with Copilot Chat; stop before Writing integration tests with Copilot. Prerequisite: understand test inputs and expected results; Python familiarity helps with the example. Study the method rather than copying Copilot UI instructions into another assistant.",
+          "access": "Public reading. Following the product-specific actions requires Copilot access, a supported IDE, and its extension. The academy's own demonstration works in an existing Codex or Claude Code conversation.",
+          "checked": "2026-10-21",
+          "verification": "Opened the official GitHub tutorial and checked its stated prerequisites and unit-test section. No Copilot interaction or generated test execution was performed."
+        },
+        "lesson": "24"
+      }
+    ]
+  }
+]

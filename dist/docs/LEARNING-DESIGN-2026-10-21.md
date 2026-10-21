@@ -39,3 +39,9 @@ Independent review caught stale imperative map titles, conflicting primer route 
 Preservation was checked against commit 8264fe535a5c19c3e2038eaaf41291c162b2682b: every previously tracked file remains present; 141 original teaching and lab files are byte-for-byte unchanged. The old short reading selections are retained in [PRIMER-READINGS.md](PRIMER-READINGS.md). Current setup, tutor handoff, README, AGENTS.md, and CLAUDE.md describe one full course rather than competing required routes.
 
 These changes address observed product and instructional defects. Automated tests and editorial review cannot prove that a learner understands the material. The next useful evidence is a learner completing a short lesson with the new guidance and describing where they still get stuck; no mastery, certificate, or commercial valuation is inferred from the test suite.
+
+## Subject tracks supersede the fixed-sequence navigation
+
+Later learner feedback clarified that a single sequence still hid the shape of the subject. The reference was a subject-oriented academy: visible, independent tracks and a clear beginner-to-advanced route inside each. The current implementation therefore expands to 14 subjects and 84 topics, with four curated paths across them. It preserves all earlier teaching and practice and retains the original 24-lesson map as a compatible route. See [the current study plan](STUDY-PLAN.md), [complete catalog](SUBJECT-CATALOG.md), and [verification record](VERIFICATION.md).
+
+The lesson is to distinguish a catalog, a guided path, and optional practice. A catalog shows what exists. A path selects what to learn next. Practice lets a learner apply an understood idea. Collapsing all three into a single sequence made the academy harder to understand even when its individual pages and tests were technically correct.

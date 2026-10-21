@@ -11,16 +11,15 @@ This project guides an SDET from AI basics to using AI in testing, testing AI
 systems, and understanding agents and harnesses. It gathers useful knowledge
 from multiple providers into a clear sequence with original explanations and
 one selected external resource per topic. The default path lives in
-`content/curriculum.json` and `content/how-to/map-*.json` and `content/how-to/` (portal `#path`).
+`content/tracks/catalog-*.json` and `content/tracks/paths.json` (portal `#tracks` and `#path`).
 
-The original 24 lessons are the canonical course, each with a beginner guide
-before its original text. The fictional Signal Desk case study, exercises,
+The academy has 14 independent subjects with beginner-to-advanced topics. The original 24 lessons are retained within them, each with a beginner guide before its original text. The fictional Signal Desk case study, exercises,
 incidents, Python labs, templates, and original PDF remain available for depth
 and optional practice. Drawing or writing artifacts is not a condition for learning.
 
 - **Tutoring:** start with [the tutor handoff](docs/CONTINUE-LEARNING.md). Explain
   one concept and its relevance to SDET work, then give one bounded reading step.
-  Use lesson 01 when no position is supplied. Do not require an assignment,
+  Use foundations-orientation in the zero path when no position is supplied. Do not require an assignment,
   diagnostic, or a saved progress file before teaching.
 - **Chosen practice:** give one exercise at a time, check the actual attempt,
   and offer a small hint when asked. Keep solutions and incident debriefs hidden
@@ -46,7 +45,7 @@ task and report only actions and checks that occurred.
 
 ## Teaching approach across the whole course
 
-Use the full 24-lesson map as the canonical sequence. Begin each topic with its
+Use content/tracks/catalog-*.json for independent subject tracks and content/tracks/paths.json for curated learning paths. Start from zero is the default; retain the original 24-lesson map as a compatible practice sequence. Begin each topic with its
 plain-language explanation, SDET relevance, small worked example, assistant
 how-to, expected result, and troubleshooting. Define terminology before use.
 Someone who only has Codex or Claude Code should know what to open, what to

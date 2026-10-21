@@ -2,7 +2,7 @@
 
 A provider-neutral learning project that gathers scattered AI knowledge into a useful sequence for an SDET. Start with plain explanations and testing examples, follow selected external articles or courses when you need depth, and progress toward context engineering, tools, skills, agents, evaluation, and harnesses.
 
-**Start with [lesson 01’s beginner guide](content/how-to/01.md)** or open the [private learning portal](https://signal-desk-ai-engineering-academy.igor-sadovyi87.chatgpt.site/#lesson=01). No drawing, report, installation, or graded exercise is required to start.
+**Start with [Start from zero](docs/START-HERE.md)** or open the [private learning portal](https://signal-desk-ai-engineering-academy.igor-sadovyi87.chatgpt.site/#start). No drawing, report, installation, or graded exercise is required to start.
 
 ## The learning experience
 
@@ -11,9 +11,11 @@ A provider-neutral learning project that gathers scattered AI knowledge into a u
 3. Open one selected external reading when you want depth, or continue to the next lesson. Save my place remembers your explicit bookmark without marking completion.
 4. Choose practice after understanding. Your tutor gives one exercise at a time and keeps assignment answers hidden until you try and ask.
 
-The [full study plan](docs/STUDY-PLAN.md) is one visible course: **24 lessons in eight stages**, covering foundations, context, tools/MCP/skills, agentic development, harnesses, evaluation, multi-agent work, and production. Every lesson has a beginner guide before its complete original text and exercises. [Learn with Codex or Claude Code](docs/ASSISTANT-QUICKSTART.md) explains where to paste prompts, how to open the project, what to expect, and what to do when stuck. Reading and self-contained assistant examples need no local setup.
+The [study plan](docs/STUDY-PLAN.md) now has **14 independent subject tracks and 84 topics**, ordered beginner → intermediate → advanced within each subject. AI foundations, coding assistants, prompting, context engineering, retrieval/RAG/memory, tools/APIs, MCP, skills, agentic development, harness engineering, evaluation, multi-agent systems, security, and production each have a separate visible home. The 24 original lessons are retained inside those tracks, alongside 60 new readings.
 
-The sidebar's **Site map** has eight expandable stages, direct links to all 24 lessons, topic search, and a highlighted current lesson. On mobile, the **Site map** button opens it without losing your reading position. **Full course map** shows the complete sequence on one page. **Find learning materials** searches all distributed documents and external resources by topic or format. Related readings, labs, templates, and one scoped external source are grouped on each lesson. The eight short primers remain available as supporting introductions. Microsoft, GitHub, OpenAI, Hugging Face, Google, Anthropic, and OWASP contribute different sources; you do not need every provider's catalog.
+Four **Learning paths** combine selected topics for a goal: Start from zero, AI in everyday SDET work, Building controlled agents, and Operate and evaluate AI systems. Start from zero is the default; the complete catalog is available without becoming mandatory homework. Every topic defines terms, teaches with an SDET example, gives a concrete assistant prompt, and explains what to check when it goes wrong. [Learn with Codex or Claude Code](docs/ASSISTANT-QUICKSTART.md) helps you get started with the assistant you have.
+
+The sidebar exposes every subject, searches topics, and highlights your location. **All subjects** shows the full catalog; **Find learning materials** indexes all retained content and scoped source selections. **Original lesson sequence** preserves the earlier 24-lesson map and stable URLs. On mobile, the Site map button opens an accessible drawer. Multiple providers contribute selected articles, docs, courses, books, and videos; you do not need every provider's catalog.
 
 All original lessons, 72 exercises, 15 lab guides, six incidents plus a capstone incident, articles, manuals, templates, books, videos, and capstones are retained. The PDF is the original practice fieldbook; the new beginner guides live in the portal, Markdown, and source download.
 
@@ -52,9 +54,10 @@ Local and hosted records do not synchronize automatically. Saving a reading plac
 
 | Source | Purpose |
 | --- | --- |
+| `content/tracks/` | Subject catalogs, 60 new readings, and four curated path definitions |
 | `content/how-to/` | Beginner teaching guides for all 24 lessons and maps of prerequisites, related materials, and scoped readings |
 | `content/sdet-path.json`, `content/guide/` | Retained short primers and scoped source selections |
-| `content/curriculum.json`, `content/learning.json`, `content/lessons/` | Canonical 24-lesson sequence, original explanations, exercises, hints, checks, and tutor packets |
+| `content/curriculum.json`, `content/learning.json`, `content/lessons/` | Retained original 24-lesson sequence, original explanations, exercises, hints, checks, and tutor packets |
 | `content/resources.json`, `content/library/` | Broader external resource collection |
 | `content/labs/`, `content/incidents/`, `lab/`, `capstones/` | Optional runnable practice and investigations |
 | `docs/`, `templates/` | Study guidance, operation, account migration, and optional engineering templates |
