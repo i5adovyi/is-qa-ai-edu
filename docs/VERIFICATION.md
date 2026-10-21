@@ -17,7 +17,9 @@ Executed locally for this revision:
 
 Selected primary reading pages and their described scope were checked against official sources. The Microsoft video was checked through official lesson/indexed video metadata; direct YouTube retrieval/playback was unavailable. External enrollment, certificates, every provider course, and actual learner comprehension were not tested. The PDF remains the original optional practice fieldbook; this revision does not claim a regenerated guided-reading PDF.
 
-These are local checks. GitHub CI and Sites publication are separate release actions; their results must be checked for the actual pushed/deployed commit. Personal learning records were neither reset nor marked complete by this work.
+The first GitHub run of this revision passed the Python 3.12 code/content/integration checks and the MCP job, but its Python 3.9 setup failed before tests: ubuntu-latest selected Ubuntu 26.04 without a compatible distribution. The workflow now pins Ubuntu 24.04, which the official setup-python version manifest lists for Python 3.9.25. This is an infrastructure correction, not a weakened test requirement.
+
+The list above records local checks. GitHub CI and Sites publication are separate release actions; their results must be checked for the actual pushed/deployed commit. Personal learning records were neither reset nor marked complete by this work.
 
 ## Earlier verification records
 

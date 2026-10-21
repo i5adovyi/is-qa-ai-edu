@@ -55,7 +55,7 @@ Run `node scripts/test_sdet_path.cjs` for the guided reading route: first-sessio
 
 Run `node scripts/test_incident_portal.cjs` for incident attempt gates, progressive hints, deliberate debrief reveal, reload and import behavior. Incident guidance must stay out of the DOM and tutor packet before explicit disclosure. The source archive contains editable guidance; the static portal is not an examination security system. The PDF includes incident briefs but omits their guidance because it cannot enforce an attempt gate.
 
-The GitHub Actions workflow runs core and optional MCP checks with no model credentials. Live Codex/provider calls are deliberately explicit local checks. Record CI execution separately from a locally passing workflow command.
+The GitHub Actions workflow runs core and optional MCP checks with no model credentials. It pins Ubuntu 24.04 because the moving ubuntu-latest label can select a runner without a Python 3.9 distribution. Check the setup-python version manifest before changing the runner or supported Python matrix. Live Codex/provider calls are deliberately explicit local checks. Record CI execution separately from a locally passing workflow command.
 
 The [Run anywhere guide](RUN-ANYWHERE.md) separates local startup, private GitHub source updates, and OpenAI Sites publication. `python3 academy.py local` rebuilds source copies and serves only `dist/` on loopback; `python3 academy.py hosted` opens the existing hosted copy. A GitHub push does not by itself deploy Sites.
 
