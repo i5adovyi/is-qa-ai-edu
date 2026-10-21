@@ -104,6 +104,7 @@ const path=require('node:path');
   await imported.locator('#incident-hint').waitFor();
   assert.equal(await imported.locator('#incident-hint').isDisabled(),true);
   const chooser=imported.waitForEvent('filechooser');
+  await imported.locator('#nav-toggle').click();
   await imported.locator('#import-progress').click();
   await (await chooser).setFiles({name:'incident-progress.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(exported))});
   await imported.waitForFunction(()=>document.querySelector('#toast').textContent.includes('Progress merged'));

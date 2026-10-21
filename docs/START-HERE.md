@@ -12,11 +12,12 @@ Use **Save my place** on a lesson or primer to remember where to return. It does
 
 ## Find the topic you need
 
+- **Site map in the sidebar:** expand any of the eight stages to open its lessons directly. Search by a familiar term such as testing, MCP, skills, or state machine. Your current lesson is highlighted. On a phone, tap **Site map** at the top; use **Close map** or Escape to return to reading.
 - **Full course map:** all eight stages and all 24 lessons, visible together.
 - **Find learning materials:** search lessons, beginner guides, primers, articles, labs, templates, books, courses, and videos by topic or format.
 - **Materials for this topic:** each lesson's relevant internal references and one bounded external reading.
 - **Practice labs:** all 15 runnable lab guides. Their prerequisites are in the [practice map](PRACTICE-MAP.md).
-- **More learning tools:** short primers, external library, incident practice, reference downloads, and capstones.
+- **Learning materials** and **Practice & projects:** sidebar groups for short primers, external courses and books, reference downloads, incidents, and capstones. **Setup & your data** holds assistant how-to, local setup, and backups.
 
 The [study plan](STUDY-PLAN.md) explains the whole sequence. The [eight primer selections](PRIMER-READINGS.md) remain useful for a shorter first look, but do not replace the full course. Sources are selected for relevance to SDET work, not allegiance to one provider.
 

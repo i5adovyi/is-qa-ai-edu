@@ -6,7 +6,7 @@ The route is provider-neutral. It goes from using AI in testing work to testing 
 
 ## Where to start
 
-[Open topic 01](../content/guide/01-ai-basics.md). In the portal open More learning tools → Short primers, then choose a primer. The home page Start reading button opens the full course. Within the primer collection, Next topic opens the next short primer. Use Save my place if you want to resume there later; it records a location, not mastery. A tutor can explain an unfamiliar term without asking you to produce an artifact.
+[Open topic 01](../content/guide/01-ai-basics.md). In the portal open Site map → Learning materials → Short primers, then choose a primer. The home page Start reading button opens the full course. Within the primer collection, Next topic opens the next short primer. Use Save my place if you want to resume there later; it records a location, not mastery. A tutor can explain an unfamiliar term without asking you to produce an artifact.
 
 ## The sequence
 

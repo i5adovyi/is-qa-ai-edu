@@ -1,5 +1,20 @@
 # Verification record for the October 2026 academy release
 
+## Sidebar site map — 21 October 2026
+
+Navigation now includes eight expandable stages, direct links to all 24 lessons, technical-term search, a current-lesson indicator, and grouped materials, practice, and setup links. A mobile drawer keeps the map accessible while reading. Course and lab sources, progress formats, and lesson URLs are unchanged.
+
+Executed for this revision:
+
+- All **51 JavaScript unit tests** passed, including sidebar context/search and unchanged learning records during navigation.
+- All **nine browser suites** passed: sidebar, general portal, learning workspaces, incidents, Run anywhere, primers, full-course teaching, actual local SQLite integration, and exhaustive audit.
+- The new sidebar suite followed every lesson and main section link; checked keyboard stage expansion, expand/collapse, technical search, empty results, document/exercise deep links, independent scrolling at a short desktop height, mobile focus trapping and Escape, same-route clicks, and resizing an open drawer to desktop.
+- Existing suites verified bookmarks, notes, progress import/export, attempt/reveal gates, and SQLite persistence with an isolated temporary database. No learner database was used.
+- The exhaustive audit passed **182 documents and Markdown downloads**, **940 internal-link occurrences**, **239 distinct internal links**, **96 quiz choices**, **eight stages**, **74 downloadable assets**, **182 mobile document views**, and **zero page errors**.
+- Desktop overview/lesson and mobile closed/open/search views were visually inspected. Content checks and source/portable builds passed. No course or lab file was removed or rewritten.
+
+This records local browser and content evidence. GitHub CI and private Site deployment are verified separately for the final commit; unchanged Python/MCP implementations were not rerun locally for this navigation-only revision.
+
 ## Full-course beginner approach — 21 October 2026
 
 This revision restores one visible 24-lesson course and adds a beginner teaching guide to every lesson. It retains the original explanations, exercises, eight supporting primers, labs, incidents, and external library. The [learning-design history](LEARNING-DESIGN-2026-10-21.md) records why the previous eight-topic entrance did not meet the learner's needs.

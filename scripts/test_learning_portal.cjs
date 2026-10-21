@@ -11,7 +11,6 @@ const path=require('node:path');
   page.on('pageerror',e=>errors.push(e.message));
   const base=process.env.ACADEMY_TEST_URL||'http://127.0.0.1:8765';
   await page.goto(base);
-  await page.locator('.nav-more summary').click();
   await page.getByRole('link',{name:'Practice preparation',exact:false}).click();
   await page.getByRole('heading',{name:'Prepare for your first attempt.'}).waitFor();
   await page.locator('[name="learning-route"][value="local"]').check();

@@ -67,7 +67,7 @@ const path = require('node:path');
  await page.goto(base+'/#doc=content%2Flibrary%2FREADME.md');
  assert.equal(await page.locator('.reading a[href="content/resources.json"]').count(),1);
  await page.setViewportSize({width:390,height:844});await page.goto(base+'/#overview');
- assert.ok(await page.locator('#export').isVisible());
+ await page.locator('#nav-toggle').click();assert.ok(await page.locator('#export').isVisible());await page.locator('#nav-toggle').click();
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth));
  await page.screenshot({path:path.join(__dirname,'../tmp/qa/mobile.png'),fullPage:true});
  for(const asset of ['fieldbook.pdf','academy-source.zip','academy-portable.zip','content/resources.json','lab/composed.py','lab/mcp_lab/server.py','content/skill-practice/signal-desk-evidence-review/scripts/check_packet.py']) {const r=await context.request.get(base+'/'+asset);assert.equal(r.status(),200,asset);}

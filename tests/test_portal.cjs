@@ -525,7 +525,7 @@ test('the new entrance offers reading without creating practice or completion re
  const p=portal();const before=p.run('JSON.stringify(state)');
  assert.match(p.nodes['#main'].innerHTML,/Start reading/);
  assert.match(p.nodes['#main'].innerHTML,/href="#lesson=01"/);
- assert.doesNotMatch(p.nodes['#nav'].innerHTML,/<details class="nav-more" open/);
+ assert.equal((p.nodes['#nav'].innerHTML.match(/class="nav-stage"/g)||[]).length,8);
  for(let i=1;i<=8;i++){
   p.context.topic=String(i).padStart(2,'0');
   p.run("location.hash='#guide='+topic;render()");
@@ -596,4 +596,25 @@ test('the last explicitly saved kind chooses resume without erasing the other bo
  p.run("state.readingKind='lesson'");assert.match(p.run('overview()'),/href="#lesson=13"/);
  p.run("var copy=validateState(clone(state));var combined=mergeProgress(fresh(),copy).state");
  assert.equal(p.run('combined.readingKind'),'lesson');assert.equal(p.run('combined.reading'),'04');assert.equal(p.run('combined.lessonReading'),'13');
+});
+
+test('sidebar indexes every stage and lesson and resolves deep-link learning context',()=>{
+ const p=portal();const original=p.run('JSON.stringify(state)');
+ assert.equal((p.nodes['#nav'].innerHTML.match(/class="nav-lesson /g)||[]).length,24);
+ for(const route of ['#lesson=13','#doc=content%2Fhow-to%2F13.md','#exercise=L13-E2']){
+  p.context.route=route;p.run("location.hash=route;nav('path')");
+  assert.match(p.nodes['#nav'].innerHTML,/class="nav-lesson active" data-lesson="13"/);
+  assert.match(p.nodes['#nav'].innerHTML,/data-stage="5" open/);
+ }
+ assert.equal(p.run('JSON.stringify(state)'),original);
+});
+test('sidebar search finds technical terminology and sections without changing progress',()=>{
+ const p=portal();const original=p.run('JSON.stringify(state)');
+ p.run("sidebarQuery='state machine';nav('overview')");
+ assert.match(p.nodes['#nav'].innerHTML,/data-lesson="13"/);
+ assert.doesNotMatch(p.nodes['#nav'].innerHTML,/data-lesson="01"/);
+ p.run("sidebarQuery='books';nav('overview')");assert.match(p.nodes['#nav'].innerHTML,/href="#library"/);
+ p.run("sidebarQuery='no-such-zzzz';nav('overview')");assert.match(p.nodes['#nav'].innerHTML,/No matches/);
+ p.run("sidebarQuery='';nav('overview')");assert.equal((p.nodes['#nav'].innerHTML.match(/class="nav-lesson /g)||[]).length,24);
+ assert.equal(p.run('JSON.stringify(state)'),original);
 });
