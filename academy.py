@@ -315,7 +315,7 @@ def main(argv=None):
             subprocess.run([sys.executable, str(builder)], cwd=str(ROOT), check=True)
         except subprocess.CalledProcessError:
             parser.error("Build failed; server was not started. Fix the reported error and retry.")
-    required = ("index.html", "app.js", "tracks.js", "style.css", "data.js")
+    required = ("index.html", "app.js", "theme.js", "tracks.js", "style.css", "data.js")
     if dist.is_symlink() or not all((dist / name).is_file() for name in required):
         parser.error("Built portal is missing or incomplete. Run without --no-build in the source copy, "
                      "or extract the complete portable ZIP, including dist/.")

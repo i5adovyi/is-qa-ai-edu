@@ -56,7 +56,7 @@ def build():
     tracks = sorted([track for p in sorted((ROOT/'content/tracks').glob('catalog-*.json')) for track in json.loads(p.read_text())], key=lambda t: t['order'])
     paths = json.loads((ROOT/'content/tracks/paths.json').read_text())
     data = {'tracks':tracks,'paths':paths,'course':course,'guide':guide,'curriculum':curriculum,'learning':learning,'incidents':incidents,'runtime':runtime,'resources':resources,'documents':docs,'assets':assets,'edition':'October 2026','built':'2026-10-21'}
-    for name in ['index.html','style.css','tracks.js','app.js']:
+    for name in ['index.html','style.css','theme.js','tracks.js','app.js']:
         shutil.copyfile(ROOT/'portal'/name,OUT/name)
     (OUT/'data.js').write_text('window.ACADEMY = '+json.dumps(data,ensure_ascii=False).replace('</','<\\/')+';\n')
     def ignore_private(directory, names):

@@ -19,6 +19,8 @@ The sidebar exposes every subject, searches topics, and highlights your location
 
 All original lessons, 72 exercises, 15 lab guides, six incidents plus a capstone incident, articles, manuals, templates, books, videos, and capstones are retained. The PDF is the original practice fieldbook; the new beginner guides live in the portal, Markdown, and source download.
 
+Use **Theme** at the top of any page to choose **Dark**, **Light**, or **System** (the default follows your device). The choice is saved in this browser for this site, separately from learning progress. It is not included in progress exports or the local database.
+
 ## New assistant session
 
 Read [AGENTS.md](AGENTS.md) and identify whether the user wants explanation, practice, maintenance, or setup. [CLAUDE.md](CLAUDE.md) points to the same rules.

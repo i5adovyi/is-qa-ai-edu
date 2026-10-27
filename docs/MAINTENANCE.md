@@ -28,7 +28,7 @@ The editable source is this repository. The portal is generated into `dist/`; do
 - `content/research/`: synthetic source corpus and scored research examples.
 - `content/dev-sandbox/`: intentionally broken development exercise; its one baseline test failure is expected and isolated from reference checks.
 - `docs/`, `templates/`, `capstones/`: learner manuals and reusable project artifacts.
-- `portal/`: interface source.
+- `portal/`: interface source. `theme.js` runs before the stylesheet to apply the browser’s saved Light/Dark/System preference. Keep its `ai-engineering-academy-theme` key separate from learning progress; include the script in builds and launcher asset checks.
 - `academy.py`, `academy.json`: shared local/hosted launcher and canonical hosted/GitHub URLs. Both source and portable packages include them; legacy server commands delegate to this launcher.
 - `academy_local.py`, `.academy-data/`: local SQLite persistence and the ignored default learner data directory. Never distribute its database, sidecars, or backups.
 - `README.md`, `AGENTS.md`, `CLAUDE.md`: project overview, shared tutor/maintainer instructions, and Claude entry point. Keep them in editable downloads and new-account copies.
@@ -119,3 +119,5 @@ Run `python3 scripts/check_tracks.py` (also included in check_content.py) to val
 Run `node scripts/test_subject_tracks.cjs` on the static preview for all subject/topic pages, every step of every curated path, mobile widths, current sidebar location, scoped source links, preserved answer gates, context-preserving detours, search, and explicit subject bookmark reload/export/import. The original course and primer suites remain compatibility checks. `node scripts/test_local_progress.cjs` also tests subject bookmark/path/notes across browser and server restarts with an isolated SQLite profile.
 
 Preserve read-only navigation: visiting topics, expanding the site map, following a path, or inspecting a source must not mutate learning records. Reading an old lesson through a subject must share its original note key and practice IDs. Unknown subject/path routes should fail gracefully, and invalid path context should fall back to the subject sequence. Keep all privacy/package tests and build both ZIP downloads before publication.
+
+Appearance checks: run `node scripts/test_theme.cjs` against the static test server. It covers system preference, explicit overrides, reloads and tabs, blocked storage, keyboard access, dark page contrast, mobile layout, printing, and unchanged learning records. Theme preference stays browser-local even when learning records use SQLite.

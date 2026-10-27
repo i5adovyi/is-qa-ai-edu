@@ -39,7 +39,7 @@ class LocalDatabaseTests(unittest.TestCase):
         for name in ("academy.py", "academy_local.py", "academy.json"):
             shutil.copyfile(ROOT / name, self.root / name)
         (self.root / "dist").mkdir()
-        for name in ("index.html", "app.js", "tracks.js", "data.js", "style.css"):
+        for name in ("index.html", "app.js", "theme.js", "tracks.js", "data.js", "style.css"):
             (self.root / "dist" / name).write_text("COURSE", encoding="utf-8")
         self.profile = self.root / ".academy-data"
         self.env = {k: v for k, v in os.environ.items() if k not in ("PYTHONPATH", "PYTHONHOME")}
