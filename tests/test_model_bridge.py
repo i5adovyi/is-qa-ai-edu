@@ -30,17 +30,17 @@ class ModelBridgeTest(unittest.TestCase):
 
     def test_export_contains_actual_evidence_but_no_answer_labels(self):
         self.export()
-        request = json.loads((self.root / "export/request.json").read_text())
+        request = json.loads((self.root / "export/request.json").read_text(encoding="utf-8"))
         case = get_case("train-01")
         self.assertEqual(request["ticket"], case["ticket"])
         self.assertEqual(request["articles"], [a for a in load_knowledge()
                                               if a["topic"] == classify(case["ticket"])])
         self.assertEqual(set(request), {
             "schema_version", "case_id", "ticket", "articles", "decision_contract"})
-        prompt = (self.root / "export/prompt.md").read_text()
+        prompt = (self.root / "export/prompt.md").read_text(encoding="utf-8")
         for label in ("must_include", "must_not_include", '"expected"'):
             self.assertNotIn(label, prompt)
-        self.assertIn("not by an AI model", (self.root / "export/README.md").read_text())
+        self.assertIn("not by an AI model", (self.root / "export/README.md").read_text(encoding="utf-8"))
 
     def test_mock_replay_has_one_write_and_discloses_provenance(self):
         response = self.export()

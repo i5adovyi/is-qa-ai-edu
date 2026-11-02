@@ -68,7 +68,7 @@ The report and message journal omit timestamps and wall-clock durations so fixed
 | Child exits during call | Connection error, pinned SDK reports `-32000`; no success invented |
 | Diagnostic on stdout | SDK reports a parsing error; diagnostic is captured in `client.stderr.txt` |
 
-The deadline applies to a call, not the full process startup. Initialization has a three-second request timeout. Tests impose an overall subprocess deadline, including cleanup. No automatic retry runs. The slow server sleeps for five seconds, so the deadline check exercises an actual timer rather than the reference harness's virtual milliseconds.
+Initialization allows 15 seconds for the child interpreter to import the SDK. Subsequent requests use three seconds by default. The slow-call exercise sets a 0.35-second deadline against a five-second server delay. The disconnect exercise keeps the default deadline to observe EOF from the crashed process. The gate checks whether each fault and its child cleanup finish in under five seconds. Its evidence records that verdict and the limit. The test caps the four-session subprocess at 90 seconds. No automatic retry runs.
 
 The stdout experiment deliberately corrupts the transport. This SDK can report the invalid line and continue, but other hosts may disconnect. Write logs to stderr and do not depend on error recovery. A message with a matching request ID is still not proof of a side effect's persistence; this service has no writes. Design reconciliation separately when extending it to mutations.
 
@@ -106,7 +106,7 @@ The exercise client accepts a server source path because the learner must run co
 | Optional dependency message | Invoke the venv's Python, not the system Python |
 | SDK version mismatch | Recreate the environment from the lock; current-major examples use different APIs |
 | `corpus.json` missing in learner copy | Copy both the server and corpus as shown above |
-| Timeout during initialization | Inspect the connection's stderr; first import on a slow machine may exceed three seconds |
+| Timeout during initialization | Inspect the connection's stderr and verify that the lab interpreter can import the pinned SDK within the 15-second startup budget |
 | Output directory is not empty | Choose another output path to preserve the previous experiment |
 | JSON parsing failure | Remove human output from stdout; inspect `client.stderr.txt` |
 | Core suite reports skips | Run the optional tests with the MCP venv to establish the MCP result |

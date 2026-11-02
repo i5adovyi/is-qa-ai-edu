@@ -2,13 +2,13 @@
 
 > For the guided SDET reading route, use [Start here](START-HERE.md). This page is for local setup or optional practical work; its exercises and checks are not required before reading.
 
-Use the [private OpenAI-hosted portal](https://signal-desk-ai-engineering-academy.igor-sadovyi87.chatgpt.site/) or run the same site locally. The [Run anywhere guide](RUN-ANYWHERE.md) explains both modes and how to transfer progress. Run Python commands in a terminal on your computer, from the project directory. The portal does not execute Python or install a skill for you.
+Run the learning portal on your computer with the steps below. The [private hosted copy](https://signal-desk-ai-engineering-academy.igor-sadovyi87.chatgpt.site/) is available to invited accounts. The [Run anywhere guide](RUN-ANYWHERE.md) explains both modes and how to transfer progress. Run Python commands in a terminal on your computer, from the project directory. The portal does not execute Python or install a skill for you.
 
 ## 1. Get the files
 
 Choose one route:
 
-- **GitHub:** sign in with an account that has access to this private repository, then clone it. A “repository not found” message can mean your Git credentials do not have access.
+- **GitHub:** clone the academy with the commands below. Your learning records are created locally when you use the portal.
 - **Download:** in the portal, open **Site map → Learning materials → Reference shelf → Download full project**, extract the ZIP, and open a terminal inside its `ai-engineering-academy` folder. This route needs no Git.
 
 For GitHub, run:

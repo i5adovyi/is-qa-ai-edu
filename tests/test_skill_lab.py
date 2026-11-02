@@ -6,6 +6,7 @@ from pathlib import Path
 import tempfile
 import shutil
 import unittest
+from tests.link_fixtures import directory_link, file_symlink
 
 from lab.skill_lab.__main__ import NAME, SOURCE, install, safe_workspace, validate_install
 
@@ -47,7 +48,7 @@ class SkillInstallTests(unittest.TestCase):
     def test_symlink_work_root_rejected(self):
         outside = self.root / "outside"
         outside.mkdir()
-        (self.root / "work").symlink_to(outside, target_is_directory=True)
+        directory_link(self.root / "work", outside)
         with self.assertRaisesRegex(ValueError, "symlink"):
             safe_workspace("work/practice", self.root)
         self.assertFalse((outside / "practice").exists())
@@ -57,7 +58,7 @@ class SkillInstallTests(unittest.TestCase):
         shutil.copytree(SOURCE, source)
         fixture = source / "fixtures" / "ticket.json"
         fixture.unlink()
-        fixture.symlink_to(SOURCE / "fixtures" / "ticket.json")
+        file_symlink(fixture, SOURCE / "fixtures" / "ticket.json")
         with self.assertRaisesRegex(ValueError, "source symlinks"):
             install(self.workspace, source)
         self.assertFalse(self.workspace.exists())
@@ -72,7 +73,24 @@ class SkillInstallTests(unittest.TestCase):
         install(self.workspace)
         ref = self.workspace / ".agents" / "skills" / NAME / "references" / "review-contract.md"
         ref.unlink()
-        ref.symlink_to(SOURCE / NAME / "references" / "review-contract.md")
+        file_symlink(ref, SOURCE / NAME / "references" / "review-contract.md")
+        with self.assertRaisesRegex(ValueError, "symlink"):
+            validate_install(self.workspace)
+
+    def test_referenced_directory_links_rejected_before_and_after_install(self):
+        source = self.root / "source"
+        source.mkdir()
+        shutil.copytree(SOURCE / NAME, source / NAME)
+        directory_link(source / "fixtures", SOURCE / "fixtures")
+        with self.assertRaisesRegex(ValueError, "source symlinks"):
+            install(self.workspace, source)
+        self.assertFalse(self.workspace.exists())
+
+        install(self.workspace)
+        refs = self.workspace / ".agents" / "skills" / NAME / "references"
+        moved = self.root / "references"
+        refs.rename(moved)
+        directory_link(refs, moved)
         with self.assertRaisesRegex(ValueError, "symlink"):
             validate_install(self.workspace)
 

@@ -6,11 +6,11 @@ The same course and interface support two modes. Choose the hosted portal for im
 | --- | --- | --- |
 | OpenAI Sites | [Open the private academy](https://signal-desk-ai-engineering-academy.igor-sadovyi87.chatgpt.site/) | Internet and an OpenAI account authorized for this Site |
 | Local computer | `python3 academy.py local` | An extracted source/portable copy and Python 3.9+ |
-| Editable source | [Private GitHub repository](https://github.com/i5adovyi/is-qa-ai-edu) | GitHub permission for cloning or pushing |
+| Editable source | [GitHub repository](https://github.com/i5adovyi/is-qa-ai-edu) | Git to clone; write permission to push |
 
 ## Start locally
 
-Either download **Run anywhere → Download portable academy** and extract the entire ZIP, or clone the private repository:
+Either download **Run anywhere → Download portable academy** and extract the entire ZIP, or clone the repository:
 
 ```sh
 git clone https://github.com/i5adovyi/is-qa-ai-edu.git
@@ -65,7 +65,7 @@ Choose an output that does not exist. Keep it private and outside the course sou
 
 ## Open in Codex using another account
 
-Keep or clone the private GitHub repository, sign in to Codex with your new OpenAI account, and open the local project folder. Its `AGENTS.md` gives a new tutor the course's one-exercise-at-a-time rules. A local database or progress JSON carries learning records; old conversations do not transfer automatically.
+Keep or clone the GitHub repository, sign in to Codex with your new OpenAI account, and open the local project folder. Its `AGENTS.md` gives a new tutor the course's one-exercise-at-a-time rules. A local database or progress JSON carries learning records; old conversations do not transfer automatically.
 
 For a Site owned by that account, prepare a separate copy:
 
@@ -79,7 +79,7 @@ Then open that prepared folder while signed in to the target account and ask the
 
 GitHub stores the editable source and generated release assets. Pushing a commit does not automatically deploy OpenAI Sites. The two destinations have separate publication steps.
 
-After editing source, rebuild with `python3 scripts/build_portal.py`, run the [maintenance checks](MAINTENANCE.md), review the diff, commit and push to the private repository. Keep personal records under the ignored `work/` directory.
+After editing source, rebuild with `python3 scripts/build_portal.py`, run the [maintenance checks](MAINTENANCE.md) and review the diff before sharing changes. Keep personal records under the ignored `work/` directory.
 
 For OpenAI hosting, open this project in Codex with the Sites plugin available and ask:
 

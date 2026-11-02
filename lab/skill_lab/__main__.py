@@ -2,11 +2,16 @@
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
 import shutil
 import sys
 
 ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from academy_local import is_link
+
 SOURCE = ROOT / "content" / "skill-practice"
 NAME = "signal-desk-evidence-review"
 REQUIRED = ("SKILL.md", "references/review-contract.md", "assets/review-template.json", "scripts/check_packet.py")
@@ -28,7 +33,7 @@ def safe_workspace(path, root=ROOT):
     cursor = root
     for part in candidate.relative_to(root).parts:
         cursor = cursor / part
-        if cursor.is_symlink():
+        if is_link(cursor):
             raise ValueError("symlink workspace component rejected: " + str(cursor))
     return candidate
 
@@ -39,7 +44,7 @@ def validate_install(workspace):
         path = skill / rel
         cursor = path
         while cursor != workspace:
-            if cursor.is_symlink():
+            if is_link(cursor):
                 raise ValueError("symlink skill component rejected: " + str(cursor))
             cursor = cursor.parent
         if not path.is_file():
@@ -58,11 +63,12 @@ def install(workspace, source=SOURCE):
     if workspace.exists():
         raise ValueError("workspace already exists; choose a fresh name (no overwrite)")
     package = source / NAME
-    for path in source.rglob("*"):
-        if path.is_symlink():
-            raise ValueError("source symlinks are not allowed")
-    if package.is_symlink():
+    if is_link(source):
         raise ValueError("source symlinks are not allowed")
+    # Stop at a redirected directory before recursing through its contents.
+    for parent, directories, files in os.walk(source):
+        if any(is_link(Path(parent) / name) for name in directories + files):
+            raise ValueError("source symlinks are not allowed")
     for rel in REQUIRED:
         if not (package / rel).is_file():
             raise ValueError("source dependency missing: " + rel)

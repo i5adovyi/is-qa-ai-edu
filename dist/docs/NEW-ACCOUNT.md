@@ -4,7 +4,7 @@ Keep three things separate: **GitHub holds the course source**, **your computer 
 
 ## 1. Open the project in Codex
 
-1. Keep the existing project folder, or clone the private repository with a GitHub account that has permission:
+1. Keep the existing project folder, or clone the course repository:
 
    ```sh
    git clone https://github.com/i5adovyi/is-qa-ai-edu.git
@@ -12,7 +12,7 @@ Keep three things separate: **GitHub holds the course source**, **your computer 
    ```
 
 2. Sign in to Codex with the new OpenAI account. Open the existing local project folder in the app. Select the folder containing `AGENTS.md`, `academy.py`, and `content/`. Opening a local folder does not upload it to a new Site.
-3. If you use a GitHub connector, reconnect GitHub from the new account and grant access to this private repository. Git credentials on your computer and a connector's repository permissions are separate.
+3. If you use a GitHub connector, reconnect GitHub from the new account and select the course repository. Git credentials on your computer and a connector's repository permissions are separate.
 4. Start a new chat in that project and use this handoff:
 
    > Read AGENTS.md and docs/CONTINUE-LEARNING.md. Tutor me using this academy, one exercise at a time. Ask for my latest attempt or progress export before deciding where I am. Do not show answers or incident debriefs before I try. Start from the next incomplete step and check my work against its criteria.
@@ -74,7 +74,7 @@ Open the resulting URL while signed in as that account and import your progress 
 
 ## Keep the two publication identities distinct
 
-Continue course edits in the original private GitHub clone, or deliberately create a separate branch/repository for the new publication copy. The preparation command does not initialize or change a GitHub remote. The Sites integration manages its own source checkout for publication; do not replace its remote with a guessed URL.
+Continue course edits in the original GitHub clone, or deliberately create a separate branch/repository for the new publication copy. The preparation command does not initialize or change a GitHub remote. The Sites integration manages its own source checkout for publication; do not replace its remote with a guessed URL.
 
 To bring later course updates into the new Site, ask Codex to merge the desired GitHub changes while preserving that copy's new `.openai/hosting.json` and `academy.json` hosted URL, test, rebuild, and publish to **its** existing Site. Review the diff first. Never overwrite one account's hosting identity with the other's as a way to synchronize content.
 

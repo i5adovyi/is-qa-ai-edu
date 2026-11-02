@@ -17,7 +17,7 @@ const path=require('node:path');
   assert.match(await page.locator('#runtime-mode').innerText(),/local academy/);
   const config=JSON.parse(fs.readFileSync(path.join(__dirname,'../academy.json'),'utf8'));
   assert.equal(await page.getByRole('link',{name:'Open hosted academy'}).getAttribute('href'),config.hostedUrl+'/');
-  assert.equal(await page.getByRole('link',{name:'Open private repository'}).getAttribute('href'),config.repositoryUrl);
+  assert.equal(await page.getByRole('link',{name:'Open GitHub repository'}).getAttribute('href'),config.repositoryUrl);
   assert.equal(await page.getByRole('link',{name:'open the local academy'}).getAttribute('href'),'http://127.0.0.1:8765/');
   const waiting=page.waitForEvent('download');
   await page.getByRole('link',{name:'Download portable academy'}).click();

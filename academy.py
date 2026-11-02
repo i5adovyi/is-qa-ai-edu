@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 from academy_local import ConflictError, MAX_BODY, ProgressDatabase, StateError, strict_json
+from academy_local import has_symlink, is_link, unlinked_files
 
 
 def private_asset(relative):
@@ -33,18 +34,6 @@ def private_asset(relative):
                                 "academy-database-progress")))
 
 
-def has_symlink(path, boundary):
-    current = Path(path)
-    boundary = Path(boundary)
-    while current != boundary:
-        if current.is_symlink():
-            return True
-        if current.parent == current:
-            return True
-        current = current.parent
-    return boundary.is_symlink()
-
-
 def portable_archive(root):
     """Package only course assets; also works inside an extracted portable copy."""
     root = Path(root)
@@ -52,9 +41,8 @@ def portable_archive(root):
     buffer = BytesIO()
     prefix = "ai-engineering-academy-portable/"
     with ZipFile(buffer, "w", ZIP_DEFLATED) as archive:
-        for item in sorted(dist.rglob("*")):
-            if (item.is_file() and not has_symlink(item, dist)
-                    and not private_asset(item.relative_to(dist))
+        for item in sorted(unlinked_files(dist, root)):
+            if (not private_asset(item.relative_to(dist))
                     and item != dist / "academy-portable.zip"):
                 archive.write(item, prefix + "dist/" + item.relative_to(dist).as_posix())
         for name in ("academy.py", "academy_local.py", "academy.json"):
@@ -316,7 +304,7 @@ def main(argv=None):
         except subprocess.CalledProcessError:
             parser.error("Build failed; server was not started. Fix the reported error and retry.")
     required = ("index.html", "app.js", "theme.js", "tracks.js", "style.css", "data.js")
-    if dist.is_symlink() or not all((dist / name).is_file() for name in required):
+    if is_link(dist) or not all((dist / name).is_file() for name in required):
         parser.error("Built portal is missing or incomplete. Run without --no-build in the source copy, "
                      "or extract the complete portable ZIP, including dist/.")
     handler = partial(AcademyHandler, directory=str(dist))

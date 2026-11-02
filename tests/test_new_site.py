@@ -9,6 +9,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from prepare_new_site import prepare
+from tests.link_fixtures import directory_link, file_symlink
 
 
 class NewSiteTests(unittest.TestCase):
@@ -54,13 +55,19 @@ class NewSiteTests(unittest.TestCase):
             self.write(name, "PRIVATE_OR_STALE")
         secret = self.parent / "secret.txt"
         secret.write_text("outside secret")
-        (self.source / "docs/link.md").symlink_to(secret)
+        with self.subTest(link="file symlink"):
+            file_symlink(self.source / "docs/link.md", secret)
+        personal = self.parent / "personal"
+        personal.mkdir()
+        (personal / "notes.md").write_text("private")
+        directory_link(self.source / "docs/external", personal)
         original = (self.source / "academy.json").read_bytes()
         original_hosting = (self.source / ".openai/hosting.json").read_bytes()
         destination = prepare(self.source, self.parent / "new-account")
         for name in excluded:
             self.assertFalse((destination / name).exists(), name)
         self.assertFalse((destination / "docs/link.md").exists())
+        self.assertFalse((destination / "docs/external").exists())
         self.assertEqual((destination / "dist/index.html").read_text(), "fresh build")
         self.assertEqual((destination / "academy_local.py").read_text(), "# local database support\n")
         self.assertEqual((destination / "AGENTS.md").read_text(), "# Tutor instructions\n")
@@ -85,7 +92,7 @@ class NewSiteTests(unittest.TestCase):
         self.assertEqual(marker.read_text(), "keep")
         self.assertFalse((self.source / "new-account").exists())
         alias = self.parent / "alias"
-        alias.symlink_to(self.source, target_is_directory=True)
+        directory_link(alias, self.source)
         with self.assertRaises(ValueError):
             prepare(self.source, alias / "nested")
 

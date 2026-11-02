@@ -1,6 +1,6 @@
 """Exercise durable progress through real HTTP servers, restarts, and SQLite backups."""
 from concurrent.futures import ThreadPoolExecutor
-from contextlib import contextmanager
+from contextlib import closing, contextmanager
 import http.client
 from io import BytesIO
 import json
@@ -22,6 +22,7 @@ from zipfile import ZipFile
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from academy_local import MAX_BODY
+from tests.link_fixtures import directory_link, file_symlink
 
 
 def state(note="Persisted work"):
@@ -241,8 +242,9 @@ class LocalDatabaseTests(unittest.TestCase):
     def test_corrupt_saved_record_is_not_silently_replaced(self):
         with self.server() as url:
             path = Path(self.request(url)[1]["databasePath"])
-            with sqlite3.connect(str(path)) as db:
+            with closing(sqlite3.connect(str(path))) as db:
                 db.execute("UPDATE progress SET state='{}'")
+                db.commit()
             code, payload, _ = self.request(url)
             self.assertEqual(code, 500)
             self.assertIn("not reset", payload["error"])
@@ -261,10 +263,12 @@ class LocalDatabaseTests(unittest.TestCase):
             path.write_text("PRIVATE", encoding="utf-8")
         (self.root / "secrets").mkdir()
         (self.root / "secrets/password.txt").write_text("PRIVATE", encoding="utf-8")
-        (dist / "leaked.txt").symlink_to(self.root / "secrets/password.txt")
-        (dist / "linked").symlink_to(self.root / "secrets", target_is_directory=True)
+        directory_link(dist / "linked", self.root / "secrets")
+        with self.subTest(link="file symlink"):
+            file_symlink(dist / "leaked.txt", self.root / "secrets/password.txt")
+            filenames.append("leaked.txt")
         with self.server() as url:
-            for path in [*filenames, "leaked.txt", "linked/password.txt", "directory/"]:
+            for path in [*filenames, "linked/password.txt", "directory/"]:
                 with self.subTest(path=path), self.assertRaises(HTTPError) as caught:
                     urlopen(url + "/" + path)
                 self.assertEqual(caught.exception.code, 404)
@@ -281,7 +285,7 @@ class LocalDatabaseTests(unittest.TestCase):
             result = self.invoke("local", "--no-build", "--no-browser", "--data-dir", str(path))
             self.assertEqual(result.returncode, 2)
             self.assertIn("outside dist", result.stderr)
-        (self.root / "linked-dist").symlink_to(self.root / "dist", target_is_directory=True)
+        directory_link(self.root / "linked-dist", self.root / "dist")
         result = self.invoke("local", "--no-build", "--no-browser", "--data-dir", str(self.root / "linked-dist/data"))
         self.assertEqual(result.returncode, 2)
         with self.server():

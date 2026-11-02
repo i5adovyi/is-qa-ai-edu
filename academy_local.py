@@ -5,10 +5,48 @@ from contextlib import contextmanager
 from pathlib import Path
 import secrets
 import sqlite3
+import stat
 import uuid
 
 MAX_BODY = 8 * 1024 * 1024
 SCHEMA_VERSION = 1
+
+
+def is_link(path):
+    """Windows directory junctions can redirect access just like symlinks."""
+    try:
+        info = path.lstat()
+    except (FileNotFoundError, NotADirectoryError):
+        return False
+    return stat.S_ISLNK(info.st_mode) or (
+        os.name == "nt" and info.st_reparse_tag == stat.IO_REPARSE_TAG_MOUNT_POINT
+    )
+
+
+def has_symlink(path, boundary):
+    current = Path(path)
+    boundary = Path(boundary)
+    while current != boundary:
+        if is_link(current) or current.parent == current:
+            return True
+        current = current.parent
+    return is_link(boundary)
+
+
+def unlinked_files(path, boundary):
+    """Prune links before descent, including a junction back to an ancestor."""
+    if has_symlink(path, boundary):
+        return
+    if path.is_file():
+        yield path
+    elif path.is_dir():
+        for parent, dirs, files in os.walk(path):
+            parent = Path(parent)
+            dirs[:] = [name for name in dirs if not is_link(parent / name)]
+            for name in files:
+                item = parent / name
+                if not is_link(item) and item.is_file():
+                    yield item
 
 
 class StateError(ValueError):

@@ -4,8 +4,8 @@ from pathlib import Path
 
 def build_catalog(root):
     tracks = sorted([t for p in (root/'content/tracks').glob('catalog-*.json')
-                     for t in json.loads(p.read_text())], key=lambda t: t['order'])
-    paths = json.loads((root/'content/tracks/paths.json').read_text())
+                     for t in json.loads(p.read_text(encoding='utf-8'))], key=lambda t: t['order'])
+    paths = json.loads((root/'content/tracks/paths.json').read_text(encoding='utf-8'))
     topics = {t['id']: t for track in tracks for t in track['lessons']}
     lines = ['# Complete subject and learning-path catalog', '',
              'This index is generated from the same metadata as the portal. Start with '
@@ -26,7 +26,7 @@ def build_catalog(root):
             t=topics[name]
             lines += [str(i+1)+'. ['+t['title']+'](../'+t['file']+')']
         lines += ['', '**Afterward:** '+path['after'], '']
-    (root/'docs/SUBJECT-CATALOG.md').write_text('\n'.join(lines)+'\n')
+    (root/'docs/SUBJECT-CATALOG.md').write_text('\n'.join(lines)+'\n', encoding='utf-8')
 
 if __name__ == '__main__':
     build_catalog(Path(__file__).resolve().parents[1])

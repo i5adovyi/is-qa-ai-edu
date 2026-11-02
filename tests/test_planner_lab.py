@@ -11,6 +11,7 @@ import time
 import unittest
 import urllib.error
 from unittest.mock import patch
+from tests.link_fixtures import directory_link
 
 from lab.contracts import HarnessError
 from lab.planner_lab.__main__ import scenario_actions
@@ -261,8 +262,8 @@ class ResponsesAdapterTests(unittest.TestCase):
         from lab.planner_lab.host import exercise
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            python = root / "venv-python"
-            python.symlink_to(sys.executable)
+            directory_link(root / "venv-bin", Path(sys.executable).parent)
+            python = root / "venv-bin" / Path(sys.executable).name
             captured = []
             async def transport(command, data):
                 captured.extend(command)
@@ -281,7 +282,7 @@ class ResponsesAdapterTests(unittest.TestCase):
             self.assertTrue(result["model_selected_tool_observed"])
             self.assertTrue(result["structural_completion"])
             setting = next(arg for arg in captured if arg.startswith("mcp_servers.signal_desk.command="))
-            self.assertIn(str(python.absolute()), setting)
+            self.assertEqual(json.loads(setting.split("=", 1)[1]), str(python.absolute()))
             self.assertNotEqual(python.absolute(), python.resolve())
             self.assertIn("--ignore-user-config", captured)
 

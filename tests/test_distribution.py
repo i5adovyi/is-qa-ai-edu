@@ -1,13 +1,40 @@
 """Personal learning records must never enter course downloads."""
 from pathlib import Path
+import shutil
+import subprocess
+import sys
 import tempfile
 import unittest
 from zipfile import ZipFile
 
 from scripts.package_project import package, source_files
+from tests.link_fixtures import directory_link, file_symlink
 
 
 class DistributionTests(unittest.TestCase):
+    def test_builder_rejects_redirected_inputs_and_output_before_writing(self):
+        source = Path(__file__).resolve().parents[1]
+        for rel in ("output/pdf", "content/how-to", "dist/docs"):
+            with self.subTest(link=rel), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary) / "course"
+                (root / "scripts").mkdir(parents=True)
+                shutil.copyfile(source / "academy_local.py", root / "academy_local.py")
+                for name in ("build_portal.py", "build_subject_catalog.py", "package_project.py"):
+                    shutil.copyfile(source / "scripts" / name, root / "scripts" / name)
+                outside = Path(temporary) / "personal"
+                outside.mkdir()
+                marker = outside / "START-HERE.md"
+                marker.write_text("untouched")
+                link = root / rel
+                link.parent.mkdir(exist_ok=True, parents=True)
+                directory_link(link, outside)
+                run = subprocess.run([sys.executable, "scripts/build_portal.py"], cwd=root,
+                                     capture_output=True, text=True, timeout=10)
+                self.assertNotEqual(run.returncode, 0)
+                self.assertIn("Linked build path: " + rel, run.stderr.replace("\\", "/"))
+                self.assertEqual(marker.read_text(), "untouched")
+                self.assertFalse((root / "dist/data.js").exists())
+
     def test_source_archive_excludes_runtime_credentials_databases_and_symlinks(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary).resolve() / "course"
@@ -51,10 +78,13 @@ class DistributionTests(unittest.TestCase):
                 destination = root / name
                 destination.parent.mkdir(parents=True, exist_ok=True)
                 destination.write_text(text)
-            outside = Path(temporary) / "personal-notes.md"
+            personal = Path(temporary) / "private"
+            personal.mkdir()
+            outside = personal / "personal-notes.md"
             outside.write_text("PRIVATE")
-            (root / "docs/linked.md").symlink_to(outside)
-            (root / "docs/linked-dir").symlink_to(outside.parent, target_is_directory=True)
+            directory_link(root / "docs/linked-dir", personal)
+            with self.subTest(link="file symlink"):
+                file_symlink(root / "docs/linked.md", outside)
             actual = {path.relative_to(root).as_posix() for path in source_files(root)}
             self.assertEqual(actual, set(public))
             output = root / "source.zip"
@@ -72,7 +102,7 @@ class DistributionTests(unittest.TestCase):
             personal = Path(temporary) / "personal"
             personal.mkdir()
             (personal / "notes.md").write_text("PRIVATE")
-            (root / "docs").symlink_to(personal, target_is_directory=True)
+            directory_link(root / "docs", personal)
             self.assertEqual(list(source_files(root)), [])
 
 

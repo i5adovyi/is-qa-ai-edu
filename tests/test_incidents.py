@@ -12,6 +12,7 @@ import unittest
 from lab.incidents import engine, reference
 from lab.incidents.__main__ import main
 from lab.incidents.scenarios import IDS, scenario, boundary_scenarios
+from tests.link_fixtures import directory_link, file_symlink
 
 
 class IncidentWorkspaceTests(unittest.TestCase):
@@ -98,25 +99,31 @@ class IncidentWorkspaceTests(unittest.TestCase):
         workspace = self.init()
         outside = self.root / "outside.txt"
         outside.write_text("private unrelated material")
-        (workspace / "outside-link").symlink_to(outside)
-        for path in ("../outside.txt", str(outside), "outside-link"):
+        directory_link(workspace / "external", self.root)
+        for path in ("../outside.txt", str(outside), "external/outside.txt"):
             with self.subTest(path=path):
                 with self.assertRaises(ValueError):
                     engine.attempt(workspace, "A plausible hypothesis exists.", path,
                                    "Inspect the actual returned pages.")
+        with self.subTest(link="file symlink"):
+            file_symlink(workspace / "outside-link", outside)
+            with self.assertRaises(ValueError):
+                engine.attempt(workspace, "A plausible hypothesis exists.", "outside-link",
+                               "Inspect the actual returned pages.")
 
     def test_worker_path_and_runs_path_cannot_escape_workspace(self):
         workspace = self.init()
         target = self.root / "worker.py"
         target.write_text("def handle(data): return {}")
         (workspace / "student.py").unlink()
-        (workspace / "student.py").symlink_to(target)
-        with self.assertRaisesRegex(ValueError, "inside"):
-            engine.run(workspace)
-        (workspace / "student.py").unlink()
+        with self.subTest(link="worker file symlink"):
+            file_symlink(workspace / "student.py", target)
+            with self.assertRaisesRegex(ValueError, "inside"):
+                engine.run(workspace)
+            (workspace / "student.py").unlink()
         (workspace / "student.py").write_text("def handle(data): return {}")
         (workspace / "runs").rmdir()
-        (workspace / "runs").symlink_to(self.root)
+        directory_link(workspace / "runs", self.root)
         with self.assertRaisesRegex(ValueError, "inside"):
             engine.run(workspace)
 

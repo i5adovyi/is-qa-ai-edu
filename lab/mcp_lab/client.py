@@ -6,14 +6,27 @@ import json
 import logging
 from pathlib import Path
 import sys
+import time
 
 import anyio
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 from mcp.shared.exceptions import McpError
+from mcp.types import InitializeRequest
 
 SDK_VERSION = "1.30.0"
 ROOT = Path(__file__).resolve().parents[2]
+
+
+class LabSession(ClientSession):
+    """Allow the child interpreter to import the SDK before its first response."""
+
+    async def send_request(self, request, result_type, request_read_timeout_seconds=None,
+                           metadata=None, progress_callback=None):
+        if isinstance(request.root, InitializeRequest) and request_read_timeout_seconds is None:
+            request_read_timeout_seconds = timedelta(seconds=15)
+        return await super().send_request(request, result_type, request_read_timeout_seconds,
+                                          metadata, progress_callback)
 
 
 def dump(value):
@@ -80,7 +93,7 @@ async def connection(events, stderr_path, fault="normal", server_file=None):
         async with stdio_client(parameters, errlog=errlog) as (read, write):
             incoming = RecordingStream(read, events, fault, "server_to_client")
             outgoing = RecordingStream(write, events, fault, "client_to_server")
-            async with ClientSession(incoming, outgoing, read_timeout_seconds=timedelta(seconds=3)) as session:
+            async with LabSession(incoming, outgoing, read_timeout_seconds=timedelta(seconds=3)) as session:
                 yield session
 
 
@@ -168,22 +181,30 @@ async def _run_checks(out, server_file, exercise, events, checks):
 
     for fault in ("timeout", "disconnect"):
         observed = None
+        # Only the deliberately slow tool should race the short timer. For a
+        # crash, let the OS deliver EOF before classifying it as a timeout.
+        call_timeout = 0.35 if fault == "timeout" else 3
         async with connection(events, out / (fault + ".stderr.txt"), fault, server_file) as session:
             await session.initialize()
             await session.list_tools()
+            started = time.monotonic()
             try:
                 await session.call_tool("lookup_article", {"record_id": "KB-RESET"},
-                                        read_timeout_seconds=timedelta(seconds=0.35))
+                                        read_timeout_seconds=timedelta(seconds=call_timeout))
                 observed = "unexpected_success"
             except McpError as error:
                 observed = error.error.code
+        cleanup_budget_seconds = 5
+        cleanup_within_budget = time.monotonic() - started < cleanup_budget_seconds
         # Observed error codes of the pinned SDK, not portable protocol constants.
         expected = 408 if fault == "timeout" else -32000
         call_id = next(e["message"]["id"] for e in reversed(events)
                        if e["connection"] == fault and e.get("message", {}).get("method") == "tools/call")
-        check(checks, "bounded_" + fault, observed == expected,
+        check(checks, "bounded_" + fault, observed == expected and cleanup_within_budget,
               {"observed_error_code": observed, "expected_error_code": expected,
-               "request_timeout_seconds": 0.35, "request_id": call_id,
+               "request_timeout_seconds": call_timeout, "request_id": call_id,
+               "call_and_cleanup_limit_seconds": cleanup_budget_seconds,
+               "cleanup_within_budget": cleanup_within_budget,
                "outcome": "no_success_response", "retry_count": 0})
 
     with client_diagnostics(out / "client.stderr.txt"):

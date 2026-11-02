@@ -158,7 +158,11 @@ test('all eight component hint pages create three separately closed safe disclos
   const p=portal();
   for(let n=1;n<=8;n++){
     p.context.hintPath=`content/labs/hints/${String(n).padStart(2,'0')}.md`;
-    const html=p.run("markdown(A.documents[hintPath].text,hintPath)");
+    const source=p.run("A.documents[hintPath].text");
+    p.context.hintText=source.replace(/\r\n/g,'\n');
+    const html=p.run("markdown(hintText,hintPath)");
+    p.context.hintText=source.replace(/\r?\n/g,'\r\n');
+    assert.equal(p.run("markdown(hintText,hintPath)"),html,p.context.hintPath);
     assert.equal((html.match(/<details class="progressive-hint">/g)||[]).length,3);
     assert.equal((html.match(/<\/details>/g)||[]).length,3);
     assert.equal((html.match(/<summary>/g)||[]).length,3);

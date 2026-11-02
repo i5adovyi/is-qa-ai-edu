@@ -18,8 +18,8 @@ def validate_tracks(root):
             errors.append(message)
     try:
         tracks = sorted([t for p in (root/'content/tracks').glob('catalog-*.json')
-                         for t in json.loads(p.read_text())], key=lambda t: t['order'])
-        paths = json.loads((root/'content/tracks/paths.json').read_text())
+                         for t in json.loads(p.read_text(encoding='utf-8'))], key=lambda t: t['order'])
+        paths = json.loads((root/'content/tracks/paths.json').read_text(encoding='utf-8'))
     except (OSError, ValueError, KeyError, TypeError) as error:
         return ['Invalid track catalog: ' + str(error)]
     ids = [t['id'] for t in tracks]
@@ -33,7 +33,7 @@ def validate_tracks(root):
     need(retained == Counter(str(i).zfill(2) for i in range(1, 25)),
          'Every original lesson must appear exactly once in the subject catalog')
     originals = {t['lesson']: t for p in (root/'content/how-to').glob('map-*.json')
-                 for t in json.loads(p.read_text())}
+                 for t in json.loads(p.read_text(encoding='utf-8'))}
     for track in tracks:
         label = track['id']
         for key in ('title', 'summary', 'why', 'outcomes'):
@@ -64,7 +64,7 @@ def validate_tracks(root):
                      f'Retained lesson must use its existing beginner guide: {name}')
                 continue
             if file.is_file():
-                text = file.read_text()
+                text = file.read_text(encoding='utf-8')
                 need(text.startswith('# '+topic['title']+'\n'), f'Topic title mismatch: {name}')
                 need(len(text.split()) >= 450, f'Subject reading too thin: {name}')
                 for heading in HEADINGS:

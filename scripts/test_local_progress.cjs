@@ -8,6 +8,7 @@ const os=require('node:os');
 const path=require('node:path');
 const net=require('node:net');
 const {spawn}=require('node:child_process');
+const {once}=require('node:events');
 const ROOT=path.resolve(__dirname,'..'),scratch=fs.mkdtempSync(path.join(os.tmpdir(),'academy-local-ui-'));
 const processes=[];
 const delay=ms=>new Promise(r=>setTimeout(r,ms));
@@ -15,12 +16,18 @@ async function port(){const server=net.createServer();await new Promise(r=>serve
 async function launch(staticOnly=false){
  const chosen=await port(),base='http://127.0.0.1:'+chosen;
  const args=staticOnly?['-m','http.server',String(chosen),'--bind','127.0.0.1','--directory',path.join(ROOT,'dist')]:[path.join(ROOT,'academy.py'),'local','--no-build','--no-browser','--port',String(chosen),'--data-dir',path.join(scratch,'profile')];
- const child=spawn(process.env.ACADEMY_PYTHON||'python3',args,{cwd:scratch,stdio:['ignore','pipe','pipe']});processes.push(child);let logs='';child.stdout.on('data',x=>{logs+=x});child.stderr.on('data',x=>{logs+=x});
+ const python=process.env.ACADEMY_PYTHON||(process.platform==='win32'?'python':'python3');
+ const child=spawn(python,args,{cwd:scratch,stdio:['ignore','pipe','pipe']});processes.push(child);let logs='';child.stdout.on('data',x=>{logs+=x});child.stderr.on('data',x=>{logs+=x});
  const until=Date.now()+15000;
  while(Date.now()<until){try{const response=await fetch(base);if(response.ok)return {child,base}}catch{}if(child.exitCode!==null)throw Error('Server exited: '+logs);await delay(50)}
  throw Error('Server startup timeout: '+logs);
 }
-async function stop(child){if(child.exitCode!==null)return;child.kill('SIGINT');await Promise.race([new Promise(r=>child.once('exit',r)),delay(3000)]);if(child.exitCode===null){child.kill('SIGKILL');await new Promise(r=>child.once('exit',r));}}
+async function stop(child){
+ if(child.exitCode!==null||child.signalCode!==null)return;
+ const exited=once(child,'exit');
+ const forceStop=setTimeout(()=>child.kill('SIGKILL'),3000);
+ try{child.kill('SIGINT');await exited;}finally{clearTimeout(forceStop);}
+}
 async function saved(page){await page.waitForFunction(()=>document.querySelector('#global-save-status')?.textContent==='Saved locally in SQLite');}
 async function db(page){return page.evaluate(async()=>(await(await fetch('/api/local-state')).json()).state)}
 (async()=>{

@@ -1,8 +1,13 @@
 """Package source only; exclude learner records, runtime artifacts, and credentials."""
 from pathlib import Path
+import sys
 from zipfile import ZipFile, ZIP_DEFLATED
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from academy_local import has_symlink, unlinked_files
+
 OUT = ROOT / 'dist/academy-source.zip'
 INCLUDE = [
     'README.md', 'AGENTS.md', 'CLAUDE.md', 'academy.py', 'academy_local.py', 'academy.json',
@@ -36,22 +41,17 @@ def source_files(root=ROOT):
     """Yield source files only. Shared with the new-account export command."""
     root = Path(root).resolve()
     for name in INCLUDE:
-        path = root / name
-        if not path.exists():
-            continue
-        for item in ([path] if path.is_file() else sorted(path.rglob('*'))):
+        for item in sorted(unlinked_files(root / name, root)):
             relative = item.relative_to(root)
-            if excluded_path(relative) or not item.is_file():
-                continue
-            # A symlinked file or any symlinked ancestor may point at private data.
-            if any(part.is_symlink() for part in [item, *item.parents] if part != root):
-                continue
-            yield item
+            if not excluded_path(relative):
+                yield item
 
 
 def package(root=ROOT, output=None):
     root = Path(root).resolve()
-    output = Path(output) if output else root / 'dist/academy-source.zip'
+    output = Path(output).absolute() if output else root / 'dist/academy-source.zip'
+    if root in output.parents and has_symlink(output, root):
+        raise ValueError('Linked source archive destination')
     output.parent.mkdir(exist_ok=True)
     with ZipFile(output, 'w', ZIP_DEFLATED) as archive:
         for item in source_files(root):

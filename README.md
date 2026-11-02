@@ -2,7 +2,7 @@
 
 A provider-neutral learning project that gathers scattered AI knowledge into a useful sequence for an SDET. Start with plain explanations and testing examples, follow selected external articles or courses when you need depth, and progress toward context engineering, tools, skills, agents, evaluation, and harnesses.
 
-**Start with [Start from zero](docs/START-HERE.md)** or open the [private learning portal](https://signal-desk-ai-engineering-academy.igor-sadovyi87.chatgpt.site/#start). No drawing, report, installation, or graded exercise is required to start.
+**[Start from zero](docs/START-HERE.md)** to read on GitHub, or [run the portal locally](#run-locally) to browse lessons and save your place.
 
 ## The learning experience
 
@@ -32,6 +32,14 @@ Read [AGENTS.md](AGENTS.md) and identify whether the user wants explanation, pra
 
 ## Run locally
 
+From the project folder on Windows:
+
+```powershell
+python academy.py local
+```
+
+On macOS or Linux:
+
 ```sh
 python3 academy.py local
 ```
@@ -44,7 +52,7 @@ For a fresh clone, Windows commands, ports, and package choices, see [SETUP.md](
 
 | Information | Location | Transfer |
 | --- | --- | --- |
-| Course, portal, labs, and tests | Private Git repository | Commit and push source changes |
+| Course, portal, labs, and tests | Git repository | Commit and push source changes |
 | Local reading place, notes, and practice records | Ignored `.academy-data/progress.sqlite3` or explicit `--data-dir` | SQLite backup or JSON export/import |
 | Hosted reading place, notes, and practice records | Browser storage for the Site's origin/profile | JSON export/import |
 | Lab evidence | Ignored `work/`, `.lab-runs/`, or a learner-selected directory | Back up separately |

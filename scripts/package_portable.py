@@ -11,6 +11,8 @@ def package():
     if not (DIST / "index.html").is_file():
         raise SystemExit("Build the portal before packaging the portable bundle.")
     launcher = runpy.run_path(str(ROOT / "academy.py"))
+    if launcher["has_symlink"](OUT, ROOT):
+        raise ValueError("Linked portable archive destination")
     with launcher["portable_archive"](ROOT) as archive:
         OUT.write_bytes(archive.getvalue())
     print("{} ({:,} bytes)".format(OUT, OUT.stat().st_size))
