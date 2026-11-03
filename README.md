@@ -2,7 +2,9 @@
 
 A provider-neutral learning project that gathers scattered AI knowledge into a useful sequence for an SDET. Start with plain explanations and testing examples, follow selected external articles or courses when you need depth, and progress toward context engineering, tools, skills, agents, evaluation, and harnesses.
 
-**[Start from zero](docs/START-HERE.md)** to read on GitHub, or [run the portal locally](#run-locally) to browse lessons and save your place.
+**[Open the academy on GitHub Pages](https://i5adovyi.github.io/is-qa-ai-edu/#start)** to read the first lesson and save your place in this browser. No sign-in is required.
+
+You can also [start from zero on GitHub](docs/START-HERE.md) or [run the portal locally](#run-locally) for the Python labs and SQLite progress storage.
 
 ## The learning experience
 
